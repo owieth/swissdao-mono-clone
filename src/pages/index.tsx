@@ -1,22 +1,22 @@
-import { type NextPage } from "next";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { type NextPage } from 'next';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
-import Committment from "~/components/Landing/Commitment";
-import Event from "~/components/Landing/Event";
-import Features from "~/components/Landing/Feature";
-import Hero from "~/components/Landing/Hero";
-import Mission from "~/components/Landing/Mission";
-import Partners from "~/components/Landing/Partners";
-import Subscribe from "~/components/Landing/Subscribe";
-import Testimonials from "~/components/Landing/Testimonials";
-import { api } from "~/utils/api";
+import Committment from '~/components/Landing/Commitment';
+import Event from '~/components/Landing/Event';
+import Features from '~/components/Landing/Feature';
+import Hero from '~/components/Landing/Hero';
+import Mission from '~/components/Landing/Mission';
+import Partners from '~/components/Landing/Partners';
+import Subscribe from '~/components/Landing/Subscribe';
+import Testimonials from '~/components/Landing/Testimonials';
+import { api } from '~/utils/api';
 // import Footer from "~/components/Landing/Footer";
 
 const Home: NextPage = () => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const hello = api.example.hello.useQuery({ text: 'from tRPC' });
 
   return (
-    <div className="flex min-h-screen flex-col w-full items-center justify-center">
+    <div className="flex min-h-screen w-full flex-col items-center justify-center">
       <Hero></Hero>
       <Mission></Mission>
       <Features></Features>
@@ -39,7 +39,7 @@ const AuthShowcase: React.FC = () => {
 
   const { data: secretMessage } = api.example.getSecretMessage.useQuery(
     undefined, // no input
-    { enabled: sessionData?.user !== undefined },
+    { enabled: sessionData?.user !== undefined }
   );
 
   return (
@@ -52,7 +52,7 @@ const AuthShowcase: React.FC = () => {
         className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
         onClick={sessionData ? () => void signOut() : () => void signIn()}
       >
-        {sessionData ? "Sign out" : "Sign in"}
+        {sessionData ? 'Sign out' : 'Sign in'}
       </button>
     </div>
   );

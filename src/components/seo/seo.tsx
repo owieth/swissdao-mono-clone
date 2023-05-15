@@ -1,4 +1,4 @@
-import Head from "next/head";
+import Head from 'next/head';
 
 const Seo = () => {
   const title = 'swissDAO - The Swiss Web3 Builder Community.³';
