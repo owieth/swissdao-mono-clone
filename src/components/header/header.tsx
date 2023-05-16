@@ -3,8 +3,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Fragment, useEffect, useRef, type ReactNode } from 'react'
 
-import { Container } from '../container/container'
 import { clamp } from '~/shared/helpers/calculate'
+import { Container } from '../container/container'
+import Logo from '../logo/logo'
 
 const navigation = [
   { name: 'About', href: '/about' },
@@ -247,26 +248,21 @@ export function Header() {
   return (
     <>
       <header
-        className="pointer-events-none relative z-50 flex flex-col"
-        style={{
-          height: 'var(--header-height)',
-          marginBottom: 'var(--header-mb)',
-        }}
+        className="relative z-50 flex flex-col h-24"
       >
+        <Link href="/" className="absolute top-0 left-6 z-10 h-24 flex flex-1 justify-center items-center">
+          <Logo className={''} width={128} height={128} />
+        </Link>
+
         <div
           ref={headerRef}
-          className="top-0 z-10 h-16 pt-6"
+          className="absolute top-0 left-2/4 z-10 h-24 p-6 flex flex-1 justify-center items-center"
           style={{ position: 'var(--header-position)' } as never}
         >
-          <Container
-            className="top-[var(--header-top,theme(spacing.6))] w-full"
-            style={{ position: 'var(--header-inner-position)' }}
-          >
+          <Container className="">
             <div className="relative flex gap-4">
-              <div className="flex flex-1 justify-end md:justify-center">
-                <MobileNavigation className="pointer-events-auto md:hidden" />
-                <DesktopNavigation className="pointer-events-auto hidden md:block" />
-              </div>
+              <MobileNavigation className="pointer-events-auto md:hidden" />
+              <DesktopNavigation className="pointer-events-auto hidden md:block" />
             </div>
           </Container>
         </div>
