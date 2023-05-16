@@ -1,11 +1,11 @@
-import { Popover, Transition } from '@headlessui/react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { Fragment, useEffect, useRef, type ReactNode } from 'react'
+import { Popover, Transition } from '@headlessui/react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { Fragment, useEffect, useRef, type ReactNode } from 'react';
 
-import { clamp } from '~/shared/helpers/calculate'
-import { Container } from '../container/container'
-import Logo from '../logo/logo'
+import { clamp } from '~/shared/helpers/calculate';
+import { Container } from '../container/container';
+import Logo from '../logo/logo';
 
 const navigation = [
   { name: 'About', href: '/about' },
@@ -14,10 +14,9 @@ const navigation = [
   // { name: 'Podcast', href: '#' },
 ];
 
-
 type Props = {
   className?: string;
-}
+};
 
 function CloseIcon(props: Props) {
   return (
@@ -31,7 +30,7 @@ function CloseIcon(props: Props) {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }
 
 function ChevronDownIcon(props: Props) {
@@ -45,17 +44,23 @@ function ChevronDownIcon(props: Props) {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }
 
-function MobileNavItem({ href, children }: { href: string, children: ReactNode }) {
+function MobileNavItem({
+  href,
+  children,
+}: {
+  href: string;
+  children: ReactNode;
+}) {
   return (
     <li>
       <Popover.Button as={Link} href={href} className="block py-2">
         {children}
       </Popover.Button>
     </li>
-  )
+  );
 }
 
 function MobileNavigation(props: Props) {
@@ -94,14 +99,14 @@ function MobileNavigation(props: Props) {
               <Popover.Button aria-label="Close menu" className="-m-1 p-1">
                 <CloseIcon className="h-6 w-6 text-zinc-500" />
               </Popover.Button>
-              <h2 className="text-sm font-medium text-zinc-600">
-                Navigation
-              </h2>
+              <h2 className="text-sm font-medium text-zinc-600">Navigation</h2>
             </div>
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800">
                 {navigation.map((item, i) => (
-                  <MobileNavItem key={i} href={item.href}>{item.name}</MobileNavItem>
+                  <MobileNavItem key={i} href={item.href}>
+                    {item.name}
+                  </MobileNavItem>
                 ))}
               </ul>
             </nav>
@@ -109,11 +114,11 @@ function MobileNavigation(props: Props) {
         </Transition.Child>
       </Transition.Root>
     </Popover>
-  )
+  );
 }
 
-function NavItem({ href, children }: { href: string, children: ReactNode }) {
-  const isActive = useRouter().pathname === href
+function NavItem({ href, children }: { href: string; children: ReactNode }) {
+  const isActive = useRouter().pathname === href;
 
   return (
     <li>
@@ -128,7 +133,7 @@ function NavItem({ href, children }: { href: string, children: ReactNode }) {
         )}
       </Link>
     </li>
-  )
+  );
 }
 
 function DesktopNavigation(props: Props) {
@@ -136,11 +141,13 @@ function DesktopNavigation(props: Props) {
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur">
         {navigation.map((item, i) => (
-          <NavItem key={i} href={item.href}>{item.name}</NavItem>
+          <NavItem key={i} href={item.href}>
+            {item.name}
+          </NavItem>
         ))}
       </ul>
     </nav>
-  )
+  );
 }
 
 export function Header() {
@@ -150,113 +157,117 @@ export function Header() {
   const isInitial = useRef(true);
 
   useEffect(() => {
-    const downDelay = 0
-    const upDelay = 64
+    const downDelay = 0;
+    const upDelay = 64;
 
     function setProperty(property: string, value: string) {
-      document.documentElement.style.setProperty(property, value)
+      document.documentElement.style.setProperty(property, value);
     }
 
     function removeProperty(property: string) {
-      document.documentElement.style.removeProperty(property)
+      document.documentElement.style.removeProperty(property);
     }
 
     function updateHeaderStyles() {
-      const { top, height } = headerRef.current?.getBoundingClientRect() ?? { top: 0, height: 0 }
+      const { top, height } = headerRef.current?.getBoundingClientRect() ?? {
+        top: 0,
+        height: 0,
+      };
       const scrollY = clamp(
         window.scrollY,
         0,
         document.body.scrollHeight - window.innerHeight
-      )
+      );
 
       if (isInitial.current) {
-        setProperty('--header-position', 'sticky')
+        setProperty('--header-position', 'sticky');
       }
 
-      setProperty('--content-offset', `${downDelay}px`)
+      setProperty('--content-offset', `${downDelay}px`);
 
       if (isInitial.current || scrollY < downDelay) {
-        setProperty('--header-height', `${downDelay + height}px`)
-        setProperty('--header-mb', `${-downDelay}px`)
+        setProperty('--header-height', `${downDelay + height}px`);
+        setProperty('--header-mb', `${-downDelay}px`);
       } else if (top + height < -upDelay) {
-        const offset = Math.max(height, scrollY - upDelay)
-        setProperty('--header-height', `${offset}px`)
-        setProperty('--header-mb', `${height - offset}px`)
+        const offset = Math.max(height, scrollY - upDelay);
+        setProperty('--header-height', `${offset}px`);
+        setProperty('--header-mb', `${height - offset}px`);
       } else if (top === 0) {
-        setProperty('--header-height', `${scrollY + height}px`)
-        setProperty('--header-mb', `${-scrollY}px`)
+        setProperty('--header-height', `${scrollY + height}px`);
+        setProperty('--header-mb', `${-scrollY}px`);
       }
 
       if (top === 0 && scrollY > 0 && scrollY >= downDelay) {
-        setProperty('--header-inner-position', 'fixed')
-        removeProperty('--header-top')
-        removeProperty('--avatar-top')
+        setProperty('--header-inner-position', 'fixed');
+        removeProperty('--header-top');
+        removeProperty('--avatar-top');
       } else {
-        removeProperty('--header-inner-position')
-        setProperty('--header-top', '0px')
-        setProperty('--avatar-top', '0px')
+        removeProperty('--header-inner-position');
+        setProperty('--header-top', '0px');
+        setProperty('--avatar-top', '0px');
       }
     }
 
     function updateAvatarStyles() {
       if (!isHomePage) {
-        return
+        return;
       }
 
-      const fromScale = 1
-      const toScale = 36 / 64
-      const fromX = 0
-      const toX = 2 / 16
+      const fromScale = 1;
+      const toScale = 36 / 64;
+      const fromX = 0;
+      const toX = 2 / 16;
 
-      const scrollY = downDelay - window.scrollY
+      const scrollY = downDelay - window.scrollY;
 
-      let scale = (scrollY * (fromScale - toScale)) / downDelay + toScale
-      scale = clamp(scale, fromScale, toScale)
+      let scale = (scrollY * (fromScale - toScale)) / downDelay + toScale;
+      scale = clamp(scale, fromScale, toScale);
 
-      let x = (scrollY * (fromX - toX)) / downDelay + toX
-      x = clamp(x, fromX, toX)
+      let x = (scrollY * (fromX - toX)) / downDelay + toX;
+      x = clamp(x, fromX, toX);
 
       setProperty(
         '--avatar-image-transform',
         `translate3d(${x}rem, 0, 0) scale(${scale})`
-      )
+      );
 
-      const borderScale = 1 / (toScale / scale)
-      const borderX = (-toX + x) * borderScale
-      const borderTransform = `translate3d(${borderX}rem, 0, 0) scale(${borderScale})`
+      const borderScale = 1 / (toScale / scale);
+      const borderX = (-toX + x) * borderScale;
+      const borderTransform = `translate3d(${borderX}rem, 0, 0) scale(${borderScale})`;
 
-      setProperty('--avatar-border-transform', borderTransform)
-      setProperty('--avatar-border-opacity', String(scale === toScale ? 1 : 0))
+      setProperty('--avatar-border-transform', borderTransform);
+      setProperty('--avatar-border-opacity', String(scale === toScale ? 1 : 0));
     }
 
     function updateStyles() {
-      updateHeaderStyles()
-      updateAvatarStyles()
-      isInitial.current = false
+      updateHeaderStyles();
+      updateAvatarStyles();
+      isInitial.current = false;
     }
 
-    updateStyles()
-    window.addEventListener('scroll', updateStyles, { passive: true })
-    window.addEventListener('resize', updateStyles)
+    updateStyles();
+    window.addEventListener('scroll', updateStyles, { passive: true });
+    window.addEventListener('resize', updateStyles);
 
     return () => {
-      window.removeEventListener('scroll', updateStyles)
-      window.removeEventListener('resize', updateStyles)
-    }
-  }, [isHomePage])
+      window.removeEventListener('scroll', updateStyles);
+      window.removeEventListener('resize', updateStyles);
+    };
+  }, [isHomePage]);
 
   return (
     <>
-      <header
-        className="relative z-50 flex flex-col h-24"
-      >
-        <Link href="/" className="absolute top-0 left-6 z-10 h-24 flex flex-1 justify-center items-center">
+      <header className="relative z-50 flex h-24 flex-col">
+        <Link
+          href="/"
+          className="absolute left-6 top-0 z-10 flex h-24 flex-1 items-center justify-center"
+        >
           <Logo className={''} width={128} height={128} />
         </Link>
 
         <div
           ref={headerRef}
-          className="absolute top-0 left-2/4 z-10 h-24 p-6 flex flex-1 justify-end items-center lg:justify-center"
+          className="absolute left-2/4 top-0 z-10 flex h-24 flex-1 items-center justify-end p-6 lg:justify-center"
           style={{ position: 'var(--header-position)' } as never}
         >
           <Container className="">
@@ -269,5 +280,5 @@ export function Header() {
       </header>
       {isHomePage && <div style={{ height: 'var(--content-offset)' }} />}
     </>
-  )
+  );
 }

@@ -15,15 +15,15 @@ const avenir = localFont({
   src: [
     {
       path: '../../public/fonts/Avenir-Medium.woff2',
-      weight: '400'
+      weight: '400',
     },
     {
       path: '../../public/fonts/Avenir-Heavy.woff2',
-      weight: '800'
-    }
+      weight: '800',
+    },
   ],
-  variable: '--font-avenir'
-})
+  variable: '--font-avenir',
+});
 
 type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
