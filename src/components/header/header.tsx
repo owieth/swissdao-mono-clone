@@ -256,7 +256,7 @@ export function Header() {
 
         <div
           ref={headerRef}
-          className="absolute top-0 left-2/4 z-10 h-24 p-6 flex flex-1 justify-center items-center"
+          className="absolute top-0 left-2/4 z-10 h-24 p-6 flex flex-1 justify-end items-center lg:justify-center"
           style={{ position: 'var(--header-position)' } as never}
         >
           <Container className="">
