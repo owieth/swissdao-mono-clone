@@ -71,7 +71,6 @@ const blogPosts = [
 export default function Blog() {
   return (
     <div className="mx-auto mt-32 w-full max-w-7xl px-6 sm:mt-40 lg:px-8">
-      <Header></Header>
       <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
         <h2 className="mb-8 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           Spotlight

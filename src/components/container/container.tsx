@@ -2,6 +2,7 @@ import { type ReactNode, forwardRef } from 'react'
 
 type Props = {
   className?: string;
+  style?: object;
   children: ReactNode;
 }
 

@@ -81,9 +81,6 @@ export default function About() {
 
   return (
     <div className="bg-white">
-      {/* Header */}
-      <Header></Header>
-
       <main className="isolate">
         {/* Hero section */}
         <div className="relative isolate -z-10">
