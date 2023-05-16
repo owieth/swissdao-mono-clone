@@ -6,6 +6,12 @@ export default {
     extend: {
       fontFamily: {
         sans: ['var(--font-avenir)']
+      },
+      colors: {
+        accent: '#e31d1c',
+        foreground: '#ffffff',
+        background: '#000000',
+        gradientFadeout: '#ff0080',
       }
     },
   },
