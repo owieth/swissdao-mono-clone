@@ -13,6 +13,9 @@ export default {
         background: '#000000',
         gradientFadeout: '#ff0080',
       },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
     },
   },
   plugins: [],
