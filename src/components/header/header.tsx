@@ -257,17 +257,17 @@ export function Header() {
 
   return (
     <>
-      <header className="relative z-50 flex h-24 flex-col">
+      <header className="relative z-10 flex h-24 flex-col">
         <Link
           href="/"
-          className="absolute left-6 top-0 z-10 flex h-24 flex-1 items-center justify-center"
+          className="absolute left-6 top-0 z-20 flex h-24 flex-1 items-center justify-center"
         >
           <Logo className={''} width={128} height={128} />
         </Link>
 
         <div
           ref={headerRef}
-          className="absolute left-2/4 top-0 z-10 flex h-24 flex-1 items-center justify-end p-6 lg:justify-center"
+          className="absolute left-2/4 top-0 z-15 flex h-24 flex-1 items-center justify-end p-6 lg:justify-center"
           style={{ position: 'var(--header-position)' } as never}
         >
           <Container className="">
