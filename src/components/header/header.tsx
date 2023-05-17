@@ -10,7 +10,7 @@ import Logo from '../logo/logo';
 const navigation = [
   { name: 'About', href: '/about' },
   { name: 'Events', href: '#' },
-  { name: 'Blog', href: '/blog' },
+  { name: 'Blog', href: '/#' },
   // { name: 'Podcast', href: '#' },
 ];
 

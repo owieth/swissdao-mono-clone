@@ -18,9 +18,9 @@ const Home: NextPage = () => {
       <Hero></Hero>
       <Mission></Mission>
       <Features></Features>
-      <Event></Event>
+      {/* <Event></Event> */}
       <Committment></Committment>
-      <Testimonials></Testimonials>
+      {/* <Testimonials></Testimonials> */}
       {/* <Partners></Partners> */}
       <Subscribe></Subscribe>
       {/* <LearnSection></LearnSection>
