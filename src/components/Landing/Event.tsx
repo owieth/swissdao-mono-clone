@@ -107,7 +107,7 @@ export default function Event() {
   return (
     <div className="w-full bg-white py-10">
       <div className="mx-auto max-w-2xl lg:text-center">
-        <h2 className="text-base font-semibold leading-7 text-indigo-400">
+        <h2 className="text-base font-semibold leading-7 text-accent">
           Join now
         </h2>
         <p className="mt-2 text-3xl font-bold tracking-tight text-black sm:text-4xl">

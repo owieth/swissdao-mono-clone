@@ -20,7 +20,14 @@ const footerNavigation = {
       name: 'Telegram',
       href: '#',
       icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
-        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <svg
+          width="24"
+          height="25"
+          viewBox="0 0 24 25"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          {...props}
+        >
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
@@ -47,10 +54,17 @@ const footerNavigation = {
       name: 'LinkedIn',
       href: '#',
       icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
-        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <svg
+          width="24"
+          height="25"
+          viewBox="0 0 24 25"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          {...props}
+        >
           <path
             d="M22.2234 0.0166016H1.77187C0.792187 0.0166016 0 0.790039 0 1.74629V22.2822C0 23.2385 0.792187 24.0166 1.77187 24.0166H22.2234C23.2031 24.0166 24 23.2385 24 22.2869V1.74629C24 0.790039 23.2031 0.0166016 22.2234 0.0166016ZM7.12031 20.4682H3.55781V9.01191H7.12031V20.4682ZM5.33906 7.45098C4.19531 7.45098 3.27188 6.52754 3.27188 5.38848C3.27188 4.24941 4.19531 3.32598 5.33906 3.32598C6.47813 3.32598 7.40156 4.24941 7.40156 5.38848C7.40156 6.52285 6.47813 7.45098 5.33906 7.45098ZM20.4516 20.4682H16.8937V14.8994C16.8937 13.5729 16.8703 11.8619 15.0422 11.8619C13.1906 11.8619 12.9094 13.3104 12.9094 14.8057V20.4682H9.35625V9.01191H12.7687V10.5775H12.8156C13.2891 9.67754 14.4516 8.72598 16.1813 8.72598C19.7859 8.72598 20.4516 11.0979 20.4516 14.1822V20.4682Z"
-            fill='currentColor'
+            fill="currentColor"
           />
         </svg>
       ),

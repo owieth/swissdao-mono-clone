@@ -1,5 +1,3 @@
-import Header from '~/components/Header';
-
 const blogPosts = [
   {
     id: 1,
