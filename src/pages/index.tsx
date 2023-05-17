@@ -6,11 +6,9 @@ import Event from '~/components/Landing/Event';
 import Features from '~/components/Landing/Feature';
 import Hero from '~/components/Landing/Hero';
 import Mission from '~/components/Landing/Mission';
-import Partners from '~/components/Landing/Partners';
 import Subscribe from '~/components/Landing/Subscribe';
 import Testimonials from '~/components/Landing/Testimonials';
 import { api } from '~/utils/api';
-// import Footer from "~/components/Landing/Footer";
 
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: 'from tRPC' });

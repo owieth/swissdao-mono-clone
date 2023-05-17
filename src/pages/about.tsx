@@ -267,8 +267,6 @@ export default function About() {
             ))}
           </ul>
         </div>
-
-        <Footer></Footer>
       </main>
     </div>
   );
