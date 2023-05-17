@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import BackgroundGrid from '../background-grid/background-grid';
 
 interface IHero {
@@ -35,12 +36,12 @@ export default function Hero(props: IHero) {
               Join our community of builders, entrepreneurs and creatives.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
+              <Link
                 href="/about"
                 className="rounded-md bg-background px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Discover
-              </a>
+              </Link>
               <button
                 
                 onClick={scrollToComponent}
