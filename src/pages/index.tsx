@@ -1,5 +1,6 @@
 import { type NextPage } from 'next';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import { useRef } from 'react';
 
 import Committment from '~/components/Landing/Commitment';
 import Event from '~/components/Landing/Event';
@@ -13,10 +14,20 @@ import { api } from '~/utils/api';
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: 'from tRPC' });
 
+  const targetRef = useRef<HTMLDivElement>(null); // Specify the correct type for the ref
+
+  const scrollToComponent = () => {
+    console.log(targetRef.current)
+    
+    if (targetRef.current) {
+      targetRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
   return (
     <div className="flex min-h-screen w-full flex-col items-center justify-center">
-      <Hero></Hero>
-      <Mission></Mission>
+      <Hero scrollToComponent={scrollToComponent}></Hero>
+      <Mission ref={targetRef}></Mission>
       <Features></Features>
       {/* <Event></Event> */}
       <Committment></Committment>

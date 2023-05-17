@@ -1,6 +1,12 @@
-export default function Mission() {
+import { RefObject, forwardRef } from "react";
+
+interface IMission {
+  ref: RefObject<HTMLDivElement>
+}
+
+const Mission = forwardRef<HTMLDivElement, IMission>((props, ref) => {
   return (
-    <div className="w-full overflow-hidden bg-white py-32">
+    <div ref={ref} className="w-full overflow-hidden bg-white py-32">
       <div className="px-6 lg:flex lg:px-8">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8">
           <div className="lg:col-end-1 lg:w-full lg:max-w-lg lg:pb-8 lg:pl-24 lg:pt-16">
@@ -13,14 +19,14 @@ export default function Mission() {
               together in weekly sessions, workshops or hackathons.
             </p>
 
-            <div className="mt-10 flex">
+            {/* <div className="mt-10 flex">
               <a
                 href="#"
                 className="rounded-md bg-background px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Join our events <span aria-hidden="true">&rarr;</span>
               </a>
-            </div>
+            </div> */}
           </div>
           <div className="flex flex-wrap items-start justify-end gap-6 sm:gap-8 lg:contents">
             <div className="w-0 flex-auto lg:ml-auto lg:w-auto lg:flex-none lg:self-end">
@@ -58,4 +64,6 @@ export default function Mission() {
       </div>
     </div>
   );
-}
+});
+
+export default Mission;

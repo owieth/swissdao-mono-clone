@@ -1,6 +1,14 @@
 import BackgroundGrid from '../background-grid/background-grid';
 
-export default function Hero() {
+interface IHero {
+  scrollToComponent: () => void
+}
+
+
+export default function Hero(props: IHero) {
+
+  const { scrollToComponent } = props;
+
   return (
     <>
       <BackgroundGrid />
@@ -10,7 +18,7 @@ export default function Hero() {
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
               Announcing our next major event.{' '}
               <a
-                href="https://amsterdam.gm.events/events/web3-startup-event/"
+                href="https://www.eventbrite.com/e/1st-modular-blockchain-hackathon-in-switzerland-27th-may-zurichtrustsquare-tickets-634259205357"
                 target="_blank"
                 className="font-semibold text-accent"
               >
@@ -28,17 +36,18 @@ export default function Hero() {
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
-                href="#"
+                href="/about"
                 className="rounded-md bg-background px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Discover
               </a>
-              <a
-                href="#"
+              <button
+                
+                onClick={scrollToComponent}
                 className="text-sm font-semibold leading-6 text-background"
               >
                 Learn more <span aria-hidden="true">→</span>
-              </a>
+              </button>
             </div>
           </div>
         </div>
