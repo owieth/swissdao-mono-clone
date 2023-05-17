@@ -23,7 +23,7 @@ const Home: NextPage = () => {
       <Event></Event>
       <Committment></Committment>
       <Testimonials></Testimonials>
-      <Partners></Partners>
+      {/* <Partners></Partners> */}
       <Subscribe></Subscribe>
       {/* <LearnSection></LearnSection>
           <ConnectSection></ConnectSection>
