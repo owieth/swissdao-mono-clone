@@ -17,8 +17,7 @@ const Home: NextPage = () => {
   const targetRef = useRef<HTMLDivElement>(null); // Specify the correct type for the ref
 
   const scrollToComponent = () => {
-    console.log(targetRef.current)
-    
+    console.log()
     if (targetRef.current) {
       targetRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
