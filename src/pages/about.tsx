@@ -238,7 +238,7 @@ export default function About() {
         </div>
 
         {/* Team section */}
-        <div className="mx-auto mt-32 max-w-7xl px-6 py-16 sm:mt-48 sm:py-16 lg:px-8 lg:pb-64">
+        {/* <div className="mx-auto mt-32 max-w-7xl px-6 py-16 sm:mt-48 sm:py-16 lg:px-8 lg:pb-64">
           <div className="mx-auto max-w-2xl lg:mx-0">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               Our Contributors
@@ -266,7 +266,7 @@ export default function About() {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
       </main>
     </div>
   );
