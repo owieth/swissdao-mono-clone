@@ -8,6 +8,7 @@ import { Container } from '../container/container';
 import Logo from '../logo/logo';
 
 const navigation = [
+  { name: 'Home', href: '/'},
   { name: 'About', href: '/about' },
   { name: 'Events', href: '#' },
   { name: 'Blog', href: '/#' },
@@ -56,7 +57,7 @@ function MobileNavItem({
 }) {
   return (
     <li>
-      <Popover.Button as={Link} href={href} className="block py-2">
+      <Popover.Button as={Link} href={href} className="block py-2 z-10">
         {children}
       </Popover.Button>
     </li>
@@ -140,7 +141,7 @@ function DesktopNavigation(props: Props) {
   return (
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur">
-        {navigation.map((item, i) => (
+        {navigation.slice(1).map((item, i) => (
           <NavItem key={i} href={item.href}>
             {item.name}
           </NavItem>
@@ -260,7 +261,7 @@ export function Header() {
       <header className="relative z-10 flex h-24 flex-col">
         <Link
           href="/"
-          className="absolute left-6 top-0 z-20 flex h-24 flex-1 items-center justify-center"
+          className="absolute left-6 top-0 flex h-24 flex-1 items-center justify-center"
         >
           <Logo className={''} width={128} height={128} />
         </Link>
