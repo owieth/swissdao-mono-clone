@@ -19,7 +19,7 @@ export default function Hero(props: IHero) {
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
               Announcing our next major event.{' '}
               <a
-                href="https://www.eventbrite.com/e/1st-modular-blockchain-hackathon-in-switzerland-27th-may-zurichtrustsquare-tickets-634259205357"
+                href="https://www.meetup.com/swissdao/events/"
                 target="_blank"
                 className="font-semibold text-accent"
               >
@@ -43,7 +43,7 @@ export default function Hero(props: IHero) {
                 Discover
               </Link>
               <button
-                
+
                 onClick={scrollToComponent}
                 className="text-sm font-semibold leading-6 text-background"
               >
