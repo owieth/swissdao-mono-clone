@@ -7,9 +7,9 @@ import { api } from '~/utils/api';
 
 import { type NextPage } from 'next';
 import { type ReactElement, type ReactNode } from 'react';
+import GoogleAnalytics from '~/helpers/analytics';
 import Layout from '~/layouts/layout';
 import '~/styles/globals.css';
-import renderGoogleAnaltics from '~/helpers/analytics';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
 const avenir = localFont({
@@ -42,7 +42,7 @@ const App = ({
 
   return (
     <>
-      {renderGoogleAnaltics()}
+      <GoogleAnalytics />
 
       <SessionProvider session={pageProps.session}>
         <div className={`${avenir.variable} font-sans`}>
