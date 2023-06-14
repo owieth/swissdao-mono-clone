@@ -10,7 +10,7 @@ const GoogleAnalytics = () => {
   useEffect(() => {
     const handleRouteChange = (url: string) => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      window.gtag('config', GA_TRACKING_ID, {
+      window?.gtag('config', GA_TRACKING_ID, {
         page_path: url,
       });
     };
