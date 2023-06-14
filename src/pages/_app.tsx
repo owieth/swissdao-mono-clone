@@ -9,6 +9,7 @@ import { type NextPage } from 'next';
 import { type ReactElement, type ReactNode } from 'react';
 import Layout from '~/layouts/layout';
 import '~/styles/globals.css';
+import renderGoogleAnaltics from '~/helpers/analytics';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
 const avenir = localFont({
@@ -40,11 +41,15 @@ const App = ({
   const getLayout = Component.getLayout ?? (page => <Layout>{page}</Layout>);
 
   return (
-    <SessionProvider session={pageProps.session}>
-      <div className={`${avenir.variable} font-sans`}>
-        {getLayout(<Component {...pageProps} />)}
-      </div>
-    </SessionProvider>
+    <>
+      {renderGoogleAnaltics()}
+
+      <SessionProvider session={pageProps.session}>
+        <div className={`${avenir.variable} font-sans`}>
+          {getLayout(<Component {...pageProps} />)}
+        </div>
+      </SessionProvider>
+    </>
   );
 };
 
