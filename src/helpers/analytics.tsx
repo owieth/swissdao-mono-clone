@@ -1,24 +1,22 @@
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
-
-const GA_TRACKING_ID = 'G-3KYP2NRC5M';
+import { GA_TRACKING_ID } from '~/utils/gtag';
+import * as gtag from "../utils/gtag";
 
 const GoogleAnalytics = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      window?.gtag('config', GA_TRACKING_ID, {
-        page_path: url,
-      });
+    const handleRouteChange = (url: URL) => {
+      gtag.pageview(url);
     };
 
     router.events.on('routeChangeComplete', handleRouteChange);
 
     return () => router.events.off('routeChangeComplete', handleRouteChange);
   }, [router.events]);
+
   return (
     <>
       <Script
