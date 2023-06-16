@@ -18,7 +18,7 @@ const footerNavigation = {
     },
     {
       name: 'Telegram',
-      href: 'https://t.me/+8uWcBEBcbqNmNzMx',
+      href: 'https://t.me/+8kAfO-simRkxY2Jh',
       icon: (props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) => (
         <svg
           width="24"
