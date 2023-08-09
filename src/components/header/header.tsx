@@ -8,10 +8,14 @@ import { Container } from '../container/container';
 import Logo from '../logo/logo';
 
 const navigation = [
-  { name: 'Home', href: '/'},
+  { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
-  { name: 'Events', href: '#' },
-  { name: 'Blog', href: '/#' },
+  {
+    name: 'Events',
+    href: 'https://www.meetup.com/swissdao/events/',
+    target: '_blank',
+  },
+  // { name: 'Blog', href: '/#' },
   // { name: 'Podcast', href: '#' },
 ];
 
@@ -57,7 +61,7 @@ function MobileNavItem({
 }) {
   return (
     <li>
-      <Popover.Button as={Link} href={href} className="block py-2 z-10">
+      <Popover.Button as={Link} href={href} className="z-10 block py-2">
         {children}
       </Popover.Button>
     </li>
@@ -118,13 +122,22 @@ function MobileNavigation(props: Props) {
   );
 }
 
-function NavItem({ href, children }: { href: string; children: ReactNode }) {
+function NavItem({
+  href,
+  target,
+  children,
+}: {
+  href: string;
+  target: string;
+  children: ReactNode;
+}) {
   const isActive = useRouter().pathname === href;
 
   return (
     <li>
       <Link
         href={href}
+        target={target}
         className={`relative block px-3 py-2 transition 
         ${isActive ? 'text-accent' : 'hover:text-accent'}`}
       >
@@ -142,7 +155,7 @@ function DesktopNavigation(props: Props) {
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur">
         {navigation.slice(1).map((item, i) => (
-          <NavItem key={i} href={item.href}>
+          <NavItem key={i} href={item.href} target={item.target || '_self'}>
             {item.name}
           </NavItem>
         ))}
@@ -261,14 +274,14 @@ export function Header() {
       <header className="relative z-10 flex h-24 flex-col">
         <Link
           href="/"
-          className="absolute left-6 top-0 flex h-24 flex-1 items-center justify-center"
+          className="absolute left-6 top-0 z-20 flex h-24 flex-1 items-center justify-center"
         >
           <Logo className={''} width={128} height={128} />
         </Link>
 
         <div
           ref={headerRef}
-          className="z-15 absolute left-2/4 top-0 flex h-24 flex-1 items-center justify-end p-6 lg:justify-center"
+          className="absolute left-2/4 top-0 z-10 flex h-24 flex-1 items-center justify-end p-6 lg:justify-center"
           style={{ position: 'var(--header-position)' } as never}
         >
           <Container className="">

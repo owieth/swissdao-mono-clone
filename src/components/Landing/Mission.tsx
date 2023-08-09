@@ -1,7 +1,7 @@
-import { RefObject, forwardRef } from "react";
+import { type RefObject, forwardRef } from 'react';
 
 interface IMission {
-  ref: RefObject<HTMLDivElement>
+  ref: RefObject<HTMLDivElement>;
 }
 
 const Mission = forwardRef<HTMLDivElement, IMission>((props, ref) => {
@@ -28,7 +28,7 @@ const Mission = forwardRef<HTMLDivElement, IMission>((props, ref) => {
               </a>
             </div> */}
           </div>
-          <div className="flex flex-wrap items-start justify-end gap-6 sm:gap-8 lg:contents">
+          <div className="flex flex-col flex-wrap items-start justify-end justify-center gap-6 sm:gap-8 md:flex-row lg:contents">
             <div className="w-0 flex-auto lg:ml-auto lg:w-auto lg:flex-none lg:self-end">
               <img
                 src="/images/mission_4.jpg"

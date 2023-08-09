@@ -2,12 +2,10 @@ import Link from 'next/link';
 import BackgroundGrid from '../background-grid/background-grid';
 
 interface IHero {
-  scrollToComponent: () => void
+  scrollToComponent: () => void;
 }
 
-
 export default function Hero(props: IHero) {
-
   const { scrollToComponent } = props;
 
   return (
@@ -43,7 +41,6 @@ export default function Hero(props: IHero) {
                 Discover
               </Link>
               <button
-
                 onClick={scrollToComponent}
                 className="text-sm font-semibold leading-6 text-background"
               >

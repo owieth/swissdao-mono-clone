@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
 import { GA_TRACKING_ID } from '~/utils/gtag';
-import * as gtag from "../utils/gtag";
+import * as gtag from '../utils/gtag';
 
 const GoogleAnalytics = () => {
   const router = useRouter();

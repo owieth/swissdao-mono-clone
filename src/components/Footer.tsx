@@ -76,7 +76,7 @@ export default function Footer() {
   return (
     <footer className="mx-auto mt-24 max-w-7xl overflow-hidden px-6 pb-20 sm:pb-24 lg:px-8">
       <nav
-        className="-mb-6 columns-2 flex justify-evenly md:justify-center sm:space-x-12"
+        className="-mb-6 flex columns-2 justify-evenly sm:space-x-12 md:justify-center"
         aria-label="Footer"
       >
         {footerNavigation.main.map(item => (

@@ -23,9 +23,9 @@ export default function Committment() {
                 <p className="mt-6 text-xl text-gray-700">
                   Join us today and become a part of a vibrant and supportive
                   community that is dedicated to pushing the boundaries of
-                  what&apos;s possible with decentralized technologies. Together, we
-                  can create a future that is more open, transparent, and
-                  decentralized than ever before.
+                  what&apos;s possible with decentralized technologies.
+                  Together, we can create a future that is more open,
+                  transparent, and decentralized than ever before.
                 </p>
               </blockquote>
             </figure>

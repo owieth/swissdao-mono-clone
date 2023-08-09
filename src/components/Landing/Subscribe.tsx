@@ -18,11 +18,17 @@ export default function Subscribe() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="max-w-2xl text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           <h2 className="inline sm:block">Want community news and updates?</h2>{' '}
-          <p className="inline sm:block">Sign up for our{' '}
-            <a href="https://forms.gle/YfZhgfgHuNKezRqA7" target="_blank" className="font-semibold text-accent hover:underline">
+          <p className="inline sm:block">
+            Sign up for our{' '}
+            <a
+              href="https://forms.gle/YfZhgfgHuNKezRqA7"
+              target="_blank"
+              className="font-semibold text-accent hover:underline"
+            >
               newsletter
             </a>
-            .</p>
+            .
+          </p>
         </div>
         <form className="mt-10 max-w-md">
           <div className="flex gap-x-4">
