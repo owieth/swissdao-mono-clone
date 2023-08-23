@@ -1,9 +1,9 @@
-import classNames from '~/utils/tailwind';
 
-const statuses: { [key: string]: string } = {
-  Completed: 'text-green-400 bg-green-400/10',
-  Error: 'text-rose-400 bg-rose-400/10',
-};
+// const statuses: { [key: string]: string } = {
+//   Completed: 'text-green-400 bg-green-400/10',
+//   Error: 'text-rose-400 bg-rose-400/10',
+// };
+
 const activityItems = [
   {
     user: {

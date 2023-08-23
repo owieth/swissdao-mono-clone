@@ -1,8 +1,7 @@
 import {
-  PuzzlePieceIcon,
-  WrenchScrewdriverIcon,
   ChatBubbleLeftRightIcon,
-  UserGroupIcon,
+  PuzzlePieceIcon,
+  WrenchScrewdriverIcon
 } from '@heroicons/react/20/solid';
 
 const features = [
