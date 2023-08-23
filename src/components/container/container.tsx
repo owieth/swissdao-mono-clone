@@ -13,7 +13,7 @@ const OuterContainer = forwardRef<HTMLDivElement, Props>(
         <div className="mx-auto max-w-7xl lg:px-8">{children}</div>
       </div>
     );
-  }
+  },
 );
 
 const InnerContainer = forwardRef<HTMLDivElement, Props>(
@@ -27,12 +27,12 @@ const InnerContainer = forwardRef<HTMLDivElement, Props>(
         <div className="mx-auto max-w-2xl lg:max-w-5xl">{children}</div>
       </div>
     );
-  }
+  },
 );
 
 export const Container = forwardRef<HTMLDivElement, Props>(function Container(
   { children, ...props },
-  ref
+  ref,
 ) {
   return (
     <OuterContainer ref={ref} {...props}>

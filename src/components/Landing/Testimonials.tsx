@@ -140,7 +140,7 @@ export default function Testimonials() {
                         columnIdx === columnGroup.length - 1)
                       ? 'xl:row-span-2'
                       : 'xl:row-start-1',
-                    'space-y-8'
+                    'space-y-8',
                   )}
                 >
                   {column.map(testimonial => (
