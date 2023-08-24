@@ -2,7 +2,7 @@ type Props = {
   holder: string;
 };
 
-const MembercardBack = ({ holder }: Props) => {
+const MembercardBack = ({}: Props) => {
   return (
     <svg
       width="348"
