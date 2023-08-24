@@ -6,7 +6,9 @@ import RawLayout from '~/layouts/rawLayout';
 
 export default function Membercard() {
   const router = useRouter();
-  const { id } = router.query;
+  const { holder } = router.query;
+
+  console.log(holder);
 
   const styles = {
     card: [
@@ -29,7 +31,7 @@ export default function Membercard() {
       'h-full',
       'transition-all',
       'duration-500',
-      '[transform-style:preserve-3d]'
+      '[transform-style:preserve-3d]',
     ].join(' '),
     front: [
       'absolute',
@@ -37,21 +39,19 @@ export default function Membercard() {
       'h-full',
       'rounded-xl',
       '[-webkit-backface-visibility:hidden]',
-      '[backface-visibility:hidden]'
+      '[backface-visibility:hidden]',
     ].join(' '),
-    back: [
-      '[transform:rotateY(180deg)]'
-    ].join(' '),
+    back: ['[transform:rotateY(180deg)]'].join(' '),
   };
 
   return (
     <div className={styles.card}>
       <div className={styles.cardInner}>
         <div className={styles.front}>
-          <MembercardFront holder={String(id)} />
+          <MembercardFront holder={String(holder)} />
         </div>
         <div className={`${styles.front} ${styles.back}`}>
-          <MembercardBack holder={''} />
+          <MembercardBack holder={String(holder)} />
         </div>
       </div>
     </div>
