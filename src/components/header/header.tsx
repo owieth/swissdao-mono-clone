@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { clamp } from '@/helpers/calculate';
 import { Popover, Transition } from '@headlessui/react';

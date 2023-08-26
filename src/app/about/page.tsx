@@ -1,4 +1,4 @@
-import BackgroundGrid from "@/components/background-grid/background-grid";
+import BackgroundGrid from '@/components/background-grid/background-grid';
 
 const stats = [
   { label: 'Steadily growing', value: '15 Builders' },

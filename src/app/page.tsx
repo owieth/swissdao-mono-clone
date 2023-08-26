@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import Committment from '@/components/Landing/Commitment';
 import Features from '@/components/Landing/Feature';

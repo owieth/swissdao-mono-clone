@@ -1,9 +1,9 @@
-import Footer from '@/components/Footer'
-import { Header } from '@/components/header/header'
-import Seo from '@/components/seo/seo'
-import type { Metadata } from 'next'
-import localFont from 'next/font/local'
-import './globals.css'
+import Footer from '@/components/Footer';
+import { Header } from '@/components/header/header';
+import Seo from '@/components/seo/seo';
+import type { Metadata } from 'next';
+import localFont from 'next/font/local';
+import './globals.css';
 
 const avenir = localFont({
   src: [
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
       {
         url,
         width: 25,
-        height: 25
-      }
-    ]
+        height: 25,
+      },
+    ],
   },
   twitter: {
     title,
@@ -49,8 +49,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     creator: '@swissDAOspace',
     images: {
-      url
-    }
+      url,
+    },
   },
   robots: {
     index: false,
@@ -64,13 +64,13 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  }
-}
+  },
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -81,5 +81,5 @@ export default function RootLayout({
         <Footer />
       </body>
     </html>
-  )
+  );
 }

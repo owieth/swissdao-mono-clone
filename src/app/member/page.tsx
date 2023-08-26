@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import IconCheck from '@/components/icons/check';
 import IconGithub from '@/components/icons/github';
@@ -87,10 +87,11 @@ export default function Member() {
                 <button
                   key={tab.name}
                   disabled={tab.name !== 'Profile'}
-                  className={`${tab.name === 'Profile'
-                    ? 'border-white '
-                    : 'cursor-not-allowed border-transparent text-gray-400'
-                    }
+                  className={`${
+                    tab.name === 'Profile'
+                      ? 'border-white '
+                      : 'cursor-not-allowed border-transparent text-gray-400'
+                  }
                     whitespace-nowrap border-b-2 px-1 py-3 font-mono text-sm font-medium`}
                 >
                   {tab.name}
