@@ -1,7 +1,1 @@
-module.exports = {
-  root: true,
-  rules: {
-    "react/display-name": "off",
-  },
-  extends: ["custom"],
-};
+module.exports = require("eslint-config-custom/index.js");
