@@ -1,9 +1,11 @@
-import Image from 'next/image';
-import IconCheck from '~/components/icons/check';
-import IconGithub from '~/components/icons/github';
-import IconUpload from '~/components/icons/upload';
+'use client'
 
-export const profileWidth = 'max-w-5xl mx-auto px-4 sm:px-6 lg:px-8';
+import IconCheck from '@/components/icons/check';
+import IconGithub from '@/components/icons/github';
+import IconUpload from '@/components/icons/upload';
+import Image from 'next/image';
+
+const profileWidth = 'max-w-5xl mx-auto px-4 sm:px-6 lg:px-8';
 
 const user = {
   name: 'Steven Jobs',
@@ -11,6 +13,12 @@ const user = {
   image: '',
   verified: false,
 };
+
+const tabs = [
+  { name: 'Profile' },
+  { name: 'Work History' },
+  { name: 'Contact' },
+];
 
 export default function Member() {
   return (
@@ -79,11 +87,10 @@ export default function Member() {
                 <button
                   key={tab.name}
                   disabled={tab.name !== 'Profile'}
-                  className={`${
-                    tab.name === 'Profile'
-                      ? 'border-white '
-                      : 'cursor-not-allowed border-transparent text-gray-400'
-                  }
+                  className={`${tab.name === 'Profile'
+                    ? 'border-white '
+                    : 'cursor-not-allowed border-transparent text-gray-400'
+                    }
                     whitespace-nowrap border-b-2 px-1 py-3 font-mono text-sm font-medium`}
                 >
                   {tab.name}
@@ -101,9 +108,3 @@ export default function Member() {
     </div>
   );
 }
-
-const tabs = [
-  { name: 'Profile' },
-  { name: 'Work History' },
-  { name: 'Contact' },
-];

@@ -1,15 +1,14 @@
+'use client'
+
+import Committment from '@/components/Landing/Commitment';
+import Features from '@/components/Landing/Feature';
+import Hero from '@/components/Landing/Hero';
+import Mission from '@/components/Landing/Mission';
+import Subscribe from '@/components/Landing/Subscribe';
 import { type NextPage } from 'next';
 import { useRef } from 'react';
 
-import Committment from '~/components/Landing/Commitment';
-import Features from '~/components/Landing/Feature';
-import Hero from '~/components/Landing/Hero';
-import Mission from '~/components/Landing/Mission';
-import Subscribe from '~/components/Landing/Subscribe';
-
 const Home: NextPage = () => {
-  // const hello = api.example.hello.useQuery({ text: 'from tRPC' });
-
   const targetRef = useRef<HTMLDivElement>(null); // Specify the correct type for the ref
 
   const scrollToComponent = () => {

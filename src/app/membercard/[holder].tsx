@@ -1,8 +1,6 @@
+import MembercardBack from '@/components/membercard/back';
+import MembercardFront from '@/components/membercard/front';
 import { useRouter } from 'next/router';
-import { type ReactElement } from 'react';
-import MembercardBack from '~/components/membercard/back';
-import MembercardFront from '~/components/membercard/front';
-import RawLayout from '~/layouts/rawLayout';
 
 export default function Membercard() {
   const router = useRouter();
@@ -57,7 +55,3 @@ export default function Membercard() {
     </div>
   );
 }
-
-Membercard.getLayout = function getLayout(page: ReactElement) {
-  return <RawLayout>{page}</RawLayout>;
-};

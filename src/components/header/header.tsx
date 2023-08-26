@@ -1,9 +1,10 @@
+'use client'
+
+import { clamp } from '@/helpers/calculate';
 import { Popover, Transition } from '@headlessui/react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { Fragment, useEffect, useRef, type ReactNode } from 'react';
-
-import { clamp } from '~/shared/helpers/calculate';
 import { Container } from '../container/container';
 import Logo from '../logo/logo';
 
@@ -131,7 +132,9 @@ function NavItem({
   target: string;
   children: ReactNode;
 }) {
-  const isActive = useRouter().pathname === href;
+  const pathname = usePathname();
+
+  const isActive = pathname === href;
 
   return (
     <li>
@@ -165,7 +168,9 @@ function DesktopNavigation(props: Props) {
 }
 
 export function Header() {
-  const isHomePage = useRouter().pathname === '/';
+  const pathname = usePathname();
+
+  const isHomePage = pathname === '/';
 
   const headerRef = useRef<HTMLDivElement>(null);
   const isInitial = useRef(true);
