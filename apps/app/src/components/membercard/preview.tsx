@@ -1,11 +1,13 @@
+'use client';
+
 import MembercardBack from '@/components/membercard/back';
 import MembercardFront from '@/components/membercard/front';
-import { useRouter } from 'next/router';
 
-export default function Membercard() {
-  const router = useRouter();
-  const { holder } = router.query;
+type Props = {
+  holder: string;
+};
 
+const MembercardPreview = ({ holder }: Props) => {
   const styles = {
     card: [
       'absolute',
@@ -52,4 +54,6 @@ export default function Membercard() {
       </div>
     </div>
   );
-}
+};
+
+export default MembercardPreview;

@@ -3,6 +3,7 @@
 import IconCheck from '@/components/icons/check';
 import IconGithub from '@/components/icons/github';
 import IconUpload from '@/components/icons/upload';
+import MembercardPreview from '@/components/membercard/preview';
 import Image from 'next/image';
 
 const profileWidth = 'max-w-5xl mx-auto px-4 sm:px-6 lg:px-8';
@@ -20,7 +21,7 @@ const tabs = [
   { name: 'Contact' },
 ];
 
-export default function Member() {
+export default function Member({ params }: { params: { holder: string } }) {
   return (
     <div className="min-h-screen pb-20">
       <div>
@@ -105,6 +106,13 @@ export default function Member() {
       {/* Bio */}
       <div className={`${profileWidth} mt-16`}>
         <h2 className="font-mono text-2xl font-semibold ">Bio</h2>
+      </div>
+
+      <div className={`${profileWidth} mt-16`}>
+        <h2 className="font-mono text-2xl font-semibold">Preview</h2>
+        <div className="relative">
+          <MembercardPreview holder="" />
+        </div>
       </div>
     </div>
   );
