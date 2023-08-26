@@ -1,16 +1,19 @@
 'use client';
 
 import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit';
+import { useEffect, useState } from 'react';
 import { WagmiConfig, configureChains, createConfig, sepolia } from 'wagmi';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import './globals.css';
 
-export default async function Web3Wrapper({
+export default function Web3Wrapper({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [mounted, setMounted] = useState(false);
+
   const { chains, publicClient } = configureChains(
     [sepolia],
     [
@@ -31,9 +34,15 @@ export default async function Web3Wrapper({
     publicClient,
   });
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider chains={chains}>{children}</RainbowKitProvider>
+      <RainbowKitProvider chains={chains}>
+        {mounted && children}
+      </RainbowKitProvider>
     </WagmiConfig>
   );
 }
