@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tremor/react": "3.6.6",
     "next": "13.4.19",
     "ui": "*"
   },
