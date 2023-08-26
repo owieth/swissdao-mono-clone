@@ -6,17 +6,17 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Fragment } from 'react';
 
-const navigation = [
-  { name: 'Members', href: '/' },
-  { name: 'Your Profile', href: '/profile' }
-];
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function Navbar({ user }: { user?: any }) {
   const pathname = usePathname();
+
+  const navigation = [
+    { name: 'Members', href: '/members' },
+    { name: 'Your Profile', href: `/members/${user?.name}` }
+  ];
 
   return (
     <Disclosure as="nav" className="bg-white shadow-sm">
