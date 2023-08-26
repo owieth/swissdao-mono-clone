@@ -1,8 +1,3 @@
-
 export default function IndexPage() {
-  return (
-    <main className="p-4 md:p-10 mx-auto max-w-7xl">
-
-    </main>
-  );
+  return <main className="mx-auto max-w-7xl p-4 md:p-10"></main>;
 }

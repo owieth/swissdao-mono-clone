@@ -5,7 +5,7 @@ import {
   TableHead,
   TableHeaderCell,
   TableRow,
-  Text
+  Text,
 } from '@tremor/react';
 
 type UserType = {
@@ -13,7 +13,7 @@ type UserType = {
   name: string;
   username: string;
   email: string;
-}
+};
 
 export default function UsersTable({ users }: { users: UserType[] }) {
   return (
@@ -26,7 +26,7 @@ export default function UsersTable({ users }: { users: UserType[] }) {
         </TableRow>
       </TableHead>
       <TableBody>
-        {users.map((user) => (
+        {users.map(user => (
           <TableRow key={user.id}>
             <TableCell>{user.name}</TableCell>
             <TableCell>

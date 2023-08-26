@@ -6,18 +6,16 @@ export default function MembersPage() {
   const users = [
     {
       id: 1,
-      name: "Max Muster",
-      username: "@maxmuster",
-      email: "max.muster@gmail.com",
-    }
+      name: 'Max Muster',
+      username: '@maxmuster',
+      email: 'max.muster@gmail.com',
+    },
   ];
 
   return (
-    <main className="p-4 md:p-10 mx-auto max-w-7xl">
+    <main className="mx-auto max-w-7xl p-4 md:p-10">
       <Title>Users</Title>
-      <Text>
-        A list of all registered Members
-      </Text>
+      <Text>A list of all registered Members</Text>
       <Search />
       <Card className="mt-6">
         <UsersTable users={users} />
