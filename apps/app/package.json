@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@notionhq/client": "^2.2.12",
     "@rainbow-me/rainbowkit": "^1.0.9",
     "@tremor/react": "3.6.6",
     "next": "13.4.19",
