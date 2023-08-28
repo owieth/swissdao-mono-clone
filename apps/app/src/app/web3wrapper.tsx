@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { WagmiConfig, configureChains, createConfig, sepolia } from 'wagmi';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
-import './globals.css';
 
 export default function Web3Wrapper({
   children,

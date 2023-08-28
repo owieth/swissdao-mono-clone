@@ -3,7 +3,7 @@ import { Header } from '@/components/header/header';
 import Seo from '@/components/seo/seo';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import './globals.css';
+import 'tailwind-config/globals.css';
 
 const avenir = localFont({
   src: [
