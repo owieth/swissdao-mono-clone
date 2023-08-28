@@ -15,8 +15,6 @@
       "esnext"
     ],
     "allowJs": true,
-    "skipLibCheck": true,
-    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "incremental": true,
@@ -25,17 +23,5 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve"
-  },
-  "paths": {
-    "@/*": [
-      "./src/*"
-    ]
-  },
-  "include": [
-    "src",
-    "next-env.d.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  }
 }
