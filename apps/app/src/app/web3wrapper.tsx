@@ -17,7 +17,7 @@ export default function Web3Wrapper({
   const { chains, publicClient } = configureChains(
     [sepolia],
     [
-      alchemyProvider({ apiKey: '_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC' }),
+      alchemyProvider({ apiKey: 'PZYto3ONWzPMqPW6AV70bOzbofx11rQf' }),
       publicProvider(),
     ]
   );
