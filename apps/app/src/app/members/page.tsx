@@ -1,7 +1,11 @@
+'use client';
+
 import { NOTION_CLIENT } from '@/api/client';
 import Search from '@/components/search/search';
 import UsersTable from '@/components/table/table';
+import { CONTRACT } from '@/contracts/contracts';
 import { Card, Text, Title } from '@tremor/react';
+import { useContractInfiniteReads } from 'wagmi';
 
 async function getData() {
   // const res = await fetch('https://api.example.com/...')
@@ -18,7 +22,16 @@ async function getData() {
   return await NOTION_CLIENT.users.list({ auth: undefined });
 }
 
-export default async function MembersPage() {
+export default function MembersPage() {
+  const { data: memberships, fetchNextPage } = useContractInfiniteReads({
+    cacheKey: 'memberships',
+    contracts(param = 1) {
+      const args = [param] as const;
+      return [{ ...CONTRACT, functionName: 'getTokenStructById', args }] as any;
+    },
+    getNextPageParam: (_, pages) => pages.length + 1,
+  });
+
   const users = [
     {
       id: 1,
@@ -28,9 +41,7 @@ export default async function MembersPage() {
     },
   ];
 
-  const data = await getData();
-
-  console.log(data);
+  console.log(memberships);
 
   return (
     <main className="mx-auto max-w-7xl p-4 md:p-10">
