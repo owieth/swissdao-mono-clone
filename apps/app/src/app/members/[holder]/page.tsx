@@ -4,7 +4,10 @@ import IconCheck from '@/components/icons/check';
 import IconGithub from '@/components/icons/github';
 import IconUpload from '@/components/icons/upload';
 import MembercardPreview from '@/components/membercard/preview';
+import { useConnectModal } from '@rainbow-me/rainbowkit';
 import Image from 'next/image';
+import { useEffect } from 'react';
+import { useAccount } from 'wagmi';
 
 const profileWidth = 'max-w-5xl mx-auto px-4 sm:px-6 lg:px-8';
 
@@ -22,7 +25,16 @@ const tabs = [
 ];
 
 export default function Member({ params }: { params: { holder: string } }) {
-  return (
+  const { address } = useAccount();
+  const { openConnectModal } = useConnectModal();
+
+  useEffect(() => {
+    if (!address) {
+      openConnectModal?.();
+    }
+  }, [address, openConnectModal]);
+
+  return address ? (
     <div className="min-h-screen pb-20">
       <div>
         <div
@@ -115,5 +127,5 @@ export default function Member({ params }: { params: { holder: string } }) {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 }
