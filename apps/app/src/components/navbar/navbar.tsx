@@ -4,6 +4,7 @@ import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useAccount } from 'wagmi';
 import WalletButton from '../wallet-button/wallet-button';
 
 function classNames(...classes: string[]) {
@@ -12,10 +13,11 @@ function classNames(...classes: string[]) {
 
 export default function Navbar({ user }: { user?: any }) {
   const pathname = usePathname();
+  const { address } = useAccount();
 
   const navigation = [
     { name: 'Members', href: '/members' },
-    { name: 'Your Profile', href: `/members/${user?.name}` },
+    address ? { name: 'Your Profile', href: `/members/${user?.name}` } : null,
   ];
 
   return (
@@ -51,17 +53,19 @@ export default function Navbar({ user }: { user?: any }) {
                 <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                   {navigation.map(item => (
                     <a
-                      key={item.name}
-                      href={item.href}
+                      key={item?.name}
+                      href={item?.href}
                       className={classNames(
-                        pathname === item.href
+                        pathname === item?.href
                           ? 'border-slate-500 text-gray-900'
                           : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
                         'inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium'
                       )}
-                      aria-current={pathname === item.href ? 'page' : undefined}
+                      aria-current={
+                        pathname === item?.href ? 'page' : undefined
+                      }
                     >
-                      {item.name}
+                      {item?.name}
                     </a>
                   ))}
                 </div>
@@ -86,18 +90,18 @@ export default function Navbar({ user }: { user?: any }) {
             <div className="space-y-1 pb-3 pt-2">
               {navigation.map(item => (
                 <Disclosure.Button
-                  key={item.name}
+                  key={item?.name}
                   as="a"
-                  href={item.href}
+                  href={item?.href}
                   className={classNames(
-                    pathname === item.href
+                    pathname === item?.href
                       ? 'border-slate-500 bg-slate-50 text-slate-700'
                       : 'border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800',
                     'block border-l-4 py-2 pl-3 pr-4 text-base font-medium'
                   )}
-                  aria-current={pathname === item.href ? 'page' : undefined}
+                  aria-current={pathname === item?.href ? 'page' : undefined}
                 >
-                  {item.name}
+                  {item?.name}
                 </Disclosure.Button>
               ))}
             </div>
