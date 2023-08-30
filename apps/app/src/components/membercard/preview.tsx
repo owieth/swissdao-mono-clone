@@ -1,5 +1,3 @@
-'use client';
-
 import MembercardBack from '@/components/membercard/back';
 import MembercardFront from '@/components/membercard/front';
 
@@ -46,10 +44,10 @@ const MembercardPreview = ({ holder }: Props) => {
     <div className={styles.card}>
       <div className={styles.cardInner}>
         <div className={styles.front}>
-          <MembercardFront holder={String(holder)} />
+          <MembercardFront holder={holder} />
         </div>
         <div className={`${styles.front} ${styles.back}`}>
-          <MembercardBack holder={String(holder)} />
+          <MembercardBack holder={holder} />
         </div>
       </div>
     </div>

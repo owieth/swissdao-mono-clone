@@ -19,9 +19,9 @@ const MembercardFront = ({ holder }: Props) => {
             fill="url(#paint0_linear_537_604)"
           />
         </g>
-        <text id="id" x="30" y="170" font-size="8" fill="white">
-          {holder}
-        </text>
+        <foreignObject x="30" y="170" style={{ width: '100%', height: '100%' }}>
+          <p style={{ color: 'white', fontSize: 8 }}>{holder}</p>
+        </foreignObject>
         <ellipse
           cx="302.136"
           cy="22.6496"
