@@ -19,12 +19,9 @@ export async function GET(request: Request) {
       <div
         style={{
           display: 'flex',
-          fontSize: 60,
-          color: 'black',
-          background: '#f6f6f6',
           width: '100%',
           height: '100%',
-          paddingTop: 50,
+          background: 'black',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
@@ -34,8 +31,8 @@ export async function GET(request: Request) {
       </div>
     ),
     {
-      width: 1200,
-      height: 630,
+      width: 700,
+      height: 700,
     }
   );
 }

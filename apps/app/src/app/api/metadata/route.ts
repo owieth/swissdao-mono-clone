@@ -4,8 +4,8 @@ export async function GET() {
   const data = {
     name: 'Membership #1',
     description: 'Membership of 0x94b2cea71f9ba7a6e55c40be320033d1151145b6',
-    // image: 'https://membership-preview.vercel.app/api/membercard',
-    image: 'https://owieth-website-app.vercel.app/api/preview?holder=0x94b2cea71f9ba7a6e55c40be320033d1151145b6',
+    image:
+      'https://owieth-website-app.vercel.app/api/preview?holder=0x94b2cea71f9ba7a6e55c40be320033d1151145b6',
     animation_url:
       'https://owieth-website-app.vercel.app/preview/0x94b2cea71f9ba7a6e55c40be320033d1151145b6',
     attributes: [
