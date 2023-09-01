@@ -47,7 +47,7 @@ export async function GET(
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={profileImageUri}
+            src={profileImageUri || "https://picsum.photos/500"}
             alt=""
             height={100}
             width={100}
