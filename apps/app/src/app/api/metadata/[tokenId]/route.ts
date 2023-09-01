@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(request: Request,
+  { params: { tokenId } }: { params: { tokenId: number } }) {
+
   const data = {
-    name: 'Membership #1',
+    name: `Membership #${tokenId}`,
     description: 'Membership of 0x94b2cea71f9ba7a6e55c40be320033d1151145b6',
     image:
       'https://owieth-website-app.vercel.app/api/preview?holder=0x94b2cea71f9ba7a6e55c40be320033d1151145b6',
