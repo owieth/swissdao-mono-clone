@@ -28,7 +28,7 @@ export async function GET(
   const data = {
     name: `Membership #${tokenId}`,
     description: `Membership of ${holder}`,
-    image: `https://owieth-website-app.vercel.app/api/preview?holder=${holder}`,
+    image: `https://owieth-website-app.vercel.app/api/preview/${holder}`,
     animation_url: `https://owieth-website-app.vercel.app/preview/${holder}`,
     attributes: [
       {
