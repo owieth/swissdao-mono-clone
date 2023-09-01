@@ -7,8 +7,6 @@ import { ethers } from 'ethers';
 import { ImageResponse } from 'next/server';
 import ABI from '../../../../contracts/ABI.json';
 
-export const runtime = 'edge';
-
 export async function GET(
   request: Request,
   { params: { tokenId } }: { params: { tokenId: number } }
