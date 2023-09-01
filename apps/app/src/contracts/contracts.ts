@@ -22,7 +22,7 @@ export type TokenStruct = {
 export const ALCHEMY_KEY = 'PZYto3ONWzPMqPW6AV70bOzbofx11rQf';
 
 export const CONTRACT_ADDRESS_SEPOLIA =
-  '0x3efba2f546a990f5821056a4cb511c88f5757a0d';
+  '0xcc46262ACDDd30505071C9232de6d9E63c429091';
 
 export const CONTRACT = {
   address: CONTRACT_ADDRESS_SEPOLIA as Address,
