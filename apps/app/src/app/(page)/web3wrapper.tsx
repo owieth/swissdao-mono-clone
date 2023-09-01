@@ -1,5 +1,6 @@
 'use client';
 
+import { ALCHEMY_KEY } from '@/contracts/contracts';
 import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit';
 import { useEffect, useState } from 'react';
 import { WagmiConfig, configureChains, createConfig, sepolia } from 'wagmi';
@@ -15,10 +16,7 @@ export default function Web3Wrapper({
 
   const { chains, publicClient } = configureChains(
     [sepolia],
-    [
-      alchemyProvider({ apiKey: 'PZYto3ONWzPMqPW6AV70bOzbofx11rQf' }),
-      publicProvider(),
-    ]
+    [alchemyProvider({ apiKey: ALCHEMY_KEY }), publicProvider()]
   );
 
   const { connectors } = getDefaultWallets({

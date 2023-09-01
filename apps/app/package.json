@@ -12,6 +12,7 @@
     "@notionhq/client": "^2.2.12",
     "@rainbow-me/rainbowkit": "^1.0.9",
     "@tremor/react": "3.6.6",
+    "ethers": "^6.7.1",
     "next": "13.4.19",
     "ui": "*",
     "viem": "^1.7.0",
