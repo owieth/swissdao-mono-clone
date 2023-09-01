@@ -2,17 +2,6 @@ import { ImageResponse } from 'next/server';
 
 export const runtime = 'edge';
 
-const renderTextElement = (
-  x: number,
-  y: number,
-  fontSize: number,
-  value: string
-) => (
-  <foreignObject x={x} y={y} style={{ width: '100%', height: '100%' }}>
-    <p style={{ color: 'white', fontSize }}>{value}</p>
-  </foreignObject>
-);
-
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const holder = searchParams.get('holder');
