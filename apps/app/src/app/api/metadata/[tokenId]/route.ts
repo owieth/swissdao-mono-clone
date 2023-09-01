@@ -1,20 +1,12 @@
-import {
-  ALCHEMY_KEY,
-  CONTRACT_ADDRESS_SEPOLIA,
-  TokenStruct,
-} from '@/contracts/contracts';
-import { ethers } from 'ethers';
+import { TokenStruct } from '@/contracts/contracts';
+import { ETHERS_CONTRACT } from '@/helpers/contracts';
 import { NextResponse } from 'next/server';
-import ABI from '../../../../contracts/ABI.json';
 
 export async function GET(
   request: Request,
   { params: { tokenId } }: { params: { tokenId: number } }
 ) {
-  const provider = new ethers.AlchemyProvider('sepolia', ALCHEMY_KEY);
-  const contract = new ethers.Contract(CONTRACT_ADDRESS_SEPOLIA, ABI, provider);
-
-  await contract.ownerOf(tokenId);
+  await ETHERS_CONTRACT.ownerOf(tokenId);
 
   const {
     mintedAt,
@@ -23,7 +15,7 @@ export async function GET(
     activityPoints,
     holder,
     state,
-  } = (await contract.getTokenStructById(tokenId)) as TokenStruct;
+  } = (await ETHERS_CONTRACT.getTokenStructById(tokenId)) as TokenStruct;
 
   const data = {
     name: `Membership #${tokenId}`,

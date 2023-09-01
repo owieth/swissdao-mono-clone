@@ -1,22 +1,14 @@
-import {
-  ALCHEMY_KEY,
-  CONTRACT_ADDRESS_SEPOLIA,
-  TokenStruct,
-} from '@/contracts/contracts';
-import { ethers } from 'ethers';
+import { TokenStruct } from '@/contracts/contracts';
+import { ETHERS_CONTRACT } from '@/helpers/contracts';
 import { ImageResponse } from 'next/server';
-import ABI from '../../../../contracts/ABI.json';
 
 export async function GET(
   request: Request,
   { params: { tokenId } }: { params: { tokenId: number } }
 ) {
-  const provider = new ethers.AlchemyProvider('sepolia', ALCHEMY_KEY);
-  const contract = new ethers.Contract(CONTRACT_ADDRESS_SEPOLIA, ABI, provider);
+  await ETHERS_CONTRACT.ownerOf(tokenId);
 
-  await contract.ownerOf(tokenId);
-
-  const { profileImageUri, holder } = (await contract.getTokenStructById(
+  const { profileImageUri, holder } = (await ETHERS_CONTRACT.getTokenStructById(
     tokenId
   )) as TokenStruct;
   return new ImageResponse(
