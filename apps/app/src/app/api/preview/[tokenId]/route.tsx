@@ -1,11 +1,26 @@
+import {
+  ALCHEMY_KEY,
+  CONTRACT_ADDRESS_SEPOLIA,
+  TokenStruct,
+} from '@/contracts/contracts';
+import { ethers } from 'ethers';
 import { ImageResponse } from 'next/server';
+import ABI from '../../../../contracts/ABI.json';
 
 export const runtime = 'edge';
 
 export async function GET(
   request: Request,
-  { params: { holder } }: { params: { holder: string } }
+  { params: { tokenId } }: { params: { tokenId: number } }
 ) {
+  const provider = new ethers.AlchemyProvider('sepolia', ALCHEMY_KEY);
+  const contract = new ethers.Contract(CONTRACT_ADDRESS_SEPOLIA, ABI, provider);
+
+  await contract.ownerOf(tokenId);
+
+  const { profileImageUri, holder } = (await contract.getTokenStructById(
+    tokenId
+  )) as TokenStruct;
   return new ImageResponse(
     (
       <div
@@ -32,7 +47,7 @@ export async function GET(
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="https://picsum.photos/500"
+            src={profileImageUri}
             alt=""
             height={100}
             width={100}
