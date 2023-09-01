@@ -6,13 +6,6 @@ export async function GET(
   request: Request,
   { params: { holder } }: { params: { holder: string } }
 ) {
-  if (!holder) {
-    return new ImageResponse(<>Please provide a Holder address!</>, {
-      width: 1200,
-      height: 630,
-    });
-  }
-
   return new ImageResponse(
     (
       <div
