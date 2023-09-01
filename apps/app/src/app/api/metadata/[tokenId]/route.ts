@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 
-export async function GET(request: Request,
-  { params: { tokenId } }: { params: { tokenId: number } }) {
-
+export async function GET(
+  request: Request,
+  { params: { tokenId } }: { params: { tokenId: number } }
+) {
   const data = {
     name: `Membership #${tokenId}`,
     description: 'Membership of 0x94b2cea71f9ba7a6e55c40be320033d1151145b6',

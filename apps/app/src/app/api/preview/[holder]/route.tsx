@@ -2,10 +2,10 @@ import { ImageResponse } from 'next/server';
 
 export const runtime = 'edge';
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const holder = searchParams.get('holder');
-
+export async function GET(
+  request: Request,
+  { params: { holder } }: { params: { holder: string } }
+) {
   if (!holder) {
     return new ImageResponse(<>Please provide a Holder address!</>, {
       width: 1200,
