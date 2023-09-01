@@ -1,8 +1,8 @@
-type Props = {
-  holder: string;
-};
+import { TokenStruct } from '@/contracts/contracts';
 
-const MembercardBack = ({}: Props) => {
+const MembercardBack = ({ tokenStruct }: { tokenStruct: TokenStruct }) => {
+  const {} = tokenStruct;
+
   return (
     <svg
       width="348"

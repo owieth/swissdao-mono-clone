@@ -1,11 +1,8 @@
 import MembercardBack from '@/components/membercard/back';
 import MembercardFront from '@/components/membercard/front';
+import { TokenStruct } from '@/contracts/contracts';
 
-type Props = {
-  holder: string;
-};
-
-const MembercardPreview = ({ holder }: Props) => {
+const MembercardPreview = ({ tokenStruct }: { tokenStruct: TokenStruct }) => {
   const styles = {
     card: [
       'absolute',
@@ -44,10 +41,10 @@ const MembercardPreview = ({ holder }: Props) => {
     <div className={styles.card}>
       <div className={styles.cardInner}>
         <div className={styles.front}>
-          <MembercardFront holder={holder} />
+          <MembercardFront tokenStruct={tokenStruct} />
         </div>
         <div className={`${styles.front} ${styles.back}`}>
-          <MembercardBack holder={holder} />
+          <MembercardBack tokenStruct={tokenStruct} />
         </div>
       </div>
     </div>
