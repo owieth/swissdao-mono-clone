@@ -3,7 +3,6 @@
 import IconCheck from '@/components/icons/check';
 import IconGithub from '@/components/icons/github';
 import IconUpload from '@/components/icons/upload';
-import MembercardPreview from '@/components/membercard/preview';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
 import Image from 'next/image';
 import { useEffect } from 'react';
@@ -123,7 +122,7 @@ export default function Member({ params }: { params: { holder: string } }) {
       <div className={`${profileWidth} mt-16`}>
         <h2 className="font-mono text-2xl font-semibold">Preview</h2>
         <div className="relative">
-          <MembercardPreview holder={params.holder} />
+          {/* <MembercardPreview holder={params.holder} /> */}
         </div>
       </div>
     </div>
