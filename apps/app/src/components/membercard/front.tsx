@@ -1,4 +1,4 @@
-import { TokenStruct } from "@/contracts/contracts";
+import { TokenStruct } from '@/contracts/contracts';
 
 const MembercardFront = ({ tokenStruct }: { tokenStruct: TokenStruct }) => {
   const { profileImageUri, holder, mintedAt, experiencePoints } = tokenStruct;
@@ -26,10 +26,50 @@ const MembercardFront = ({ tokenStruct }: { tokenStruct: TokenStruct }) => {
             fill="url(#paint0_linear_605_531)"
           />
         </g>
-        <text fill="white" font-family="Avenir" font-size="19" font-weight="350" letter-spacing="-0.04em"><tspan x="20.4707" y="162.347">John Doe</tspan></text>
-        <text fill="white" font-family="Avenir" font-size="8" font-weight="350" letter-spacing="-0.04em"><tspan x="297.471" y="184.36">{mintedAt}</tspan></text>
-        <text fill="white" font-family="Avenir" font-size="8" font-weight="350" letter-spacing="-0.04em"><tspan x="20.4707" y="184.36">{holder}</tspan></text>
-        <text fill="black" font-family="Avenir" font-size="8" font-weight="350" letter-spacing="-0.04em"><tspan x="61.9707" y="122.86">{experiencePoints}</tspan></text>
+        <text
+          fill="white"
+          font-family="Avenir"
+          font-size="19"
+          font-weight="350"
+          letter-spacing="-0.04em"
+        >
+          <tspan x="20.4707" y="162.347">
+            John Doe
+          </tspan>
+        </text>
+        <text
+          fill="white"
+          font-family="Avenir"
+          font-size="8"
+          font-weight="350"
+          letter-spacing="-0.04em"
+        >
+          <tspan x="297.471" y="184.36">
+            {mintedAt}
+          </tspan>
+        </text>
+        <text
+          fill="white"
+          font-family="Avenir"
+          font-size="8"
+          font-weight="350"
+          letter-spacing="-0.04em"
+        >
+          <tspan x="20.4707" y="184.36">
+            {holder}
+          </tspan>
+        </text>
+        <text
+          fill="black"
+          font-family="Avenir"
+          font-size="8"
+          font-weight="350"
+          letter-spacing="-0.04em"
+        >
+          <tspan x="61.9707" y="122.86">
+            {experiencePoints}
+          </tspan>
+        </text>
         <ellipse
           cx="301.694"
           cy="22.9738"

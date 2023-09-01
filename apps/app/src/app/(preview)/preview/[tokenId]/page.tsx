@@ -1,9 +1,9 @@
 import MembercardPreview from '@/components/membercard/preview';
 
 export default function PreviewPage({
-  params,
+  params: { tokenId },
 }: {
-  params: { holder: string };
+  params: { tokenId: number };
 }) {
-  return <MembercardPreview holder={params.holder} />;
+  return <MembercardPreview holder={tokenId} />;
 }
