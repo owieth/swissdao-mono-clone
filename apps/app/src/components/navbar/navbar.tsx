@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { useAccount } from 'wagmi';
 import { UserNav } from '../dashboard/user-nav';
 import Logo from '../ui/logo';
+import Link from 'next/link';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -28,9 +29,9 @@ export default function Navbar({ user }: { user?: any }) {
           <div className="mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 justify-between">
               <div className="flex">
-                <div className="flex flex-shrink-0 items-center">
+                <Link href={'/'} className="flex flex-shrink-0 items-center">
                   <Logo height={32} width={32} className="text-[#e31d1c]" />
-                </div>
+                </Link>
                 <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                   {navigation.map(item => (
                     <a
