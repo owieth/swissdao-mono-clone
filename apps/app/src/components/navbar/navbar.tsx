@@ -3,11 +3,11 @@
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAccount } from 'wagmi';
 import { UserNav } from '../dashboard/user-nav';
 import Logo from '../ui/logo';
-import Link from 'next/link';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -17,10 +17,12 @@ export default function Navbar({ user }: { user?: any }) {
   const pathname = usePathname();
   const { address } = useAccount();
 
-  const navigation = [
-    { name: 'Members', href: '/members' },
-    address ? { name: 'Your Profile', href: `/members/${user?.name}` } : null,
-  ];
+  const navigation = address
+    ? [
+        { name: 'Members', href: '/members' },
+        { name: 'Your Profile', href: `/members/${user?.name}` },
+      ]
+    : [{ name: 'Members', href: '/members' }];
 
   return (
     <Disclosure as="nav" className="bg-white shadow-sm">
@@ -32,10 +34,12 @@ export default function Navbar({ user }: { user?: any }) {
                 <Link href={'/'} className="flex flex-shrink-0 items-center">
                   <Logo height={32} width={32} className="text-[#e31d1c]" />
                 </Link>
-                <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
-                  {navigation.map(item => (
+                {navigation.map(item => (
+                  <div
+                    key={item?.name}
+                    className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8"
+                  >
                     <a
-                      key={item?.name}
                       href={item?.href}
                       className={classNames(
                         pathname === item?.href
@@ -49,11 +53,10 @@ export default function Navbar({ user }: { user?: any }) {
                     >
                       {item?.name}
                     </a>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
-                {/* <WalletButton /> */}
                 <UserNav />
               </div>
               <div className="-mr-2 flex items-center sm:hidden">
