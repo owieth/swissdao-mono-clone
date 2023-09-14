@@ -5,7 +5,6 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useAccount } from 'wagmi';
-import WalletButton from '../wallet-button/wallet-button';
 import { UserNav } from '../dashboard/user-nav';
 import Logo from '../ui/logo';
 
