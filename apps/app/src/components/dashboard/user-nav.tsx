@@ -15,6 +15,7 @@ import { shortenString } from '@/helpers/format';
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export function UserNav() {
   return (
@@ -85,8 +86,13 @@ export function UserNav() {
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
                       <DropdownMenuItem>
-                        Profile
-                        <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                        <Link
+                          href={`/members/${account.address}`}
+                          className="flex w-full items-center"
+                        >
+                          Profile
+                          <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                        </Link>
                       </DropdownMenuItem>
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
