@@ -14,7 +14,6 @@ import {
 import { shortenString } from '@/helpers/format';
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import Image from 'next/image';
 import Link from 'next/link';
 
 export function UserNav() {

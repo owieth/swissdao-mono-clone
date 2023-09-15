@@ -1,4 +1,6 @@
 import 'tailwind-config/globals.css';
+import '@rainbow-me/rainbowkit/styles.css';
+import Web3Wrapper from '../(app)/web3wrapper';
 
 export default function RootLayout({
   children,
@@ -8,7 +10,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body>
-        <main>{children}</main>
+        <Web3Wrapper>
+          <main>{children}</main>
+        </Web3Wrapper>
       </body>
     </html>
   );

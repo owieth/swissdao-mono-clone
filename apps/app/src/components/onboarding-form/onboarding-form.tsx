@@ -6,11 +6,14 @@ import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { cn } from '@/helpers/utils';
 import { Icons } from '../ui/icons';
+import { useConnectModal } from '@rainbow-me/rainbowkit';
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function OnboardingForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
+  const { openConnectModal } = useConnectModal();
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
@@ -57,13 +60,18 @@ export function OnboardingForm({ className, ...props }: UserAuthFormProps) {
           </span>
         </div>
       </div>
-      <Button variant="outline" type="button" disabled={isLoading}>
+      <Button
+        variant="outline"
+        type="button"
+        disabled={isLoading}
+        onClick={openConnectModal}
+      >
         {isLoading ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
-          <Icons.gitHub className="mr-2 h-4 w-4" />
+          <Icons.ethereum className="mr-2 h-4 w-4" />
         )}{' '}
-        Github
+        Wallet
       </Button>
     </div>
   );
