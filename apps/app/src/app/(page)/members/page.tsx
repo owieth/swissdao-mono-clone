@@ -1,7 +1,7 @@
 'use client';
 
 import { NOTION_CLIENT } from '@/api/client';
-import { UsersTable } from '@/components/table/table';
+import { UsersTable } from '@/components/members-table/members-table';
 import { CONTRACT } from '@/contracts/contracts';
 import { Card, Text, Title } from '@tremor/react';
 import { useContractInfiniteReads } from 'wagmi';
