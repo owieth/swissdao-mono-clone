@@ -1,5 +1,6 @@
 import { TokenStruct } from '@/contracts/contracts';
 import { ETHERS_CONTRACT } from '@/helpers/contracts';
+import { shortenString } from '@/helpers/format';
 import { ImageResponse } from 'next/server';
 
 export async function GET(
@@ -80,7 +81,7 @@ export async function GET(
               fontSize: 16,
             }}
           >
-            {holder}
+            {shortenString(holder, 8)}
           </p>
           <p
             style={{
