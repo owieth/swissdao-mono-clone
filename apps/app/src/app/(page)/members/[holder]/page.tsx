@@ -1,16 +1,13 @@
 'use client';
 
-import IconCheck from '@/components/icons/check';
-import IconGithub from '@/components/icons/github';
 import IconUpload from '@/components/icons/upload';
+import { MemberStats } from '@/components/member-stats/member-stats';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { CheckIcon, Cross1Icon, Pencil1Icon } from '@radix-ui/react-icons';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
-import { CheckIcon, Cross1Icon, Pencil1Icon } from '@radix-ui/react-icons';
-import { Pencil2Icon } from '@radix-ui/react-icons';
-import { Button } from '@/components/ui/button';
 
 const profileWidth = 'max-w-5xl mx-auto px-4 sm:px-6 lg:px-8';
 
@@ -81,10 +78,21 @@ export default function Member({ params }: { params: { holder: string } }) {
 
       <div className={`${profileWidth} mt-16`}>
         <h2 className="font-mono text-2xl font-semibold">About me</h2>
+        <span>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac dolor
+          vitae erat consectetur luctus. Aenean nec lorem ut velit dapibus
+          elementum. Proin ac lorem maximus, consequat ante ac, aliquet eros.
+          Donec consectetur consequat velit ut vestibulum. In hac habitasse
+          platea dictumst. Sed sit amet diam nec ex pulvinar rutrum. Duis
+          imperdiet, nulla sit amet cursus interdum, ligula justo blandit nisi,
+          ac ullamcorper sem dui quis leo. Quisque dictum semper fringilla.
+          Donec sit amet nulla diam.
+        </span>
       </div>
 
       <div className={`${profileWidth} mt-16`}>
         <h2 className="font-mono text-2xl font-semibold">My Membership</h2>
+        <MemberStats />
       </div>
     </div>
   ) : null;
