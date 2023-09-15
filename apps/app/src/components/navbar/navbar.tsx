@@ -20,7 +20,7 @@ export default function Navbar({ user }: { user?: any }) {
   const navigation = address
     ? [
         { name: 'Members', href: '/members' },
-        { name: 'Your Profile', href: `/members/${user?.name}` },
+        { name: 'Your Profile', href: `/members/${address}` },
       ]
     : [{ name: 'Members', href: '/members' }];
 
