@@ -4,6 +4,7 @@ import IconUpload from '@/components/icons/upload';
 import { MemberStats } from '@/components/member-stats/member-stats';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 import { CheckIcon, Cross1Icon, Pencil1Icon } from '@radix-ui/react-icons';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
 import { useEffect, useState } from 'react';
@@ -11,20 +12,10 @@ import { useAccount } from 'wagmi';
 
 const profileWidth = 'max-w-5xl mx-auto px-4 sm:px-6 lg:px-8';
 
-const user = {
-  name: 'Steven Jobs',
-  username: '@sjobs',
-  image: '',
-  verified: false,
-};
+const userBio =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac dolor vitae erat consectetur luctus.Aenean nec lorem ut velit dapibus elementum.Proin ac lorem maximus, consequat ante ac, aliquet eros. Donec consectetur consequat velit ut vestibulum.In hac habitasse platea dictumst.Sed sit amet diam nec ex pulvinar rutrum.Duis imperdiet, nulla sit amet cursus interdum, ligula justo blandit nisi, ac ullamcorper sem dui quis leo.Quisque dictum semper fringilla. Donec sit amet nulla diam.';
 
-const tabs = [
-  { name: 'Profile' },
-  { name: 'Work History' },
-  { name: 'Contact' },
-];
-
-export default function Member({ params }: { params: { holder: string } }) {
+export default function Member() {
   const [edit, setEdit] = useState(false);
 
   const { address } = useAccount();
@@ -78,16 +69,7 @@ export default function Member({ params }: { params: { holder: string } }) {
 
       <div className={`${profileWidth} mt-16`}>
         <h2 className="font-mono text-2xl font-semibold">About me</h2>
-        <span>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac dolor
-          vitae erat consectetur luctus. Aenean nec lorem ut velit dapibus
-          elementum. Proin ac lorem maximus, consequat ante ac, aliquet eros.
-          Donec consectetur consequat velit ut vestibulum. In hac habitasse
-          platea dictumst. Sed sit amet diam nec ex pulvinar rutrum. Duis
-          imperdiet, nulla sit amet cursus interdum, ligula justo blandit nisi,
-          ac ullamcorper sem dui quis leo. Quisque dictum semper fringilla.
-          Donec sit amet nulla diam.
-        </span>
+        {edit ? <Textarea>{userBio}</Textarea> : <span>{userBio}</span>}
       </div>
 
       <div className={`${profileWidth} mt-16`}>
