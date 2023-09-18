@@ -224,6 +224,22 @@ export default function About() {
         <div className="mt-32 sm:mt-40 xl:mx-auto xl:max-w-7xl xl:px-8">
           <div className="mx-auto max-w-7xl px-6 xl:px-0">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              1st Modular Blockchain Hackathon in Switzerland (Wowen Blockchain)
+            </h2>
+            <p className="text-lg leading-8 text-gray-600">27. May 2023</p>
+          </div>
+          <video
+            className="mt-6 aspect-[5/2] w-full object-cover xl:rounded-3xl"
+            src="/videos/wowen_hackathon.mp4"
+            autoPlay
+            loop
+            muted
+          />
+        </div>
+
+        <div className="mt-32 sm:mt-40 xl:mx-auto xl:max-w-7xl xl:px-8">
+          <div className="mx-auto max-w-7xl px-6 xl:px-0">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               Solana Ecosystem Day
             </h2>
             <p className="text-lg leading-8 text-gray-600">
@@ -234,6 +250,13 @@ export default function About() {
             src="/images/about_solana.png"
             alt=""
             className="mt-6 aspect-[5/2] w-full object-cover xl:rounded-3xl"
+          />
+          <video
+            className="mt-6 aspect-[5/2] w-full object-cover xl:rounded-3xl"
+            src="/videos/solana_x_swissdao.mp4"
+            autoPlay
+            loop
+            muted
           />
         </div>
 

@@ -11,7 +11,7 @@ export default function Committment() {
                 autoPlay
                 loop
                 muted
-              ></video>
+              />
             </div>
           </div>
           <div className="w-full max-w-2xl xl:max-w-none xl:flex-auto xl:px-16 xl:py-24">
