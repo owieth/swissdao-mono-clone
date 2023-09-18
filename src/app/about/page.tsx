@@ -228,12 +228,9 @@ export default function About() {
             </h2>
             <p className="text-lg leading-8 text-gray-600">27. May 2023</p>
           </div>
-          <video
+          <iframe
             className="mt-6 aspect-[5/2] w-full object-cover xl:rounded-3xl"
-            src="/videos/wowen_hackathon.mp4"
-            autoPlay
-            loop
-            muted
+            src="https://www.youtube.com/embed/62jEvkY1EA0?autoplay=1&mute=1&loop=1&playlist=62jEvkY1EA0"
           />
         </div>
 
@@ -251,12 +248,9 @@ export default function About() {
             alt=""
             className="mt-6 aspect-[5/2] w-full object-cover xl:rounded-3xl"
           />
-          <video
+          <iframe
             className="mt-6 aspect-[5/2] w-full object-cover xl:rounded-3xl"
-            src="/videos/solana_x_swissdao.mp4"
-            autoPlay
-            loop
-            muted
+            src="https://www.youtube.com/embed/Un0QvnFIB1w?autoplay=1&mute=1&loop=1&playlist=Un0QvnFIB1w"
           />
         </div>
 
