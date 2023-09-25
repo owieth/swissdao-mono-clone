@@ -208,10 +208,49 @@ export default function About() {
 
         {/* Image section */}
         <div className="mt-32 sm:mt-40 xl:mx-auto xl:max-w-7xl xl:px-8">
+          <div className="mx-auto max-w-7xl px-6 xl:px-0">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Workshop Gelato Network
+            </h2>
+            <p className="text-lg leading-8 text-gray-600">01. April 2023</p>
+          </div>
           <img
-            src="/images/about_showcase.jpg"
+            src="/images/about_gelato.jpg"
             alt=""
-            className="aspect-[5/2] w-full object-cover xl:rounded-3xl"
+            className="mt-6 aspect-[5/2] w-full object-cover xl:rounded-3xl"
+          />
+        </div>
+
+        <div className="mt-32 sm:mt-40 xl:mx-auto xl:max-w-7xl xl:px-8">
+          <div className="mx-auto max-w-7xl px-6 xl:px-0">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              1st Modular Blockchain Hackathon in Switzerland (Wowen Blockchain)
+            </h2>
+            <p className="text-lg leading-8 text-gray-600">27. May 2023</p>
+          </div>
+          <iframe
+            className="mt-6 aspect-[5/2] w-full object-cover xl:rounded-3xl"
+            src="https://www.youtube.com/embed/62jEvkY1EA0?autoplay=1&mute=1&loop=1&playlist=62jEvkY1EA0"
+          />
+        </div>
+
+        <div className="mt-32 sm:mt-40 xl:mx-auto xl:max-w-7xl xl:px-8">
+          <div className="mx-auto max-w-7xl px-6 xl:px-0">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Solana Ecosystem Day
+            </h2>
+            <p className="text-lg leading-8 text-gray-600">
+              09. September 2023
+            </p>
+          </div>
+          <img
+            src="/images/about_solana.png"
+            alt=""
+            className="mt-6 aspect-[5/2] w-full object-cover xl:rounded-3xl"
+          />
+          <iframe
+            className="mt-6 aspect-[5/2] w-full object-cover xl:rounded-3xl"
+            src="https://www.youtube.com/embed/Un0QvnFIB1w?autoplay=1&mute=1&loop=1&playlist=Un0QvnFIB1w"
           />
         </div>
 
