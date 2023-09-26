@@ -1,7 +1,7 @@
 'use client';
 
 import { NOTION_CLIENT } from '@/api/client';
-import { UsersTable } from '@/components/members-table/members-table';
+import { MembersTable } from '@/components/members-table/members-table';
 import { CONTRACT } from '@/contracts/contracts';
 import { Card, Text, Title } from '@tremor/react';
 import { useContractInfiniteReads } from 'wagmi';
@@ -47,7 +47,7 @@ export default function MembersPage() {
       <Title>Users</Title>
       <Text>A list of all registered Members</Text>
       <Card className="mt-6">
-        <UsersTable />
+        <MembersTable />
       </Card>
     </main>
   );
