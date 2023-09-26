@@ -145,9 +145,8 @@ function generateEvent() {
 async function generateMembership(tokenId: string) {
   await ETHERS_CONTRACT.ownerOf(tokenId);
 
-  const { profileImageUri, holder } = (await ETHERS_CONTRACT.getTokenStructById(
-    tokenId
-  )) as TokenStruct;
+  const { profileImageUri, holder } =
+    (await ETHERS_CONTRACT.getMembershipStructByHolder(tokenId)) as TokenStruct;
 
   return new ImageResponse(
     (

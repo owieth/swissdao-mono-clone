@@ -7,7 +7,7 @@ export default async function PreviewPage({
 }: {
   params: { tokenId: number };
 }) {
-  const tokenStruct = (await ETHERS_CONTRACT.getTokenStructById(
+  const tokenStruct = (await ETHERS_CONTRACT.getMembershipStructByHolder(
     tokenId
   )) as TokenStruct;
 

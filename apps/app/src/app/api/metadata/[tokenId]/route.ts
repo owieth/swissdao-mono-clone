@@ -35,7 +35,7 @@ function generateEvent() {
 }
 
 async function generateMembership(tokenId: string) {
-  await ETHERS_CONTRACT.ownerOf(tokenId);
+  //await ETHERS_CONTRACT.balanceOf;
 
   const {
     mintedAt,
@@ -44,7 +44,9 @@ async function generateMembership(tokenId: string) {
     activityPoints,
     holder,
     state,
-  } = (await ETHERS_CONTRACT.getTokenStructById(tokenId)) as TokenStruct;
+  } = (await ETHERS_CONTRACT.getMembershipStructByHolder(
+    tokenId
+  )) as TokenStruct;
 
   return {
     name: `Membership #${tokenId}`,
