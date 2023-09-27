@@ -1,6 +1,6 @@
-import { TokenStruct } from '@/contracts/contracts';
+import { MembershipType } from '@/types/types';
 
-const MembercardBack = ({ tokenStruct }: { tokenStruct: TokenStruct }) => {
+const MembercardBack = ({ tokenStruct }: { tokenStruct: MembershipType }) => {
   const {} = tokenStruct;
 
   return (

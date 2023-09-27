@@ -1,8 +1,12 @@
 import MembercardBack from '@/components/membercard/back';
 import MembercardFront from '@/components/membercard/front';
-import { TokenStruct } from '@/contracts/contracts';
+import { MembershipType } from '@/types/types';
 
-const MembercardPreview = ({ tokenStruct }: { tokenStruct: TokenStruct }) => {
+const MembercardPreview = ({
+  tokenStruct,
+}: {
+  tokenStruct: MembershipType;
+}) => {
   const styles = {
     card: [
       'absolute',

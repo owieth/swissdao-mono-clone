@@ -1,7 +1,7 @@
-import { TokenStruct } from '@/contracts/contracts';
+import { MembershipType } from '@/types/types';
 
-const MembercardFront = ({ tokenStruct }: { tokenStruct: TokenStruct }) => {
-  const { profileImageUri, holder, mintedAt, experiencePoints } = tokenStruct;
+const MembercardFront = ({ tokenStruct }: { tokenStruct: MembershipType }) => {
+  const { profileImageUri, holder, mintedAt } = tokenStruct;
 
   return (
     <svg
@@ -67,7 +67,7 @@ const MembercardFront = ({ tokenStruct }: { tokenStruct: TokenStruct }) => {
           letter-spacing="-0.04em"
         >
           <tspan x="61.9707" y="122.86">
-            {experiencePoints}
+            {0}
           </tspan>
         </text>
         <ellipse
