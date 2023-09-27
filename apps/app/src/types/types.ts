@@ -1,11 +1,14 @@
 export type MembershipType = {
-  id: number;
+  tokenId: number;
   nickname: string;
   joinedAt: number;
   profileImageUri: string;
 };
 
-export type BadgeType = {};
+export type BadgeType = {
+  name: string;
+  description: string;
+};
 
 export type MemberType = {
   membership: MembershipType;

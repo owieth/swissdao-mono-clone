@@ -35,6 +35,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { MemberType } from '@/types/types';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 
 type Props = {
   members: MemberType[];
@@ -42,41 +43,49 @@ type Props = {
 
 export const columns: ColumnDef<MemberType>[] = [
   {
-    accessorKey: 'status',
-    header: 'Status',
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue('status')}</div>
-    ),
+    accessorKey: 'membership.tokenId',
+    header: 'Token ID',
   },
   {
-    accessorKey: 'email',
-    header: ({ column }) => {
+    accessorKey: 'membership.nickname',
+    header: 'Nickname',
+    cell: ({ row }) => {
+      const label = row.getValue('membership_nickname') as any;
+
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Email
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        <div className="capitalize">
+          <Avatar className="h-8 w-8">
+            <AvatarImage
+              src={row.original.membership.profileImageUri}
+              alt="@shadcn"
+            />
+            <AvatarFallback>{label}</AvatarFallback>
+          </Avatar>
+          {label}
+        </div>
       );
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue('email')}</div>,
   },
   {
-    accessorKey: 'amount',
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue('amount'));
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-      }).format(amount);
-
-      return <div className="text-right font-medium">{formatted}</div>;
-    },
+    accessorKey: 'membership.badges',
+    header: 'Badges',
+    cell: ({ row: { original } }) => (
+      <div className="capitalize">
+        {original.badges.length > 0 ? (
+          original.badges.map((badge, i) => (
+            <Avatar className="h-8 w-8" key={i}>
+              <AvatarImage
+                src="https://avatar.vercel.sh/leerob"
+                alt="@shadcn"
+              />
+              <AvatarFallback>{badge.name}</AvatarFallback>
+            </Avatar>
+          ))
+        ) : (
+          <p>No Badges yet.</p>
+        )}
+      </div>
+    ),
   },
   {
     id: 'actions',
@@ -136,10 +145,16 @@ export function MembersTable({ members }: Props) {
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
+          placeholder="Filter nicknames..."
+          value={
+            (table
+              .getColumn('membership_nickname')
+              ?.getFilterValue() as string) ?? ''
+          }
           onChange={event =>
-            table.getColumn('email')?.setFilterValue(event.target.value)
+            table
+              .getColumn('membership_nickname')
+              ?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
