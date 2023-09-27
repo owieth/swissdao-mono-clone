@@ -1,10 +1,4 @@
-import {
-  Address,
-  PublicClient,
-  createPublicClient,
-  createWalletClient,
-  http,
-} from 'viem';
+import { Address, createPublicClient, createWalletClient, http } from 'viem';
 import { sepolia } from 'viem/chains';
 import abi from './ABI.json';
 
@@ -41,7 +35,7 @@ export const WALLET_PROVIDER = createWalletClient({
 });
 
 export const CONTRACT_ADDRESS_SEPOLIA =
-  '0xd2397C77A4A437f81bcF56581e95BF3e352E9B86';
+  '0xe0c1da8341E4F24c0281bb2aF5Cd82394A38Bad6';
 
 export const CONTRACT = {
   address: CONTRACT_ADDRESS_SEPOLIA as Address,

@@ -411,6 +411,11 @@
           {
             "components": [
               {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+              },
+              {
                 "internalType": "string",
                 "name": "nickname",
                 "type": "string"
@@ -496,6 +501,11 @@
           {
             "components": [
               {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+              },
+              {
                 "internalType": "string",
                 "name": "nickname",
                 "type": "string"
@@ -559,47 +569,6 @@
           }
         ],
         "internalType": "struct SwissDAO.QueryStruct",
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_holder",
-        "type": "address"
-      }
-    ],
-    "name": "getMembershipStructByHolder",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "string",
-            "name": "nickname",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "profileImageUri",
-            "type": "string"
-          },
-          {
-            "internalType": "uint256",
-            "name": "joinedAt",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "mintedAt",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct SwissDAO.MembershipStruct",
         "name": "",
         "type": "tuple"
       }
@@ -726,19 +695,6 @@
     "name": "mintBadge",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "numberOfMembers",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
