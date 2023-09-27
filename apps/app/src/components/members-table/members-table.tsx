@@ -34,15 +34,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
+import { MemberType } from '@/types/types';
 
-export type Member = {
-  id: number;
-  nickname: string;
-  joinedAt: number;
-  profileImageUri: string;
+type Props = {
+  members: MemberType[];
 };
 
-export const columns: ColumnDef<Member>[] = [
+export const columns: ColumnDef<MemberType>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
@@ -96,11 +94,6 @@ export const columns: ColumnDef<Member>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>
             <DropdownMenuItem>View payment details</DropdownMenuItem>
@@ -111,7 +104,7 @@ export const columns: ColumnDef<Member>[] = [
   },
 ];
 
-export function MembersTable() {
+export function MembersTable({ members }: Props) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -121,7 +114,7 @@ export function MembersTable() {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
-    data,
+    data: members || [],
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -186,9 +179,9 @@ export function MembersTable() {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   );
                 })}

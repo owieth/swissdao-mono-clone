@@ -2,7 +2,10 @@
 
 import { NOTION_CLIENT } from '@/api/client';
 import { MembersTable } from '@/components/members-table/members-table';
+import { CONTRACT } from '@/contracts/contracts';
+import { MemberType } from '@/types/types';
 import { Card, Text, Title } from '@tremor/react';
+import { useContractInfiniteReads, useContractRead } from 'wagmi';
 
 async function getData() {
   // const res = await fetch('https://api.example.com/...')
@@ -20,12 +23,19 @@ async function getData() {
 }
 
 export default function MembersPage() {
+  const {
+    data: members,
+    isError,
+    isLoading,
+  } = useContractRead({ ...CONTRACT, functionName: 'getAllMembers' });
+
+  console.log(members);
   return (
     <main className="mx-auto max-w-7xl p-4 md:p-10">
       <Title>Users</Title>
       <Text>A list of all registered Members</Text>
       <Card className="mt-6">
-        <MembersTable />
+        <MembersTable members={members as MemberType[]} />
       </Card>
     </main>
   );

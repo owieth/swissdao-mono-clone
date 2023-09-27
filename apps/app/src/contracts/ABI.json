@@ -5,11 +5,6 @@
         "internalType": "address",
         "name": "_defaultAdminRoler",
         "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_coreDelegateRoler",
-        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -27,12 +22,22 @@
   },
   {
     "inputs": [],
+    "name": "SwissDAO__InvalidBadge",
+    "type": "error"
+  },
+  {
+    "inputs": [],
     "name": "SwissDAO__PermissionError",
     "type": "error"
   },
   {
     "inputs": [],
     "name": "SwissDAO__SoulboundTokenError",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SwissDAO__TooManyBadgeProposals",
     "type": "error"
   },
   {
@@ -266,90 +271,12 @@
   },
   {
     "inputs": [],
-    "name": "COMMUNITY_GUILD_BADGE",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "CORE_DELEGATE_GUILD_BADGE",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "DEFAULT_ADMIN_ROLE",
     "outputs": [
       {
         "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "DESIGN_GUILD_BADGE",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "DEV_GUILD_BADGE",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "EDUCATION_GUILD_BADGE",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "EVENT_GUILD_BADGE",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -369,55 +296,16 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "MEDIA_GUILD_BADGE",
-    "outputs": [
+    "inputs": [
       {
         "internalType": "uint256",
-        "name": "",
+        "name": "_badgeId",
         "type": "uint256"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "PARTNERSHIPS_GUILD_BADGE",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "PROJECT_GUILD_BADGE",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "TREASURY_GUILD_BADGE",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
+    "name": "acceptBadge",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -482,6 +370,19 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_badgeId",
+        "type": "uint256"
+      }
+    ],
+    "name": "declineBadge",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "decreaseActivityPoints",
     "outputs": [],
@@ -503,12 +404,163 @@
   },
   {
     "inputs": [],
-    "name": "getMembersAddressList",
+    "name": "getAllMembers",
     "outputs": [
       {
-        "internalType": "address[]",
+        "components": [
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "nickname",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "profileImageUri",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "joinedAt",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "mintedAt",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct SwissDAO.MembershipStruct",
+            "name": "membership",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "description",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct SwissDAO.BadgeStruct[]",
+            "name": "badges",
+            "type": "tuple[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "experiencePoints",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "activityPoints",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "attendedEvents",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct SwissDAO.QueryStruct[]",
         "name": "",
-        "type": "address[]"
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_member",
+        "type": "address"
+      }
+    ],
+    "name": "getMember",
+    "outputs": [
+      {
+        "components": [
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "nickname",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "profileImageUri",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "joinedAt",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "mintedAt",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct SwissDAO.MembershipStruct",
+            "name": "membership",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "description",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct SwissDAO.BadgeStruct[]",
+            "name": "badges",
+            "type": "tuple[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "experiencePoints",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "activityPoints",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "attendedEvents",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct SwissDAO.QueryStruct",
+        "name": "",
+        "type": "tuple"
       }
     ],
     "stateMutability": "view",
@@ -532,14 +584,19 @@
             "type": "string"
           },
           {
+            "internalType": "string",
+            "name": "profileImageUri",
+            "type": "string"
+          },
+          {
             "internalType": "uint256",
             "name": "joinedAt",
             "type": "uint256"
           },
           {
-            "internalType": "string",
-            "name": "profileImageUri",
-            "type": "string"
+            "internalType": "uint256",
+            "name": "mintedAt",
+            "type": "uint256"
           }
         ],
         "internalType": "struct SwissDAO.MembershipStruct",
@@ -657,6 +714,37 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "_member",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_badgeId",
+        "type": "uint256"
+      }
+    ],
+    "name": "mintBadge",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "numberOfMembers",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "member",
         "type": "address"
       },
@@ -672,6 +760,24 @@
       }
     ],
     "name": "onboard",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_description",
+        "type": "string"
+      }
+    ],
+    "name": "proposeBadge",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
