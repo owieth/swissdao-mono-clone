@@ -1,8 +1,10 @@
 export type MembershipType = {
   tokenId: number;
   nickname: string;
-  joinedAt: number;
+  holder: string;
   profileImageUri: string;
+  joinedAt: number;
+  mintedAt: number;
 };
 
 export type BadgeType = {
