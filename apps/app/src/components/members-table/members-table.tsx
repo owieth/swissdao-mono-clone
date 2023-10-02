@@ -36,6 +36,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { MemberType } from '@/types/types';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import Link from 'next/link';
 
 type Props = {
   members: MemberType[];
@@ -91,7 +92,9 @@ export const columns: ColumnDef<MemberType>[] = [
     id: 'actions',
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original;
+      const {
+        membership: { holder },
+      } = row.original;
 
       return (
         <DropdownMenu>
@@ -104,8 +107,9 @@ export const columns: ColumnDef<MemberType>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={`/members/${holder}`}>View profile</Link>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
