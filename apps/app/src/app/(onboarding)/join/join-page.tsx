@@ -1,7 +1,8 @@
 'use client';
 
-import { JoinForm } from '@/components/join-form/join-form';
+import { Connect } from '@/components/flows/join/connect';
 import Swiper from '@/components/swiper/swiper';
+import { Card } from '@/components/ui/card';
 
 export default function JoinPage() {
   return (
@@ -19,7 +20,7 @@ export default function JoinPage() {
       <div className="col-span-2 lg:p-8">
         <div className="mx-auto flex h-[500px] w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <Swiper interactive>
-            <div>
+            <Card className="p-4">
               <div className="flex flex-col space-y-2 text-center">
                 <h1 className="text-2xl font-semibold tracking-tight">
                   Join our awesome community!
@@ -28,8 +29,8 @@ export default function JoinPage() {
                   Connect your wallet
                 </p>
               </div>
-              <JoinForm />
-            </div>
+              <Connect />
+            </Card>
           </Swiper>
         </div>
       </div>

@@ -3,13 +3,13 @@
 import { cn } from '@/helpers/utils';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import * as React from 'react';
-import { UserNav } from '../dashboard/user-nav';
-import { Button } from '../ui/button';
-import { Icons } from '../ui/icons';
+import { UserNav } from '../../dashboard/user-nav';
+import { Button } from '../../ui/button';
+import { Icons } from '../../ui/icons';
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export function JoinForm({ className, ...props }: UserAuthFormProps) {
+export function Connect({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   return (
