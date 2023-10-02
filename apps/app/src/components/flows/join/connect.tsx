@@ -13,7 +13,7 @@ export function Connect() {
   const { swiper } = React.useContext(SwiperContext);
 
   React.useEffect(() => {
-    if (isConnected) swiper?.slideNext();
+    if (isConnected && swiper && !swiper.destroyed) swiper?.slideNext();
   }, [isConnected, swiper]);
 
   return (
