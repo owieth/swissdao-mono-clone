@@ -29,6 +29,7 @@ export default function JoinPage() {
                   Connect your wallet
                 </p>
               </div>
+
               <Connect />
             </Card>
           </Swiper>
