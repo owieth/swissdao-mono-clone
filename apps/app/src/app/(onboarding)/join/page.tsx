@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 
-import { OnboardingForm } from '@/components/onboarding-form/onboarding-form';
 import { JoinForm } from '@/components/join-form/join-form';
 
 export const metadata: Metadata = {
