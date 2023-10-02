@@ -7,8 +7,15 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { ToastAction } from '@/components/ui/toast';
+import { toast } from '@/components/ui/use-toast';
+import { SwiperContext } from '@/contexts/swiper';
+import { CONTRACT } from '@/contracts/contracts';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Link from 'next/link';
+import * as React from 'react';
 import { useForm } from 'react-hook-form';
+import { useAccount, useContractWrite, usePrepareContractWrite } from 'wagmi';
 import * as z from 'zod';
 
 const FormSchema = z.object({
@@ -19,11 +26,52 @@ const FormSchema = z.object({
 });
 
 export function Mint() {
+  const { address } = useAccount();
+  const { swiper } = React.useContext(SwiperContext);
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {}
+  const { watch } = form;
+
+  const formData = watch();
+
+  const { config, error } = usePrepareContractWrite({
+    ...CONTRACT,
+    functionName: 'onboard',
+    args: [address, formData.nickname, formData.profileImageUri],
+    onSuccess() {
+      toast({
+        description: 'Membership has been minted!',
+      });
+      swiper?.slideNext();
+    },
+  });
+
+  const { write, error: writeError } = useContractWrite(config);
+
+  if (error || writeError) {
+    toast({
+      variant: 'destructive',
+      title: 'Uh oh! Something went wrong.',
+      description: error?.message || writeError?.message,
+    });
+  }
+
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+    const hash = write?.();
+    toast({
+      title: 'Your Membership is minting...',
+      action: (
+        <ToastAction altText="explorer">
+          <Link href={hash || ''} target="_blank">
+            Have a look
+          </Link>
+        </ToastAction>
+      ),
+    });
+  }
 
   return (
     <Form {...form}>
@@ -54,7 +102,9 @@ export function Mint() {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={!write}>
+          Submit
+        </Button>
       </form>
     </Form>
   );
