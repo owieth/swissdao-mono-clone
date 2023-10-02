@@ -47,7 +47,7 @@ export default function Swiper({ interactive, children }: Props) {
           clickable: interactive,
           renderBullet: (index: number, className: string) => {
             return `
-              <span class="${`${className} h-4 w-4 rounded-full	text-[0px] bg-red transition-all`}">
+              <span class="${`${className} h-4 w-4 rounded-full	text-[0px] bg-black transition-all`}">
                 ${index + 1}
               </span>
             `;
@@ -55,7 +55,7 @@ export default function Swiper({ interactive, children }: Props) {
         }}
         navigation={true}
       >
-        <div className="swiperPagination absolute top-0 flex w-full justify-center gap-10" />
+        <div className="swiperPagination absolute bottom-0 flex w-full justify-center gap-10" />
 
         {Children.map(children, (child, i) => (
           <SwiperSlide key={i} className="box-border">
