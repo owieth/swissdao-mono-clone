@@ -1,6 +1,7 @@
 'use client';
 
 import { Connect } from '@/components/flows/join/connect';
+import { Mint } from '@/components/flows/join/mint';
 import Swiper from '@/components/swiper/swiper';
 import { Card } from '@/components/ui/card';
 
@@ -31,6 +32,16 @@ export default function JoinPage() {
               </div>
 
               <Connect />
+            </Card>
+
+            <Card className="p-4">
+              <div className="flex flex-col space-y-2 text-center">
+                <h1 className="text-2xl font-semibold tracking-tight">
+                  Mint your Membership now!
+                </h1>
+              </div>
+
+              <Mint />
             </Card>
           </Swiper>
         </div>
