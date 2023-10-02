@@ -4,8 +4,12 @@ import { Connect } from '@/components/flows/join/connect';
 import { Mint } from '@/components/flows/join/mint';
 import Swiper from '@/components/swiper/swiper';
 import { Card } from '@/components/ui/card';
+import Link from 'next/link';
+import { useAccount } from 'wagmi';
 
 export default function JoinPage() {
+  const { address } = useAccount();
+
   return (
     <div className="relative grid h-screen grid-cols-3 flex-col items-center">
       <div className="col-span-1 h-full">
@@ -42,6 +46,16 @@ export default function JoinPage() {
               </div>
 
               <Mint />
+            </Card>
+
+            <Card className="p-4">
+              <div className="flex flex-col space-y-2 text-center">
+                <h1 className="text-2xl font-semibold tracking-tight">
+                  Mint your Membership now!
+                </h1>
+              </div>
+
+              <Link href={`/members/${address}`}>Visit your Profile!</Link>
             </Card>
           </Swiper>
         </div>
