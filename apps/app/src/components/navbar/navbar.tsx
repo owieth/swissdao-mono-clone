@@ -17,12 +17,14 @@ export default function Navbar({ user }: { user?: any }) {
   const pathname = usePathname();
   const { address } = useAccount();
 
-  const navigation = address
-    ? [
-        { name: 'Members', href: '/members' },
-        { name: 'Your Profile', href: `/members/${address}` },
-      ]
-    : [{ name: 'Members', href: '/members' }];
+  let navigation = [
+    { name: 'Members', href: '/members' },
+    { name: 'Badges', href: '/badges' },
+    { name: 'Guilds', href: '/guilds' },
+  ];
+
+  if (address)
+    navigation.push({ name: 'Your Profile', href: `/members/${address}` });
 
   return (
     <Disclosure as="nav" className="bg-white shadow-sm">
