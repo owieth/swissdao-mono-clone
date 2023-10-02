@@ -12,7 +12,7 @@ export default function AuthenticationPage() {
     <div className="relative grid h-screen grid-cols-3 flex-col items-center">
       <div className="col-span-1 h-full">
         <video
-          className="h-full"
+          className="h-full object-cover"
           src="/videos/teaser.mp4"
           autoPlay
           loop
