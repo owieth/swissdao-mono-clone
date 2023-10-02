@@ -1,6 +1,7 @@
 import 'tailwind-config/globals.css';
 import '@rainbow-me/rainbowkit/styles.css';
 import Web3Wrapper from '../(app)/web3wrapper';
+import { Toaster } from '@/components/ui/toaster';
 
 export default function RootLayout({
   children,
@@ -12,6 +13,7 @@ export default function RootLayout({
       <body>
         <Web3Wrapper>
           <main>{children}</main>
+          <Toaster />
         </Web3Wrapper>
       </body>
     </html>

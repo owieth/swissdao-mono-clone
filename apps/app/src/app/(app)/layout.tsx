@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import 'tailwind-config/globals.css';
 import Web3Wrapper from './web3wrapper';
+import { Toaster } from '@/components/ui/toaster';
 
 const avenir = localFont({
   src: [
@@ -78,6 +79,7 @@ export default function RootLayout({
         <Web3Wrapper>
           <Navbar />
           {children}
+          <Toaster />
         </Web3Wrapper>
       </body>
     </html>
