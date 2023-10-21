@@ -1,0 +1,23 @@
+{
+  "name": "website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@headlessui/react": "1.7.17",
+    "@heroicons/react": "2.0.18",
+    "next": "13.4.19",
+    "ui": "*"
+  },
+  "devDependencies": {
+    "@types/gtag.js": "^0.0.13",
+    "eslint-config-custom": "*",
+    "tailwind-config": "*",
+    "tsconfig": "*"
+  }
+}
