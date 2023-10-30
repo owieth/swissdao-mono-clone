@@ -16,6 +16,11 @@ const navigation = [
     href: 'https://www.meetup.com/swissdao/events/',
     target: '_blank',
   },
+  {
+    name: 'Courses',
+    href: 'https://www.notion.so/swissdao/Courses-067249204b0544838290803aa9de1923',
+    target: '_blank',
+  },
   // { name: 'Blog', href: '/#' },
   // { name: 'Podcast', href: '#' },
 ];
