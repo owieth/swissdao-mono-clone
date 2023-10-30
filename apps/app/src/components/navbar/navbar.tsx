@@ -25,6 +25,7 @@ export default function Navbar({ user }: { user?: any }) {
 
   if (address)
     navigation.push({ name: 'Your Profile', href: `/members/${address}` });
+    navigation.push({ name: 'Contributor Quest', href: `/contributor-quest`})
 
   return (
     <Disclosure as="nav" className="bg-white shadow-sm">
