@@ -14,8 +14,8 @@ export type BadgeType = {
 
 export type MemberType = {
   membership: MembershipType;
-  activityPoints: number;
-  experiencePoints: number;
-  attendedEvents: number;
+  activityPoints: BigInt;
+  experiencePoints: BigInt;
+  attendedEvents: BigInt;
   badges: BadgeType[];
 };

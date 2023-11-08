@@ -89,6 +89,57 @@ export const columns: ColumnDef<MemberType>[] = [
     ),
   },
   {
+    accessorKey: 'membership.activityPoins',
+    header: 'Activity Poins',
+    cell: ({ row: { original } }) => {
+      const value = original.activityPoints;
+
+      return (
+        <div className="flex items-center gap-4">
+          {Number(value)}
+          <Avatar className="h-8 w-8">
+            <AvatarImage src={''} alt="@shadcn" />
+            <AvatarFallback>AP</AvatarFallback>
+          </Avatar>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: 'membership.experiencePoints',
+    header: 'Experience Poins',
+    cell: ({ row: { original } }) => {
+      const value = original.experiencePoints;
+
+      return (
+        <div className="flex items-center gap-4">
+          {Number(value)}
+          <Avatar className="h-8 w-8">
+            <AvatarImage src={''} alt="@shadcn" />
+            <AvatarFallback>XP</AvatarFallback>
+          </Avatar>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: 'membership.attendedEvents',
+    header: 'Attended Events',
+    cell: ({ row: { original } }) => {
+      const value = original.attendedEvents;
+
+      return (
+        <div className="flex items-center gap-4">
+          {Number(value)}
+          <Avatar className="h-8 w-8">
+            <AvatarImage src={''} alt="@shadcn" />
+            <AvatarFallback>Events</AvatarFallback>
+          </Avatar>
+        </div>
+      );
+    },
+  },
+  {
     id: 'actions',
     enableHiding: false,
     cell: ({ row }) => {
