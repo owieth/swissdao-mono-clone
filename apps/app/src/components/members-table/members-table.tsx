@@ -189,7 +189,7 @@ export function MembersTable({ members }: Props) {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
+      <div className="flex items-center justify-between py-4">
         <Input
           placeholder="Filter nicknames..."
           value={
@@ -204,6 +204,10 @@ export function MembersTable({ members }: Props) {
           }
           className="max-w-sm"
         />
+
+        <div className="text-muted-foreground text-sm">
+          {members?.length} Members
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>
