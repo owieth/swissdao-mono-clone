@@ -3,7 +3,12 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_defaultAdminRoler",
+        "name": "_defaultAdmin",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_defaultMemberAdmin",
         "type": "address"
       }
     ],
@@ -12,42 +17,42 @@
   },
   {
     "inputs": [],
-    "name": "SwissDAO__FreezedBeforeAttending3Events",
+    "name": "SwissDAOMembership__FreezedBeforeAttending3Events",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "SwissDAO__FreezedBeforePassingContributorQuest",
+    "name": "SwissDAOMembership__FreezedBeforePassingContributorQuest",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "SwissDAO__InvalidBadge",
+    "name": "SwissDAOMembership__InvalidBadge",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "SwissDAO__PermissionError",
+    "name": "SwissDAOMembership__PermissionError",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "SwissDAO__SoulboundTokenError",
+    "name": "SwissDAOMembership__SoulboundTokenError",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "SwissDAO__TooManyBadgeProposals",
+    "name": "SwissDAOMembership__TooManyBadgeProposals",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "SwissDAO__WrongAnswer",
+    "name": "SwissDAOMembership__WrongAnswer",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "SwissDAO__YouAlreadyAreMember",
+    "name": "SwissDAOMembership__YouAlreadyAreMember",
     "type": "error"
   },
   {
@@ -296,16 +301,16 @@
     "type": "function"
   },
   {
-    "inputs": [
+    "inputs": [],
+    "name": "MEMBER_ADMIN_ROLE",
+    "outputs": [
       {
-        "internalType": "uint256",
-        "name": "_badgeId",
-        "type": "uint256"
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
       }
     ],
-    "name": "acceptBadge",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -370,19 +375,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_badgeId",
-        "type": "uint256"
-      }
-    ],
-    "name": "declineBadge",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "decreaseActivityPoints",
     "outputs": [],
@@ -400,6 +392,36 @@
     "name": "destroy",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAllBadges",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tokenId",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct SwissDAOMembership.BadgeStruct[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -441,7 +463,7 @@
                 "type": "uint256"
               }
             ],
-            "internalType": "struct SwissDAO.MembershipStruct",
+            "internalType": "struct SwissDAOMembership.MembershipStruct",
             "name": "membership",
             "type": "tuple"
           },
@@ -463,7 +485,7 @@
                 "type": "uint256"
               }
             ],
-            "internalType": "struct SwissDAO.BadgeStruct[]",
+            "internalType": "struct SwissDAOMembership.BadgeStruct[]",
             "name": "badges",
             "type": "tuple[]"
           },
@@ -483,7 +505,7 @@
             "type": "uint256"
           }
         ],
-        "internalType": "struct SwissDAO.QueryStruct[]",
+        "internalType": "struct SwissDAOMembership.QueryStruct[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -536,7 +558,7 @@
                 "type": "uint256"
               }
             ],
-            "internalType": "struct SwissDAO.MembershipStruct",
+            "internalType": "struct SwissDAOMembership.MembershipStruct",
             "name": "membership",
             "type": "tuple"
           },
@@ -558,7 +580,7 @@
                 "type": "uint256"
               }
             ],
-            "internalType": "struct SwissDAO.BadgeStruct[]",
+            "internalType": "struct SwissDAOMembership.BadgeStruct[]",
             "name": "badges",
             "type": "tuple[]"
           },
@@ -578,7 +600,7 @@
             "type": "uint256"
           }
         ],
-        "internalType": "struct SwissDAO.QueryStruct",
+        "internalType": "struct SwissDAOMembership.QueryStruct",
         "name": "",
         "type": "tuple"
       }
@@ -629,7 +651,7 @@
             "type": "uint256"
           }
         ],
-        "internalType": "struct SwissDAO.MembershipStruct",
+        "internalType": "struct SwissDAOMembership.MembershipStruct",
         "name": "",
         "type": "tuple"
       }
@@ -777,24 +799,6 @@
       }
     ],
     "name": "onboard",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "_name",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_description",
-        "type": "string"
-      }
-    ],
-    "name": "proposeBadge",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
