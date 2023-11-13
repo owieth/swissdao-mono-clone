@@ -19,7 +19,6 @@ export default function Navbar({ user }: { user?: any }) {
 
   let navigation = [
     { name: 'Members', href: '/members' },
-    { name: 'Badges', href: '/badges' },
     { name: 'Guilds', href: '/guilds' },
   ];
 
