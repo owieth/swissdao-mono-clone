@@ -1,7 +1,7 @@
 'use client';
 
 import { NOTION_CLIENT } from '@/api/client';
-import { MembersTable } from '@/components/members-table/members-table';
+import { MembersTable } from '@/components/tables/members-table';
 import { CONTRACT } from '@/contracts/contracts';
 import { MemberType } from '@/types/types';
 import { Card, Text, Title } from '@tremor/react';
