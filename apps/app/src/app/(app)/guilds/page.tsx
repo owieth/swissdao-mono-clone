@@ -3,6 +3,7 @@
 import Listitem from '@/components/listitem/listitem';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { CONTRACT } from '@/contracts/contracts';
+import { BADGE_INITIAL_COUNTER, GUILD_INITIAL_COUNTER } from '@/helpers/const';
 import { TokenType } from '@/types/types';
 import { Text, Title } from '@tremor/react';
 import { useContractRead } from 'wagmi';
@@ -31,17 +32,22 @@ export default function BadgesPage() {
     <main className="mx-auto max-w-7xl p-4 md:p-10">
       <Title>Guilds</Title>
       <Text>A list of all swissDAO Guilds</Text>
-      {(guilds as TokenType[])?.map((badge, i) => (
-        <Listitem key={i} trigger={<BadgeTriggerItem badge={badge} />}>
-          <div>
-            <h2>About this Badge</h2>
-            <span>Lorem Ipsum</span>
+      {(guilds as TokenType[])
+        ?.filter(
+          ({ tokenId }) =>
+            tokenId >= GUILD_INITIAL_COUNTER && tokenId < BADGE_INITIAL_COUNTER
+        )
+        .map((badge, i) => (
+          <Listitem key={i} trigger={<BadgeTriggerItem badge={badge} />}>
+            <div>
+              <h2>About this Badge</h2>
+              <span>Lorem Ipsum</span>
 
-            <h2>About this Badge</h2>
-            <span>Lorem Ipsum</span>
-          </div>
-        </Listitem>
-      ))}
+              <h2>About this Badge</h2>
+              <span>Lorem Ipsum</span>
+            </div>
+          </Listitem>
+        ))}
     </main>
   );
 }
