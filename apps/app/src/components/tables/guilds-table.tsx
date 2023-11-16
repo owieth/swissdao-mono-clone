@@ -138,26 +138,6 @@ export function GuildsTable({ guilds, onJoinGuild }: Props) {
 
   return (
     <div className="w-full">
-      <div className="flex items-center justify-between py-4">
-        <Input
-          placeholder="Filter nicknames..."
-          value={
-            (table
-              .getColumn('membership_nickname')
-              ?.getFilterValue() as string) ?? ''
-          }
-          onChange={event =>
-            table
-              .getColumn('membership_nickname')
-              ?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-
-        <div className="text-muted-foreground text-sm">
-          {guilds?.length} Guilds
-        </div>
-      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
