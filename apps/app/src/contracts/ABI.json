@@ -1,28 +1,187 @@
 [
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_defaultAdmin",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_defaultMemberAdmin",
-        "type": "address"
-      }
-    ],
+    "inputs": [],
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
   {
     "inputs": [],
-    "name": "SwissDAOMembership__FreezedBeforeAttending3Events",
+    "name": "AccessControlBadConfirmation",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "neededRole",
+        "type": "bytes32"
+      }
+    ],
+    "name": "AccessControlUnauthorizedAccount",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "target",
+        "type": "address"
+      }
+    ],
+    "name": "AddressEmptyCode",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "balance",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "needed",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "ERC1155InsufficientBalance",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "approver",
+        "type": "address"
+      }
+    ],
+    "name": "ERC1155InvalidApprover",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "idsLength",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "valuesLength",
+        "type": "uint256"
+      }
+    ],
+    "name": "ERC1155InvalidArrayLength",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "operator",
+        "type": "address"
+      }
+    ],
+    "name": "ERC1155InvalidOperator",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "receiver",
+        "type": "address"
+      }
+    ],
+    "name": "ERC1155InvalidReceiver",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      }
+    ],
+    "name": "ERC1155InvalidSender",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "operator",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      }
+    ],
+    "name": "ERC1155MissingApprovalForAll",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "implementation",
+        "type": "address"
+      }
+    ],
+    "name": "ERC1967InvalidImplementation",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "SwissDAOMembership__FreezedBeforePassingContributorQuest",
+    "name": "ERC1967NonPayable",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "FailedInnerCall",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidInitialization",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotInitializing",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SwissDAOMembership__AlreadyBadgeOwner",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SwissDAOMembership__BadgeOutOfRange",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SwissDAOMembership__FreezedBeforeAttending3Events",
     "type": "error"
   },
   {
@@ -42,17 +201,23 @@
   },
   {
     "inputs": [],
-    "name": "SwissDAOMembership__TooManyBadgeProposals",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "SwissDAOMembership__WrongAnswer",
-    "type": "error"
-  },
-  {
-    "inputs": [],
     "name": "SwissDAOMembership__YouAlreadyAreMember",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "UUPSUnauthorizedCallContext",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "slot",
+        "type": "bytes32"
+      }
+    ],
+    "name": "UUPSUnsupportedProxiableUUID",
     "type": "error"
   },
   {
@@ -78,6 +243,19 @@
       }
     ],
     "name": "ApprovalForAll",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "version",
+        "type": "uint64"
+      }
+    ],
+    "name": "Initialized",
     "type": "event"
   },
   {
@@ -249,6 +427,19 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "implementation",
+        "type": "address"
+      }
+    ],
+    "name": "Upgraded",
+    "type": "event"
+  },
+  {
     "inputs": [],
     "name": "ACTIVITY_POINTS",
     "outputs": [
@@ -276,12 +467,51 @@
   },
   {
     "inputs": [],
+    "name": "BADGE_INITIAL_COUNTER",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "DEFAULT_ADMIN_ROLE",
     "outputs": [
       {
         "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "DEFAULT_UPGRADER_ROLE",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "EVENT_INITIAL_COUNTER",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -302,12 +532,51 @@
   },
   {
     "inputs": [],
+    "name": "GUILD_INITIAL_COUNTER",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "MEMBERSHIP_INITIAL_COUNTER",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "MEMBER_ADMIN_ROLE",
     "outputs": [
       {
         "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "UPGRADE_INTERFACE_VERSION",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
       }
     ],
     "stateMutability": "view",
@@ -401,6 +670,16 @@
       {
         "components": [
           {
+            "internalType": "bytes",
+            "name": "svg",
+            "type": "bytes"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tokenId",
+            "type": "uint256"
+          },
+          {
             "internalType": "string",
             "name": "name",
             "type": "string"
@@ -411,12 +690,12 @@
             "type": "string"
           },
           {
-            "internalType": "uint256",
-            "name": "tokenId",
-            "type": "uint256"
+            "internalType": "string",
+            "name": "attributes",
+            "type": "string"
           }
         ],
-        "internalType": "struct SwissDAOMembership.BadgeStruct[]",
+        "internalType": "struct SwissDAOMembership.TokenStruct[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -470,6 +749,16 @@
           {
             "components": [
               {
+                "internalType": "bytes",
+                "name": "svg",
+                "type": "bytes"
+              },
+              {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+              },
+              {
                 "internalType": "string",
                 "name": "name",
                 "type": "string"
@@ -480,12 +769,12 @@
                 "type": "string"
               },
               {
-                "internalType": "uint256",
-                "name": "tokenId",
-                "type": "uint256"
+                "internalType": "string",
+                "name": "attributes",
+                "type": "string"
               }
             ],
-            "internalType": "struct SwissDAOMembership.BadgeStruct[]",
+            "internalType": "struct SwissDAOMembership.TokenStruct[]",
             "name": "badges",
             "type": "tuple[]"
           },
@@ -565,6 +854,16 @@
           {
             "components": [
               {
+                "internalType": "bytes",
+                "name": "svg",
+                "type": "bytes"
+              },
+              {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+              },
+              {
                 "internalType": "string",
                 "name": "name",
                 "type": "string"
@@ -575,12 +874,12 @@
                 "type": "string"
               },
               {
-                "internalType": "uint256",
-                "name": "tokenId",
-                "type": "uint256"
+                "internalType": "string",
+                "name": "attributes",
+                "type": "string"
               }
             ],
-            "internalType": "struct SwissDAOMembership.BadgeStruct[]",
+            "internalType": "struct SwissDAOMembership.TokenStruct[]",
             "name": "badges",
             "type": "tuple[]"
           },
@@ -742,6 +1041,29 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "_defaultAdmin",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_defaultMemberAdmin",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_defaultUpgraderAdmin",
+        "type": "address"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "account",
         "type": "address"
       },
@@ -760,6 +1082,42 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_tokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_guildId",
+        "type": "uint256"
+      }
+    ],
+    "name": "joinGuild",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_tokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_guildId",
+        "type": "uint256"
+      }
+    ],
+    "name": "leaveGuild",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -804,6 +1162,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "proxiableUUID",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "bytes32",
@@ -812,7 +1183,7 @@
       },
       {
         "internalType": "address",
-        "name": "account",
+        "name": "callerConfirmation",
         "type": "address"
       }
     ],
@@ -858,7 +1229,7 @@
       },
       {
         "internalType": "uint256[]",
-        "name": "amounts",
+        "name": "values",
         "type": "uint256[]"
       },
       {
@@ -891,7 +1262,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "amount",
+        "name": "value",
         "type": "uint256"
       },
       {
@@ -946,18 +1317,18 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "member",
+        "name": "newImplementation",
         "type": "address"
       },
       {
-        "internalType": "string",
-        "name": "answer",
-        "type": "string"
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
       }
     ],
-    "name": "takeContributorQuest",
+    "name": "upgradeToAndCall",
     "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "payable",
     "type": "function"
   },
   {
