@@ -7,9 +7,12 @@ export type MembershipType = {
   mintedAt: number;
 };
 
-export type BadgeType = {
+export type TokenType = {
+  tokenId: number;
   name: string;
   description: string;
+  svg: string;
+  attributes: string[];
 };
 
 export type MemberType = {
@@ -17,5 +20,5 @@ export type MemberType = {
   activityPoints: BigInt;
   experiencePoints: BigInt;
   attendedEvents: BigInt;
-  badges: BadgeType[];
+  badges: TokenType[];
 };
