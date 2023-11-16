@@ -34,7 +34,14 @@ import {
 import { Input } from '@/components/ui/input';
 import { MemberType } from '@/types/types';
 import Link from 'next/link';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupList,
+  AvatarImage,
+  AvatarOverflowIndicator,
+} from '../ui/avatar';
 
 type Props = {
   members: MemberType[];
@@ -71,15 +78,20 @@ export const columns: ColumnDef<MemberType>[] = [
     cell: ({ row: { original } }) => (
       <div className="capitalize">
         {original.badges.length > 0 ? (
-          original.badges.map((badge, i) => (
-            <Avatar className="h-8 w-8" key={i}>
-              <AvatarImage
-                src="https://avatar.vercel.sh/leerob"
-                alt="@shadcn"
-              />
-              <AvatarFallback>{badge.name}</AvatarFallback>
-            </Avatar>
-          ))
+          <AvatarGroup limit={3} className="justify-start">
+            <AvatarGroupList>
+              {original.badges.map((badge, i) => (
+                <Avatar key={i}>
+                  <AvatarImage
+                    src="https://avatar.vercel.sh/leerob"
+                    alt="@shadcn"
+                  />
+                  <AvatarFallback>{badge.name}</AvatarFallback>
+                </Avatar>
+              ))}
+            </AvatarGroupList>
+            <AvatarOverflowIndicator />
+          </AvatarGroup>
         ) : (
           <p>No Badges yet.</p>
         )}
