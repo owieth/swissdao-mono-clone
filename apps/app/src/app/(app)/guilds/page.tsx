@@ -55,18 +55,33 @@
 'use client';
 
 import { GuildsTable } from '@/components/tables/guilds-table';
+import { MembershipContext } from '@/contexts/membership';
 import { CONTRACT } from '@/contracts/contracts';
 import { BADGE_INITIAL_COUNTER, GUILD_INITIAL_COUNTER } from '@/helpers/const';
 import { TokenType } from '@/types/types';
 import { Card, Text, Title } from '@tremor/react';
+import { prepareWriteContract, writeContract } from '@wagmi/core';
+import { useContext } from 'react';
 import { useContractRead } from 'wagmi';
 
 export default function BadgesPage() {
+  const { membership } = useContext(MembershipContext);
+
   const {
     data: guilds,
     isError,
     isLoading,
   } = useContractRead({ ...CONTRACT, functionName: 'getAllBadges' });
+
+  const onJoinGuild = async (guildId: number) => {
+    const config = await prepareWriteContract({
+      ...CONTRACT,
+      functionName: 'joinGuild',
+      args: [membership?.membership.tokenId, guildId],
+    });
+
+    const { hash } = await writeContract(config);
+  };
 
   return (
     <main className="mx-auto max-w-7xl p-4 md:p-10">
@@ -79,7 +94,7 @@ export default function BadgesPage() {
               tokenId >= GUILD_INITIAL_COUNTER &&
               tokenId < BADGE_INITIAL_COUNTER
           )}
-          onJoinGuild={() => {}}
+          onJoinGuild={onJoinGuild}
         />
       </Card>
     </main>

@@ -37,7 +37,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 
 type Props = {
   guilds: TokenType[];
-  onJoinGuild: () => void;
+  onJoinGuild: (guildId: number) => void;
 };
 
 export function GuildsTable({ guilds, onJoinGuild }: Props) {
@@ -111,7 +111,7 @@ export function GuildsTable({ guilds, onJoinGuild }: Props) {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={onJoinGuild}>
+              <DropdownMenuItem onClick={() => onJoinGuild(tokenId)}>
                 Join Guild
               </DropdownMenuItem>
             </DropdownMenuContent>
