@@ -32,99 +32,94 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
-import { MemberType, TokenType } from '@/types/types';
-import Link from 'next/link';
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarGroup,
-  AvatarGroupList,
-  AvatarImage,
-  AvatarOverflowIndicator,
-} from '../ui/avatar';
+import { TokenType } from '@/types/types';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 
 type Props = {
   guilds: TokenType[];
+  onJoinGuild: () => void;
 };
 
-export const columns: ColumnDef<TokenType>[] = [
-  {
-    accessorKey: 'tokenId',
-    header: 'Token ID',
-  },
-  {
-    accessorKey: 'name',
-    header: 'Name',
-    cell: ({ row }) => {
-      const label = row.getValue('name') as any;
-
-      return (
-        <div className="flex items-center gap-4">
-          <Avatar className="h-8 w-8">
-            <AvatarImage src={row.original.svg} alt="@shadcn" />
-            <AvatarFallback>{label}</AvatarFallback>
-          </Avatar>
-          {label}
-        </div>
-      );
-    },
-  },
-  // {
-  //   accessorKey: 'membership.badges',
-  //   header: 'Badges',
-  //   cell: ({ row: { original } }) => (
-  //     <div className="capitalize">
-  //       {original.badges.length > 0 ? (
-  //         <AvatarGroup limit={3} className="justify-start">
-  //           <AvatarGroupList>
-  //             {original.badges.map((badge, i) => (
-  //               <Avatar key={i}>
-  //                 <AvatarImage
-  //                   src="https://avatar.vercel.sh/leerob"
-  //                   alt="@shadcn"
-  //                 />
-  //                 <AvatarFallback>{badge.name}</AvatarFallback>
-  //               </Avatar>
-  //             ))}
-  //           </AvatarGroupList>
-  //           <AvatarOverflowIndicator />
-  //         </AvatarGroup>
-  //       ) : (
-  //         <p>No Badges yet.</p>
-  //       )}
-  //     </div>
-  //   ),
-  // },
-  {
-    id: 'actions',
-    enableHiding: false,
-    cell: ({ row }) => {
-      const { tokenId } = row.original;
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => {}}>Join Guild</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
-  },
-];
-
-export function GuildsTable({ guilds }: Props) {
+export function GuildsTable({ guilds, onJoinGuild }: Props) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
+
+  const columns: ColumnDef<TokenType>[] = [
+    {
+      accessorKey: 'tokenId',
+      header: 'Token ID',
+    },
+    {
+      accessorKey: 'name',
+      header: 'Name',
+      cell: ({ row }) => {
+        const label = row.getValue('name') as any;
+
+        return (
+          <div className="flex items-center gap-4">
+            <Avatar className="h-8 w-8">
+              <AvatarImage src={row.original.svg} alt="@shadcn" />
+              <AvatarFallback>{label}</AvatarFallback>
+            </Avatar>
+            {label}
+          </div>
+        );
+      },
+    },
+    // {
+    //   accessorKey: 'membership.badges',
+    //   header: 'Badges',
+    //   cell: ({ row: { original } }) => (
+    //     <div className="capitalize">
+    //       {original.badges.length > 0 ? (
+    //         <AvatarGroup limit={3} className="justify-start">
+    //           <AvatarGroupList>
+    //             {original.badges.map((badge, i) => (
+    //               <Avatar key={i}>
+    //                 <AvatarImage
+    //                   src="https://avatar.vercel.sh/leerob"
+    //                   alt="@shadcn"
+    //                 />
+    //                 <AvatarFallback>{badge.name}</AvatarFallback>
+    //               </Avatar>
+    //             ))}
+    //           </AvatarGroupList>
+    //           <AvatarOverflowIndicator />
+    //         </AvatarGroup>
+    //       ) : (
+    //         <p>No Badges yet.</p>
+    //       )}
+    //     </div>
+    //   ),
+    // },
+    {
+      id: 'actions',
+      enableHiding: false,
+      cell: ({ row }) => {
+        const { tokenId } = row.original;
+
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={onJoinGuild}>
+                Join Guild
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        );
+      },
+    },
+  ];
 
   const table = useReactTable({
     data: guilds || [],

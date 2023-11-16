@@ -79,6 +79,7 @@ export default function BadgesPage() {
               tokenId >= GUILD_INITIAL_COUNTER &&
               tokenId < BADGE_INITIAL_COUNTER
           )}
+          onJoinGuild={() => {}}
         />
       </Card>
     </main>
