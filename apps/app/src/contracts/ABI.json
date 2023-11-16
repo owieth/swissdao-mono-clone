@@ -670,32 +670,44 @@
       {
         "components": [
           {
-            "internalType": "bytes",
-            "name": "svg",
-            "type": "bytes"
+            "components": [
+              {
+                "internalType": "bytes",
+                "name": "svg",
+                "type": "bytes"
+              },
+              {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "description",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "attributes",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct SwissDAOMembership.TokenStruct",
+            "name": "badge",
+            "type": "tuple"
           },
           {
-            "internalType": "uint256",
-            "name": "tokenId",
-            "type": "uint256"
-          },
-          {
-            "internalType": "string",
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "description",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "attributes",
-            "type": "string"
+            "internalType": "address[]",
+            "name": "holders",
+            "type": "address[]"
           }
         ],
-        "internalType": "struct SwissDAOMembership.TokenStruct[]",
+        "internalType": "struct SwissDAOMembership.BadgeStruct[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -1156,7 +1168,7 @@
         "type": "string"
       }
     ],
-    "name": "onboard",
+    "name": "mintMembership",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1311,6 +1323,29 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_member",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_nickname",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_profileImageUri",
+        "type": "string"
+      }
+    ],
+    "name": "updateMembership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {

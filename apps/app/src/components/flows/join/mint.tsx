@@ -39,7 +39,7 @@ export function Mint() {
 
   const { config, error } = usePrepareContractWrite({
     ...CONTRACT,
-    functionName: 'onboard',
+    functionName: 'mintMembership',
     args: [address, formData.nickname, formData.profileImageUri],
     onSuccess() {
       toast({
