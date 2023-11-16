@@ -13,7 +13,7 @@ const navigation = [
   { name: 'About', href: '/about' },
   {
     name: 'Events',
-    href: 'https://www.meetup.com/swissdao/events/',
+    href: 'https://lu.ma/u/swissdao',
     target: '_blank',
   },
   {
