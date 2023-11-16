@@ -52,7 +52,7 @@ export const columns: ColumnDef<MemberType>[] = [
       const label = row.getValue('membership_nickname') as any;
 
       return (
-        <div className="capitalize">
+        <div className="flex items-center gap-4">
           <Avatar className="h-8 w-8">
             <AvatarImage
               src={row.original.membership.profileImageUri}
