@@ -2,16 +2,16 @@
 
 import { MembershipContext } from '@/contexts/membership';
 import { CONTRACT } from '@/contracts/contracts';
-import { MembershipType } from '@/types/types';
-import { useAccount, useContractRead } from 'wagmi';
+import { MemberType, MembershipType } from '@/types/types';
 import { useEffect, useState } from 'react';
+import { useAccount, useContractRead } from 'wagmi';
 
 export default function MembershipWrapper({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [membership, setMembership] = useState<MembershipType>();
+  const [membership, setMembership] = useState<MemberType>();
 
   const { address } = useAccount();
 
@@ -22,7 +22,7 @@ export default function MembershipWrapper({
   });
 
   useEffect(() => {
-    setMembership(member as MembershipType);
+    setMembership(member as MemberType);
   }, [member]);
 
   return (
