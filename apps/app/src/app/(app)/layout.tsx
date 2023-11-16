@@ -5,6 +5,7 @@ import localFont from 'next/font/local';
 import 'tailwind-config/globals.css';
 import Web3Wrapper from './web3wrapper';
 import { Toaster } from '@/components/ui/toaster';
+import MembershipWrapper from './membershipWrapper';
 
 const avenir = localFont({
   src: [
@@ -77,9 +78,11 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body className={`${avenir.variable} font-sans`}>
         <Web3Wrapper>
-          <Navbar />
-          {children}
-          <Toaster />
+          <MembershipWrapper>
+            <Navbar />
+            {children}
+            <Toaster />
+          </MembershipWrapper>
         </Web3Wrapper>
       </body>
     </html>
