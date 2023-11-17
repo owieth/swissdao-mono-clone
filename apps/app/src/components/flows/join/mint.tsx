@@ -103,7 +103,7 @@ export function Mint() {
         />
 
         <Button type="submit" disabled={!write}>
-          Submit
+          Mint
         </Button>
       </form>
     </Form>
