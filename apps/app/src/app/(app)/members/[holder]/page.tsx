@@ -4,10 +4,11 @@ import IconUpload from '@/components/icons/upload';
 import { MemberStats } from '@/components/member-stats/member-stats';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
 import { CheckIcon, Cross1Icon, Pencil1Icon } from '@radix-ui/react-icons';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
+import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { Address, getAddress } from 'viem';
 import { useAccount } from 'wagmi';
 
 const profileWidth = 'max-w-5xl mx-auto px-4 sm:px-6 lg:px-8';
@@ -18,8 +19,13 @@ const userBio =
 export default function Member() {
   const [edit, setEdit] = useState(false);
 
+  const { holder } = useParams();
+
   const { address } = useAccount();
   const { openConnectModal } = useConnectModal();
+
+  const isProfileOwner =
+    getAddress(address as Address) == getAddress(holder as Address);
 
   useEffect(() => {
     if (!address) {
@@ -27,7 +33,7 @@ export default function Member() {
     }
   }, [address, openConnectModal]);
 
-  return address ? (
+  return isProfileOwner ? (
     <div className="relative min-h-screen pb-20">
       <div className="absolute right-4 top-4 flex gap-2 sm:right-6 lg:right-8">
         <Button size="icon" onClick={() => setEdit(!edit)}>
