@@ -17,12 +17,10 @@ export default function Navbar({ user }: { user?: any }) {
   const pathname = usePathname();
   const { address } = useAccount();
 
-  let navigation = [
-    { name: 'Members', href: '/members' },
-    { name: 'Guilds', href: '/guilds' },
-  ];
+  let navigation = [{ name: 'Members', href: '/members' }];
 
   if (address) {
+    navigation.push({ name: 'Guilds', href: '/guilds' });
     navigation.push({ name: 'Your Profile', href: `/members/${address}` });
     navigation.push({ name: 'Contributor Quest', href: `/contributor-quest` });
   }
