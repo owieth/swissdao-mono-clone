@@ -4,17 +4,16 @@ import IconUpload from '@/components/icons/upload';
 import { MemberStats } from '@/components/member-stats/member-stats';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import { CONTRACT } from '@/contracts/contracts';
+import { MemberType } from '@/types/types';
 import { CheckIcon, Cross1Icon, Pencil1Icon } from '@radix-ui/react-icons';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Address, getAddress } from 'viem';
-import { useAccount } from 'wagmi';
+import { useAccount, useContractRead } from 'wagmi';
 
 const profileWidth = 'max-w-5xl mx-auto px-4 sm:px-6 lg:px-8';
-
-const userBio =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac dolor vitae erat consectetur luctus.Aenean nec lorem ut velit dapibus elementum.Proin ac lorem maximus, consequat ante ac, aliquet eros. Donec consectetur consequat velit ut vestibulum.In hac habitasse platea dictumst.Sed sit amet diam nec ex pulvinar rutrum.Duis imperdiet, nulla sit amet cursus interdum, ligula justo blandit nisi, ac ullamcorper sem dui quis leo.Quisque dictum semper fringilla. Donec sit amet nulla diam.';
 
 export default function Member() {
   const [edit, setEdit] = useState(false);
@@ -27,29 +26,37 @@ export default function Member() {
   const isProfileOwner =
     getAddress(address as Address) == getAddress(holder as Address);
 
+  const { data: member } = useContractRead({
+    ...CONTRACT,
+    functionName: 'getMember',
+    args: [address],
+  });
+
   useEffect(() => {
     if (!address) {
       openConnectModal?.();
     }
   }, [address, openConnectModal]);
 
-  return isProfileOwner ? (
+  return member ? (
     <div className="relative min-h-screen pb-20">
-      <div className="absolute right-4 top-4 flex gap-2 sm:right-6 lg:right-8">
-        <Button size="icon" onClick={() => setEdit(!edit)}>
-          {edit ? (
-            <Cross1Icon className="h-4 w-4" />
-          ) : (
-            <Pencil1Icon className="h-4 w-4" />
-          )}
-        </Button>
-
-        {edit && (
-          <Button size="icon">
-            <CheckIcon className="h-4 w-4" />
+      {isProfileOwner && (
+        <div className="absolute right-4 top-4 flex gap-2 sm:right-6 lg:right-8">
+          <Button size="icon" onClick={() => setEdit(!edit)}>
+            {edit ? (
+              <Cross1Icon className="h-4 w-4" />
+            ) : (
+              <Pencil1Icon className="h-4 w-4" />
+            )}
           </Button>
-        )}
-      </div>
+
+          {edit && (
+            <Button size="icon">
+              <CheckIcon className="h-4 w-4" />
+            </Button>
+          )}
+        </div>
+      )}
 
       <div className="h-48 w-full bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 lg:h-64" />
 
@@ -75,7 +82,7 @@ export default function Member() {
 
         <div className="mt-16">
           <h1 className="truncate text-2xl font-semibold text-black">
-            {'nickname'}
+            {(member as MemberType).membership.nickname}
           </h1>
         </div>
       </div>
