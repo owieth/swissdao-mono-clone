@@ -5,6 +5,7 @@ import { MemberStats } from '@/components/member-stats/member-stats';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { CONTRACT } from '@/contracts/contracts';
+import { getGradient } from '@/helpers/gradient';
 import { MemberType } from '@/types/types';
 import { CheckIcon, Cross1Icon, Pencil1Icon } from '@radix-ui/react-icons';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
@@ -60,7 +61,12 @@ export default function Member() {
         </div>
       )}
 
-      <div className="h-48 w-full bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 lg:h-64" />
+      {/* <div className="h-48 w-full bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 lg:h-64" /> */}
+
+      <div
+        className={`h-48 w-full lg:h-64 
+          ${getGradient((member as any).membership.nickname)}`}
+      />
 
       <div
         className={`${profileWidth} -mt-12 items-center sm:-mt-16 sm:flex sm:space-x-5`}
