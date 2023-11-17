@@ -46,8 +46,9 @@ export default function Member() {
       </div>
 
       <div className="h-48 w-full bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 lg:h-64" />
+
       <div
-        className={`${profileWidth} -mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5`}
+        className={`${profileWidth} -mt-12 items-center sm:-mt-16 sm:flex sm:space-x-5`}
       >
         <div className="group relative h-24 w-24 overflow-hidden rounded-full sm:h-32 sm:w-32">
           {edit && (
@@ -65,12 +66,18 @@ export default function Member() {
             <AvatarImage src="https://avatar.vercel.sh/leerob" alt="@shadcn" />
           </Avatar>
         </div>
+
+        <div className="mt-16">
+          <h1 className="truncate text-2xl font-semibold text-black">
+            {'nickname'}
+          </h1>
+        </div>
       </div>
 
-      <div className={`${profileWidth} mt-16`}>
+      {/* <div className={`${profileWidth} mt-16`}>
         <h2 className="font-mono text-2xl font-semibold">About me</h2>
         {edit ? <Textarea>{userBio}</Textarea> : <span>{userBio}</span>}
-      </div>
+      </div> */}
 
       <div className={`${profileWidth} mt-16`}>
         <h2 className="font-mono text-2xl font-semibold">My Membership</h2>
