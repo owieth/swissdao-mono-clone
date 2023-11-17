@@ -24,7 +24,9 @@ export default function Member() {
   const { openConnectModal } = useConnectModal();
 
   const isProfileOwner =
-    getAddress(address as Address) == getAddress(holder as Address);
+    address && holder
+      ? getAddress(address as Address) == getAddress(holder as Address)
+      : false;
 
   const { data: member } = useContractRead({
     ...CONTRACT,
