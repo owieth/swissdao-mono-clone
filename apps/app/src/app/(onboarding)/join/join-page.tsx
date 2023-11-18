@@ -49,11 +49,11 @@ export default function JoinPage() {
             </Card>
 
             <Card className="p-4">
-              <div className="flex flex-col space-y-2 text-center">
+              {/* <div className="flex flex-col space-y-2 text-center">
                 <h1 className="text-2xl font-semibold tracking-tight">
                   Mint your Membership now!
                 </h1>
-              </div>
+              </div> */}
 
               <Link href={`/members/${address}`}>Visit your Profile!</Link>
             </Card>

@@ -37,39 +37,50 @@ export function Mint() {
 
   const formData = watch();
 
-  const { config, error } = usePrepareContractWrite({
+  // const { config, error } = usePrepareContractWrite({
+  //   ...CONTRACT,
+  //   functionName: 'mintMembership',
+  //   args: [address, formData.nickname, formData.profileImageUri],
+  //   onSuccess() {
+  //     toast({
+  //       description: 'Membership has been minted!',
+  //     });
+  //     swiper?.slideNext();
+  //   },
+  // });
+
+  //const { write, error: writeError } = useContractWrite(config);
+  const { write, error: writeError } = useContractWrite({
     ...CONTRACT,
     functionName: 'mintMembership',
     args: [address, formData.nickname, formData.profileImageUri],
-    onSuccess() {
-      toast({
-        description: 'Membership has been minted!',
-      });
-      swiper?.slideNext();
-    },
+    // onSuccess() {
+    //   toast({
+    //     description: 'Membership has been minted!',
+    //   });
+    //   swiper?.slideNext();
+    // },
   });
 
-  const { write, error: writeError } = useContractWrite(config);
-
-  if (error || writeError) {
-    toast({
-      variant: 'destructive',
-      title: 'Uh oh! Something went wrong.',
-      description: error?.message || writeError?.message,
-    });
-  }
+  // if (error || writeError) {
+  //   toast({
+  //     variant: 'destructive',
+  //     title: 'Uh oh! Something went wrong.',
+  //     description: error?.message || writeError?.message,
+  //   });
+  // }
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     const hash = write?.();
     toast({
       title: 'Your Membership is minting...',
-      action: (
-        <ToastAction altText="explorer">
-          <Link href={hash || ''} target="_blank">
-            Have a look
-          </Link>
-        </ToastAction>
-      ),
+      // action: (
+      //   <ToastAction altText="explorer">
+      //     <Link href={hash || ''} target="_blank">
+      //       Have a look
+      //     </Link>
+      //   </ToastAction>
+      // ),
     });
   }
 
