@@ -42,7 +42,7 @@ export default function MembersPage() {
           <Title>Members</Title>
           <Text>A list of all swissDAO Members</Text>
         </div>
-        {!membership && (
+        {BigInt(membership?.membership.tokenId || 0) === BigInt(0) && (
           <Button>
             <Link href="/join">Get Membership</Link>
           </Button>
