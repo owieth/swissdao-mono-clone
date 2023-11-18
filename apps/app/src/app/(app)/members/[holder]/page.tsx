@@ -1,30 +1,20 @@
 'use client';
 
-import { UpdateMembershipForm } from '@/components/forms/membership';
-import IconUpload from '@/components/icons/upload';
 import { MemberStats } from '@/components/member-stats/member-stats';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
 import { CONTRACT } from '@/contracts/contracts';
 import { getGradient } from '@/helpers/gradient';
 import { MemberType } from '@/types/types';
-import { CheckIcon, Cross1Icon, Pencil1Icon } from '@radix-ui/react-icons';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
 import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Address, getAddress } from 'viem';
 import { useAccount, useContractRead } from 'wagmi';
 
 const profileWidth = 'max-w-5xl mx-auto px-4 sm:px-6 lg:px-8';
 
 export default function Member() {
-  const [edit, setEdit] = useState(false);
+  // const [edit, setEdit] = useState(false);
 
   const { holder } = useParams();
 
@@ -50,18 +40,18 @@ export default function Member() {
 
   return member ? (
     <>
-      <Dialog open={edit} onOpenChange={setEdit}>
+      {/* <Dialog open={edit} onOpenChange={setEdit}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Edit Membership</DialogTitle>
           </DialogHeader>
 
-          {/* <UpdateMembershipForm /> */}
+          <UpdateMembershipForm />
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
 
       <div className="relative min-h-screen pb-20">
-        {isProfileOwner && (
+        {/* {isProfileOwner && (
           <div className="absolute right-4 top-4 flex gap-2 sm:right-6 lg:right-8">
             <Button size="icon" onClick={() => setEdit(!edit)}>
               {edit ? (
@@ -77,7 +67,7 @@ export default function Member() {
               </Button>
             )}
           </div>
-        )}
+        )} */}
 
         <div
           className={`h-48 w-full lg:h-64 
@@ -88,7 +78,7 @@ export default function Member() {
           className={`${profileWidth} -mt-12 items-center sm:-mt-16 sm:flex sm:space-x-5`}
         >
           <div className="group relative h-24 w-24 overflow-hidden rounded-full sm:h-32 sm:w-32">
-            {edit && (
+            {/* {edit && (
               <button
                 className="absolute z-10 flex h-full w-full items-center justify-center bg-gray-800 bg-opacity-50 transition-all hover:bg-opacity-70"
                 onClick={() =>
@@ -97,7 +87,7 @@ export default function Member() {
               >
                 <IconUpload className="h-6 w-6" />
               </button>
-            )}
+            )} */}
 
             <Avatar className="h-24 w-24 sm:h-32 sm:w-32">
               <AvatarImage
