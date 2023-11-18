@@ -91,7 +91,10 @@ export default function Member() {
 
             <Avatar className="h-24 w-24 sm:h-32 sm:w-32">
               <AvatarImage
-                src="https://avatar.vercel.sh/leerob"
+                src={
+                  (member as MemberType).membership.profileImageUri ||
+                  'https://avatar.vercel.sh/leerob'
+                }
                 alt="@shadcn"
               />
             </Avatar>
