@@ -3,11 +3,13 @@
 import { NOTION_CLIENT } from '@/api/client';
 import { MembersTable } from '@/components/tables/members-table';
 import { Button } from '@/components/ui/button';
+import { MembershipContext } from '@/contexts/membership';
 import { CONTRACT } from '@/contracts/contracts';
 import { MemberType } from '@/types/types';
 import { Card, Text, Title } from '@tremor/react';
 import Link from 'next/link';
 import { useContractRead } from 'wagmi';
+import { useContext } from 'react';
 
 async function getData() {
   // const res = await fetch('https://api.example.com/...')
@@ -25,6 +27,8 @@ async function getData() {
 }
 
 export default function MembersPage() {
+  const { membership } = useContext(MembershipContext);
+
   const {
     data: members,
     isError,
@@ -38,9 +42,11 @@ export default function MembersPage() {
           <Title>Members</Title>
           <Text>A list of all swissDAO Members</Text>
         </div>
-        <Button>
-          <Link href="/join">Get Membership</Link>
-        </Button>
+        {!membership && (
+          <Button>
+            <Link href="/join">Get Membership</Link>
+          </Button>
+        )}
       </div>
       <Card className="mt-6">
         <MembersTable members={members as MemberType[]} />
