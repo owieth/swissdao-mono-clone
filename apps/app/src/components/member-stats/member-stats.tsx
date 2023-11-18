@@ -1,5 +1,6 @@
 import { LineChart } from '@tremor/react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { MemberType } from '@/types/types';
 
 const chartdata = [
   {
@@ -33,13 +34,17 @@ const chartdata = [
 const dataFormatter = (number: number) =>
   `${Intl.NumberFormat('us').format(number).toString()}%`;
 
-export function MemberStats() {
+type Props = {
+  member: MemberType;
+};
+
+export function MemberStats({ member }: Props) {
   return (
     <>
       <div className="mb-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
+            <CardTitle className="text-sm font-medium">Total Badges</CardTitle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -54,15 +59,15 @@ export function MemberStats() {
             </svg>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$45,231.89</div>
-            <p className="text-muted-foreground text-xs">
-              +20.1% from last month
-            </p>
+            <div className="text-2xl font-bold">{member.badges.length}</div>
           </CardContent>
         </Card>
+
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Subscriptions</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Activity Points
+            </CardTitle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -79,15 +84,17 @@ export function MemberStats() {
             </svg>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+2350</div>
-            <p className="text-muted-foreground text-xs">
-              +180.1% from last month
-            </p>
+            <div className="text-2xl font-bold">
+              {member.activityPoints.toString()}
+            </div>
           </CardContent>
         </Card>
+
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Sales</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Experience Points
+            </CardTitle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -103,15 +110,16 @@ export function MemberStats() {
             </svg>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+12,234</div>
-            <p className="text-muted-foreground text-xs">
-              +19% from last month
-            </p>
+            <div className="text-2xl font-bold">
+              {member.experiencePoints.toString()}
+            </div>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Now</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Attended Events
+            </CardTitle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -126,15 +134,14 @@ export function MemberStats() {
             </svg>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+573</div>
-            <p className="text-muted-foreground text-xs">
-              +201 since last hour
-            </p>
+            <div className="text-2xl font-bold">
+              {member.attendedEvents.toString()}
+            </div>
           </CardContent>
         </Card>
       </div>
 
-      <Card>
+      {/* <Card>
         <CardHeader>
           <CardTitle>Your Progress</CardTitle>
         </CardHeader>
@@ -149,7 +156,7 @@ export function MemberStats() {
             yAxisWidth={40}
           />
         </CardContent>
-      </Card>
+      </Card> */}
     </>
   );
 }

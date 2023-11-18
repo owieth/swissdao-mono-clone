@@ -114,7 +114,7 @@ export default function Member() {
 
         <div className={`${profileWidth} mt-16`}>
           <h2 className="font-mono text-2xl font-semibold">My Membership</h2>
-          <MemberStats />
+          <MemberStats member={member as MemberType} />
         </div>
       </div>
     </>
