@@ -58,7 +58,7 @@ import { GuildsTable } from '@/components/tables/guilds-table';
 import { MembershipContext } from '@/contexts/membership';
 import { CONTRACT } from '@/contracts/contracts';
 import { BADGE_INITIAL_COUNTER, GUILD_INITIAL_COUNTER } from '@/helpers/const';
-import { TokenType } from '@/types/types';
+import { GuildType } from '@/types/types';
 import { Card, Text, Title } from '@tremor/react';
 import { prepareWriteContract, writeContract } from '@wagmi/core';
 import { useContext } from 'react';
@@ -89,11 +89,13 @@ export default function BadgesPage() {
       <Text>A list of all registered Members</Text>
       <Card className="mt-6">
         <GuildsTable
-          guilds={(guilds as TokenType[])?.filter(
-            ({ tokenId }) =>
-              tokenId >= GUILD_INITIAL_COUNTER &&
-              tokenId < BADGE_INITIAL_COUNTER
-          )}
+          guilds={(guilds as GuildType[])
+            ?.filter(
+              ({ badge }) =>
+                badge.tokenId >= GUILD_INITIAL_COUNTER &&
+                badge.tokenId < BADGE_INITIAL_COUNTER
+            )
+            .map(guilds => guilds.badge)}
           onJoinGuild={onJoinGuild}
         />
       </Card>

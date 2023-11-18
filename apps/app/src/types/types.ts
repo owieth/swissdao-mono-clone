@@ -15,6 +15,11 @@ export type TokenType = {
   attributes: string[];
 };
 
+export type GuildType = {
+  badge: TokenType;
+  holders: string[];
+};
+
 export type MemberType = {
   membership: MembershipType;
   activityPoints: BigInt;
