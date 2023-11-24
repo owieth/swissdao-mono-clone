@@ -29,7 +29,7 @@ export default function Member() {
   const { data: member } = useContractRead({
     ...CONTRACT,
     functionName: 'getMember',
-    args: [address],
+    args: [holder],
   });
 
   useEffect(() => {
