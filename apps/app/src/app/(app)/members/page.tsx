@@ -5,11 +5,12 @@ import { MembersTable } from '@/components/tables/members-table';
 import { Button } from '@/components/ui/button';
 import { MembershipContext } from '@/contexts/membership';
 import { CONTRACT } from '@/contracts/contracts';
+import { BADGE_INITIAL_COUNTER, EVENT_INITIAL_COUNTER } from '@/helpers/const';
 import { MemberType } from '@/types/types';
 import { Card, Text, Title } from '@tremor/react';
 import Link from 'next/link';
-import { useContractRead } from 'wagmi';
 import { useContext } from 'react';
+import { useContractRead } from 'wagmi';
 
 async function getData() {
   // const res = await fetch('https://api.example.com/...')
@@ -49,7 +50,18 @@ export default function MembersPage() {
         )}
       </div>
       <Card className="mt-6">
-        <MembersTable members={members as MemberType[]} />
+        <MembersTable
+          members={(members as MemberType[])?.map(member => {
+            return {
+              ...member,
+              badges: member.badges?.filter(
+                badge =>
+                  BigInt(badge.tokenId) >= BADGE_INITIAL_COUNTER &&
+                  BigInt(badge.tokenId) < EVENT_INITIAL_COUNTER
+              ),
+            };
+          })}
+        />
       </Card>
     </main>
   );
