@@ -42,6 +42,7 @@ import {
   AvatarImage,
   AvatarOverflowIndicator,
 } from '../ui/avatar';
+import { convertIpfsToHttps } from '@/helpers/ipfs';
 
 type Props = {
   members: MemberType[];
@@ -83,7 +84,9 @@ export const columns: ColumnDef<MemberType>[] = [
               {original.badges.map((badge, i) => (
                 <Avatar key={i}>
                   <AvatarImage
-                    src="https://avatar.vercel.sh/leerob"
+                    src={convertIpfsToHttps(
+                      'ipfs://QmQJ5TP1L7K4ZqXCp27yHpFvNAtTYFj7RPEH8usHrr4d1D'
+                    )}
                     alt="@shadcn"
                   />
                   <AvatarFallback>{badge.name}</AvatarFallback>
