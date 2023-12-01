@@ -5,7 +5,7 @@ import { MembersTable } from '@/components/tables/members-table';
 import { Button } from '@/components/ui/button';
 import { MembershipContext } from '@/contexts/membership';
 import { CONTRACT } from '@/contracts/contracts';
-import { BADGE_INITIAL_COUNTER, EVENT_INITIAL_COUNTER } from '@/helpers/const';
+import { EVENT_INITIAL_COUNTER, GUILD_INITIAL_COUNTER } from '@/helpers/const';
 import { MemberType } from '@/types/types';
 import { Card, Text, Title } from '@tremor/react';
 import Link from 'next/link';
@@ -56,7 +56,7 @@ export default function MembersPage() {
               ...member,
               badges: member.badges?.filter(
                 badge =>
-                  BigInt(badge.tokenId) >= BADGE_INITIAL_COUNTER &&
+                  BigInt(badge.tokenId) >= GUILD_INITIAL_COUNTER &&
                   BigInt(badge.tokenId) < EVENT_INITIAL_COUNTER
               ),
             };

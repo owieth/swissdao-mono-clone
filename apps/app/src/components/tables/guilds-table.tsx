@@ -60,7 +60,7 @@ export function GuildsTable({ guilds, onJoinGuild }: Props) {
         return (
           <div className="flex items-center gap-4">
             <Avatar className="h-8 w-8">
-              <AvatarImage src={row.original.svg} alt="@shadcn" />
+              <AvatarImage src={row.original.imageUri} alt="@shadcn" />
               <AvatarFallback>{label}</AvatarFallback>
             </Avatar>
             {label}

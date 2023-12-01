@@ -11,7 +11,7 @@ export type TokenType = {
   tokenId: number;
   name: string;
   description: string;
-  svg: string;
+  imageUri: string;
   attributes: string[];
 };
 
