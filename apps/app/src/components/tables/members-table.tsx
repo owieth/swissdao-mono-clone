@@ -43,6 +43,11 @@ import {
   AvatarOverflowIndicator,
 } from '../ui/avatar';
 import { convertIpfsToHttps } from '@/helpers/ipfs';
+import {
+  ACTIVITY_POINTS_IPFS_URL,
+  ATTENDED_EVENTS_IPFS_URL,
+  EXPERIENCE_POINTS_IPFS_URL,
+} from '@/helpers/const';
 
 type Props = {
   members: MemberType[];
@@ -87,7 +92,7 @@ export const columns: ColumnDef<MemberType>[] = [
                     src={convertIpfsToHttps(
                       'ipfs://QmQJ5TP1L7K4ZqXCp27yHpFvNAtTYFj7RPEH8usHrr4d1D'
                     )}
-                    alt="@shadcn"
+                    alt={badge.name}
                   />
                   <AvatarFallback>{badge.name}</AvatarFallback>
                 </Avatar>
@@ -111,7 +116,10 @@ export const columns: ColumnDef<MemberType>[] = [
         <div className="flex items-center gap-4">
           {Number(value)}
           <Avatar className="h-8 w-8">
-            <AvatarImage src={''} alt="@shadcn" />
+            <AvatarImage
+              src={convertIpfsToHttps(ACTIVITY_POINTS_IPFS_URL)}
+              alt="AP"
+            />
             <AvatarFallback>AP</AvatarFallback>
           </Avatar>
         </div>
@@ -128,7 +136,10 @@ export const columns: ColumnDef<MemberType>[] = [
         <div className="flex items-center gap-4">
           {Number(value)}
           <Avatar className="h-8 w-8">
-            <AvatarImage src={''} alt="@shadcn" />
+            <AvatarImage
+              src={convertIpfsToHttps(EXPERIENCE_POINTS_IPFS_URL)}
+              alt="XP"
+            />
             <AvatarFallback>XP</AvatarFallback>
           </Avatar>
         </div>
@@ -145,7 +156,10 @@ export const columns: ColumnDef<MemberType>[] = [
         <div className="flex items-center gap-4">
           {Number(value)}
           <Avatar className="h-8 w-8">
-            <AvatarImage src={''} alt="@shadcn" />
+            <AvatarImage
+              src={convertIpfsToHttps(ATTENDED_EVENTS_IPFS_URL)}
+              alt="Events"
+            />
             <AvatarFallback>Events</AvatarFallback>
           </Avatar>
         </div>
