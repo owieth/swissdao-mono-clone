@@ -11,7 +11,7 @@ export default function BadgesPage() {
   const {
     data: badges,
     isError,
-    isLoading,
+    isLoading
   } = useContractRead({ ...CONTRACT, functionName: 'getAllBadges' });
 
   const BadgeTriggerItem = ({ badge }: { badge: TokenType }) => (

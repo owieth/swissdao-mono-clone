@@ -9,7 +9,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { shortenString } from '@/helpers/format';
 import { useContext } from 'react';
@@ -28,7 +28,7 @@ export function UserNav() {
         openAccountModal,
         openChainModal,
         openConnectModal,
-        mounted,
+        mounted
       }) => {
         const connected = mounted && account && chain;
 
@@ -39,8 +39,8 @@ export function UserNav() {
               style: {
                 opacity: 0,
                 pointerEvents: 'none',
-                userSelect: 'none',
-              },
+                userSelect: 'none'
+              }
             })}
           >
             {(() => {

@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useAccount, useContractRead } from 'wagmi';
 
 export default function MembershipWrapper({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) {
@@ -18,7 +18,7 @@ export default function MembershipWrapper({
   const { data: member } = useContractRead({
     ...CONTRACT,
     functionName: 'getMember',
-    args: [address],
+    args: [address]
   });
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger,
+  AccordionTrigger
 } from '../ui/accordion';
 import { Card } from '../ui/card';
 

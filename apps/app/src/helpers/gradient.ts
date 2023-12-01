@@ -6,7 +6,7 @@ export const gradients = [
   'bg-gradient-to-r from-green-200 via-green-300 to-blue-500',
   'bg-gradient-to-r from-indigo-300 to-purple-400',
   'bg-gradient-to-r from-green-200 to-green-500',
-  'bg-gradient-to-r from-blue-100 via-blue-300 to-blue-500',
+  'bg-gradient-to-r from-blue-100 via-blue-300 to-blue-500'
 ];
 
 export function getGradient(username?: string) {

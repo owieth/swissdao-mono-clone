@@ -70,7 +70,7 @@ export default function BadgesPage() {
   const {
     data: guilds,
     isError,
-    isLoading,
+    isLoading
   } = useContractRead({ ...CONTRACT, functionName: 'getAllBadges' });
 
   const contracts = (guilds as GuildType[])
@@ -79,7 +79,7 @@ export default function BadgesPage() {
       return {
         ...CONTRACT,
         functionName: 'getMember',
-        args: [member],
+        args: [member]
       };
     }) as any;
 
@@ -93,7 +93,7 @@ export default function BadgesPage() {
     const config = await prepareWriteContract({
       ...CONTRACT,
       functionName: 'joinGuild',
-      args: [membership?.membership.tokenId, guildId],
+      args: [membership?.membership.tokenId, guildId]
     });
 
     const { hash } = await writeContract(config);
@@ -117,7 +117,7 @@ export default function BadgesPage() {
                 members:
                   members?.filter(member =>
                     guild.holders.includes(member.holder)
-                  ) || [],
+                  ) || []
               };
             })}
           onJoinGuild={onJoinGuild}

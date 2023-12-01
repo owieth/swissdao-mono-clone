@@ -4,7 +4,7 @@ import { OnboardingForm } from '@/components/onboarding-form/onboarding-form';
 
 export const metadata: Metadata = {
   title: 'swissDAO - Onboarding',
-  description: 'swissDAO - Onboarding',
+  description: 'swissDAO - Onboarding'
 };
 
 export default function AuthenticationPage() {

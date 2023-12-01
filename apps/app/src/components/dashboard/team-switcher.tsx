@@ -4,7 +4,7 @@ import * as React from 'react';
 import {
   CaretSortIcon,
   CheckIcon,
-  PlusCircledIcon,
+  PlusCircledIcon
 } from '@radix-ui/react-icons';
 
 import { cn } from '@/helpers/utils';
@@ -17,7 +17,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
+  CommandSeparator
 } from '@/components/ui/command';
 import {
   Dialog,
@@ -26,21 +26,21 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
+  DialogTrigger
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger,
+  PopoverTrigger
 } from '@/components/ui/popover';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
+  SelectValue
 } from '@/components/ui/select';
 
 const groups = [
@@ -49,23 +49,23 @@ const groups = [
     teams: [
       {
         label: 'Alicia Koch',
-        value: 'personal',
-      },
-    ],
+        value: 'personal'
+      }
+    ]
   },
   {
     label: 'Teams',
     teams: [
       {
         label: 'Acme Inc.',
-        value: 'acme-inc',
+        value: 'acme-inc'
       },
       {
         label: 'Monsters Inc.',
-        value: 'monsters',
-      },
-    ],
-  },
+        value: 'monsters'
+      }
+    ]
+  }
 ];
 
 type Team = (typeof groups)[number]['teams'][number];

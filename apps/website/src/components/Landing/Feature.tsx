@@ -1,7 +1,7 @@
 import {
   ChatBubbleLeftRightIcon,
   PuzzlePieceIcon,
-  WrenchScrewdriverIcon,
+  WrenchScrewdriverIcon
 } from '@heroicons/react/20/solid';
 
 const features = [
@@ -10,22 +10,22 @@ const features = [
     description:
       'We host workshops in different areas. We invite experts from different Web3 protocols to teach our community in full afternoon sessions the latest tech and trends.',
     href: '#',
-    icon: PuzzlePieceIcon,
+    icon: PuzzlePieceIcon
   },
   {
     name: 'Connect',
     description:
       'Connecting at a networking event is chill but with many you just talk and never execute. Come to us, we are a group of do-ers.',
     href: '#',
-    icon: ChatBubbleLeftRightIcon,
+    icon: ChatBubbleLeftRightIcon
   },
   {
     name: 'Build',
     description:
       'We build together in weekly sessions on projects we enjoy and like pursueing. We build to learn and learn to build.',
     href: '#',
-    icon: WrenchScrewdriverIcon,
-  },
+    icon: WrenchScrewdriverIcon
+  }
 ];
 
 export default function Features() {

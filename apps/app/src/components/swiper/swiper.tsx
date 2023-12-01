@@ -7,7 +7,7 @@ import {
   EffectFade,
   Keyboard,
   Navigation,
-  Pagination,
+  Pagination
 } from 'swiper/modules';
 import { Swiper as SwiperReact, SwiperSlide } from 'swiper/react';
 import 'swiper/scss';
@@ -29,7 +29,7 @@ export default function Swiper({ interactive, children }: Props) {
         slidesPerView={1}
         effect="fade"
         fadeEffect={{
-          crossFade: true,
+          crossFade: true
         }}
         speed={200}
         autoHeight={true}
@@ -40,7 +40,7 @@ export default function Swiper({ interactive, children }: Props) {
         }}
         keyboard={{
           enabled: interactive,
-          onlyInViewport: true,
+          onlyInViewport: true
         }}
         pagination={{
           el: '.swiperPagination',
@@ -51,7 +51,7 @@ export default function Swiper({ interactive, children }: Props) {
                 ${index + 1}
               </span>
             `;
-          },
+          }
         }}
         navigation={true}
       >

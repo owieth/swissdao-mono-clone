@@ -1,7 +1,7 @@
 import 'tailwind-config/globals.css';
 
 export default function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) {

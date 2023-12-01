@@ -3,7 +3,7 @@ import { ETHERS_CONTRACT } from '@/helpers/contracts';
 import { MembershipType } from '@/types/types';
 
 export default async function PreviewPage({
-  params: { tokenId },
+  params: { tokenId }
 }: {
   params: { tokenId: number };
 }) {

@@ -20,7 +20,7 @@ export async function GET(
           background: 'black',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'center',
+          alignItems: 'center'
         }}
       >
         <div
@@ -31,7 +31,7 @@ export async function GET(
             height: 213,
             width: 349,
             border: '1px solid #868686',
-            borderRadius: 16,
+            borderRadius: 16
           }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -44,7 +44,7 @@ export async function GET(
               position: 'absolute',
               top: 20,
               left: 20,
-              borderRadius: 50,
+              borderRadius: 50
             }}
           />
 
@@ -54,7 +54,7 @@ export async function GET(
               top: 120,
               left: 20,
               color: 'white',
-              fontSize: 24,
+              fontSize: 24
             }}
           >
             {'John Doe'}
@@ -65,7 +65,7 @@ export async function GET(
               top: 160,
               left: 260,
               color: 'white',
-              fontSize: 16,
+              fontSize: 16
             }}
           >
             {'01/01/23'}
@@ -76,7 +76,7 @@ export async function GET(
               top: 160,
               left: 20,
               color: 'white',
-              fontSize: 16,
+              fontSize: 16
             }}
           >
             {shortenString(holder, 8)}
@@ -87,7 +87,7 @@ export async function GET(
               top: 110,
               left: 60,
               color: 'white',
-              fontSize: 8,
+              fontSize: 8
             }}
           >
             {'150'}
@@ -97,7 +97,7 @@ export async function GET(
     ),
     {
       width: 700,
-      height: 700,
+      height: 700
     }
   );
 }

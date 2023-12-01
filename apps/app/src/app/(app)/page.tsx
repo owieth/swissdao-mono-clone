@@ -4,7 +4,7 @@ import DashboardPage from './dashboard-page';
 
 export const metadata: Metadata = {
   title: 'swissDAO - Dashboard',
-  description: 'swissDAO - Membership Overview',
+  description: 'swissDAO - Membership Overview'
 };
 
 export default function MainPage() {

@@ -34,7 +34,7 @@ const GoogleAnalytics = () => {
             gtag('config', '${GA_TRACKING_ID}', {
               page_path: window.location.pathname,
             });
-          `,
+          `
         }}
       />
     </>

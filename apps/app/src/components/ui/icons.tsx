@@ -173,5 +173,5 @@ export const Icons = {
         fill="currentColor"
       />
     </svg>
-  ),
+  )
 };

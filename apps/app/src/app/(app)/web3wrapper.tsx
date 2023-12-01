@@ -8,7 +8,7 @@ import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 
 export default function Web3Wrapper({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) {
@@ -22,13 +22,13 @@ export default function Web3Wrapper({
   const { connectors } = getDefaultWallets({
     appName: 'swissDAO - Membership',
     projectId: 'd9177ce16c4d52154c2e5031118d7c5d',
-    chains,
+    chains
   });
 
   const wagmiConfig = createConfig({
     autoConnect: true,
     connectors,
-    publicClient,
+    publicClient
   });
 
   useEffect(() => {

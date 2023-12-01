@@ -9,14 +9,14 @@ const avenir = localFont({
   src: [
     {
       path: '../../public/fonts/Avenir-Medium.woff2',
-      weight: '400',
+      weight: '400'
     },
     {
       path: '../../public/fonts/Avenir-Heavy.woff2',
-      weight: '800',
-    },
+      weight: '800'
+    }
   ],
-  variable: '--font-avenir',
+  variable: '--font-avenir'
 });
 
 const title = 'swissDAO - The Swiss Web3 Builder Community.³';
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
       {
         url,
         width: 25,
-        height: 25,
-      },
-    ],
+        height: 25
+      }
+    ]
   },
   twitter: {
     title,
@@ -49,8 +49,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     creator: '@swissDAOspace',
     images: {
-      url,
-    },
+      url
+    }
   },
   robots: {
     index: false,
@@ -62,13 +62,13 @@ export const metadata: Metadata = {
       noimageindex: true,
       'max-video-preview': -1,
       'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
+      'max-snippet': -1
+    }
+  }
 };
 
 export default function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) {

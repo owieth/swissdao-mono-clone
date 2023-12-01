@@ -14,13 +14,13 @@ const navigation = [
   {
     name: 'Events',
     href: 'https://lu.ma/u/swissdao',
-    target: '_blank',
+    target: '_blank'
   },
   {
     name: 'Courses',
     href: 'https://swissdao.notion.site/Courses-067249204b0544838290803aa9de1923',
-    target: '_blank',
-  },
+    target: '_blank'
+  }
   // { name: 'Blog', href: '/#' },
   // { name: 'Podcast', href: '#' },
 ];
@@ -60,7 +60,7 @@ function ChevronDownIcon(props: Props) {
 
 function MobileNavItem({
   href,
-  children,
+  children
 }: {
   href: string;
   children: ReactNode;
@@ -131,7 +131,7 @@ function MobileNavigation(props: Props) {
 function NavItem({
   href,
   target,
-  children,
+  children
 }: {
   href: string;
   target: string;
@@ -195,7 +195,7 @@ export function Header() {
     function updateHeaderStyles() {
       const { top, height } = headerRef.current?.getBoundingClientRect() ?? {
         top: 0,
-        height: 0,
+        height: 0
       };
       const scrollY = clamp(
         window.scrollY,

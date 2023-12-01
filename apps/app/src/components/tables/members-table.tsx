@@ -9,7 +9,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable,
+  useReactTable
 } from '@tanstack/react-table';
 import { MoreHorizontal } from 'lucide-react';
 import * as React from 'react';
@@ -20,7 +20,7 @@ import {
   TableCell,
   TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from '@/components//ui/table';
 import { Button } from '@/components/ui/button';
 import {
@@ -29,7 +29,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { MemberType } from '@/types/types';
@@ -40,13 +40,13 @@ import {
   AvatarGroup,
   AvatarGroupList,
   AvatarImage,
-  AvatarOverflowIndicator,
+  AvatarOverflowIndicator
 } from '../ui/avatar';
 import { convertIpfsToHttps } from '@/helpers/ipfs';
 import {
   ACTIVITY_POINTS_IPFS_URL,
   ATTENDED_EVENTS_IPFS_URL,
-  EXPERIENCE_POINTS_IPFS_URL,
+  EXPERIENCE_POINTS_IPFS_URL
 } from '@/helpers/const';
 
 type Props = {
@@ -56,7 +56,7 @@ type Props = {
 export const columns: ColumnDef<MemberType>[] = [
   {
     accessorKey: 'membership.tokenId',
-    header: 'Token ID',
+    header: 'Token ID'
   },
   {
     accessorKey: 'membership.nickname',
@@ -76,7 +76,7 @@ export const columns: ColumnDef<MemberType>[] = [
           {label}
         </div>
       );
-    },
+    }
   },
   {
     accessorKey: 'membership.badges',
@@ -102,7 +102,7 @@ export const columns: ColumnDef<MemberType>[] = [
           <p>No Badges yet.</p>
         )}
       </div>
-    ),
+    )
   },
   {
     accessorKey: 'membership.activityPoints',
@@ -122,7 +122,7 @@ export const columns: ColumnDef<MemberType>[] = [
           </Avatar>
         </div>
       );
-    },
+    }
   },
   {
     accessorKey: 'membership.experiencePoints',
@@ -142,7 +142,7 @@ export const columns: ColumnDef<MemberType>[] = [
           </Avatar>
         </div>
       );
-    },
+    }
   },
   {
     accessorKey: 'membership.attendedEvents',
@@ -162,14 +162,14 @@ export const columns: ColumnDef<MemberType>[] = [
           </Avatar>
         </div>
       );
-    },
+    }
   },
   {
     id: 'actions',
     enableHiding: false,
     cell: ({ row }) => {
       const {
-        membership: { holder },
+        membership: { holder }
       } = row.original;
 
       return (
@@ -189,8 +189,8 @@ export const columns: ColumnDef<MemberType>[] = [
           </DropdownMenuContent>
         </DropdownMenu>
       );
-    },
-  },
+    }
+  }
 ];
 
 export function MembersTable({ members }: Props) {
@@ -210,8 +210,8 @@ export function MembersTable({ members }: Props) {
     getFilteredRowModel: getFilteredRowModel(),
     state: {
       sorting,
-      columnFilters,
-    },
+      columnFilters
+    }
   });
 
   return (

@@ -3,39 +3,39 @@ import BackgroundGrid from '@/components/background-grid/background-grid';
 const stats = [
   { label: 'Steadily growing', value: '15 Builders' },
   { label: 'Currently build by the swissDAO Community', value: '2 Startups' },
-  { label: 'A consistent community', value: 'Every week' },
+  { label: 'A consistent community', value: 'Every week' }
 ];
 const values = [
   {
     name: 'Innovation',
     description:
-      'We are committed to driving innovation and pushing the boundaries of what is possible with decentralized technologies.',
+      'We are committed to driving innovation and pushing the boundaries of what is possible with decentralized technologies.'
   },
   {
     name: 'Community',
     description:
-      'We believe that a strong sense of community is essential to building a thriving web3 ecosystem, and work to foster connections and relationships among our members.',
+      'We believe that a strong sense of community is essential to building a thriving web3 ecosystem, and work to foster connections and relationships among our members.'
   },
   {
     name: 'Collaboration',
     description:
-      'We foster a collaborative environment where diverse perspectives and ideas can come together to create something truly remarkable.',
+      'We foster a collaborative environment where diverse perspectives and ideas can come together to create something truly remarkable.'
   },
   {
     name: 'Continuous Learning',
     description:
-      'We are committed to continuous learning and self-improvement, and believe that curiosity and a willingness to learn are essential to success in the fast-changing world of web3.',
+      'We are committed to continuous learning and self-improvement, and believe that curiosity and a willingness to learn are essential to success in the fast-changing world of web3.'
   },
   {
     name: 'Empowerment',
     description:
-      'We empower builders, entrepreneurs, and creatives to harness the full potential of decentralized technologies and build a more equitable and sustainable future for all.',
+      'We empower builders, entrepreneurs, and creatives to harness the full potential of decentralized technologies and build a more equitable and sustainable future for all.'
   },
   {
     name: 'Transparency',
     description:
-      'We believe in transparency and openness, and are committed to creating a trustworthy and reliable platform for our community to engage with.',
-  },
+      'We believe in transparency and openness, and are committed to creating a trustworthy and reliable platform for our community to engage with.'
+  }
 ];
 
 // const team = [
@@ -84,7 +84,7 @@ export default function About() {
               className="aspect-[801/1036] w-[50.0625rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
               style={{
                 clipPath:
-                  'polygon(63.1% 29.5%, 100% 17.1%, 76.6% 3%, 48.4% 0%, 44.6% 4.7%, 54.5% 25.3%, 59.8% 49%, 55.2% 57.8%, 44.4% 57.2%, 27.8% 47.9%, 35.1% 81.5%, 0% 97.7%, 39.2% 100%, 35.2% 81.4%, 97.2% 52.8%, 63.1% 29.5%)',
+                  'polygon(63.1% 29.5%, 100% 17.1%, 76.6% 3%, 48.4% 0%, 44.6% 4.7%, 54.5% 25.3%, 59.8% 49%, 55.2% 57.8%, 44.4% 57.2%, 27.8% 47.9%, 35.1% 81.5%, 0% 97.7%, 39.2% 100%, 35.2% 81.4%, 97.2% 52.8%, 63.1% 29.5%)'
               }}
             />
           </div>

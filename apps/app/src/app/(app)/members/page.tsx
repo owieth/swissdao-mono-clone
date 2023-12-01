@@ -33,7 +33,7 @@ export default function MembersPage() {
   const {
     data: members,
     isError,
-    isLoading,
+    isLoading
   } = useContractRead({ ...CONTRACT, functionName: 'getAllMembers' });
 
   return (
@@ -58,7 +58,7 @@ export default function MembersPage() {
                 badge =>
                   BigInt(badge.tokenId) >= GUILD_INITIAL_COUNTER &&
                   BigInt(badge.tokenId) < EVENT_INITIAL_COUNTER
-              ),
+              )
             };
           })}
         />

@@ -4,7 +4,7 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage,
+  FormMessage
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { ToastAction } from '@/components/ui/toast';
@@ -20,9 +20,9 @@ import * as z from 'zod';
 
 const FormSchema = z.object({
   nickname: z.string().min(2, {
-    message: 'Nickname must be at least 2 characters.',
+    message: 'Nickname must be at least 2 characters.'
   }),
-  profileImageUri: z.string(),
+  profileImageUri: z.string()
 });
 
 export function Mint() {
@@ -30,7 +30,7 @@ export function Mint() {
   const { swiper } = React.useContext(SwiperContext);
 
   const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+    resolver: zodResolver(FormSchema)
   });
 
   const { watch } = form;
@@ -53,7 +53,7 @@ export function Mint() {
   const { write, error: writeError } = useContractWrite({
     ...CONTRACT,
     functionName: 'mintMembership',
-    args: [address, formData.nickname, formData.profileImageUri],
+    args: [address, formData.nickname, formData.profileImageUri]
     // onSuccess() {
     //   toast({
     //     description: 'Membership has been minted!',
@@ -73,7 +73,7 @@ export function Mint() {
   function onSubmit(data: z.infer<typeof FormSchema>) {
     const hash = write?.();
     toast({
-      title: 'Your Membership is minting...',
+      title: 'Your Membership is minting...'
       // action: (
       //   <ToastAction altText="explorer">
       //     <Link href={hash || ''} target="_blank">

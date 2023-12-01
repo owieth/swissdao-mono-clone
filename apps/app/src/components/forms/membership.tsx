@@ -4,7 +4,7 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage,
+  FormMessage
 } from '../ui/form';
 import { Input } from '../ui/input';
 
@@ -14,9 +14,9 @@ import * as z from 'zod';
 
 const FormSchema = z.object({
   nickname: z.string().min(2, {
-    message: 'Nickname must be at least 2 characters.',
+    message: 'Nickname must be at least 2 characters.'
   }),
-  profileImageUri: z.string(),
+  profileImageUri: z.string()
 });
 
 type Props = {
@@ -26,7 +26,7 @@ type Props = {
 
 export default function MembershipForm({ disabled, onSubmit }: Props) {
   const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+    resolver: zodResolver(FormSchema)
   });
 
   return (

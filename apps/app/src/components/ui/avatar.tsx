@@ -57,7 +57,7 @@ const AvatarGroupContext = React.createContext<AvatarGroupContextValue>({});
 
 const AvatarGroupProvider = ({
   children,
-  limit,
+  limit
 }: {
   children?: React.ReactNode;
   limit?: number;
@@ -69,7 +69,7 @@ const AvatarGroupProvider = ({
       value={{
         count,
         setCount,
-        limit,
+        limit
       }}
     >
       {children}
@@ -145,5 +145,5 @@ export {
   AvatarFallback,
   AvatarGroup,
   AvatarGroupList,
-  AvatarOverflowIndicator,
+  AvatarOverflowIndicator
 };

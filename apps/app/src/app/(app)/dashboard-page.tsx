@@ -12,16 +12,16 @@ export default function DashboardPage() {
     activityPoints: BigInt(10),
     experiencePoints: BigInt(10),
     attendedEvents: BigInt(10),
-    badges: [],
+    badges: []
   });
 
   const {
     data: members,
     isError,
-    isLoading,
+    isLoading
   } = useContractRead({
     ...CONTRACT,
-    functionName: 'getAllMembers',
+    functionName: 'getAllMembers'
   });
 
   // console.log(members);

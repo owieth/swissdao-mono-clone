@@ -9,7 +9,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable,
+  useReactTable
 } from '@tanstack/react-table';
 import { MoreHorizontal } from 'lucide-react';
 import * as React from 'react';
@@ -20,7 +20,7 @@ import {
   TableCell,
   TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from '@/components//ui/table';
 import { Button } from '@/components/ui/button';
 import {
@@ -29,7 +29,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { GuildType } from '@/types/types';
 import {
@@ -38,7 +38,7 @@ import {
   AvatarGroup,
   AvatarGroupList,
   AvatarImage,
-  AvatarOverflowIndicator,
+  AvatarOverflowIndicator
 } from '../ui/avatar';
 import Link from 'next/link';
 
@@ -56,7 +56,7 @@ export function GuildsTable({ guilds, onJoinGuild }: Props) {
   const columns: ColumnDef<GuildType>[] = [
     {
       accessorKey: 'badge.tokenId',
-      header: 'Token ID',
+      header: 'Token ID'
     },
     {
       accessorKey: 'name',
@@ -73,7 +73,7 @@ export function GuildsTable({ guilds, onJoinGuild }: Props) {
             {label}
           </div>
         );
-      },
+      }
     },
     {
       accessorKey: 'membership.members',
@@ -122,7 +122,7 @@ export function GuildsTable({ guilds, onJoinGuild }: Props) {
             <p>No Members yet.</p>
           )}
         </div>
-      ),
+      )
     },
     {
       id: 'actions',
@@ -147,8 +147,8 @@ export function GuildsTable({ guilds, onJoinGuild }: Props) {
             </DropdownMenuContent>
           </DropdownMenu>
         );
-      },
-    },
+      }
+    }
   ];
 
   const table = useReactTable({
@@ -162,8 +162,8 @@ export function GuildsTable({ guilds, onJoinGuild }: Props) {
     getFilteredRowModel: getFilteredRowModel(),
     state: {
       sorting,
-      columnFilters,
-    },
+      columnFilters
+    }
   });
 
   return (

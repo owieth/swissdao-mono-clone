@@ -17,13 +17,13 @@ export async function GET(
     attributes: [
       {
         trait_type: 'Holder',
-        value: holder,
+        value: holder
       },
       { trait_type: 'Minted', value: Number(mintedAt) },
-      { trait_type: 'Joined', value: Number(joinedAt) },
+      { trait_type: 'Joined', value: Number(joinedAt) }
       // { trait_type: 'Experience Points', value: Number(experiencePoints) },
       // { trait_type: 'Activity Points', value: Number(activityPoints) },
       // { trait_type: 'State', value: Number(state) },
-    ],
+    ]
   });
 }

@@ -3,7 +3,7 @@ import MembercardFront from '@/components/membercard/front';
 import { MembershipType } from '@/types/types';
 
 const MembercardPreview = ({
-  tokenStruct,
+  tokenStruct
 }: {
   tokenStruct: MembershipType;
 }) => {
@@ -19,7 +19,7 @@ const MembercardPreview = ({
       'w-[350px]',
       'h-[220px]',
       '[perspective:1000px]',
-      'bg-transparent',
+      'bg-transparent'
     ].join(' '),
     cardInner: [
       'group-hover:[transform:rotateY(180deg)]',
@@ -28,7 +28,7 @@ const MembercardPreview = ({
       'h-full',
       'transition-all',
       'duration-500',
-      '[transform-style:preserve-3d]',
+      '[transform-style:preserve-3d]'
     ].join(' '),
     front: [
       'absolute',
@@ -36,9 +36,9 @@ const MembercardPreview = ({
       'h-full',
       'rounded-xl',
       '[-webkit-backface-visibility:hidden]',
-      '[backface-visibility:hidden]',
+      '[backface-visibility:hidden]'
     ].join(' '),
-    back: ['[transform:rotateY(180deg)]'].join(' '),
+    back: ['[transform:rotateY(180deg)]'].join(' ')
   };
 
   return (
