@@ -102,8 +102,8 @@ export const columns: ColumnDef<MemberType>[] = [
     ),
   },
   {
-    accessorKey: 'membership.activityPoins',
-    header: 'Activity Poins',
+    accessorKey: 'membership.activityPoints',
+    header: 'Activity Points',
     cell: ({ row: { original } }) => {
       const value = original.activityPoints;
 
@@ -120,7 +120,7 @@ export const columns: ColumnDef<MemberType>[] = [
   },
   {
     accessorKey: 'membership.experiencePoints',
-    header: 'Experience Poins',
+    header: 'Experience Points',
     cell: ({ row: { original } }) => {
       const value = original.experiencePoints;
 
