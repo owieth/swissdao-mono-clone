@@ -67,10 +67,12 @@ export function UserNav() {
                     >
                       <Avatar className="h-8 w-8">
                         <AvatarImage
-                          src="https://avatar.vercel.sh/leerob"
-                          alt="@shadcn"
+                          src={membership?.membership.profileImageUri}
+                          alt={membership?.membership.nickname}
                         />
-                        <AvatarFallback>SC</AvatarFallback>
+                        <AvatarFallback>
+                          {membership?.membership.nickname}
+                        </AvatarFallback>
                       </Avatar>
                     </Button>
                   </DropdownMenuTrigger>
