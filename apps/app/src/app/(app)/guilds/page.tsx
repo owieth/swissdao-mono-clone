@@ -58,11 +58,11 @@ import { GuildsTable } from '@/components/tables/guilds-table';
 import { MembershipContext } from '@/contexts/membership';
 import { CONTRACT } from '@/contracts/contracts';
 import { BADGE_INITIAL_COUNTER, GUILD_INITIAL_COUNTER } from '@/helpers/const';
-import { GuildType } from '@/types/types';
+import { GuildType, MemberType, MembershipType } from '@/types/types';
 import { Card, Text, Title } from '@tremor/react';
 import { prepareWriteContract, writeContract } from '@wagmi/core';
 import { useContext } from 'react';
-import { useContractRead } from 'wagmi';
+import { useContractRead, useContractReads } from 'wagmi';
 
 export default function BadgesPage() {
   const { membership } = useContext(MembershipContext);
@@ -72,6 +72,22 @@ export default function BadgesPage() {
     isError,
     isLoading,
   } = useContractRead({ ...CONTRACT, functionName: 'getAllBadges' });
+
+  const contracts = (guilds as GuildType[])
+    ?.flatMap(guild => guild.holders)
+    .map(member => {
+      return {
+        ...CONTRACT,
+        functionName: 'getMember',
+        args: [member],
+      };
+    }) as any;
+
+  const { data: result } = useContractReads({ contracts });
+
+  const members = result?.flatMap(
+    ({ result }) => (result as MemberType).membership
+  );
 
   const onJoinGuild = async (guildId: number) => {
     const config = await prepareWriteContract({
@@ -95,7 +111,15 @@ export default function BadgesPage() {
                 badge.tokenId >= GUILD_INITIAL_COUNTER &&
                 badge.tokenId < BADGE_INITIAL_COUNTER
             )
-            .map(guilds => guilds.badge)}
+            .map(guild => {
+              return {
+                ...guild,
+                members:
+                  members?.filter(member =>
+                    guild.holders.includes(member.holder)
+                  ) || [],
+              };
+            })}
           onJoinGuild={onJoinGuild}
         />
       </Card>

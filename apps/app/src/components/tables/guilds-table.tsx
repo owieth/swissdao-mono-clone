@@ -31,12 +31,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
-import { TokenType } from '@/types/types';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { GuildType } from '@/types/types';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupList,
+  AvatarImage,
+  AvatarOverflowIndicator,
+} from '../ui/avatar';
 
 type Props = {
-  guilds: TokenType[];
+  guilds: GuildType[];
   onJoinGuild: (guildId: number) => void;
 };
 
@@ -46,21 +52,21 @@ export function GuildsTable({ guilds, onJoinGuild }: Props) {
     []
   );
 
-  const columns: ColumnDef<TokenType>[] = [
+  const columns: ColumnDef<GuildType>[] = [
     {
-      accessorKey: 'tokenId',
+      accessorKey: 'badge.tokenId',
       header: 'Token ID',
     },
     {
       accessorKey: 'name',
       header: 'Name',
       cell: ({ row }) => {
-        const label = row.getValue('name') as any;
+        const label = row.original.badge.name;
 
         return (
           <div className="flex items-center gap-4">
             <Avatar className="h-8 w-8">
-              <AvatarImage src={row.original.imageUri} alt="@shadcn" />
+              <AvatarImage src={row.original.badge.imageUri} alt="@shadcn" />
               <AvatarFallback>{label}</AvatarFallback>
             </Avatar>
             {label}
@@ -68,37 +74,34 @@ export function GuildsTable({ guilds, onJoinGuild }: Props) {
         );
       },
     },
-    // {
-    //   accessorKey: 'membership.badges',
-    //   header: 'Badges',
-    //   cell: ({ row: { original } }) => (
-    //     <div className="capitalize">
-    //       {original.badges.length > 0 ? (
-    //         <AvatarGroup limit={3} className="justify-start">
-    //           <AvatarGroupList>
-    //             {original.badges.map((badge, i) => (
-    //               <Avatar key={i}>
-    //                 <AvatarImage
-    //                   src="https://avatar.vercel.sh/leerob"
-    //                   alt="@shadcn"
-    //                 />
-    //                 <AvatarFallback>{badge.name}</AvatarFallback>
-    //               </Avatar>
-    //             ))}
-    //           </AvatarGroupList>
-    //           <AvatarOverflowIndicator />
-    //         </AvatarGroup>
-    //       ) : (
-    //         <p>No Badges yet.</p>
-    //       )}
-    //     </div>
-    //   ),
-    // },
+    {
+      accessorKey: 'membership.members',
+      header: 'Members',
+      cell: ({ row: { original } }) => (
+        <div className="capitalize">
+          {original.members?.length > 0 ? (
+            <AvatarGroup limit={3} className="justify-start">
+              <AvatarGroupList>
+                {original.members?.map((member, i) => (
+                  <Avatar key={i}>
+                    <AvatarImage src={member.profileImageUri} alt="@shadcn" />
+                    <AvatarFallback>asdf</AvatarFallback>
+                  </Avatar>
+                ))}
+              </AvatarGroupList>
+              <AvatarOverflowIndicator />
+            </AvatarGroup>
+          ) : (
+            <p>No Members yet.</p>
+          )}
+        </div>
+      ),
+    },
     {
       id: 'actions',
       enableHiding: false,
       cell: ({ row }) => {
-        const { tokenId } = row.original;
+        const { tokenId } = row.original.badge;
 
         return (
           <DropdownMenu>

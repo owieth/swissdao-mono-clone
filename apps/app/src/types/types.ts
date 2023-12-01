@@ -18,6 +18,7 @@ export type TokenType = {
 export type GuildType = {
   badge: TokenType;
   holders: string[];
+  members: MembershipType[];
 };
 
 export type MemberType = {
