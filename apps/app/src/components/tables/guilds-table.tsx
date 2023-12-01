@@ -40,6 +40,7 @@ import {
   AvatarImage,
   AvatarOverflowIndicator,
 } from '../ui/avatar';
+import Link from 'next/link';
 
 type Props = {
   guilds: GuildType[];
@@ -83,10 +84,36 @@ export function GuildsTable({ guilds, onJoinGuild }: Props) {
             <AvatarGroup limit={3} className="justify-start">
               <AvatarGroupList>
                 {original.members?.map((member, i) => (
-                  <Avatar key={i}>
-                    <AvatarImage src={member.profileImageUri} alt="@shadcn" />
-                    <AvatarFallback>asdf</AvatarFallback>
-                  </Avatar>
+                  <DropdownMenu key={i}>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        className="relative h-8 w-8 rounded-full"
+                      >
+                        <Avatar>
+                          <AvatarImage
+                            src={member.profileImageUri}
+                            alt="@shadcn"
+                          />
+                          <AvatarFallback>asdf</AvatarFallback>
+                        </Avatar>
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                      className="w-56"
+                      align="end"
+                      forceMount
+                    >
+                      <DropdownMenuItem>
+                        <Link
+                          href={`/members/${member.holder}`}
+                          className="flex w-full items-center"
+                        >
+                          Profile
+                        </Link>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 ))}
               </AvatarGroupList>
               <AvatarOverflowIndicator />
