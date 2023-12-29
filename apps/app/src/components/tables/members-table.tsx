@@ -51,153 +51,161 @@ import {
 
 type Props = {
   members: MemberType[];
+  onAttend: (holder: string) => void;
+  onIncrease: (holder: string) => void;
 };
 
-export const columns: ColumnDef<MemberType>[] = [
-  {
-    accessorKey: 'membership.tokenId',
-    header: 'Token ID'
-  },
-  {
-    accessorKey: 'membership.nickname',
-    header: 'Nickname',
-    cell: ({ row }) => {
-      const label = row.getValue('membership_nickname') as any;
-
-      return (
-        <div className="flex items-center gap-4">
-          <Avatar className="h-8 w-8">
-            <AvatarImage
-              src={row.original.membership.profileImageUri}
-              alt="@shadcn"
-            />
-            <AvatarFallback>{label}</AvatarFallback>
-          </Avatar>
-          {label}
-        </div>
-      );
-    }
-  },
-  {
-    accessorKey: 'membership.badges',
-    header: 'Badges',
-    cell: ({ row: { original } }) => (
-      <div className="capitalize">
-        {original.badges.length > 0 ? (
-          <AvatarGroup limit={3} className="justify-start">
-            <AvatarGroupList>
-              {original.badges.map((badge, i) => (
-                <Avatar key={i}>
-                  <AvatarImage
-                    src={convertIpfsToHttps(badge.imageUri || '')}
-                    alt={badge.name}
-                  />
-                  <AvatarFallback>{badge.name}</AvatarFallback>
-                </Avatar>
-              ))}
-            </AvatarGroupList>
-            <AvatarOverflowIndicator />
-          </AvatarGroup>
-        ) : (
-          <p>No Badges yet.</p>
-        )}
-      </div>
-    )
-  },
-  {
-    accessorKey: 'membership.activityPoints',
-    header: 'Activity Points',
-    cell: ({ row: { original } }) => {
-      const value = original.activityPoints;
-
-      return (
-        <div className="flex items-center gap-4">
-          {Number(value)}
-          <Avatar className="h-8 w-8">
-            <AvatarImage
-              src={convertIpfsToHttps(ACTIVITY_POINTS_IPFS_URL)}
-              alt="AP"
-            />
-            <AvatarFallback>AP</AvatarFallback>
-          </Avatar>
-        </div>
-      );
-    }
-  },
-  {
-    accessorKey: 'membership.experiencePoints',
-    header: 'Experience Points',
-    cell: ({ row: { original } }) => {
-      const value = original.experiencePoints;
-
-      return (
-        <div className="flex items-center gap-4">
-          {Number(value)}
-          <Avatar className="h-8 w-8">
-            <AvatarImage
-              src={convertIpfsToHttps(EXPERIENCE_POINTS_IPFS_URL)}
-              alt="XP"
-            />
-            <AvatarFallback>XP</AvatarFallback>
-          </Avatar>
-        </div>
-      );
-    }
-  },
-  {
-    accessorKey: 'membership.attendedEvents',
-    header: 'Attended Events',
-    cell: ({ row: { original } }) => {
-      const value = original.attendedEvents;
-
-      return (
-        <div className="flex items-center gap-4">
-          {Number(value)}
-          <Avatar className="h-8 w-8">
-            <AvatarImage
-              src={convertIpfsToHttps(ATTENDED_EVENTS_IPFS_URL)}
-              alt="Events"
-            />
-            <AvatarFallback>Events</AvatarFallback>
-          </Avatar>
-        </div>
-      );
-    }
-  },
-  {
-    id: 'actions',
-    enableHiding: false,
-    cell: ({ row }) => {
-      const {
-        membership: { holder }
-      } = row.original;
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link href={`/members/${holder}`}>View profile</Link>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    }
-  }
-];
-
-export function MembersTable({ members }: Props) {
+export function MembersTable({ members, onAttend, onIncrease }: Props) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
+
+  const columns: ColumnDef<MemberType>[] = [
+    {
+      accessorKey: 'membership.tokenId',
+      header: 'Token ID'
+    },
+    {
+      accessorKey: 'membership.nickname',
+      header: 'Nickname',
+      cell: ({ row }) => {
+        const label = row.getValue('membership_nickname') as any;
+
+        return (
+          <div className="flex items-center gap-4">
+            <Avatar className="h-8 w-8">
+              <AvatarImage
+                src={row.original.membership.profileImageUri}
+                alt="@shadcn"
+              />
+              <AvatarFallback>{label}</AvatarFallback>
+            </Avatar>
+            {label}
+          </div>
+        );
+      }
+    },
+    {
+      accessorKey: 'membership.badges',
+      header: 'Badges',
+      cell: ({ row: { original } }) => (
+        <div className="capitalize">
+          {original.badges.length > 0 ? (
+            <AvatarGroup limit={3} className="justify-start">
+              <AvatarGroupList>
+                {original.badges.map((badge, i) => (
+                  <Avatar key={i}>
+                    <AvatarImage
+                      src={convertIpfsToHttps(badge.imageUri || '')}
+                      alt={badge.name}
+                    />
+                    <AvatarFallback>{badge.name}</AvatarFallback>
+                  </Avatar>
+                ))}
+              </AvatarGroupList>
+              <AvatarOverflowIndicator />
+            </AvatarGroup>
+          ) : (
+            <p>No Badges yet.</p>
+          )}
+        </div>
+      )
+    },
+    {
+      accessorKey: 'membership.activityPoints',
+      header: 'Activity Points',
+      cell: ({ row: { original } }) => {
+        const value = original.activityPoints;
+
+        return (
+          <div className="flex items-center gap-4">
+            {Number(value)}
+            <Avatar className="h-8 w-8">
+              <AvatarImage
+                src={convertIpfsToHttps(ACTIVITY_POINTS_IPFS_URL)}
+                alt="AP"
+              />
+              <AvatarFallback>AP</AvatarFallback>
+            </Avatar>
+          </div>
+        );
+      }
+    },
+    {
+      accessorKey: 'membership.experiencePoints',
+      header: 'Experience Points',
+      cell: ({ row: { original } }) => {
+        const value = original.experiencePoints;
+
+        return (
+          <div className="flex items-center gap-4">
+            {Number(value)}
+            <Avatar className="h-8 w-8">
+              <AvatarImage
+                src={convertIpfsToHttps(EXPERIENCE_POINTS_IPFS_URL)}
+                alt="XP"
+              />
+              <AvatarFallback>XP</AvatarFallback>
+            </Avatar>
+          </div>
+        );
+      }
+    },
+    {
+      accessorKey: 'membership.attendedEvents',
+      header: 'Attended Events',
+      cell: ({ row: { original } }) => {
+        const value = original.attendedEvents;
+
+        return (
+          <div className="flex items-center gap-4">
+            {Number(value)}
+            <Avatar className="h-8 w-8">
+              <AvatarImage
+                src={convertIpfsToHttps(ATTENDED_EVENTS_IPFS_URL)}
+                alt="Events"
+              />
+              <AvatarFallback>Events</AvatarFallback>
+            </Avatar>
+          </div>
+        );
+      }
+    },
+    {
+      id: 'actions',
+      enableHiding: false,
+      cell: ({ row }) => {
+        const {
+          membership: { holder }
+        } = row.original;
+
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Link href={`/members/${holder}`}>View profile</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onAttend(holder)}>
+                Attend Event
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onIncrease(holder)}>
+                Increase Activity Points
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        );
+      }
+    }
+  ];
 
   const table = useReactTable({
     data: members || [],
