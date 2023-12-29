@@ -61,6 +61,8 @@ export default function MembersPage() {
               )
             };
           })}
+          onAttend={() => { }}
+          onIncrease={() => { }}
         />
       </Card>
     </main>

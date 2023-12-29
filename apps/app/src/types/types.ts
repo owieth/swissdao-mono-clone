@@ -27,4 +27,5 @@ export type MemberType = {
   experiencePoints: BigInt;
   attendedEvents: BigInt;
   badges: TokenType[];
+  isAdmin?: boolean;
 };
