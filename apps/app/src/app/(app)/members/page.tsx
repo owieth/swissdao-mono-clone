@@ -43,7 +43,7 @@ export default function MembersPage() {
           <Title>Members</Title>
           <Text>A list of all swissDAO Members</Text>
         </div>
-        {BigInt(membership?.membership.tokenId || 0) === BigInt(0) && (
+        {BigInt(membership?.membership?.tokenId || 0) === BigInt(0) && (
           <Button>
             <Link href="/join">Get Membership</Link>
           </Button>
@@ -61,8 +61,8 @@ export default function MembersPage() {
               )
             };
           })}
-          onAttend={() => {}}
-          onIncrease={() => {}}
+          onAttend={() => { }}
+          onIncrease={() => { }}
         />
       </Card>
     </main>

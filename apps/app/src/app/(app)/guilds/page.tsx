@@ -93,7 +93,7 @@ export default function BadgesPage() {
     const config = await prepareWriteContract({
       ...CONTRACT,
       functionName: 'joinGuild',
-      args: [membership?.membership.tokenId, guildId]
+      args: [membership?.membership?.tokenId, guildId]
     });
 
     const { hash } = await writeContract(config);

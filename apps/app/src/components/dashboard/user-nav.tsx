@@ -67,11 +67,11 @@ export function UserNav() {
                     >
                       <Avatar className="h-8 w-8">
                         <AvatarImage
-                          src={membership?.membership.profileImageUri}
-                          alt={membership?.membership.nickname}
+                          src={membership?.membership?.profileImageUri}
+                          alt={membership?.membership?.nickname}
                         />
                         <AvatarFallback>
-                          {membership?.membership.nickname}
+                          {membership?.membership?.nickname}
                         </AvatarFallback>
                       </Avatar>
                     </Button>
@@ -80,7 +80,7 @@ export function UserNav() {
                     <DropdownMenuLabel className="font-normal">
                       <div className="flex flex-col space-y-1">
                         <p className="text-sm font-medium leading-none">
-                          {membership?.membership.nickname}
+                          {membership?.membership?.nickname}
                         </p>
                         <p className="text-muted-foreground text-xs leading-none">
                           {shortenString(account.address)}
