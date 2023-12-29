@@ -24,11 +24,14 @@ export default function MembershipWrapper({
   const { data: isAdmin } = useContractRead({
     ...CONTRACT,
     functionName: 'hasRole',
-    args: ["0x0000000000000000000000000000000000000000000000000000000000000000", address]
+    args: [
+      '0x0000000000000000000000000000000000000000000000000000000000000000',
+      address
+    ]
   });
 
   useEffect(() => {
-    setMembership({ ...(member as MemberType), isAdmin: (isAdmin as boolean) });
+    setMembership({ ...(member as MemberType), isAdmin: isAdmin as boolean });
   }, [isAdmin, member]);
 
   return (

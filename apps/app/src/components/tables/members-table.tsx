@@ -32,8 +32,16 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
+import { MembershipContext } from '@/contexts/membership';
+import {
+  ACTIVITY_POINTS_IPFS_URL,
+  ATTENDED_EVENTS_IPFS_URL,
+  EXPERIENCE_POINTS_IPFS_URL
+} from '@/helpers/const';
+import { convertIpfsToHttps } from '@/helpers/ipfs';
 import { MemberType } from '@/types/types';
 import Link from 'next/link';
+import { useContext } from 'react';
 import {
   Avatar,
   AvatarFallback,
@@ -42,12 +50,6 @@ import {
   AvatarImage,
   AvatarOverflowIndicator
 } from '../ui/avatar';
-import { convertIpfsToHttps } from '@/helpers/ipfs';
-import {
-  ACTIVITY_POINTS_IPFS_URL,
-  ATTENDED_EVENTS_IPFS_URL,
-  EXPERIENCE_POINTS_IPFS_URL
-} from '@/helpers/const';
 
 type Props = {
   members: MemberType[];
@@ -60,6 +62,8 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
+
+  const { membership } = useContext(MembershipContext);
 
   const columns: ColumnDef<MemberType>[] = [
     {
@@ -194,12 +198,16 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
               <DropdownMenuItem>
                 <Link href={`/members/${holder}`}>View profile</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onAttend(holder)}>
-                Attend Event
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onIncrease(holder)}>
-                Increase Activity Points
-              </DropdownMenuItem>
+              {membership?.isAdmin && (
+                <>
+                  <DropdownMenuItem onClick={() => onAttend(holder)}>
+                    Attend Event
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => onIncrease(holder)}>
+                    Increase Activity Points
+                  </DropdownMenuItem>
+                </>
+              )}
             </DropdownMenuContent>
           </DropdownMenu>
         );
