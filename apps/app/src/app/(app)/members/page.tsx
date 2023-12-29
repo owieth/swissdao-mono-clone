@@ -8,6 +8,7 @@ import { CONTRACT } from '@/contracts/contracts';
 import { EVENT_INITIAL_COUNTER, GUILD_INITIAL_COUNTER } from '@/helpers/const';
 import { MemberType } from '@/types/types';
 import { Card, Text, Title } from '@tremor/react';
+import { prepareWriteContract, writeContract } from '@wagmi/core';
 import Link from 'next/link';
 import { useContext } from 'react';
 import { useContractRead } from 'wagmi';
@@ -36,6 +37,26 @@ export default function MembersPage() {
     isLoading
   } = useContractRead({ ...CONTRACT, functionName: 'getAllMembers' });
 
+  const onAttend = async (holder: string) => {
+    const config = await prepareWriteContract({
+      ...CONTRACT,
+      functionName: 'attended',
+      args: [holder]
+    });
+
+    const { hash } = await writeContract(config);
+  };
+
+  const onIncrease = async (holder: string) => {
+    const config = await prepareWriteContract({
+      ...CONTRACT,
+      functionName: 'increasePoints',
+      args: [holder, 1]
+    });
+
+    const { hash } = await writeContract(config);
+  };
+
   return (
     <main className="mx-auto max-w-7xl p-4 md:p-10">
       <div className="flex items-center justify-between">
@@ -61,8 +82,8 @@ export default function MembersPage() {
               )
             };
           })}
-          onAttend={() => { }}
-          onIncrease={() => { }}
+          onAttend={onAttend}
+          onIncrease={onIncrease}
         />
       </Card>
     </main>
