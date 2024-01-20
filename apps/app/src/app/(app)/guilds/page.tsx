@@ -75,7 +75,7 @@ export default function BadgesPage() {
 
   const contracts = (guilds as GuildType[])
     ?.flatMap(guild => guild.holders)
-    .filter(member => member !== "0x0000000000000000000000000000000000000000")
+    .filter(member => member !== '0x0000000000000000000000000000000000000000')
     .map(member => {
       return {
         ...CONTRACT,

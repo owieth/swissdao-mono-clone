@@ -50,7 +50,7 @@ export default function Member() {
         </DialogContent>
       </Dialog> */}
 
-      <div className="relative min-h-screen pb-20">
+      <div className="relative flex min-h-screen flex-col gap-10 pb-20">
         {/* {isProfileOwner && (
           <div className="absolute right-4 top-4 flex gap-2 sm:right-6 lg:right-8">
             <Button size="icon" onClick={() => setEdit(!edit)}>
@@ -69,27 +69,15 @@ export default function Member() {
           </div>
         )} */}
 
-        <div
-          className={`h-48 w-full lg:h-64 
-          ${getGradient((member as any).membership.nickname)}`}
-        />
+        <div className="relative mx-auto my-20 flex h-48 w-full max-w-screen-2xl origin-bottom justify-center md:px-20">
+          <div
+            className={`h-full w-full md:rounded-3xl ${getGradient(
+              (member as any).membership.nickname
+            )}`}
+          />
 
-        <div
-          className={`${profileWidth} -mt-12 items-center sm:-mt-16 sm:flex sm:space-x-5`}
-        >
-          <div className="group relative h-24 w-24 overflow-hidden rounded-full sm:h-32 sm:w-32">
-            {/* {edit && (
-              <button
-                className="absolute z-10 flex h-full w-full items-center justify-center bg-gray-800 bg-opacity-50 transition-all hover:bg-opacity-70"
-                onClick={() =>
-                  alert('Image upload has been disabled for demo purposes.')
-                }
-              >
-                <IconUpload className="h-6 w-6" />
-              </button>
-            )} */}
-
-            <Avatar className="h-24 w-24 sm:h-32 sm:w-32">
+          <div className="absolute -bottom-20 h-32 w-32 overflow-hidden rounded-full border-8 border-white sm:h-48 sm:w-48">
+            <Avatar className="h-full w-full">
               <AvatarImage
                 src={
                   (member as MemberType).membership.profileImageUri ||
@@ -99,23 +87,80 @@ export default function Member() {
               />
             </Avatar>
           </div>
+        </div>
 
-          <div className="mt-16">
-            <h1 className="truncate text-2xl font-semibold text-black">
-              {(member as MemberType).membership.nickname}
-            </h1>
+        <div className="relative flex w-full px-10 md:px-20">
+          <div className="w-full rounded-xl border border-b border-t border-gray-200 bg-white shadow-xl">
+            <div className="rounded-t-xl bg-gradient-to-r from-black via-gray-800 to-black py-3 text-center">
+              <p className="text-2xl tracking-widest text-white">
+                Membership #06609
+              </p>
+            </div>
+            <div className="min-w-0 px-6 pb-10">
+              <h1 className="truncate text-2xl font-semibold text-black">
+                Nickname: {(member as MemberType).membership.nickname}
+              </h1>
+              <h1 className="truncate text-2xl font-semibold text-black">
+                Badges: {(member as MemberType).badges.length}
+              </h1>
+
+              <h1 className="truncate text-2xl font-semibold text-black">
+                Activty Points:{' '}
+                {(member as MemberType).activityPoints.toString()}
+              </h1>
+
+              <h1 className="truncate text-2xl font-semibold text-black">
+                Experience Points:{' '}
+                {(member as MemberType).experiencePoints.toString()}
+              </h1>
+
+              <h1 className="truncate text-2xl font-semibold text-black">
+                Attended Events:{' '}
+                {(member as MemberType).attendedEvents.toString()}
+              </h1>
+            </div>
           </div>
         </div>
 
-        {/* <div className={`${profileWidth} mt-16`}>
-        <h2 className="font-mono text-2xl font-semibold">About me</h2>
-        {edit ? <Textarea>{userBio}</Textarea> : <span>{userBio}</span>}
-      </div> */}
+        {/* <div className="grid w-full grid-cols-1 gap-8 px-10 sm:grid-cols-2 md:px-20 xl:grid-cols-3">
+          <a href="/dao/developer">
+            <div className="ease hidden rounded-2xl border-2 border-gray-100 bg-white shadow transition-all duration-200 hover:-translate-y-1 hover:shadow-xl sm:block">
+              <div className="overflow-hidden rounded-t-2xl">
+                <span
+                  style={CSSstring(
+                    'box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative;'
+                  )}
+                >
+                  <span
+                    style={CSSstring(
+                      'box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 80% 0px 0px;'
+                    )}
+                  ></span>
+                  <img
+                    alt="Developer DAO"
+                    sizes="100vw"
+                    src="/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdaojones%2Fimage%2Fupload%2FCleanShot_2021-11-24_at_04.08.33_pxl0kp.png&amp;w=3840&amp;q=75"
+                    decoding="async"
+                    data-nimg="responsive"
+                    className="scale-100 blur-0 grayscale-0 duration-700 ease-in-out"
+                    style={CSSstring(
+                      'position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;'
+                    )}
+                  />
+                </span>
+              </div>
 
-        <div className={`${profileWidth} mt-16`}>
-          <h2 className="font-mono text-2xl font-semibold">My Membership</h2>
-          <MemberStats member={member as MemberType} />
-        </div>
+              <div className="h-36 px-5 py-6">
+                <h3 className="font-cal my-0 truncate text-2xl font-bold tracking-wide">
+                  Developer DAO
+                </h3>
+                <p className="mt-3 line-clamp-2 text-base font-normal italic leading-snug text-gray-800">
+                  Build web3 with frens 🤝
+                </p>
+              </div>
+            </div>
+          </a>
+        </div> */}
       </div>
     </>
   ) : null;
