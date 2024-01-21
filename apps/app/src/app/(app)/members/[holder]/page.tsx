@@ -32,6 +32,8 @@ export default function Member() {
     args: [holder]
   });
 
+  console.log(member);
+
   useEffect(() => {
     if (!address) {
       openConnectModal?.();
@@ -93,7 +95,8 @@ export default function Member() {
           <div className="w-full rounded-xl border border-b border-t border-gray-200 bg-white shadow-xl">
             <div className="rounded-t-xl bg-gradient-to-r from-black via-gray-800 to-black py-3 text-center">
               <p className="text-2xl tracking-widest text-white">
-                Membership #06609
+                Membership #
+                {(member as MemberType).membership.tokenId.toString()}
               </p>
             </div>
             <div className="min-w-0 px-6 pb-10">
