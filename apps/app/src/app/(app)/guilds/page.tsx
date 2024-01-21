@@ -153,12 +153,12 @@ export default function BadgesPage() {
                     <img
                       alt="Developer DAO"
                       sizes="100vw"
-                      src="/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdaojones%2Fimage%2Fupload%2FCleanShot_2021-11-24_at_04.08.33_pxl0kp.png&amp;w=3840&amp;q=75"
+                      src="https://daocentral.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdaojones%2Fimage%2Fupload%2FCleanShot_2021-11-24_at_04.08.33_pxl0kp.png&w=1920&q=75"
                       decoding="async"
                       data-nimg="responsive"
                       className="scale-100 blur-0 grayscale-0 duration-700 ease-in-out"
                       style={CSSstring(
-                        'position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;'
+                        'position: absolute; inset: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;'
                       )}
                     />
                   </span>
@@ -168,9 +168,9 @@ export default function BadgesPage() {
                   <h3 className="font-cal my-0 truncate text-2xl font-bold tracking-wide">
                     {guild.badge.name}
                   </h3>
-                  <p className="mt-3 line-clamp-2 text-base font-normal italic leading-snug text-gray-800">
+                  {/* <p className="mt-3 line-clamp-2 text-base font-normal italic leading-snug text-gray-800">
                     Build web3 with frens 🤝
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </Link>
