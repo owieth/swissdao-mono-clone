@@ -18,7 +18,7 @@ const navigation = [
   },
   {
     name: 'Courses',
-    href: 'https://swissdao.notion.site/Courses-067249204b0544838290803aa9de1923',
+    href: 'https://swissdao.notion.site/Courses-30f51f7b26814cf8804b1471afa34465',
     target: '_blank'
   }
   // { name: 'Blog', href: '/#' },
