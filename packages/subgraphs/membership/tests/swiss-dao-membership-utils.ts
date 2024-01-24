@@ -1,5 +1,5 @@
-import { newMockEvent } from "matchstick-as"
-import { ethereum, Address, BigInt, Bytes } from "@graphprotocol/graph-ts"
+import { newMockEvent } from 'matchstick-as';
+import { ethereum, Address, BigInt, Bytes } from '@graphprotocol/graph-ts';
 import {
   ApprovalForAll,
   Initialized,
@@ -10,43 +10,43 @@ import {
   TransferSingle,
   URI,
   Upgraded
-} from "../generated/SwissDAOMembership/SwissDAOMembership"
+} from '../generated/SwissDAOMembership/SwissDAOMembership';
 
 export function createApprovalForAllEvent(
   account: Address,
   operator: Address,
   approved: boolean
 ): ApprovalForAll {
-  let approvalForAllEvent = changetype<ApprovalForAll>(newMockEvent())
+  let approvalForAllEvent = changetype<ApprovalForAll>(newMockEvent());
 
-  approvalForAllEvent.parameters = new Array()
+  approvalForAllEvent.parameters = new Array();
 
   approvalForAllEvent.parameters.push(
-    new ethereum.EventParam("account", ethereum.Value.fromAddress(account))
-  )
+    new ethereum.EventParam('account', ethereum.Value.fromAddress(account))
+  );
   approvalForAllEvent.parameters.push(
-    new ethereum.EventParam("operator", ethereum.Value.fromAddress(operator))
-  )
+    new ethereum.EventParam('operator', ethereum.Value.fromAddress(operator))
+  );
   approvalForAllEvent.parameters.push(
-    new ethereum.EventParam("approved", ethereum.Value.fromBoolean(approved))
-  )
+    new ethereum.EventParam('approved', ethereum.Value.fromBoolean(approved))
+  );
 
-  return approvalForAllEvent
+  return approvalForAllEvent;
 }
 
 export function createInitializedEvent(version: BigInt): Initialized {
-  let initializedEvent = changetype<Initialized>(newMockEvent())
+  let initializedEvent = changetype<Initialized>(newMockEvent());
 
-  initializedEvent.parameters = new Array()
+  initializedEvent.parameters = new Array();
 
   initializedEvent.parameters.push(
     new ethereum.EventParam(
-      "version",
+      'version',
       ethereum.Value.fromUnsignedBigInt(version)
     )
-  )
+  );
 
-  return initializedEvent
+  return initializedEvent;
 }
 
 export function createRoleAdminChangedEvent(
@@ -54,27 +54,27 @@ export function createRoleAdminChangedEvent(
   previousAdminRole: Bytes,
   newAdminRole: Bytes
 ): RoleAdminChanged {
-  let roleAdminChangedEvent = changetype<RoleAdminChanged>(newMockEvent())
+  let roleAdminChangedEvent = changetype<RoleAdminChanged>(newMockEvent());
 
-  roleAdminChangedEvent.parameters = new Array()
+  roleAdminChangedEvent.parameters = new Array();
 
   roleAdminChangedEvent.parameters.push(
-    new ethereum.EventParam("role", ethereum.Value.fromFixedBytes(role))
-  )
+    new ethereum.EventParam('role', ethereum.Value.fromFixedBytes(role))
+  );
   roleAdminChangedEvent.parameters.push(
     new ethereum.EventParam(
-      "previousAdminRole",
+      'previousAdminRole',
       ethereum.Value.fromFixedBytes(previousAdminRole)
     )
-  )
+  );
   roleAdminChangedEvent.parameters.push(
     new ethereum.EventParam(
-      "newAdminRole",
+      'newAdminRole',
       ethereum.Value.fromFixedBytes(newAdminRole)
     )
-  )
+  );
 
-  return roleAdminChangedEvent
+  return roleAdminChangedEvent;
 }
 
 export function createRoleGrantedEvent(
@@ -82,21 +82,21 @@ export function createRoleGrantedEvent(
   account: Address,
   sender: Address
 ): RoleGranted {
-  let roleGrantedEvent = changetype<RoleGranted>(newMockEvent())
+  let roleGrantedEvent = changetype<RoleGranted>(newMockEvent());
 
-  roleGrantedEvent.parameters = new Array()
+  roleGrantedEvent.parameters = new Array();
 
   roleGrantedEvent.parameters.push(
-    new ethereum.EventParam("role", ethereum.Value.fromFixedBytes(role))
-  )
+    new ethereum.EventParam('role', ethereum.Value.fromFixedBytes(role))
+  );
   roleGrantedEvent.parameters.push(
-    new ethereum.EventParam("account", ethereum.Value.fromAddress(account))
-  )
+    new ethereum.EventParam('account', ethereum.Value.fromAddress(account))
+  );
   roleGrantedEvent.parameters.push(
-    new ethereum.EventParam("sender", ethereum.Value.fromAddress(sender))
-  )
+    new ethereum.EventParam('sender', ethereum.Value.fromAddress(sender))
+  );
 
-  return roleGrantedEvent
+  return roleGrantedEvent;
 }
 
 export function createRoleRevokedEvent(
@@ -104,21 +104,21 @@ export function createRoleRevokedEvent(
   account: Address,
   sender: Address
 ): RoleRevoked {
-  let roleRevokedEvent = changetype<RoleRevoked>(newMockEvent())
+  let roleRevokedEvent = changetype<RoleRevoked>(newMockEvent());
 
-  roleRevokedEvent.parameters = new Array()
+  roleRevokedEvent.parameters = new Array();
 
   roleRevokedEvent.parameters.push(
-    new ethereum.EventParam("role", ethereum.Value.fromFixedBytes(role))
-  )
+    new ethereum.EventParam('role', ethereum.Value.fromFixedBytes(role))
+  );
   roleRevokedEvent.parameters.push(
-    new ethereum.EventParam("account", ethereum.Value.fromAddress(account))
-  )
+    new ethereum.EventParam('account', ethereum.Value.fromAddress(account))
+  );
   roleRevokedEvent.parameters.push(
-    new ethereum.EventParam("sender", ethereum.Value.fromAddress(sender))
-  )
+    new ethereum.EventParam('sender', ethereum.Value.fromAddress(sender))
+  );
 
-  return roleRevokedEvent
+  return roleRevokedEvent;
 }
 
 export function createTransferBatchEvent(
@@ -128,30 +128,30 @@ export function createTransferBatchEvent(
   ids: Array<BigInt>,
   values: Array<BigInt>
 ): TransferBatch {
-  let transferBatchEvent = changetype<TransferBatch>(newMockEvent())
+  let transferBatchEvent = changetype<TransferBatch>(newMockEvent());
 
-  transferBatchEvent.parameters = new Array()
+  transferBatchEvent.parameters = new Array();
 
   transferBatchEvent.parameters.push(
-    new ethereum.EventParam("operator", ethereum.Value.fromAddress(operator))
-  )
+    new ethereum.EventParam('operator', ethereum.Value.fromAddress(operator))
+  );
   transferBatchEvent.parameters.push(
-    new ethereum.EventParam("from", ethereum.Value.fromAddress(from))
-  )
+    new ethereum.EventParam('from', ethereum.Value.fromAddress(from))
+  );
   transferBatchEvent.parameters.push(
-    new ethereum.EventParam("to", ethereum.Value.fromAddress(to))
-  )
+    new ethereum.EventParam('to', ethereum.Value.fromAddress(to))
+  );
   transferBatchEvent.parameters.push(
-    new ethereum.EventParam("ids", ethereum.Value.fromUnsignedBigIntArray(ids))
-  )
+    new ethereum.EventParam('ids', ethereum.Value.fromUnsignedBigIntArray(ids))
+  );
   transferBatchEvent.parameters.push(
     new ethereum.EventParam(
-      "values",
+      'values',
       ethereum.Value.fromUnsignedBigIntArray(values)
     )
-  )
+  );
 
-  return transferBatchEvent
+  return transferBatchEvent;
 }
 
 export function createTransferSingleEvent(
@@ -161,55 +161,55 @@ export function createTransferSingleEvent(
   id: BigInt,
   value: BigInt
 ): TransferSingle {
-  let transferSingleEvent = changetype<TransferSingle>(newMockEvent())
+  let transferSingleEvent = changetype<TransferSingle>(newMockEvent());
 
-  transferSingleEvent.parameters = new Array()
+  transferSingleEvent.parameters = new Array();
 
   transferSingleEvent.parameters.push(
-    new ethereum.EventParam("operator", ethereum.Value.fromAddress(operator))
-  )
+    new ethereum.EventParam('operator', ethereum.Value.fromAddress(operator))
+  );
   transferSingleEvent.parameters.push(
-    new ethereum.EventParam("from", ethereum.Value.fromAddress(from))
-  )
+    new ethereum.EventParam('from', ethereum.Value.fromAddress(from))
+  );
   transferSingleEvent.parameters.push(
-    new ethereum.EventParam("to", ethereum.Value.fromAddress(to))
-  )
+    new ethereum.EventParam('to', ethereum.Value.fromAddress(to))
+  );
   transferSingleEvent.parameters.push(
-    new ethereum.EventParam("id", ethereum.Value.fromUnsignedBigInt(id))
-  )
+    new ethereum.EventParam('id', ethereum.Value.fromUnsignedBigInt(id))
+  );
   transferSingleEvent.parameters.push(
-    new ethereum.EventParam("value", ethereum.Value.fromUnsignedBigInt(value))
-  )
+    new ethereum.EventParam('value', ethereum.Value.fromUnsignedBigInt(value))
+  );
 
-  return transferSingleEvent
+  return transferSingleEvent;
 }
 
 export function createURIEvent(value: string, id: BigInt): URI {
-  let uriEvent = changetype<URI>(newMockEvent())
+  let uriEvent = changetype<URI>(newMockEvent());
 
-  uriEvent.parameters = new Array()
+  uriEvent.parameters = new Array();
 
   uriEvent.parameters.push(
-    new ethereum.EventParam("value", ethereum.Value.fromString(value))
-  )
+    new ethereum.EventParam('value', ethereum.Value.fromString(value))
+  );
   uriEvent.parameters.push(
-    new ethereum.EventParam("id", ethereum.Value.fromUnsignedBigInt(id))
-  )
+    new ethereum.EventParam('id', ethereum.Value.fromUnsignedBigInt(id))
+  );
 
-  return uriEvent
+  return uriEvent;
 }
 
 export function createUpgradedEvent(implementation: Address): Upgraded {
-  let upgradedEvent = changetype<Upgraded>(newMockEvent())
+  let upgradedEvent = changetype<Upgraded>(newMockEvent());
 
-  upgradedEvent.parameters = new Array()
+  upgradedEvent.parameters = new Array();
 
   upgradedEvent.parameters.push(
     new ethereum.EventParam(
-      "implementation",
+      'implementation',
       ethereum.Value.fromAddress(implementation)
     )
-  )
+  );
 
-  return upgradedEvent
+  return upgradedEvent;
 }
