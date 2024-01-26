@@ -20,6 +20,11 @@ const navigation = [
     name: 'Courses',
     href: 'https://swissdao.notion.site/Courses-30f51f7b26814cf8804b1471afa34465',
     target: '_blank'
+  },
+  {
+    name: 'For Protocols',
+    href: 'https://swissdao.notion.site/Share-your-Web3-Tech-in-the-Swiss-Community-with-a-half-day-Workshop-7ce6340408fd4c70bc436ed7aece37c0',
+    target: '_blank'
   }
   // { name: 'Blog', href: '/#' },
   // { name: 'Podcast', href: '#' },
