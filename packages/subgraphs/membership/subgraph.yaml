@@ -16,35 +16,13 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - ApprovalForAll
-        - Initialized
-        - RoleAdminChanged
-        - RoleGranted
-        - RoleRevoked
-        - TransferBatch
-        - TransferSingle
-        - URI
-        - Upgraded
+        - Token
+        - Membership
+        - Guild
       abis:
         - name: SwissDAOMembership
           file: ./abis/SwissDAOMembership.json
       eventHandlers:
-        - event: ApprovalForAll(indexed address,indexed address,bool)
-          handler: handleApprovalForAll
-        - event: Initialized(uint64)
-          handler: handleInitialized
-        - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
-          handler: handleRoleAdminChanged
-        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
-          handler: handleRoleGranted
-        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
-          handler: handleRoleRevoked
-        - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
-          handler: handleTransferBatch
         - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
           handler: handleTransferSingle
-        - event: URI(string,indexed uint256)
-          handler: handleURI
-        - event: Upgraded(indexed address)
-          handler: handleUpgraded
       file: ./src/swiss-dao-membership.ts

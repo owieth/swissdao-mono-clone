@@ -592,7 +592,7 @@
         "type": "string"
       }
     ],
-    "name": "addGuilds",
+    "name": "addGuild",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -620,7 +620,7 @@
         "type": "string"
       }
     ],
-    "name": "addSkillBadges",
+    "name": "addSkillBadge",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -767,7 +767,7 @@
         "type": "string"
       }
     ],
-    "name": "editSkillBadges",
+    "name": "editSkillBadge",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1093,6 +1093,52 @@
         "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getTokenStructByTokenId",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "imageUri",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tokenId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "attributes",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct SwissDAOMembership.TokenStruct",
+        "name": "",
+        "type": "tuple"
       }
     ],
     "stateMutability": "view",

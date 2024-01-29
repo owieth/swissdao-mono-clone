@@ -7,8 +7,8 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
-} from '@graphprotocol/graph-ts';
+  BigInt,
+} from "@graphprotocol/graph-ts";
 
 export class ApprovalForAll extends ethereum.Event {
   get params(): ApprovalForAll__Params {
@@ -50,6 +50,42 @@ export class Initialized__Params {
   }
 
   get version(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+}
+
+export class MembershipMinted extends ethereum.Event {
+  get params(): MembershipMinted__Params {
+    return new MembershipMinted__Params(this);
+  }
+}
+
+export class MembershipMinted__Params {
+  _event: MembershipMinted;
+
+  constructor(event: MembershipMinted) {
+    this._event = event;
+  }
+
+  get tokenId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+}
+
+export class MembershipUpdated extends ethereum.Event {
+  get params(): MembershipUpdated__Params {
+    return new MembershipUpdated__Params(this);
+  }
+}
+
+export class MembershipUpdated__Params {
+  _event: MembershipUpdated;
+
+  constructor(event: MembershipUpdated) {
+    this._event = event;
+  }
+
+  get tokenId(): BigInt {
     return this._event.parameters[0].value.toBigInt();
   }
 }
@@ -129,6 +165,42 @@ export class RoleRevoked__Params {
 
   get sender(): Address {
     return this._event.parameters[2].value.toAddress();
+  }
+}
+
+export class TokenMinted extends ethereum.Event {
+  get params(): TokenMinted__Params {
+    return new TokenMinted__Params(this);
+  }
+}
+
+export class TokenMinted__Params {
+  _event: TokenMinted;
+
+  constructor(event: TokenMinted) {
+    this._event = event;
+  }
+
+  get tokenId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+}
+
+export class TokenUpdated extends ethereum.Event {
+  get params(): TokenUpdated__Params {
+    return new TokenUpdated__Params(this);
+  }
+}
+
+export class TokenUpdated__Params {
+  _event: TokenUpdated;
+
+  constructor(event: TokenUpdated) {
+    this._event = event;
+  }
+
+  get tokenId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
   }
 }
 
@@ -243,7 +315,7 @@ export class Upgraded__Params {
 export class SwissDAOMembership__getAllBadgesResultValue0Struct extends ethereum.Tuple {
   get badge(): SwissDAOMembership__getAllBadgesResultValue0BadgeStruct {
     return changetype<SwissDAOMembership__getAllBadgesResultValue0BadgeStruct>(
-      this[0].toTuple()
+      this[0].toTuple(),
     );
   }
 
@@ -277,7 +349,7 @@ export class SwissDAOMembership__getAllBadgesResultValue0BadgeStruct extends eth
 export class SwissDAOMembership__getAllMembersResultValue0Struct extends ethereum.Tuple {
   get membership(): SwissDAOMembership__getAllMembersResultValue0MembershipStruct {
     return changetype<SwissDAOMembership__getAllMembersResultValue0MembershipStruct>(
-      this[0].toTuple()
+      this[0].toTuple(),
     );
   }
 
@@ -349,7 +421,7 @@ export class SwissDAOMembership__getAllMembersResultValue0BadgesStruct extends e
 export class SwissDAOMembership__getMemberResultValue0Struct extends ethereum.Tuple {
   get membership(): SwissDAOMembership__getMemberResultValue0MembershipStruct {
     return changetype<SwissDAOMembership__getMemberResultValue0MembershipStruct>(
-      this[0].toTuple()
+      this[0].toTuple(),
     );
   }
 
@@ -444,16 +516,38 @@ export class SwissDAOMembership__getMemberStructByTokenIdResultValue0Struct exte
   }
 }
 
+export class SwissDAOMembership__getTokenStructByTokenIdResultValue0Struct extends ethereum.Tuple {
+  get imageUri(): string {
+    return this[0].toString();
+  }
+
+  get tokenId(): BigInt {
+    return this[1].toBigInt();
+  }
+
+  get name(): string {
+    return this[2].toString();
+  }
+
+  get description(): string {
+    return this[3].toString();
+  }
+
+  get attributes(): string {
+    return this[4].toString();
+  }
+}
+
 export class SwissDAOMembership extends ethereum.SmartContract {
   static bind(address: Address): SwissDAOMembership {
-    return new SwissDAOMembership('SwissDAOMembership', address);
+    return new SwissDAOMembership("SwissDAOMembership", address);
   }
 
   ACTIVITY_POINTS(): BigInt {
     let result = super.call(
-      'ACTIVITY_POINTS',
-      'ACTIVITY_POINTS():(uint256)',
-      []
+      "ACTIVITY_POINTS",
+      "ACTIVITY_POINTS():(uint256)",
+      [],
     );
 
     return result[0].toBigInt();
@@ -461,9 +555,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   try_ACTIVITY_POINTS(): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
-      'ACTIVITY_POINTS',
-      'ACTIVITY_POINTS():(uint256)',
-      []
+      "ACTIVITY_POINTS",
+      "ACTIVITY_POINTS():(uint256)",
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -474,9 +568,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   ATTENDED_EVENTS(): BigInt {
     let result = super.call(
-      'ATTENDED_EVENTS',
-      'ATTENDED_EVENTS():(uint256)',
-      []
+      "ATTENDED_EVENTS",
+      "ATTENDED_EVENTS():(uint256)",
+      [],
     );
 
     return result[0].toBigInt();
@@ -484,9 +578,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   try_ATTENDED_EVENTS(): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
-      'ATTENDED_EVENTS',
-      'ATTENDED_EVENTS():(uint256)',
-      []
+      "ATTENDED_EVENTS",
+      "ATTENDED_EVENTS():(uint256)",
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -497,9 +591,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   DEFAULT_ADMIN_ROLE(): Bytes {
     let result = super.call(
-      'DEFAULT_ADMIN_ROLE',
-      'DEFAULT_ADMIN_ROLE():(bytes32)',
-      []
+      "DEFAULT_ADMIN_ROLE",
+      "DEFAULT_ADMIN_ROLE():(bytes32)",
+      [],
     );
 
     return result[0].toBytes();
@@ -507,9 +601,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   try_DEFAULT_ADMIN_ROLE(): ethereum.CallResult<Bytes> {
     let result = super.tryCall(
-      'DEFAULT_ADMIN_ROLE',
-      'DEFAULT_ADMIN_ROLE():(bytes32)',
-      []
+      "DEFAULT_ADMIN_ROLE",
+      "DEFAULT_ADMIN_ROLE():(bytes32)",
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -520,9 +614,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   DEFAULT_UPGRADER_ROLE(): Bytes {
     let result = super.call(
-      'DEFAULT_UPGRADER_ROLE',
-      'DEFAULT_UPGRADER_ROLE():(bytes32)',
-      []
+      "DEFAULT_UPGRADER_ROLE",
+      "DEFAULT_UPGRADER_ROLE():(bytes32)",
+      [],
     );
 
     return result[0].toBytes();
@@ -530,9 +624,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   try_DEFAULT_UPGRADER_ROLE(): ethereum.CallResult<Bytes> {
     let result = super.tryCall(
-      'DEFAULT_UPGRADER_ROLE',
-      'DEFAULT_UPGRADER_ROLE():(bytes32)',
-      []
+      "DEFAULT_UPGRADER_ROLE",
+      "DEFAULT_UPGRADER_ROLE():(bytes32)",
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -543,9 +637,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   EXPERIENCE_POINTS(): BigInt {
     let result = super.call(
-      'EXPERIENCE_POINTS',
-      'EXPERIENCE_POINTS():(uint256)',
-      []
+      "EXPERIENCE_POINTS",
+      "EXPERIENCE_POINTS():(uint256)",
+      [],
     );
 
     return result[0].toBigInt();
@@ -553,9 +647,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   try_EXPERIENCE_POINTS(): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
-      'EXPERIENCE_POINTS',
-      'EXPERIENCE_POINTS():(uint256)',
-      []
+      "EXPERIENCE_POINTS",
+      "EXPERIENCE_POINTS():(uint256)",
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -566,9 +660,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   GUILD_INITIAL_COUNTER(): BigInt {
     let result = super.call(
-      'GUILD_INITIAL_COUNTER',
-      'GUILD_INITIAL_COUNTER():(uint256)',
-      []
+      "GUILD_INITIAL_COUNTER",
+      "GUILD_INITIAL_COUNTER():(uint256)",
+      [],
     );
 
     return result[0].toBigInt();
@@ -576,9 +670,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   try_GUILD_INITIAL_COUNTER(): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
-      'GUILD_INITIAL_COUNTER',
-      'GUILD_INITIAL_COUNTER():(uint256)',
-      []
+      "GUILD_INITIAL_COUNTER",
+      "GUILD_INITIAL_COUNTER():(uint256)",
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -589,9 +683,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   MEMBERSHIP_INITIAL_COUNTER(): BigInt {
     let result = super.call(
-      'MEMBERSHIP_INITIAL_COUNTER',
-      'MEMBERSHIP_INITIAL_COUNTER():(uint256)',
-      []
+      "MEMBERSHIP_INITIAL_COUNTER",
+      "MEMBERSHIP_INITIAL_COUNTER():(uint256)",
+      [],
     );
 
     return result[0].toBigInt();
@@ -599,9 +693,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   try_MEMBERSHIP_INITIAL_COUNTER(): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
-      'MEMBERSHIP_INITIAL_COUNTER',
-      'MEMBERSHIP_INITIAL_COUNTER():(uint256)',
-      []
+      "MEMBERSHIP_INITIAL_COUNTER",
+      "MEMBERSHIP_INITIAL_COUNTER():(uint256)",
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -612,9 +706,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   MEMBER_ADMIN_ROLE(): Bytes {
     let result = super.call(
-      'MEMBER_ADMIN_ROLE',
-      'MEMBER_ADMIN_ROLE():(bytes32)',
-      []
+      "MEMBER_ADMIN_ROLE",
+      "MEMBER_ADMIN_ROLE():(bytes32)",
+      [],
     );
 
     return result[0].toBytes();
@@ -622,9 +716,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   try_MEMBER_ADMIN_ROLE(): ethereum.CallResult<Bytes> {
     let result = super.tryCall(
-      'MEMBER_ADMIN_ROLE',
-      'MEMBER_ADMIN_ROLE():(bytes32)',
-      []
+      "MEMBER_ADMIN_ROLE",
+      "MEMBER_ADMIN_ROLE():(bytes32)",
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -635,9 +729,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   SKILL_BADGE_INITIAL_COUNTER(): BigInt {
     let result = super.call(
-      'SKILL_BADGE_INITIAL_COUNTER',
-      'SKILL_BADGE_INITIAL_COUNTER():(uint256)',
-      []
+      "SKILL_BADGE_INITIAL_COUNTER",
+      "SKILL_BADGE_INITIAL_COUNTER():(uint256)",
+      [],
     );
 
     return result[0].toBigInt();
@@ -645,9 +739,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   try_SKILL_BADGE_INITIAL_COUNTER(): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
-      'SKILL_BADGE_INITIAL_COUNTER',
-      'SKILL_BADGE_INITIAL_COUNTER():(uint256)',
-      []
+      "SKILL_BADGE_INITIAL_COUNTER",
+      "SKILL_BADGE_INITIAL_COUNTER():(uint256)",
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -658,9 +752,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   UPGRADE_INTERFACE_VERSION(): string {
     let result = super.call(
-      'UPGRADE_INTERFACE_VERSION',
-      'UPGRADE_INTERFACE_VERSION():(string)',
-      []
+      "UPGRADE_INTERFACE_VERSION",
+      "UPGRADE_INTERFACE_VERSION():(string)",
+      [],
     );
 
     return result[0].toString();
@@ -668,9 +762,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   try_UPGRADE_INTERFACE_VERSION(): ethereum.CallResult<string> {
     let result = super.tryCall(
-      'UPGRADE_INTERFACE_VERSION',
-      'UPGRADE_INTERFACE_VERSION():(string)',
-      []
+      "UPGRADE_INTERFACE_VERSION",
+      "UPGRADE_INTERFACE_VERSION():(string)",
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -681,12 +775,12 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   balanceOf(account: Address, id: BigInt): BigInt {
     let result = super.call(
-      'balanceOf',
-      'balanceOf(address,uint256):(uint256)',
+      "balanceOf",
+      "balanceOf(address,uint256):(uint256)",
       [
         ethereum.Value.fromAddress(account),
-        ethereum.Value.fromUnsignedBigInt(id)
-      ]
+        ethereum.Value.fromUnsignedBigInt(id),
+      ],
     );
 
     return result[0].toBigInt();
@@ -694,12 +788,12 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   try_balanceOf(account: Address, id: BigInt): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
-      'balanceOf',
-      'balanceOf(address,uint256):(uint256)',
+      "balanceOf",
+      "balanceOf(address,uint256):(uint256)",
       [
         ethereum.Value.fromAddress(account),
-        ethereum.Value.fromUnsignedBigInt(id)
-      ]
+        ethereum.Value.fromUnsignedBigInt(id),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -710,12 +804,12 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   balanceOfBatch(accounts: Array<Address>, ids: Array<BigInt>): Array<BigInt> {
     let result = super.call(
-      'balanceOfBatch',
-      'balanceOfBatch(address[],uint256[]):(uint256[])',
+      "balanceOfBatch",
+      "balanceOfBatch(address[],uint256[]):(uint256[])",
       [
         ethereum.Value.fromAddressArray(accounts),
-        ethereum.Value.fromUnsignedBigIntArray(ids)
-      ]
+        ethereum.Value.fromUnsignedBigIntArray(ids),
+      ],
     );
 
     return result[0].toBigIntArray();
@@ -723,15 +817,15 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   try_balanceOfBatch(
     accounts: Array<Address>,
-    ids: Array<BigInt>
+    ids: Array<BigInt>,
   ): ethereum.CallResult<Array<BigInt>> {
     let result = super.tryCall(
-      'balanceOfBatch',
-      'balanceOfBatch(address[],uint256[]):(uint256[])',
+      "balanceOfBatch",
+      "balanceOfBatch(address[],uint256[]):(uint256[])",
       [
         ethereum.Value.fromAddressArray(accounts),
-        ethereum.Value.fromUnsignedBigIntArray(ids)
-      ]
+        ethereum.Value.fromUnsignedBigIntArray(ids),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -742,9 +836,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   getAllBadges(): Array<SwissDAOMembership__getAllBadgesResultValue0Struct> {
     let result = super.call(
-      'getAllBadges',
-      'getAllBadges():(((string,uint256,string,string,string),address[])[])',
-      []
+      "getAllBadges",
+      "getAllBadges():(((string,uint256,string,string,string),address[])[])",
+      [],
     );
 
     return result[0].toTupleArray<SwissDAOMembership__getAllBadgesResultValue0Struct>();
@@ -754,24 +848,24 @@ export class SwissDAOMembership extends ethereum.SmartContract {
     Array<SwissDAOMembership__getAllBadgesResultValue0Struct>
   > {
     let result = super.tryCall(
-      'getAllBadges',
-      'getAllBadges():(((string,uint256,string,string,string),address[])[])',
-      []
+      "getAllBadges",
+      "getAllBadges():(((string,uint256,string,string,string),address[])[])",
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<SwissDAOMembership__getAllBadgesResultValue0Struct>()
+      value[0].toTupleArray<SwissDAOMembership__getAllBadgesResultValue0Struct>(),
     );
   }
 
   getAllMembers(): Array<SwissDAOMembership__getAllMembersResultValue0Struct> {
     let result = super.call(
-      'getAllMembers',
-      'getAllMembers():(((uint256,string,address,string,uint256,uint256),(string,uint256,string,string,string)[],uint256,uint256,uint256)[])',
-      []
+      "getAllMembers",
+      "getAllMembers():(((uint256,string,address,string,uint256,uint256),(string,uint256,string,string,string)[],uint256,uint256,uint256)[])",
+      [],
     );
 
     return result[0].toTupleArray<SwissDAOMembership__getAllMembersResultValue0Struct>();
@@ -781,38 +875,38 @@ export class SwissDAOMembership extends ethereum.SmartContract {
     Array<SwissDAOMembership__getAllMembersResultValue0Struct>
   > {
     let result = super.tryCall(
-      'getAllMembers',
-      'getAllMembers():(((uint256,string,address,string,uint256,uint256),(string,uint256,string,string,string)[],uint256,uint256,uint256)[])',
-      []
+      "getAllMembers",
+      "getAllMembers():(((uint256,string,address,string,uint256,uint256),(string,uint256,string,string,string)[],uint256,uint256,uint256)[])",
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<SwissDAOMembership__getAllMembersResultValue0Struct>()
+      value[0].toTupleArray<SwissDAOMembership__getAllMembersResultValue0Struct>(),
     );
   }
 
   getMember(_member: Address): SwissDAOMembership__getMemberResultValue0Struct {
     let result = super.call(
-      'getMember',
-      'getMember(address):(((uint256,string,address,string,uint256,uint256),(string,uint256,string,string,string)[],uint256,uint256,uint256))',
-      [ethereum.Value.fromAddress(_member)]
+      "getMember",
+      "getMember(address):(((uint256,string,address,string,uint256,uint256),(string,uint256,string,string,string)[],uint256,uint256,uint256))",
+      [ethereum.Value.fromAddress(_member)],
     );
 
     return changetype<SwissDAOMembership__getMemberResultValue0Struct>(
-      result[0].toTuple()
+      result[0].toTuple(),
     );
   }
 
   try_getMember(
-    _member: Address
+    _member: Address,
   ): ethereum.CallResult<SwissDAOMembership__getMemberResultValue0Struct> {
     let result = super.tryCall(
-      'getMember',
-      'getMember(address):(((uint256,string,address,string,uint256,uint256),(string,uint256,string,string,string)[],uint256,uint256,uint256))',
-      [ethereum.Value.fromAddress(_member)]
+      "getMember",
+      "getMember(address):(((uint256,string,address,string,uint256,uint256),(string,uint256,string,string,string)[],uint256,uint256,uint256))",
+      [ethereum.Value.fromAddress(_member)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -820,32 +914,32 @@ export class SwissDAOMembership extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(
       changetype<SwissDAOMembership__getMemberResultValue0Struct>(
-        value[0].toTuple()
-      )
+        value[0].toTuple(),
+      ),
     );
   }
 
   getMemberStructByTokenId(
-    _tokenId: BigInt
+    _tokenId: BigInt,
   ): SwissDAOMembership__getMemberStructByTokenIdResultValue0Struct {
     let result = super.call(
-      'getMemberStructByTokenId',
-      'getMemberStructByTokenId(uint256):((uint256,string,address,string,uint256,uint256))',
-      [ethereum.Value.fromUnsignedBigInt(_tokenId)]
+      "getMemberStructByTokenId",
+      "getMemberStructByTokenId(uint256):((uint256,string,address,string,uint256,uint256))",
+      [ethereum.Value.fromUnsignedBigInt(_tokenId)],
     );
 
     return changetype<SwissDAOMembership__getMemberStructByTokenIdResultValue0Struct>(
-      result[0].toTuple()
+      result[0].toTuple(),
     );
   }
 
   try_getMemberStructByTokenId(
-    _tokenId: BigInt
+    _tokenId: BigInt,
   ): ethereum.CallResult<SwissDAOMembership__getMemberStructByTokenIdResultValue0Struct> {
     let result = super.tryCall(
-      'getMemberStructByTokenId',
-      'getMemberStructByTokenId(uint256):((uint256,string,address,string,uint256,uint256))',
-      [ethereum.Value.fromUnsignedBigInt(_tokenId)]
+      "getMemberStructByTokenId",
+      "getMemberStructByTokenId(uint256):((uint256,string,address,string,uint256,uint256))",
+      [ethereum.Value.fromUnsignedBigInt(_tokenId)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -853,14 +947,14 @@ export class SwissDAOMembership extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(
       changetype<SwissDAOMembership__getMemberStructByTokenIdResultValue0Struct>(
-        value[0].toTuple()
-      )
+        value[0].toTuple(),
+      ),
     );
   }
 
   getRoleAdmin(role: Bytes): Bytes {
-    let result = super.call('getRoleAdmin', 'getRoleAdmin(bytes32):(bytes32)', [
-      ethereum.Value.fromFixedBytes(role)
+    let result = super.call("getRoleAdmin", "getRoleAdmin(bytes32):(bytes32)", [
+      ethereum.Value.fromFixedBytes(role),
     ]);
 
     return result[0].toBytes();
@@ -868,9 +962,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   try_getRoleAdmin(role: Bytes): ethereum.CallResult<Bytes> {
     let result = super.tryCall(
-      'getRoleAdmin',
-      'getRoleAdmin(bytes32):(bytes32)',
-      [ethereum.Value.fromFixedBytes(role)]
+      "getRoleAdmin",
+      "getRoleAdmin(bytes32):(bytes32)",
+      [ethereum.Value.fromFixedBytes(role)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -879,19 +973,52 @@ export class SwissDAOMembership extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
+  getTokenStructByTokenId(
+    _tokenId: BigInt,
+  ): SwissDAOMembership__getTokenStructByTokenIdResultValue0Struct {
+    let result = super.call(
+      "getTokenStructByTokenId",
+      "getTokenStructByTokenId(uint256):((string,uint256,string,string,string))",
+      [ethereum.Value.fromUnsignedBigInt(_tokenId)],
+    );
+
+    return changetype<SwissDAOMembership__getTokenStructByTokenIdResultValue0Struct>(
+      result[0].toTuple(),
+    );
+  }
+
+  try_getTokenStructByTokenId(
+    _tokenId: BigInt,
+  ): ethereum.CallResult<SwissDAOMembership__getTokenStructByTokenIdResultValue0Struct> {
+    let result = super.tryCall(
+      "getTokenStructByTokenId",
+      "getTokenStructByTokenId(uint256):((string,uint256,string,string,string))",
+      [ethereum.Value.fromUnsignedBigInt(_tokenId)],
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      changetype<SwissDAOMembership__getTokenStructByTokenIdResultValue0Struct>(
+        value[0].toTuple(),
+      ),
+    );
+  }
+
   hasRole(role: Bytes, account: Address): boolean {
-    let result = super.call('hasRole', 'hasRole(bytes32,address):(bool)', [
+    let result = super.call("hasRole", "hasRole(bytes32,address):(bool)", [
       ethereum.Value.fromFixedBytes(role),
-      ethereum.Value.fromAddress(account)
+      ethereum.Value.fromAddress(account),
     ]);
 
     return result[0].toBoolean();
   }
 
   try_hasRole(role: Bytes, account: Address): ethereum.CallResult<boolean> {
-    let result = super.tryCall('hasRole', 'hasRole(bytes32,address):(bool)', [
+    let result = super.tryCall("hasRole", "hasRole(bytes32,address):(bool)", [
       ethereum.Value.fromFixedBytes(role),
-      ethereum.Value.fromAddress(account)
+      ethereum.Value.fromAddress(account),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -902,12 +1029,12 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   isApprovedForAll(account: Address, operator: Address): boolean {
     let result = super.call(
-      'isApprovedForAll',
-      'isApprovedForAll(address,address):(bool)',
+      "isApprovedForAll",
+      "isApprovedForAll(address,address):(bool)",
       [
         ethereum.Value.fromAddress(account),
-        ethereum.Value.fromAddress(operator)
-      ]
+        ethereum.Value.fromAddress(operator),
+      ],
     );
 
     return result[0].toBoolean();
@@ -915,15 +1042,15 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   try_isApprovedForAll(
     account: Address,
-    operator: Address
+    operator: Address,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
-      'isApprovedForAll',
-      'isApprovedForAll(address,address):(bool)',
+      "isApprovedForAll",
+      "isApprovedForAll(address,address):(bool)",
       [
         ethereum.Value.fromAddress(account),
-        ethereum.Value.fromAddress(operator)
-      ]
+        ethereum.Value.fromAddress(operator),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -933,16 +1060,16 @@ export class SwissDAOMembership extends ethereum.SmartContract {
   }
 
   proxiableUUID(): Bytes {
-    let result = super.call('proxiableUUID', 'proxiableUUID():(bytes32)', []);
+    let result = super.call("proxiableUUID", "proxiableUUID():(bytes32)", []);
 
     return result[0].toBytes();
   }
 
   try_proxiableUUID(): ethereum.CallResult<Bytes> {
     let result = super.tryCall(
-      'proxiableUUID',
-      'proxiableUUID():(bytes32)',
-      []
+      "proxiableUUID",
+      "proxiableUUID():(bytes32)",
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -953,9 +1080,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   supportsInterface(_interfaceId: Bytes): boolean {
     let result = super.call(
-      'supportsInterface',
-      'supportsInterface(bytes4):(bool)',
-      [ethereum.Value.fromFixedBytes(_interfaceId)]
+      "supportsInterface",
+      "supportsInterface(bytes4):(bool)",
+      [ethereum.Value.fromFixedBytes(_interfaceId)],
     );
 
     return result[0].toBoolean();
@@ -963,9 +1090,9 @@ export class SwissDAOMembership extends ethereum.SmartContract {
 
   try_supportsInterface(_interfaceId: Bytes): ethereum.CallResult<boolean> {
     let result = super.tryCall(
-      'supportsInterface',
-      'supportsInterface(bytes4):(bool)',
-      [ethereum.Value.fromFixedBytes(_interfaceId)]
+      "supportsInterface",
+      "supportsInterface(bytes4):(bool)",
+      [ethereum.Value.fromFixedBytes(_interfaceId)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -975,16 +1102,16 @@ export class SwissDAOMembership extends ethereum.SmartContract {
   }
 
   uri(_tokenId: BigInt): string {
-    let result = super.call('uri', 'uri(uint256):(string)', [
-      ethereum.Value.fromUnsignedBigInt(_tokenId)
+    let result = super.call("uri", "uri(uint256):(string)", [
+      ethereum.Value.fromUnsignedBigInt(_tokenId),
     ]);
 
     return result[0].toString();
   }
 
   try_uri(_tokenId: BigInt): ethereum.CallResult<string> {
-    let result = super.tryCall('uri', 'uri(uint256):(string)', [
-      ethereum.Value.fromUnsignedBigInt(_tokenId)
+    let result = super.tryCall("uri", "uri(uint256):(string)", [
+      ethereum.Value.fromUnsignedBigInt(_tokenId),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1020,20 +1147,20 @@ export class ConstructorCall__Outputs {
   }
 }
 
-export class AddGuildsCall extends ethereum.Call {
-  get inputs(): AddGuildsCall__Inputs {
-    return new AddGuildsCall__Inputs(this);
+export class AddGuildCall extends ethereum.Call {
+  get inputs(): AddGuildCall__Inputs {
+    return new AddGuildCall__Inputs(this);
   }
 
-  get outputs(): AddGuildsCall__Outputs {
-    return new AddGuildsCall__Outputs(this);
+  get outputs(): AddGuildCall__Outputs {
+    return new AddGuildCall__Outputs(this);
   }
 }
 
-export class AddGuildsCall__Inputs {
-  _call: AddGuildsCall;
+export class AddGuildCall__Inputs {
+  _call: AddGuildCall;
 
-  constructor(call: AddGuildsCall) {
+  constructor(call: AddGuildCall) {
     this._call = call;
   }
 
@@ -1054,28 +1181,28 @@ export class AddGuildsCall__Inputs {
   }
 }
 
-export class AddGuildsCall__Outputs {
-  _call: AddGuildsCall;
+export class AddGuildCall__Outputs {
+  _call: AddGuildCall;
 
-  constructor(call: AddGuildsCall) {
+  constructor(call: AddGuildCall) {
     this._call = call;
   }
 }
 
-export class AddSkillBadgesCall extends ethereum.Call {
-  get inputs(): AddSkillBadgesCall__Inputs {
-    return new AddSkillBadgesCall__Inputs(this);
+export class AddSkillBadgeCall extends ethereum.Call {
+  get inputs(): AddSkillBadgeCall__Inputs {
+    return new AddSkillBadgeCall__Inputs(this);
   }
 
-  get outputs(): AddSkillBadgesCall__Outputs {
-    return new AddSkillBadgesCall__Outputs(this);
+  get outputs(): AddSkillBadgeCall__Outputs {
+    return new AddSkillBadgeCall__Outputs(this);
   }
 }
 
-export class AddSkillBadgesCall__Inputs {
-  _call: AddSkillBadgesCall;
+export class AddSkillBadgeCall__Inputs {
+  _call: AddSkillBadgeCall;
 
-  constructor(call: AddSkillBadgesCall) {
+  constructor(call: AddSkillBadgeCall) {
     this._call = call;
   }
 
@@ -1096,10 +1223,10 @@ export class AddSkillBadgesCall__Inputs {
   }
 }
 
-export class AddSkillBadgesCall__Outputs {
-  _call: AddSkillBadgesCall;
+export class AddSkillBadgeCall__Outputs {
+  _call: AddSkillBadgeCall;
 
-  constructor(call: AddSkillBadgesCall) {
+  constructor(call: AddSkillBadgeCall) {
     this._call = call;
   }
 }
@@ -1236,20 +1363,20 @@ export class EditGuildCall__Outputs {
   }
 }
 
-export class EditSkillBadgesCall extends ethereum.Call {
-  get inputs(): EditSkillBadgesCall__Inputs {
-    return new EditSkillBadgesCall__Inputs(this);
+export class EditSkillBadgeCall extends ethereum.Call {
+  get inputs(): EditSkillBadgeCall__Inputs {
+    return new EditSkillBadgeCall__Inputs(this);
   }
 
-  get outputs(): EditSkillBadgesCall__Outputs {
-    return new EditSkillBadgesCall__Outputs(this);
+  get outputs(): EditSkillBadgeCall__Outputs {
+    return new EditSkillBadgeCall__Outputs(this);
   }
 }
 
-export class EditSkillBadgesCall__Inputs {
-  _call: EditSkillBadgesCall;
+export class EditSkillBadgeCall__Inputs {
+  _call: EditSkillBadgeCall;
 
-  constructor(call: EditSkillBadgesCall) {
+  constructor(call: EditSkillBadgeCall) {
     this._call = call;
   }
 
@@ -1274,10 +1401,10 @@ export class EditSkillBadgesCall__Inputs {
   }
 }
 
-export class EditSkillBadgesCall__Outputs {
-  _call: EditSkillBadgesCall;
+export class EditSkillBadgeCall__Outputs {
+  _call: EditSkillBadgeCall;
 
-  constructor(call: EditSkillBadgesCall) {
+  constructor(call: EditSkillBadgeCall) {
     this._call = call;
   }
 }
