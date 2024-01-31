@@ -39,7 +39,7 @@ import {
   EXPERIENCE_POINTS_IPFS_URL
 } from '@/helpers/const';
 import { convertIpfsToHttps } from '@/helpers/ipfs';
-import { NewMembershipType } from '@/types/types';
+import { MembershipType } from '@/types/types';
 import Link from 'next/link';
 import { useContext } from 'react';
 import {
@@ -52,7 +52,7 @@ import {
 } from '../ui/avatar';
 
 type Props = {
-  members: NewMembershipType[];
+  members: MembershipType[];
   onAttend: (holder: string) => void;
   onIncrease: (holder: string) => void;
 };
@@ -65,7 +65,7 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
 
   const { membership } = useContext(MembershipContext);
 
-  const columns: ColumnDef<NewMembershipType>[] = [
+  const columns: ColumnDef<MembershipType>[] = [
     {
       accessorKey: 'tokenID',
       header: 'Token ID',
@@ -178,7 +178,7 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
       id: 'actions',
       enableHiding: false,
       cell: ({ row }) => {
-        const { holder } = row.original;
+        const { tokenID, holder } = row.original;
 
         return (
           <DropdownMenu>
@@ -192,7 +192,7 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <Link href={`/members/${holder}`}>View profile</Link>
+                <Link href={`/members/${tokenID}`}>View profile</Link>
               </DropdownMenuItem>
               {membership?.isAdmin && (
                 <>

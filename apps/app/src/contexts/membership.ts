@@ -1,8 +1,8 @@
-import { MemberType } from '@/types/types';
+import { MembershipType } from '@/types/types';
 import { createContext } from 'react';
 
 type MembershipContextType = {
-  membership: MemberType | undefined;
+  membership: MembershipType | undefined;
   setMembership: Function;
 };
 

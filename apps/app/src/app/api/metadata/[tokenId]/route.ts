@@ -1,5 +1,4 @@
 import { ETHERS_CONTRACT } from '@/helpers/contracts';
-import { MembershipType } from '@/types/types';
 import { NextResponse } from 'next/server';
 
 export async function GET(
@@ -7,7 +6,7 @@ export async function GET(
   { params: { tokenId } }: { params: { tokenId: string } }
 ) {
   const { nickname, holder, joinedAt, mintedAt } =
-    (await ETHERS_CONTRACT.getMemberStructByTokenId(tokenId)) as MembershipType;
+    (await ETHERS_CONTRACT.getMemberStructByTokenId(tokenId)) as any;
 
   return NextResponse.json({
     name: `Membership #${tokenId} of ${nickname}`,

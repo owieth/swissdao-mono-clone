@@ -1,12 +1,3 @@
-export type MembershipType = {
-  tokenId: number;
-  nickname: string;
-  holder: string;
-  profileImageUri: string;
-  joinedAt: number;
-  mintedAt: number;
-};
-
 export type TokenType = {
   tokenId: number;
   name: string;
@@ -15,22 +6,7 @@ export type TokenType = {
   attributes: string[];
 };
 
-export type GuildType = {
-  badge: TokenType;
-  holders: string[];
-  members: MembershipType[];
-};
-
-export type MemberType = {
-  membership: MembershipType;
-  activityPoints: BigInt;
-  experiencePoints: BigInt;
-  attendedEvents: BigInt;
-  badges: TokenType[];
-  isAdmin?: boolean;
-};
-
-export type NewMembershipType = {
+export type MembershipType = {
   id: number;
   tokenID: number;
   holder: string;
@@ -41,32 +17,15 @@ export type NewMembershipType = {
   experiencePoints: number;
   activityPoints: number;
   attendedEvents: number;
-  guilds: NewGuildType[];
+  guilds: GuildType[];
+  isAdmin?: boolean;
 };
 
-export type NewGuildType = {
+export type GuildType = {
   id: number;
   tokenID: number;
   name: string;
   description: string;
   imageUri: string;
-  holders: NewMembershipType[];
+  holders: MembershipType[];
 };
-
-// type Token @entity {
-//   id: ID!
-//   tokenID: BigInt!
-//   imageUri: String!
-//   name: String!
-//   description: String!
-//   attributes: String!
-// }
-
-// type Guild @entity {
-//   id: ID!
-//   tokenID: BigInt!
-//   imageUri: String!
-//   name: String!
-//   description: String!
-//   holders: [Membership!]!
-// }

@@ -31,7 +31,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { GuildType } from '@/types/types';
+import Link from 'next/link';
 import {
   Avatar,
   AvatarFallback,
@@ -40,10 +40,9 @@ import {
   AvatarImage,
   AvatarOverflowIndicator
 } from '../ui/avatar';
-import Link from 'next/link';
 
 type Props = {
-  guilds: GuildType[];
+  guilds: any[];
   onJoinGuild: (guildId: number) => void;
 };
 
@@ -53,7 +52,7 @@ export function GuildsTable({ guilds, onJoinGuild }: Props) {
     []
   );
 
-  const columns: ColumnDef<GuildType>[] = [
+  const columns: ColumnDef<any>[] = [
     {
       accessorKey: 'badge.tokenId',
       header: 'Token ID'
@@ -83,7 +82,7 @@ export function GuildsTable({ guilds, onJoinGuild }: Props) {
           {original.members?.length > 0 ? (
             <AvatarGroup limit={3} className="justify-start">
               <AvatarGroupList>
-                {original.members?.map((member, i) => (
+                {original.members?.map((member: any, i: number) => (
                   <DropdownMenu key={i}>
                     <DropdownMenuTrigger asChild>
                       <Button

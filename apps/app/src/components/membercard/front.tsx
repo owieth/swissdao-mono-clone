@@ -1,7 +1,7 @@
 import { MembershipType } from '@/types/types';
 
 const MembercardFront = ({ tokenStruct }: { tokenStruct: MembershipType }) => {
-  const { profileImageUri, holder, mintedAt } = tokenStruct;
+  const { profileImageUri, holder, minted_At } = tokenStruct;
 
   return (
     <svg
@@ -45,7 +45,7 @@ const MembercardFront = ({ tokenStruct }: { tokenStruct: MembershipType }) => {
           letter-spacing="-0.04em"
         >
           <tspan x="297.471" y="184.36">
-            {mintedAt}
+            {minted_At}
           </tspan>
         </text>
         <text

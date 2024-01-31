@@ -2,7 +2,7 @@
 
 import { MemberStats } from '@/components/member-stats/member-stats';
 import { CONTRACT } from '@/contracts/contracts';
-import { MemberType, MembershipType } from '@/types/types';
+import { MembershipType } from '@/types/types';
 import { useEffect, useState } from 'react';
 import { useContractRead } from 'wagmi';
 

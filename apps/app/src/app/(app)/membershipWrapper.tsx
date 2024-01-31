@@ -2,22 +2,23 @@
 
 import { MembershipContext } from '@/contexts/membership';
 import { CONTRACT } from '@/contracts/contracts';
-import { MemberType } from '@/types/types';
+import { MembershipType } from '@/types/types';
 import { useEffect, useState } from 'react';
 import { useAccount, useContractRead } from 'wagmi';
 
+// TODO server side
 export default function MembershipWrapper({
   children
 }: {
   children: React.ReactNode;
 }) {
-  const [membership, setMembership] = useState<MemberType>();
+  const [membership, setMembership] = useState<MembershipType>();
 
   const { address } = useAccount();
 
   const { data: member } = useContractRead({
     ...CONTRACT,
-    functionName: 'getMember',
+    functionName: 'getMemberStructByAddress',
     args: [address]
   });
 
@@ -31,7 +32,10 @@ export default function MembershipWrapper({
   });
 
   useEffect(() => {
-    setMembership({ ...(member as MemberType), isAdmin: isAdmin as boolean });
+    setMembership({
+      ...(member as MembershipType),
+      isAdmin: isAdmin as boolean
+    });
   }, [isAdmin, member]);
 
   return (

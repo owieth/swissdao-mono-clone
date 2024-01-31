@@ -11,11 +11,11 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { MembershipContext } from '@/contexts/membership';
 import { shortenString } from '@/helpers/format';
-import { useContext } from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
-import { MembershipContext } from '@/contexts/membership';
+import { useContext } from 'react';
 
 export function UserNav() {
   const { membership } = useContext(MembershipContext);
@@ -67,12 +67,10 @@ export function UserNav() {
                     >
                       <Avatar className="h-8 w-8">
                         <AvatarImage
-                          src={membership?.membership?.profileImageUri}
-                          alt={membership?.membership?.nickname}
+                          src={membership?.profileImageUri}
+                          alt={membership?.nickname}
                         />
-                        <AvatarFallback>
-                          {membership?.membership?.nickname}
-                        </AvatarFallback>
+                        <AvatarFallback>{membership?.nickname}</AvatarFallback>
                       </Avatar>
                     </Button>
                   </DropdownMenuTrigger>
@@ -80,7 +78,7 @@ export function UserNav() {
                     <DropdownMenuLabel className="font-normal">
                       <div className="flex flex-col space-y-1">
                         <p className="text-sm font-medium leading-none">
-                          {membership?.membership?.nickname}
+                          {membership?.nickname}
                         </p>
                         <p className="text-muted-foreground text-xs leading-none">
                           {shortenString(account.address)}
@@ -91,7 +89,7 @@ export function UserNav() {
                     <DropdownMenuGroup>
                       <DropdownMenuItem>
                         <Link
-                          href={`/members/${account.address}`}
+                          href={`/members/${(membership as any)?.tokenId}`}
                           className="flex w-full items-center"
                         >
                           Profile

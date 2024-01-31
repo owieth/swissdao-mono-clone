@@ -56,7 +56,7 @@
 
 import { MembershipContext } from '@/contexts/membership';
 import { CONTRACT } from '@/contracts/contracts';
-import { NewGuildType } from '@/types/types';
+import { GuildType } from '@/types/types';
 import { Text, Title } from '@tremor/react';
 import { prepareWriteContract, writeContract } from '@wagmi/core';
 import Link from 'next/link';
@@ -77,7 +77,7 @@ function CSSstring(string: string) {
   return Object.assign({}, ...keyValues);
 }
 
-export default function GuildsPage({ guilds }: { guilds: NewGuildType[] }) {
+export default function GuildsPage({ guilds }: { guilds: GuildType[] }) {
   const { membership } = useContext(MembershipContext);
 
   // const {
@@ -107,7 +107,7 @@ export default function GuildsPage({ guilds }: { guilds: NewGuildType[] }) {
     const config = await prepareWriteContract({
       ...CONTRACT,
       functionName: 'joinGuild',
-      args: [membership?.membership?.tokenId, guildId]
+      args: [membership?.tokenID, guildId]
     });
 
     const { hash } = await writeContract(config);

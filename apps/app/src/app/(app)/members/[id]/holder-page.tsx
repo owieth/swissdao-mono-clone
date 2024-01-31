@@ -1,19 +1,21 @@
 'use client';
 
-import { MemberStats } from '@/components/member-stats/member-stats';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { CONTRACT } from '@/contracts/contracts';
 import { getGradient } from '@/helpers/gradient';
-import { MemberType } from '@/types/types';
+import { MembershipType } from '@/types/types';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
 import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { Address, getAddress } from 'viem';
-import { useAccount, useContractRead } from 'wagmi';
+import { useAccount } from 'wagmi';
 
 const profileWidth = 'max-w-5xl mx-auto px-4 sm:px-6 lg:px-8';
 
-export default function Member() {
+export default function MemberPage({
+  membership
+}: {
+  membership: MembershipType;
+}) {
   // const [edit, setEdit] = useState(false);
 
   const { holder } = useParams();
@@ -26,21 +28,13 @@ export default function Member() {
       ? getAddress(address as Address) == getAddress(holder as Address)
       : false;
 
-  const { data: member } = useContractRead({
-    ...CONTRACT,
-    functionName: 'getMember',
-    args: [holder]
-  });
-
-  console.log(member);
-
   useEffect(() => {
     if (!address) {
       openConnectModal?.();
     }
   }, [address, openConnectModal]);
 
-  return member ? (
+  return (
     <>
       {/* <Dialog open={edit} onOpenChange={setEdit}>
         <DialogContent className="sm:max-w-[425px]">
@@ -74,7 +68,7 @@ export default function Member() {
         <div className="relative mx-auto my-20 flex h-48 w-full max-w-screen-2xl origin-bottom justify-center md:px-20">
           <div
             className={`h-full w-full md:rounded-3xl ${getGradient(
-              (member as any).membership.nickname
+              membership.nickname
             )}`}
           />
 
@@ -82,7 +76,7 @@ export default function Member() {
             <Avatar className="h-full w-full">
               <AvatarImage
                 src={
-                  (member as MemberType).membership.profileImageUri ||
+                  membership.profileImageUri ||
                   'https://avatar.vercel.sh/leerob'
                 }
                 alt="@shadcn"
@@ -95,31 +89,27 @@ export default function Member() {
           <div className="w-full rounded-xl border border-b border-t border-gray-200 bg-white shadow-xl">
             <div className="rounded-t-xl bg-gradient-to-r from-black via-gray-800 to-black py-3 text-center">
               <p className="text-2xl tracking-widest text-white">
-                Membership #
-                {(member as MemberType).membership.tokenId.toString()}
+                Membership #{membership.tokenID}
               </p>
             </div>
             <div className="min-w-0 px-6 pb-10">
               <h1 className="truncate text-2xl font-semibold text-black">
-                Nickname: {(member as MemberType).membership.nickname}
+                Nickname: {membership.nickname}
               </h1>
               <h1 className="truncate text-2xl font-semibold text-black">
-                Badges: {(member as MemberType).badges.length}
-              </h1>
-
-              <h1 className="truncate text-2xl font-semibold text-black">
-                Activty Points:{' '}
-                {(member as MemberType).activityPoints.toString()}
+                Guilds: {membership.guilds.length}
               </h1>
 
               <h1 className="truncate text-2xl font-semibold text-black">
-                Experience Points:{' '}
-                {(member as MemberType).experiencePoints.toString()}
+                Activty Points: {membership.activityPoints.toString()}
               </h1>
 
               <h1 className="truncate text-2xl font-semibold text-black">
-                Attended Events:{' '}
-                {(member as MemberType).attendedEvents.toString()}
+                Experience Points: {membership.experiencePoints.toString()}
+              </h1>
+
+              <h1 className="truncate text-2xl font-semibold text-black">
+                Attended Events: {membership.attendedEvents.toString()}
               </h1>
             </div>
           </div>
@@ -166,5 +156,5 @@ export default function Member() {
         </div> */}
       </div>
     </>
-  ) : null;
+  );
 }
