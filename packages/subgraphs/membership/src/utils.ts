@@ -61,10 +61,10 @@ export function fetchBalance(
   return contract.balanceOf(accountAddress, tokenId);
 }
 
-export function fetchHolder(address: Address, tokenAddress: Address): Membership {
+export function fetchHolder(tokenAddress: Address, memberAddress: Address): Membership {
   let contract = SwissDAOMembership.bind(tokenAddress);
 
-  //const member = contract.getMember(address);
+  const member = contract.getMemberStructByAddress(memberAddress);
 
-  return fetchMembership("10000");
+  return fetchMembership(member.tokenId.toString());
 }
