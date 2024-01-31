@@ -39,7 +39,7 @@ import {
   EXPERIENCE_POINTS_IPFS_URL
 } from '@/helpers/const';
 import { convertIpfsToHttps } from '@/helpers/ipfs';
-import { MemberType } from '@/types/types';
+import { NewMembershipType } from '@/types/types';
 import Link from 'next/link';
 import { useContext } from 'react';
 import {
@@ -52,7 +52,7 @@ import {
 } from '../ui/avatar';
 
 type Props = {
-  members: MemberType[];
+  members: NewMembershipType[];
   onAttend: (holder: string) => void;
   onIncrease: (holder: string) => void;
 };
@@ -65,24 +65,22 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
 
   const { membership } = useContext(MembershipContext);
 
-  const columns: ColumnDef<MemberType>[] = [
+  const columns: ColumnDef<NewMembershipType>[] = [
     {
-      accessorKey: 'membership.tokenId',
-      header: 'Token ID'
+      accessorKey: 'tokenID',
+      header: 'Token ID',
+      cell: ({ row }) => <div>#{row.original.tokenID}</div>
     },
     {
-      accessorKey: 'membership.nickname',
+      accessorKey: 'nickname',
       header: 'Nickname',
       cell: ({ row }) => {
-        const label = row.getValue('membership_nickname') as any;
+        const label = row.original.nickname;
 
         return (
           <div className="flex items-center gap-4">
             <Avatar className="h-8 w-8">
-              <AvatarImage
-                src={row.original.membership.profileImageUri}
-                alt="@shadcn"
-              />
+              <AvatarImage src={row.original.profileImageUri} alt="@shadcn" />
               <AvatarFallback>{label}</AvatarFallback>
             </Avatar>
             {label}
@@ -91,20 +89,20 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
       }
     },
     {
-      accessorKey: 'membership.badges',
+      accessorKey: 'badges',
       header: 'Badges',
       cell: ({ row: { original } }) => (
         <div className="capitalize">
-          {original.badges.length > 0 ? (
+          {original.guilds.length > 0 ? (
             <AvatarGroup limit={3} className="justify-start">
               <AvatarGroupList>
-                {original.badges.map((badge, i) => (
+                {original.guilds.map((badge, i) => (
                   <Avatar key={i}>
-                    <AvatarImage
+                    {/* <AvatarImage
                       src={convertIpfsToHttps(badge.imageUri || '')}
                       alt={badge.name}
                     />
-                    <AvatarFallback>{badge.name}</AvatarFallback>
+                    <AvatarFallback>{badge.name}</AvatarFallback> */}
                   </Avatar>
                 ))}
               </AvatarGroupList>
@@ -117,7 +115,7 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
       )
     },
     {
-      accessorKey: 'membership.activityPoints',
+      accessorKey: 'activityPoints',
       header: 'Activity Points',
       cell: ({ row: { original } }) => {
         const value = original.activityPoints;
@@ -137,7 +135,7 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
       }
     },
     {
-      accessorKey: 'membership.experiencePoints',
+      accessorKey: 'experiencePoints',
       header: 'Experience Points',
       cell: ({ row: { original } }) => {
         const value = original.experiencePoints;
@@ -157,7 +155,7 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
       }
     },
     {
-      accessorKey: 'membership.attendedEvents',
+      accessorKey: 'attendedEvents',
       header: 'Attended Events',
       cell: ({ row: { original } }) => {
         const value = original.attendedEvents;
@@ -180,9 +178,7 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
       id: 'actions',
       enableHiding: false,
       cell: ({ row }) => {
-        const {
-          membership: { holder }
-        } = row.original;
+        const { holder } = row.original;
 
         return (
           <DropdownMenu>
@@ -236,14 +232,10 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
         <Input
           placeholder="Filter nicknames..."
           value={
-            (table
-              .getColumn('membership_nickname')
-              ?.getFilterValue() as string) ?? ''
+            (table.getColumn('nickname')?.getFilterValue() as string) ?? ''
           }
           onChange={event =>
-            table
-              .getColumn('membership_nickname')
-              ?.setFilterValue(event.target.value)
+            table.getColumn('nickname')?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />

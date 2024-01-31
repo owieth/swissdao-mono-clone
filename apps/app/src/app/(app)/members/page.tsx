@@ -31,7 +31,7 @@ async function getData() {
 }
 
 export default async function Page() {
-  const members = await getData();
+  const { memberships } = await getData();
 
-  return <MembersPage members={members} />;
+  return <MembersPage members={memberships} />;
 }
