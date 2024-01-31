@@ -1,10 +1,8 @@
-import { BigInt } from '@graphprotocol/graph-ts';
-
 import {
   SwissDAOMembership,
   TransferSingle as TransferSingleEvent
 } from '../generated/SwissDAOMembership/SwissDAOMembership';
-import { fetchBalance, fetchGuild, fetchHolder, fetchMembership, fetchToken } from './utils';
+import { fetchGuild, fetchHolder, fetchMembership, fetchToken } from './utils';
 
 export function handleToken(event: TransferSingleEvent): void {
   const contract = SwissDAOMembership.bind(event.address);
@@ -14,12 +12,22 @@ export function handleToken(event: TransferSingleEvent): void {
   let token = fetchToken(tokenId.toString());
 
   const tokenStruct = contract.getTokenStructByTokenId(tokenId);
+  const member = fetchHolder(event.address, event.params.to);
 
   token.imageUri = tokenStruct.imageUri;
   token.name = tokenStruct.name;
   token.description = tokenStruct.description;
   token.attributes = tokenStruct.attributes;
 
+  if (token.id == "1") {
+    member.experiencePoints = member.experiencePoints.plus(event.params.value);
+  } else if (token.id == "2") {
+    member.activityPoints = member.activityPoints.plus(event.params.value);
+  } else if (token.id == "3") {
+    member.attendedEvents = member.attendedEvents.plus(event.params.value);
+  }
+
+  member.save();
   token.save();
 }
 
@@ -44,8 +52,6 @@ export function handleGuild(event: TransferSingleEvent): void {
 
   guild.holders = holders;
 
-  //let holder = Membership.load(tokenId.toString() + "-" + );
-
   guild.save();
 }
 
@@ -63,21 +69,6 @@ export function handleMembership(event: TransferSingleEvent): void {
   membership.holder = membershipStruct.holder;
   membership.joined_At = membershipStruct.joinedAt;
   membership.minted_At = membershipStruct.mintedAt;
-  membership.experiencePoints = fetchBalance(
-    event.address,
-    membershipStruct.holder,
-    BigInt.fromI32(1)
-  );
-  membership.activityPoints = fetchBalance(
-    event.address,
-    membershipStruct.holder,
-    BigInt.fromI32(2)
-  );
-  membership.attendedEvents = fetchBalance(
-    event.address,
-    membershipStruct.holder,
-    BigInt.fromI32(3)
-  );
 
   membership.save();
 }
