@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: SwissDAOMembership
-    network: sepolia
+    network: optimism-sepolia
     source:
-      address: "0xf2fa99322a359eF5De22944c7EdFe9BCb7769426"
+      address: "0x878b42Fe88A7a135f8Ee1E978Effa824e8f32998"
       abi: SwissDAOMembership
-      startBlock: 4717916
+      startBlock: 7456356
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

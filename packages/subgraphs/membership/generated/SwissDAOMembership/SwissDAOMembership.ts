@@ -240,65 +240,7 @@ export class Upgraded__Params {
   }
 }
 
-export class SwissDAOMembership__getAllBadgesResultValue0Struct extends ethereum.Tuple {
-  get badge(): SwissDAOMembership__getAllBadgesResultValue0BadgeStruct {
-    return changetype<SwissDAOMembership__getAllBadgesResultValue0BadgeStruct>(
-      this[0].toTuple(),
-    );
-  }
-
-  get holders(): Array<Address> {
-    return this[1].toAddressArray();
-  }
-}
-
-export class SwissDAOMembership__getAllBadgesResultValue0BadgeStruct extends ethereum.Tuple {
-  get imageUri(): string {
-    return this[0].toString();
-  }
-
-  get tokenId(): BigInt {
-    return this[1].toBigInt();
-  }
-
-  get name(): string {
-    return this[2].toString();
-  }
-
-  get description(): string {
-    return this[3].toString();
-  }
-
-  get attributes(): string {
-    return this[4].toString();
-  }
-}
-
-export class SwissDAOMembership__getAllMembersResultValue0Struct extends ethereum.Tuple {
-  get membership(): SwissDAOMembership__getAllMembersResultValue0MembershipStruct {
-    return changetype<SwissDAOMembership__getAllMembersResultValue0MembershipStruct>(
-      this[0].toTuple(),
-    );
-  }
-
-  get badges(): Array<SwissDAOMembership__getAllMembersResultValue0BadgesStruct> {
-    return this[1].toTupleArray<SwissDAOMembership__getAllMembersResultValue0BadgesStruct>();
-  }
-
-  get experiencePoints(): BigInt {
-    return this[2].toBigInt();
-  }
-
-  get activityPoints(): BigInt {
-    return this[3].toBigInt();
-  }
-
-  get attendedEvents(): BigInt {
-    return this[4].toBigInt();
-  }
-}
-
-export class SwissDAOMembership__getAllMembersResultValue0MembershipStruct extends ethereum.Tuple {
+export class SwissDAOMembership__getMemberStructByAddressResultValue0Struct extends ethereum.Tuple {
   get tokenId(): BigInt {
     return this[0].toBigInt();
   }
@@ -321,100 +263,6 @@ export class SwissDAOMembership__getAllMembersResultValue0MembershipStruct exten
 
   get mintedAt(): BigInt {
     return this[5].toBigInt();
-  }
-}
-
-export class SwissDAOMembership__getAllMembersResultValue0BadgesStruct extends ethereum.Tuple {
-  get imageUri(): string {
-    return this[0].toString();
-  }
-
-  get tokenId(): BigInt {
-    return this[1].toBigInt();
-  }
-
-  get name(): string {
-    return this[2].toString();
-  }
-
-  get description(): string {
-    return this[3].toString();
-  }
-
-  get attributes(): string {
-    return this[4].toString();
-  }
-}
-
-export class SwissDAOMembership__getMemberResultValue0Struct extends ethereum.Tuple {
-  get membership(): SwissDAOMembership__getMemberResultValue0MembershipStruct {
-    return changetype<SwissDAOMembership__getMemberResultValue0MembershipStruct>(
-      this[0].toTuple(),
-    );
-  }
-
-  get badges(): Array<SwissDAOMembership__getMemberResultValue0BadgesStruct> {
-    return this[1].toTupleArray<SwissDAOMembership__getMemberResultValue0BadgesStruct>();
-  }
-
-  get experiencePoints(): BigInt {
-    return this[2].toBigInt();
-  }
-
-  get activityPoints(): BigInt {
-    return this[3].toBigInt();
-  }
-
-  get attendedEvents(): BigInt {
-    return this[4].toBigInt();
-  }
-}
-
-export class SwissDAOMembership__getMemberResultValue0MembershipStruct extends ethereum.Tuple {
-  get tokenId(): BigInt {
-    return this[0].toBigInt();
-  }
-
-  get nickname(): string {
-    return this[1].toString();
-  }
-
-  get holder(): Address {
-    return this[2].toAddress();
-  }
-
-  get profileImageUri(): string {
-    return this[3].toString();
-  }
-
-  get joinedAt(): BigInt {
-    return this[4].toBigInt();
-  }
-
-  get mintedAt(): BigInt {
-    return this[5].toBigInt();
-  }
-}
-
-export class SwissDAOMembership__getMemberResultValue0BadgesStruct extends ethereum.Tuple {
-  get imageUri(): string {
-    return this[0].toString();
-  }
-
-  get tokenId(): BigInt {
-    return this[1].toBigInt();
-  }
-
-  get name(): string {
-    return this[2].toString();
-  }
-
-  get description(): string {
-    return this[3].toString();
-  }
-
-  get attributes(): string {
-    return this[4].toString();
   }
 }
 
@@ -508,6 +356,29 @@ export class SwissDAOMembership extends ethereum.SmartContract {
     let result = super.tryCall(
       "ATTENDED_EVENTS",
       "ATTENDED_EVENTS():(uint256)",
+      [],
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  BADGE_INITIAL_COUNTER(): BigInt {
+    let result = super.call(
+      "BADGE_INITIAL_COUNTER",
+      "BADGE_INITIAL_COUNTER():(uint256)",
+      [],
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_BADGE_INITIAL_COUNTER(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "BADGE_INITIAL_COUNTER",
+      "BADGE_INITIAL_COUNTER():(uint256)",
       [],
     );
     if (result.reverted) {
@@ -655,29 +526,6 @@ export class SwissDAOMembership extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
-  SKILL_BADGE_INITIAL_COUNTER(): BigInt {
-    let result = super.call(
-      "SKILL_BADGE_INITIAL_COUNTER",
-      "SKILL_BADGE_INITIAL_COUNTER():(uint256)",
-      [],
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_SKILL_BADGE_INITIAL_COUNTER(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "SKILL_BADGE_INITIAL_COUNTER",
-      "SKILL_BADGE_INITIAL_COUNTER():(uint256)",
-      [],
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
   UPGRADE_INTERFACE_VERSION(): string {
     let result = super.call(
       "UPGRADE_INTERFACE_VERSION",
@@ -762,78 +610,26 @@ export class SwissDAOMembership extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigIntArray());
   }
 
-  getAllBadges(): Array<SwissDAOMembership__getAllBadgesResultValue0Struct> {
+  getMemberStructByAddress(
+    _member: Address,
+  ): SwissDAOMembership__getMemberStructByAddressResultValue0Struct {
     let result = super.call(
-      "getAllBadges",
-      "getAllBadges():(((string,uint256,string,string,string),address[])[])",
-      [],
-    );
-
-    return result[0].toTupleArray<SwissDAOMembership__getAllBadgesResultValue0Struct>();
-  }
-
-  try_getAllBadges(): ethereum.CallResult<
-    Array<SwissDAOMembership__getAllBadgesResultValue0Struct>
-  > {
-    let result = super.tryCall(
-      "getAllBadges",
-      "getAllBadges():(((string,uint256,string,string,string),address[])[])",
-      [],
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<SwissDAOMembership__getAllBadgesResultValue0Struct>(),
-    );
-  }
-
-  getAllMembers(): Array<SwissDAOMembership__getAllMembersResultValue0Struct> {
-    let result = super.call(
-      "getAllMembers",
-      "getAllMembers():(((uint256,string,address,string,uint256,uint256),(string,uint256,string,string,string)[],uint256,uint256,uint256)[])",
-      [],
-    );
-
-    return result[0].toTupleArray<SwissDAOMembership__getAllMembersResultValue0Struct>();
-  }
-
-  try_getAllMembers(): ethereum.CallResult<
-    Array<SwissDAOMembership__getAllMembersResultValue0Struct>
-  > {
-    let result = super.tryCall(
-      "getAllMembers",
-      "getAllMembers():(((uint256,string,address,string,uint256,uint256),(string,uint256,string,string,string)[],uint256,uint256,uint256)[])",
-      [],
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<SwissDAOMembership__getAllMembersResultValue0Struct>(),
-    );
-  }
-
-  getMember(_member: Address): SwissDAOMembership__getMemberResultValue0Struct {
-    let result = super.call(
-      "getMember",
-      "getMember(address):(((uint256,string,address,string,uint256,uint256),(string,uint256,string,string,string)[],uint256,uint256,uint256))",
+      "getMemberStructByAddress",
+      "getMemberStructByAddress(address):((uint256,string,address,string,uint256,uint256))",
       [ethereum.Value.fromAddress(_member)],
     );
 
-    return changetype<SwissDAOMembership__getMemberResultValue0Struct>(
+    return changetype<SwissDAOMembership__getMemberStructByAddressResultValue0Struct>(
       result[0].toTuple(),
     );
   }
 
-  try_getMember(
+  try_getMemberStructByAddress(
     _member: Address,
-  ): ethereum.CallResult<SwissDAOMembership__getMemberResultValue0Struct> {
+  ): ethereum.CallResult<SwissDAOMembership__getMemberStructByAddressResultValue0Struct> {
     let result = super.tryCall(
-      "getMember",
-      "getMember(address):(((uint256,string,address,string,uint256,uint256),(string,uint256,string,string,string)[],uint256,uint256,uint256))",
+      "getMemberStructByAddress",
+      "getMemberStructByAddress(address):((uint256,string,address,string,uint256,uint256))",
       [ethereum.Value.fromAddress(_member)],
     );
     if (result.reverted) {
@@ -841,7 +637,7 @@ export class SwissDAOMembership extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      changetype<SwissDAOMembership__getMemberResultValue0Struct>(
+      changetype<SwissDAOMembership__getMemberStructByAddressResultValue0Struct>(
         value[0].toTuple(),
       ),
     );
@@ -1075,6 +871,48 @@ export class ConstructorCall__Outputs {
   }
 }
 
+export class AddBadgeCall extends ethereum.Call {
+  get inputs(): AddBadgeCall__Inputs {
+    return new AddBadgeCall__Inputs(this);
+  }
+
+  get outputs(): AddBadgeCall__Outputs {
+    return new AddBadgeCall__Outputs(this);
+  }
+}
+
+export class AddBadgeCall__Inputs {
+  _call: AddBadgeCall;
+
+  constructor(call: AddBadgeCall) {
+    this._call = call;
+  }
+
+  get _imageUri(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+
+  get _name(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get _description(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+
+  get _attributes(): string {
+    return this._call.inputValues[3].value.toString();
+  }
+}
+
+export class AddBadgeCall__Outputs {
+  _call: AddBadgeCall;
+
+  constructor(call: AddBadgeCall) {
+    this._call = call;
+  }
+}
+
 export class AddGuildCall extends ethereum.Call {
   get inputs(): AddGuildCall__Inputs {
     return new AddGuildCall__Inputs(this);
@@ -1113,48 +951,6 @@ export class AddGuildCall__Outputs {
   _call: AddGuildCall;
 
   constructor(call: AddGuildCall) {
-    this._call = call;
-  }
-}
-
-export class AddSkillBadgeCall extends ethereum.Call {
-  get inputs(): AddSkillBadgeCall__Inputs {
-    return new AddSkillBadgeCall__Inputs(this);
-  }
-
-  get outputs(): AddSkillBadgeCall__Outputs {
-    return new AddSkillBadgeCall__Outputs(this);
-  }
-}
-
-export class AddSkillBadgeCall__Inputs {
-  _call: AddSkillBadgeCall;
-
-  constructor(call: AddSkillBadgeCall) {
-    this._call = call;
-  }
-
-  get _imageUri(): string {
-    return this._call.inputValues[0].value.toString();
-  }
-
-  get _name(): string {
-    return this._call.inputValues[1].value.toString();
-  }
-
-  get _description(): string {
-    return this._call.inputValues[2].value.toString();
-  }
-
-  get _attributes(): string {
-    return this._call.inputValues[3].value.toString();
-  }
-}
-
-export class AddSkillBadgeCall__Outputs {
-  _call: AddSkillBadgeCall;
-
-  constructor(call: AddSkillBadgeCall) {
     this._call = call;
   }
 }
@@ -1215,32 +1011,48 @@ export class DecreaseActivityPointsCall__Outputs {
   }
 }
 
-export class DestroyCall extends ethereum.Call {
-  get inputs(): DestroyCall__Inputs {
-    return new DestroyCall__Inputs(this);
+export class EditBadgeCall extends ethereum.Call {
+  get inputs(): EditBadgeCall__Inputs {
+    return new EditBadgeCall__Inputs(this);
   }
 
-  get outputs(): DestroyCall__Outputs {
-    return new DestroyCall__Outputs(this);
+  get outputs(): EditBadgeCall__Outputs {
+    return new EditBadgeCall__Outputs(this);
   }
 }
 
-export class DestroyCall__Inputs {
-  _call: DestroyCall;
+export class EditBadgeCall__Inputs {
+  _call: EditBadgeCall;
 
-  constructor(call: DestroyCall) {
+  constructor(call: EditBadgeCall) {
     this._call = call;
   }
 
-  get apocalypse(): Address {
-    return this._call.inputValues[0].value.toAddress();
+  get _tokenId(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get _imageUri(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get _name(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+
+  get _description(): string {
+    return this._call.inputValues[3].value.toString();
+  }
+
+  get _attributes(): string {
+    return this._call.inputValues[4].value.toString();
   }
 }
 
-export class DestroyCall__Outputs {
-  _call: DestroyCall;
+export class EditBadgeCall__Outputs {
+  _call: EditBadgeCall;
 
-  constructor(call: DestroyCall) {
+  constructor(call: EditBadgeCall) {
     this._call = call;
   }
 }
@@ -1287,52 +1099,6 @@ export class EditGuildCall__Outputs {
   _call: EditGuildCall;
 
   constructor(call: EditGuildCall) {
-    this._call = call;
-  }
-}
-
-export class EditSkillBadgeCall extends ethereum.Call {
-  get inputs(): EditSkillBadgeCall__Inputs {
-    return new EditSkillBadgeCall__Inputs(this);
-  }
-
-  get outputs(): EditSkillBadgeCall__Outputs {
-    return new EditSkillBadgeCall__Outputs(this);
-  }
-}
-
-export class EditSkillBadgeCall__Inputs {
-  _call: EditSkillBadgeCall;
-
-  constructor(call: EditSkillBadgeCall) {
-    this._call = call;
-  }
-
-  get _tokenId(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
-  }
-
-  get _imageUri(): string {
-    return this._call.inputValues[1].value.toString();
-  }
-
-  get _name(): string {
-    return this._call.inputValues[2].value.toString();
-  }
-
-  get _description(): string {
-    return this._call.inputValues[3].value.toString();
-  }
-
-  get _attributes(): string {
-    return this._call.inputValues[4].value.toString();
-  }
-}
-
-export class EditSkillBadgeCall__Outputs {
-  _call: EditSkillBadgeCall;
-
-  constructor(call: EditSkillBadgeCall) {
     this._call = call;
   }
 }
