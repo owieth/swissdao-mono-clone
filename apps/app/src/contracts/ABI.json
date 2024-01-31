@@ -506,19 +506,6 @@
   },
   {
     "inputs": [],
-    "name": "EVENT_INITIAL_COUNTER",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "EXPERIENCE_POINTS",
     "outputs": [
       {
@@ -580,6 +567,62 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_imageUri",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_description",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_attributes",
+        "type": "string"
+      }
+    ],
+    "name": "addBadge",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_imageUri",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_description",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_attributes",
+        "type": "string"
+      }
+    ],
+    "name": "addGuild",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -653,165 +696,67 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "apocalypse",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "_tokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_imageUri",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_description",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_attributes",
+        "type": "string"
       }
     ],
-    "name": "destroy",
+    "name": "editBadge",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "getAllBadges",
-    "outputs": [
+    "inputs": [
       {
-        "components": [
-          {
-            "components": [
-              {
-                "internalType": "bytes",
-                "name": "svg",
-                "type": "bytes"
-              },
-              {
-                "internalType": "uint256",
-                "name": "tokenId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "string",
-                "name": "name",
-                "type": "string"
-              },
-              {
-                "internalType": "string",
-                "name": "description",
-                "type": "string"
-              },
-              {
-                "internalType": "string",
-                "name": "attributes",
-                "type": "string"
-              }
-            ],
-            "internalType": "struct SwissDAOMembership.TokenStruct",
-            "name": "badge",
-            "type": "tuple"
-          },
-          {
-            "internalType": "address[]",
-            "name": "holders",
-            "type": "address[]"
-          }
-        ],
-        "internalType": "struct SwissDAOMembership.BadgeStruct[]",
-        "name": "",
-        "type": "tuple[]"
+        "internalType": "uint256",
+        "name": "_tokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_imageUri",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_description",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_attributes",
+        "type": "string"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getAllMembers",
-    "outputs": [
-      {
-        "components": [
-          {
-            "components": [
-              {
-                "internalType": "uint256",
-                "name": "tokenId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "string",
-                "name": "nickname",
-                "type": "string"
-              },
-              {
-                "internalType": "address",
-                "name": "holder",
-                "type": "address"
-              },
-              {
-                "internalType": "string",
-                "name": "profileImageUri",
-                "type": "string"
-              },
-              {
-                "internalType": "uint256",
-                "name": "joinedAt",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "mintedAt",
-                "type": "uint256"
-              }
-            ],
-            "internalType": "struct SwissDAOMembership.MembershipStruct",
-            "name": "membership",
-            "type": "tuple"
-          },
-          {
-            "components": [
-              {
-                "internalType": "bytes",
-                "name": "svg",
-                "type": "bytes"
-              },
-              {
-                "internalType": "uint256",
-                "name": "tokenId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "string",
-                "name": "name",
-                "type": "string"
-              },
-              {
-                "internalType": "string",
-                "name": "description",
-                "type": "string"
-              },
-              {
-                "internalType": "string",
-                "name": "attributes",
-                "type": "string"
-              }
-            ],
-            "internalType": "struct SwissDAOMembership.TokenStruct[]",
-            "name": "badges",
-            "type": "tuple[]"
-          },
-          {
-            "internalType": "uint256",
-            "name": "experiencePoints",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "activityPoints",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "attendedEvents",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct SwissDAOMembership.QueryStruct[]",
-        "name": "",
-        "type": "tuple[]"
-      }
-    ],
-    "stateMutability": "view",
+    "name": "editGuild",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -822,96 +767,42 @@
         "type": "address"
       }
     ],
-    "name": "getMember",
+    "name": "getMemberStructByAddress",
     "outputs": [
       {
         "components": [
           {
-            "components": [
-              {
-                "internalType": "uint256",
-                "name": "tokenId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "string",
-                "name": "nickname",
-                "type": "string"
-              },
-              {
-                "internalType": "address",
-                "name": "holder",
-                "type": "address"
-              },
-              {
-                "internalType": "string",
-                "name": "profileImageUri",
-                "type": "string"
-              },
-              {
-                "internalType": "uint256",
-                "name": "joinedAt",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "mintedAt",
-                "type": "uint256"
-              }
-            ],
-            "internalType": "struct SwissDAOMembership.MembershipStruct",
-            "name": "membership",
-            "type": "tuple"
+            "internalType": "uint256",
+            "name": "tokenId",
+            "type": "uint256"
           },
           {
-            "components": [
-              {
-                "internalType": "bytes",
-                "name": "svg",
-                "type": "bytes"
-              },
-              {
-                "internalType": "uint256",
-                "name": "tokenId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "string",
-                "name": "name",
-                "type": "string"
-              },
-              {
-                "internalType": "string",
-                "name": "description",
-                "type": "string"
-              },
-              {
-                "internalType": "string",
-                "name": "attributes",
-                "type": "string"
-              }
-            ],
-            "internalType": "struct SwissDAOMembership.TokenStruct[]",
-            "name": "badges",
-            "type": "tuple[]"
+            "internalType": "string",
+            "name": "nickname",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "holder",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "profileImageUri",
+            "type": "string"
           },
           {
             "internalType": "uint256",
-            "name": "experiencePoints",
+            "name": "joinedAt",
             "type": "uint256"
           },
           {
             "internalType": "uint256",
-            "name": "activityPoints",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "attendedEvents",
+            "name": "mintedAt",
             "type": "uint256"
           }
         ],
-        "internalType": "struct SwissDAOMembership.QueryStruct",
+        "internalType": "struct SwissDAOMembership.MembershipStruct",
         "name": "",
         "type": "tuple"
       }
@@ -984,6 +875,52 @@
         "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getTokenStructByTokenId",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "imageUri",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tokenId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "attributes",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct SwissDAOMembership.TokenStruct",
+        "name": "",
+        "type": "tuple"
       }
     ],
     "stateMutability": "view",

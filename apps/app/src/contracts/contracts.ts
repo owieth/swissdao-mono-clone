@@ -16,10 +16,10 @@ export const WALLET_PROVIDER = createWalletClient({
   transport: http(ALCHEMY_URL)
 });
 
-export const CONTRACT_ADDRESS_SEPOLIA =
-  '0xf2fa99322a359eF5De22944c7EdFe9BCb7769426';
+export const CONTRACT_ADDRESS_OPTIMISM_SEPOLIA =
+  '0x878b42Fe88A7a135f8Ee1E978Effa824e8f32998';
 
 export const CONTRACT = {
-  address: CONTRACT_ADDRESS_SEPOLIA as Address,
+  address: CONTRACT_ADDRESS_OPTIMISM_SEPOLIA as Address,
   abi
 };
