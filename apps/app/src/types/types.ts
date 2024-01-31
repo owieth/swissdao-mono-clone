@@ -29,3 +29,34 @@ export type MemberType = {
   badges: TokenType[];
   isAdmin?: boolean;
 };
+
+export type NewMembershipType = {
+  tokenID: number;
+  holder: string;
+  profileImageUri: string;
+  nickname: string;
+  joined_At: number;
+  minted_At: number;
+  experiencePoints: number;
+  activityPoints: number;
+  attendedEvents: number;
+  guilds: [];
+};
+
+// type Token @entity {
+//   id: ID!
+//   tokenID: BigInt!
+//   imageUri: String!
+//   name: String!
+//   description: String!
+//   attributes: String!
+// }
+
+// type Guild @entity {
+//   id: ID!
+//   tokenID: BigInt!
+//   imageUri: String!
+//   name: String!
+//   description: String!
+//   holders: [Membership!]!
+// }
