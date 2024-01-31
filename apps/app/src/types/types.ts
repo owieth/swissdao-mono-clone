@@ -41,7 +41,7 @@ export type NewMembershipType = {
   experiencePoints: number;
   activityPoints: number;
   attendedEvents: number;
-  guilds: [];
+  guilds: NewGuildType[];
 };
 
 export type NewGuildType = {

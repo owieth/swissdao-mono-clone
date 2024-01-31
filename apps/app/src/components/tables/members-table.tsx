@@ -89,20 +89,20 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
       }
     },
     {
-      accessorKey: 'badges',
-      header: 'Badges',
+      accessorKey: 'guilds',
+      header: 'Guilds',
       cell: ({ row: { original } }) => (
         <div className="capitalize">
           {original.guilds.length > 0 ? (
             <AvatarGroup limit={3} className="justify-start">
               <AvatarGroupList>
-                {original.guilds.map((badge, i) => (
+                {original.guilds.map((guild, i) => (
                   <Avatar key={i}>
-                    {/* <AvatarImage
-                      src={convertIpfsToHttps(badge.imageUri || '')}
-                      alt={badge.name}
+                    <AvatarImage
+                      src={convertIpfsToHttps(guild.imageUri || '')}
+                      alt={guild.name}
                     />
-                    <AvatarFallback>{badge.name}</AvatarFallback> */}
+                    <AvatarFallback>{guild.name}</AvatarFallback>
                   </Avatar>
                 ))}
               </AvatarGroupList>

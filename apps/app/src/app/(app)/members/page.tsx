@@ -22,6 +22,8 @@ async function getData() {
         attendedEvents
         guilds {
           id
+          name
+          imageUri
         }
       }
     }
