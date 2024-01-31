@@ -54,42 +54,6 @@ export class Initialized__Params {
   }
 }
 
-export class MembershipMinted extends ethereum.Event {
-  get params(): MembershipMinted__Params {
-    return new MembershipMinted__Params(this);
-  }
-}
-
-export class MembershipMinted__Params {
-  _event: MembershipMinted;
-
-  constructor(event: MembershipMinted) {
-    this._event = event;
-  }
-
-  get tokenId(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
-  }
-}
-
-export class MembershipUpdated extends ethereum.Event {
-  get params(): MembershipUpdated__Params {
-    return new MembershipUpdated__Params(this);
-  }
-}
-
-export class MembershipUpdated__Params {
-  _event: MembershipUpdated;
-
-  constructor(event: MembershipUpdated) {
-    this._event = event;
-  }
-
-  get tokenId(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
-  }
-}
-
 export class RoleAdminChanged extends ethereum.Event {
   get params(): RoleAdminChanged__Params {
     return new RoleAdminChanged__Params(this);
@@ -165,42 +129,6 @@ export class RoleRevoked__Params {
 
   get sender(): Address {
     return this._event.parameters[2].value.toAddress();
-  }
-}
-
-export class TokenMinted extends ethereum.Event {
-  get params(): TokenMinted__Params {
-    return new TokenMinted__Params(this);
-  }
-}
-
-export class TokenMinted__Params {
-  _event: TokenMinted;
-
-  constructor(event: TokenMinted) {
-    this._event = event;
-  }
-
-  get tokenId(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
-  }
-}
-
-export class TokenUpdated extends ethereum.Event {
-  get params(): TokenUpdated__Params {
-    return new TokenUpdated__Params(this);
-  }
-}
-
-export class TokenUpdated__Params {
-  _event: TokenUpdated;
-
-  constructor(event: TokenUpdated) {
-    this._event = event;
-  }
-
-  get tokenId(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
   }
 }
 

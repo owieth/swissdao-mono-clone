@@ -60,13 +60,6 @@ export function fetchBalance(
   tokenId: BigInt
 ): BigInt {
   let contract = SwissDAOMembership.bind(tokenAddress);
-  let amount = BigInt.fromI32(0);
 
-  let tokenBalance = contract.try_balanceOf(accountAddress, tokenId);
-
-  if (!tokenBalance.reverted) {
-    amount = tokenBalance.value;
-  }
-
-  return amount;
+  return contract.balanceOf(accountAddress, tokenId);
 }
