@@ -31,6 +31,7 @@ export type MemberType = {
 };
 
 export type NewMembershipType = {
+  id: number;
   tokenID: number;
   holder: string;
   profileImageUri: string;
@@ -41,6 +42,15 @@ export type NewMembershipType = {
   activityPoints: number;
   attendedEvents: number;
   guilds: [];
+};
+
+export type NewGuildType = {
+  id: number;
+  tokenID: number;
+  name: string;
+  description: string;
+  imageUri: string;
+  holders: NewMembershipType[];
 };
 
 // type Token @entity {
