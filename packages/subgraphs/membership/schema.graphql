@@ -27,5 +27,5 @@ type Membership @entity {
   experiencePoints: BigInt!
   activityPoints: BigInt!
   attendedEvents: BigInt!
-  #guilds: [Guild!]!
+  guilds: [Guild!]! @derivedFrom(field: "holders")
 }
