@@ -1,18 +1,18 @@
 import { Address, createPublicClient, createWalletClient, http } from 'viem';
-import { sepolia } from 'viem/chains';
+import { optimismSepolia } from 'viem/chains';
 import abi from './ABI.json';
 
-export const ALCHEMY_KEY = 'PZYto3ONWzPMqPW6AV70bOzbofx11rQf';
+export const ALCHEMY_KEY = '7CxD2Ho9qFjw7rtvrAj4i371vUHX9lHA';
 
-export const ALCHEMY_URL = `https://eth-goerli.g.alchemy.com/v2/${ALCHEMY_KEY}`;
+export const ALCHEMY_URL = `https://opt-sepolia.g.alchemy.com/v2/${ALCHEMY_KEY}`;
 
 export const PUBLIC_PROVIDER = createPublicClient({
-  chain: sepolia,
+  chain: optimismSepolia,
   transport: http(ALCHEMY_URL)
 }) as any;
 
 export const WALLET_PROVIDER = createWalletClient({
-  chain: sepolia,
+  chain: optimismSepolia,
   transport: http(ALCHEMY_URL)
 });
 
