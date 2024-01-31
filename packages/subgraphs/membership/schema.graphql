@@ -13,7 +13,7 @@ type Guild @entity {
   imageUri: String!
   name: String!
   description: String!
-  holders: [String!]!
+  holders: [Membership!]!
 }
 
 type Membership @entity {

@@ -1,6 +1,6 @@
 import { Address, BigInt, Bytes } from '@graphprotocol/graph-ts';
 import { SwissDAOMembership } from '../generated/SwissDAOMembership/SwissDAOMembership';
-import { Guild, Membership } from '../generated/schema';
+import { Guild, Membership, Token } from '../generated/schema';
 
 export function fetchMembership(id: string): Membership {
   let membership = Membership.load(id);
@@ -36,6 +36,21 @@ export function fetchGuild(id: string): Guild {
   return guild;
 }
 
+export function fetchToken(id: string): Token {
+  let token = Token.load(id);
+
+  if (!token) {
+    token = new Token(id);
+    token.tokenID = BigInt.fromString(id);;
+    token.imageUri = '';
+    token.name = '';
+    token.description = '';
+    token.attributes = '';
+  }
+
+  return token;
+}
+
 export function fetchBalance(
   tokenAddress: Address,
   accountAddress: Address,
@@ -44,4 +59,12 @@ export function fetchBalance(
   let contract = SwissDAOMembership.bind(tokenAddress);
 
   return contract.balanceOf(accountAddress, tokenId);
+}
+
+export function fetchHolder(address: Address, tokenAddress: Address): Membership {
+  let contract = SwissDAOMembership.bind(tokenAddress);
+
+  //const member = contract.getMember(address);
+
+  return fetchMembership("10000");
 }

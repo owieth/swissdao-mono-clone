@@ -1,31 +1,26 @@
-import { BigInt, Bytes } from '@graphprotocol/graph-ts';
-import { Guild, Membership, Token } from '../generated/schema';
+import { BigInt } from '@graphprotocol/graph-ts';
 
 import {
   SwissDAOMembership,
   TransferSingle as TransferSingleEvent
 } from '../generated/SwissDAOMembership/SwissDAOMembership';
-import { fetchBalance, fetchGuild, fetchMembership } from './utils';
+import { fetchBalance, fetchGuild, fetchHolder, fetchMembership, fetchToken } from './utils';
 
 export function handleToken(event: TransferSingleEvent): void {
   const contract = SwissDAOMembership.bind(event.address);
 
   const tokenId = event.params.id;
 
-  let token = Token.load(tokenId.toString());
+  let token = fetchToken(tokenId.toString());
 
-  // TODO need fresh contract
-  //const tokenStruct = contract.getTokenStructByTokenId(tokenId);
+  const tokenStruct = contract.getTokenStructByTokenId(tokenId);
 
-  if (!token) {
-    token = new Token(tokenId.toString());
-    token.tokenID = tokenId;
-    token.imageUri = 'tokenStruct.imageUri';
-    token.name = 'tokenStruct.name';
-    token.description = 'tokenStruct.description';
-    token.attributes = 'tokenStruct.attributes';
-    token.save();
-  }
+  token.imageUri = tokenStruct.imageUri;
+  token.name = tokenStruct.name;
+  token.description = tokenStruct.description;
+  token.attributes = tokenStruct.attributes;
+
+  token.save();
 }
 
 export function handleGuild(event: TransferSingleEvent): void {
@@ -37,16 +32,15 @@ export function handleGuild(event: TransferSingleEvent): void {
 
   const holders = guild.holders;
 
-  // TODO need fresh contract
-  //const tokenStruct = contract.getTokenStructByTokenId(tokenId);
+  const holder = fetchHolder(event.address, event.params.to);
 
-  // guild = new Guild(tokenId.toString());
-  // guild.tokenID = tokenId;
-  // guild.imageUri = 'tokenStruct.imageUri';
-  // guild.name = 'tokenStruct.name';
-  // guild.description = 'tokenStruct.description';
+  const tokenStruct = contract.getTokenStructByTokenId(tokenId);
 
-  holders.push(event.params.to.toHexString());
+  guild.imageUri = tokenStruct.imageUri;
+  guild.name = tokenStruct.name;
+  guild.description = tokenStruct.description;
+
+  holders.push(holder.id);
 
   guild.holders = holders;
 
@@ -91,6 +85,7 @@ export function handleMembership(event: TransferSingleEvent): void {
 export function handleTransferSingle(event: TransferSingleEvent): void {
   switch (event.params.id.toString().length) {
     case 1:
+    case 3:
       handleToken(event);
       break;
 
