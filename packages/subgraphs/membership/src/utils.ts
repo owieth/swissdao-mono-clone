@@ -8,13 +8,15 @@ export function fetchMembership(id: string): Membership {
   if (!membership) {
     membership = new Membership(id);
     membership.tokenID = BigInt.fromString(id);
-    membership.profileImageUri = "";
-    membership.nickname = "";
-    membership.holder = Bytes.fromHexString("0x0000000000000000000000000000000000000000");
+    membership.profileImageUri = '';
+    membership.nickname = '';
+    membership.holder = Bytes.fromHexString(
+      '0x0000000000000000000000000000000000000000'
+    );
     membership.joined_At = BigInt.fromI32(0);
-    membership.minted_At = BigInt.fromI32(0)
-    membership.experiencePoints = BigInt.fromI32(0)
-    membership.activityPoints = BigInt.fromI32(0)
+    membership.minted_At = BigInt.fromI32(0);
+    membership.experiencePoints = BigInt.fromI32(0);
+    membership.activityPoints = BigInt.fromI32(0);
     membership.attendedEvents = BigInt.fromI32(0);
   }
 
@@ -41,7 +43,7 @@ export function fetchToken(id: string): Token {
 
   if (!token) {
     token = new Token(id);
-    token.tokenID = BigInt.fromString(id);;
+    token.tokenID = BigInt.fromString(id);
     token.imageUri = '';
     token.name = '';
     token.description = '';
@@ -61,7 +63,10 @@ export function fetchBalance(
   return contract.balanceOf(accountAddress, tokenId);
 }
 
-export function fetchHolder(tokenAddress: Address, memberAddress: Address): Membership {
+export function fetchHolder(
+  tokenAddress: Address,
+  memberAddress: Address
+): Membership {
   let contract = SwissDAOMembership.bind(tokenAddress);
 
   const member = contract.getMemberStructByAddress(memberAddress);

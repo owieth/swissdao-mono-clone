@@ -19,11 +19,11 @@ export function handleToken(event: TransferSingleEvent): void {
   token.description = tokenStruct.description;
   token.attributes = tokenStruct.attributes;
 
-  if (token.id == "1") {
+  if (token.id == '1') {
     member.experiencePoints = member.experiencePoints.plus(event.params.value);
-  } else if (token.id == "2") {
+  } else if (token.id == '2') {
     member.activityPoints = member.activityPoints.plus(event.params.value);
-  } else if (token.id == "3") {
+  } else if (token.id == '3') {
     member.attendedEvents = member.attendedEvents.plus(event.params.value);
   }
 
