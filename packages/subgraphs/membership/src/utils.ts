@@ -1,58 +1,40 @@
-import { Address, BigInt } from '@graphprotocol/graph-ts';
+import { Address, BigInt, Bytes } from '@graphprotocol/graph-ts';
 import { SwissDAOMembership } from '../generated/SwissDAOMembership/SwissDAOMembership';
+import { Guild, Membership } from '../generated/schema';
 
-// export function fetchTokenDetails(event: ethereum.Event): Token | null {
-//   //check if token details are already saved
-//   let token = Token.load(event.address.toHex());
-//   if (!token) {
-//     //if token details are not available
-//     //create a new token
-//     token = new Token(event.address.toHex());
+export function fetchMembership(id: string): Membership {
+  let membership = Membership.load(id);
 
-//     //set some default values
-//     token.name = "N/A";
-//     token.symbol = "N/A";
-//     token.decimals = BigDecimal.fromString("0");
+  if (!membership) {
+    membership = new Membership(id);
+    membership.tokenID = BigInt.fromString(id);
+    membership.profileImageUri = "";
+    membership.nickname = "";
+    membership.holder = Bytes.fromHexString("0x0000000000000000000000000000000000000000");
+    membership.joined_At = BigInt.fromI32(0);
+    membership.minted_At = BigInt.fromI32(0)
+    membership.experiencePoints = BigInt.fromI32(0)
+    membership.activityPoints = BigInt.fromI32(0)
+    membership.attendedEvents = BigInt.fromI32(0);
+  }
 
-//     //bind the contract
-//     let erc20 = ERC20.bind(event.address);
+  return membership;
+}
 
-//     //fetch name
-//     let tokenName = erc20.try_name();
-//     if (!tokenName.reverted) {
-//       token.name = tokenName.value;
-//     }
+export function fetchGuild(id: string): Guild {
+  let guild = Guild.load(id);
 
-//     //fetch symbol
-//     let tokenSymbol = erc20.try_symbol();
-//     if (!tokenSymbol.reverted) {
-//       token.symbol = tokenSymbol.value;
-//     }
+  if (!guild) {
+    guild = new Guild(id);
+    guild.tokenID = BigInt.fromString(id);
+    guild.imageUri = '';
+    guild.name = '';
+    guild.description = '';
+    guild.holders = [];
+  }
 
-//     //fetch decimals
-//     let tokenDecimal = erc20.try_decimals();
-//     if (!tokenDecimal.reverted) {
-//       token.decimals = BigDecimal.fromString(tokenDecimal.value.toString());
-//     }
-
-//     //save the details
-//     token.save();
-//   }
-//   return token;
-// }
-
-// //fetch account details
-// export function fetchAccount(address: string): Account | null {
-//   //check if account details are already saved
-//   let account = Account.load(address);
-//   if (!account) {
-//     //if account details are not available
-//     //create new account
-//     account = new Account(address);
-//     account.save();
-//   }
-//   return account;
-// }
+  return guild;
+}
 
 export function fetchBalance(
   tokenAddress: Address,

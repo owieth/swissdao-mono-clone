@@ -207,8 +207,17 @@ export class Guild extends Entity {
     this.set("description", Value.fromString(value));
   }
 
-  get holders(): MembershipLoader {
-    return new MembershipLoader("Guild", this.get("id")!.toString(), "holders");
+  get holders(): Array<string> {
+    let value = this.get("holders");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set holders(value: Array<string>) {
+    this.set("holders", Value.fromStringArray(value));
   }
 }
 
@@ -366,45 +375,5 @@ export class Membership extends Entity {
 
   set attendedEvents(value: BigInt) {
     this.set("attendedEvents", Value.fromBigInt(value));
-  }
-
-  get guilds(): GuildLoader {
-    return new GuildLoader("Membership", this.get("id")!.toString(), "guilds");
-  }
-}
-
-export class MembershipLoader extends Entity {
-  _entity: string;
-  _field: string;
-  _id: string;
-
-  constructor(entity: string, id: string, field: string) {
-    super();
-    this._entity = entity;
-    this._id = id;
-    this._field = field;
-  }
-
-  load(): Membership[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<Membership[]>(value);
-  }
-}
-
-export class GuildLoader extends Entity {
-  _entity: string;
-  _field: string;
-  _id: string;
-
-  constructor(entity: string, id: string, field: string) {
-    super();
-    this._entity = entity;
-    this._id = id;
-    this._field = field;
-  }
-
-  load(): Guild[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<Guild[]>(value);
   }
 }
