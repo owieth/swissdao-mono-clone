@@ -3,17 +3,17 @@ import { Metadata } from 'next';
 import GuildPage from './guild-page';
 
 export const metadata: Metadata = {
-  title: 'Member'
+  title: 'Guild'
 };
 
 async function getData(id: string) {
-  const members = await fetchSubgraph(`
+  const guild = await fetchSubgraph(`
     query {
       guild(id:${id}) {
         id
         name
         imageUri
-        holder {
+        holders {
           id
           tokenID
           profileImageUri
@@ -29,7 +29,7 @@ async function getData(id: string) {
     }
   `);
 
-  return members;
+  return guild;
 }
 
 export default async function Page({
