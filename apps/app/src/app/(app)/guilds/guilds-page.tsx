@@ -1,63 +1,8 @@
-// 'use client';
-
-// import Listitem from '@/components/listitem/listitem';
-// import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-// import { CONTRACT } from '@/contracts/contracts';
-// import { BADGE_INITIAL_COUNTER, GUILD_INITIAL_COUNTER } from '@/helpers/const';
-// import { TokenType } from '@/types/types';
-// import { Text, Title } from '@tremor/react';
-// import { useContractRead } from 'wagmi';
-
-// export default function BadgesPage() {
-//   const {
-//     data: guilds,
-//     isError,
-//     isLoading,
-//   } = useContractRead({ ...CONTRACT, functionName: 'getAllBadges' });
-
-//   const BadgeTriggerItem = ({ badge }: { badge: TokenType }) => (
-//     <div className="flex w-full items-center justify-between">
-//       <Avatar className="h-8 w-8">
-//         <AvatarImage src={''} alt="@shadcn" />
-//         <AvatarFallback></AvatarFallback>
-//       </Avatar>
-
-//       <span>{badge.name}</span>
-
-//       <span>Holders</span>
-//     </div>
-//   );
-
-//   return (
-//     <main className="mx-auto max-w-7xl p-4 md:p-10">
-//       <Title>Guilds</Title>
-//       <Text>A list of all swissDAO Guilds</Text>
-//       {(guilds as TokenType[])
-//         ?.filter(
-//           ({ tokenId }) =>
-//             tokenId >= GUILD_INITIAL_COUNTER && tokenId < BADGE_INITIAL_COUNTER
-//         )
-//         .map((badge, i) => (
-//           <Listitem key={i} trigger={<BadgeTriggerItem badge={badge} />}>
-//             <div>
-//               <h2>About this Badge</h2>
-//               <span>Lorem Ipsum</span>
-
-//               <h2>About this Badge</h2>
-//               <span>Lorem Ipsum</span>
-//             </div>
-//           </Listitem>
-//         ))}
-//     </main>
-//   );
-// }
-
 'use client';
 
 import { MembershipContext } from '@/contexts/membership';
 import { CONTRACT } from '@/contracts/contracts';
 import { GuildType } from '@/types/types';
-import { Text, Title } from '@tremor/react';
 import { prepareWriteContract, writeContract } from '@wagmi/core';
 import Link from 'next/link';
 import { useContext } from 'react';
@@ -80,29 +25,6 @@ function CSSstring(string: string) {
 export default function GuildsPage({ guilds }: { guilds: GuildType[] }) {
   const { membership } = useContext(MembershipContext);
 
-  // const {
-  //   data: guilds,
-  //   isError,
-  //   isLoading
-  // } = useContractRead({ ...CONTRACT, functionName: 'getAllBadges' });
-
-  // const contracts = (guilds as GuildType[])
-  //   ?.flatMap(guild => guild.holders)
-  //   .filter(member => member !== '0x0000000000000000000000000000000000000000')
-  //   .map(member => {
-  //     return {
-  //       ...CONTRACT,
-  //       functionName: 'getMember',
-  //       args: [member]
-  //     };
-  //   }) as any;
-
-  // const { data: result } = useContractReads({ contracts });
-
-  // const members = result?.flatMap(
-  //   ({ result }) => (result as MemberType).membership
-  // );
-
   const onJoinGuild = async (guildId: number) => {
     const config = await prepareWriteContract({
       ...CONTRACT,
@@ -113,12 +35,14 @@ export default function GuildsPage({ guilds }: { guilds: GuildType[] }) {
     const { hash } = await writeContract(config);
   };
 
-  console.log(guilds);
-
   return (
     <main className="mx-auto max-w-7xl p-4 md:p-10">
-      <Title>Guilds</Title>
-      <Text>All swissDAO Guilds</Text>
+      <div className="flex flex-col items-center justify-center">
+        <h1 className="text-4xl sm:text-6xl">Guilds</h1>
+        <p className="mt-5 text-gray-600 sm:mt-10 sm:text-lg">
+          All swissDAO Guilds
+        </p>
+      </div>
 
       <div className="mt-10 grid w-full grid-cols-1 gap-8 px-10 sm:grid-cols-2 md:px-20 lg:mt-20 xl:grid-cols-3">
         {guilds.map((guild, i) => (
@@ -153,9 +77,9 @@ export default function GuildsPage({ guilds }: { guilds: GuildType[] }) {
                 <h3 className="font-cal my-0 truncate text-2xl font-bold tracking-wide">
                   {guild.name}
                 </h3>
-                {/* <p className="mt-3 line-clamp-2 text-base font-normal italic leading-snug text-gray-800">
-                    Build web3 with frens 🤝
-                  </p> */}
+                <p className="mt-3 line-clamp-2 text-base font-normal italic leading-snug text-gray-800">
+                  {guild.description}
+                </p>
               </div>
             </div>
           </Link>
