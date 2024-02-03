@@ -1,3 +1,4 @@
+import { Bytes } from '@graphprotocol/graph-ts';
 import {
   SwissDAOMembership,
   TransferSingle as TransferSingleEvent
@@ -69,6 +70,13 @@ export function handleMembership(event: TransferSingleEvent): void {
   membership.holder = membershipStruct.holder;
   membership.joined_At = membershipStruct.joinedAt;
   membership.minted_At = membershipStruct.mintedAt;
+
+  membership.isAdmin = contract.hasRole(
+    Bytes.fromHexString(
+      '0x0000000000000000000000000000000000000000000000000000000000000000'
+    ),
+    membershipStruct.holder
+  );
 
   membership.save();
 }

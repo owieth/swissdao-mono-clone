@@ -27,5 +27,6 @@ type Membership @entity {
   experiencePoints: BigInt!
   activityPoints: BigInt!
   attendedEvents: BigInt!
+  isAdmin: Boolean
   guilds: [Guild!]! @derivedFrom(field: "holders")
 }

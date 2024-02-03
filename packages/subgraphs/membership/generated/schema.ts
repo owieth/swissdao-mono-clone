@@ -377,6 +377,19 @@ export class Membership extends Entity {
     this.set('attendedEvents', Value.fromBigInt(value));
   }
 
+  get isAdmin(): boolean {
+    let value = this.get('isAdmin');
+    if (!value || value.kind == ValueKind.NULL) {
+      return false;
+    } else {
+      return value.toBoolean();
+    }
+  }
+
+  set isAdmin(value: boolean) {
+    this.set('isAdmin', Value.fromBoolean(value));
+  }
+
   get guilds(): GuildLoader {
     return new GuildLoader('Membership', this.get('id')!.toString(), 'guilds');
   }
