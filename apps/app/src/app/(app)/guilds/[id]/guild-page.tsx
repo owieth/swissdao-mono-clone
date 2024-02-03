@@ -1,8 +1,10 @@
 'use client';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { getGradient } from '@/helpers/gradient';
 import { GuildType } from '@/types/types';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function GuildPage({ guild }: { guild: GuildType }) {
   return (
@@ -65,6 +67,33 @@ export default function GuildPage({ guild }: { guild: GuildType }) {
             Join
           </button>
         </div>
+      </div>
+
+      <div className="m-10 grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
+        {guild.holders.map((holder, i) => (
+          <Link href={`/members/${holder.tokenID}`} key={i}>
+            <div className="group relative flex flex-col items-center rounded-lg border border-gray-200 pb-8 transition-all hover:shadow-xl">
+              <div
+                className={`-mb-12 h-24 w-full rounded-t-lg ${getGradient(
+                  holder.nickname
+                )}`}
+              />
+
+              <div className="h-20 w-20">
+                <Avatar className="h-full w-full">
+                  <AvatarImage
+                    src={holder.profileImageUri}
+                    alt={holder.nickname}
+                  />
+                </Avatar>
+              </div>
+
+              <div className="mx-auto mt-6">
+                <p className="text-2xl">{holder.nickname}</p>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
     </>
   );
