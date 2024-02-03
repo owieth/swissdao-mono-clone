@@ -1,11 +1,5 @@
-'use client';
-
-import { MembershipContext } from '@/contexts/membership';
-import { CONTRACT } from '@/contracts/contracts';
 import { GuildType } from '@/types/types';
-import { prepareWriteContract, writeContract } from '@wagmi/core';
 import Link from 'next/link';
-import { useContext } from 'react';
 
 function CSSstring(string: string) {
   const css_json = `{"${string
@@ -23,18 +17,6 @@ function CSSstring(string: string) {
 }
 
 export default function GuildsPage({ guilds }: { guilds: GuildType[] }) {
-  const { membership } = useContext(MembershipContext);
-
-  const onJoinGuild = async (guildId: number) => {
-    const config = await prepareWriteContract({
-      ...CONTRACT,
-      functionName: 'joinGuild',
-      args: [membership?.tokenID, guildId]
-    });
-
-    const { hash } = await writeContract(config);
-  };
-
   return (
     <main className="mx-auto max-w-7xl p-4 md:p-10">
       <div className="flex flex-col items-center justify-center">

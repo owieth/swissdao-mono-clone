@@ -1,12 +1,66 @@
 'use client';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { Icons } from '@/components/ui/icons';
+import { MembershipContext } from '@/contexts/membership';
+import { CONTRACT } from '@/contracts/contracts';
 import { getGradient } from '@/helpers/gradient';
 import { GuildType } from '@/types/types';
+import {
+  prepareWriteContract,
+  waitForTransaction,
+  writeContract
+} from '@wagmi/core';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useContext, useState } from 'react';
 
 export default function GuildPage({ guild }: { guild: GuildType }) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { membership } = useContext(MembershipContext);
+
+  const isGuildMember = guild.holders
+    .map(({ holder }) => holder)
+    .includes(membership?.holder!);
+
+  const joinGuild = async () => {
+    const config = await prepareWriteContract({
+      ...CONTRACT,
+      functionName: 'joinGuild',
+      args: [membership?.tokenID, guild.id]
+    });
+
+    const { hash } = await writeContract(config);
+
+    setIsLoading(true);
+
+    await waitForTransaction({
+      hash
+    });
+
+    setIsLoading(false);
+  };
+
+  const leaveGuild = async () => {
+    const config = await prepareWriteContract({
+      ...CONTRACT,
+      functionName: 'leaveGuild',
+      args: [membership?.tokenID, guild.id]
+    });
+
+    const { hash } = await writeContract(config);
+
+    setIsLoading(true);
+
+    await waitForTransaction({
+      hash
+    });
+
+    setIsLoading(false);
+  };
+
   return (
     <>
       <div className="mx-auto w-full max-w-screen-2xl">
@@ -26,9 +80,21 @@ export default function GuildPage({ guild }: { guild: GuildType }) {
           </div>
 
           <div className="absolute -bottom-20 right-10 hidden items-center justify-center space-x-5 md:flex">
-            <button className="font-cal ease h-12 w-36 whitespace-nowrap rounded-full border-2 border-black bg-black text-lg tracking-wide text-white transition-all duration-150 hover:bg-white hover:text-black">
-              Join
-            </button>
+            {isGuildMember ? (
+              <Button size="lg" onClick={leaveGuild} disabled={isLoading}>
+                {isLoading && (
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                Leave
+              </Button>
+            ) : (
+              <Button size="lg" onClick={joinGuild} disabled={isLoading}>
+                {isLoading && (
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                Join
+              </Button>
+            )}
           </div>
         </div>
       </div>
