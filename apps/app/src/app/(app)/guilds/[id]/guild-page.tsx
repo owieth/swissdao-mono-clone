@@ -108,24 +108,15 @@ export default function GuildPage({ guild }: { guild: GuildType }) {
           </div>
           <p className="mt-5 text-base sm:text-lg">{guild.description}</p>
           <div className="my-3 flex justify-center space-x-2 md:justify-start">
-            <a
-              className="rounded-full border border-gray-500 px-3 py-1 text-base text-gray-500 transition-all hover:border-black hover:bg-black hover:text-white"
-              href="/explore/service"
-            >
+            <span className="rounded-full border border-gray-500 px-3 py-1 text-base text-gray-500 transition-all hover:border-black hover:bg-black hover:text-white">
               Service
-            </a>
-            <a
-              className="rounded-full border border-gray-500 px-3 py-1 text-base text-gray-500 transition-all hover:border-black hover:bg-black hover:text-white"
-              href="/explore/social"
-            >
+            </span>
+            <span className="rounded-full border border-gray-500 px-3 py-1 text-base text-gray-500 transition-all hover:border-black hover:bg-black hover:text-white">
               Social
-            </a>
-            <a
-              className="rounded-full border border-gray-500 px-3 py-1 text-base text-gray-500 transition-all hover:border-black hover:bg-black hover:text-white"
-              href="/explore/education"
-            >
+            </span>
+            <span className="rounded-full border border-gray-500 px-3 py-1 text-base text-gray-500 transition-all hover:border-black hover:bg-black hover:text-white">
               Education
-            </a>
+            </span>
           </div>
         </div>
         <div className="mt-8 flex flex-col items-center justify-center border-t border-gray-300 pt-8 md:hidden">
