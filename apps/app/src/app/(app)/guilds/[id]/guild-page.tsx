@@ -4,35 +4,17 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { GuildType } from '@/types/types';
 import Image from 'next/image';
 
-/*
-function CSSstring(string: string) {
-  const css_json = `{"${string
-    .replace(/; /g, '", "')
-    .replace(/: /g, '": "')
-    .replace(';', '')}"}`;
-
-  const obj = JSON.parse(css_json);
-
-  const keyValues = Object.keys(obj).map(key => {
-    var camelCased = key.replace(/-[a-z]/g, g => g[1].toUpperCase());
-    return { [camelCased]: obj[key] };
-  });
-  return Object.assign({}, ...keyValues);
-}
-*/
-
 export default function GuildPage({ guild }: { guild: GuildType }) {
   return (
     <>
       <div className="mx-auto w-full max-w-screen-2xl">
-        <div className="relative my-20 flex h-80 justify-center md:block">
-          {/* <span style={CSSstring(
-            'box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;'
-          )}>
-            <img alt="Developer DAO" sizes="100vw" src="https://daocentral.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdaojones%2Fimage%2Fupload%2FCleanShot_2021-11-24_at_04.08.33_pxl0kp.png&w=1920&q=75" />
-          </span> */}
-
-          {/* <Image alt="" src="" /> */}
+        <div className="relative flex h-80 justify-center md:block">
+          <Image
+            src="https://daocentral.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdaojones%2Fimage%2Fupload%2FCleanShot_2021-11-24_at_04.08.33_pxl0kp.png&w=1920&q=75"
+            alt=""
+            className="object-cover"
+            fill
+          />
 
           <div className="absolute -bottom-20 mx-10 h-32 w-32 overflow-hidden rounded-full border-8 border-white sm:h-48 sm:w-48">
             <Avatar className="h-full w-full">
@@ -41,7 +23,7 @@ export default function GuildPage({ guild }: { guild: GuildType }) {
             </Avatar>
           </div>
 
-          <div className="absolute -bottom-20 right-10 mx-10 hidden items-center justify-center space-x-5 md:flex">
+          <div className="absolute -bottom-20 right-10 hidden items-center justify-center space-x-5 md:flex">
             <button className="font-cal ease h-12 w-36 whitespace-nowrap rounded-full border-2 border-black bg-black text-lg tracking-wide text-white transition-all duration-150 hover:bg-white hover:text-black">
               Join
             </button>
