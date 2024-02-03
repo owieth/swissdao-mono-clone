@@ -44,7 +44,7 @@ export default function MembersPage({
           <Title>Members</Title>
           <Text>A list of all swissDAO Members</Text>
         </div>
-        {BigInt(membership?.tokenID || 0) === BigInt(0) && (
+        {(membership?.tokenID || 0) === 0 && (
           <Button>
             <Link href="/join">Get Membership</Link>
           </Button>
