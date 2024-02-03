@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 async function getData(id: string) {
-  const members = await fetchSubgraph(`
+  const member = await fetchSubgraph(`
     query {
       membership(id:${id}) {
         id
@@ -29,7 +29,7 @@ async function getData(id: string) {
     }
   `);
 
-  return members;
+  return member;
 }
 
 export default async function Page({
