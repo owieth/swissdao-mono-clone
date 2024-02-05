@@ -4,7 +4,7 @@ export const fetchSubgraph = async (query: string) => {
     {
       method: 'POST',
       body: JSON.stringify({ query }),
-      next: { revalidate: 5000 }
+      next: { revalidate: 0 }
     }
   );
 
