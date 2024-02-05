@@ -79,6 +79,10 @@ export default function GuildPage({ guild }: { guild: GuildType }) {
             </Avatar>
           </div>
 
+          <div className="absolute -bottom-24 rounded-full border border-gray-100 bg-white py-2 pl-4 pr-5 text-center shadow-md md:-bottom-20 md:left-36">
+            # {guild.id}
+          </div>
+
           <div className="absolute -bottom-20 right-10 hidden items-center justify-center space-x-5 md:flex">
             {isGuildMember ? (
               <Button size="lg" onClick={leaveGuild} disabled={isLoading}>

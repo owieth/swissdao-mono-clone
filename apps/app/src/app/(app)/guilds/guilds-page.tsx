@@ -29,7 +29,7 @@ export default function GuildsPage({ guilds }: { guilds: GuildType[] }) {
       <div className="mt-10 grid w-full grid-cols-1 gap-8 px-10 sm:grid-cols-2 md:px-20 lg:mt-20 xl:grid-cols-3">
         {guilds.map((guild, i) => (
           <Link href={`/guilds/${guild.id}`} key={i}>
-            <div className="ease rounded-2xl border-2 border-gray-100 bg-white shadow transition-all duration-200 hover:-translate-y-1 hover:shadow-xl">
+            <div className="ease relative rounded-2xl border-2 border-gray-100 bg-white shadow transition-all duration-200 hover:-translate-y-1 hover:shadow-xl">
               <div className="overflow-hidden rounded-t-2xl">
                 <span
                   style={CSSstring(
@@ -55,6 +55,10 @@ export default function GuildsPage({ guilds }: { guilds: GuildType[] }) {
                 </span>
               </div>
 
+              <div className="absolute right-5 top-[23rem] rounded-full border border-gray-100 bg-white py-2 pl-4 pr-5 text-center shadow-md">
+                # {guild.id}
+              </div>
+
               <div className="h-36 px-5 py-6">
                 <h3 className="font-cal my-0 truncate text-2xl font-bold tracking-wide">
                   {guild.name}
@@ -67,7 +71,6 @@ export default function GuildsPage({ guilds }: { guilds: GuildType[] }) {
           </Link>
         ))}
       </div>
-      {/* </Card> */}
     </main>
   );
 }
