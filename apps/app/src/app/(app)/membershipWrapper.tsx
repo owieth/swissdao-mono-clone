@@ -30,6 +30,7 @@ export default function MembershipWrapper({
             experiencePoints
             activityPoints
             attendedEvents
+            isAdmin
           }
         }
       `)) as { memberships: MembershipType[] };
