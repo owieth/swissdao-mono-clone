@@ -105,12 +105,24 @@ export function handleTransferSingle(event: TransferSingleEvent): void {
   }
 }
 
-export function handleAddBadge(event: AddBadgeEvent): void { }
+export function handleAddBadge(event: AddBadgeEvent): void {
+  const badge = fetchBadge(event.params._badgeId.toString());
+  badge.save();
+}
 
-export function handleEditBadge(event: EditBadgeEvent): void { }
+export function handleEditBadge(event: EditBadgeEvent): void {
+  const badge = fetchBadge(event.params._badgeId.toString());
 
-export function handleAddGuild(event: AddGuildEvent): void { }
+  badge.name = 'bruh';
 
-export function handleEditGuild(event: EditGuildEvent): void { }
+  badge.save();
+}
 
-export function handleEditMembership(event: EditMembershipEvent): void { }
+export function handleAddGuild(event: AddGuildEvent): void {
+  const guild = fetchGuild(event.params._guildId.toString());
+  guild.save();
+}
+
+export function handleEditGuild(event: EditGuildEvent): void {}
+
+export function handleEditMembership(event: EditMembershipEvent): void {}
