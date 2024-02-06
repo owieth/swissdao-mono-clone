@@ -11,7 +11,7 @@ import {
   BigDecimal
 } from '@graphprotocol/graph-ts';
 
-export class Token extends Entity {
+export class Badge extends Entity {
   constructor(id: string) {
     super();
     this.set('id', Value.fromString(id));
@@ -19,22 +19,22 @@ export class Token extends Entity {
 
   save(): void {
     let id = this.get('id');
-    assert(id != null, 'Cannot save Token entity without an ID');
+    assert(id != null, 'Cannot save Badge entity without an ID');
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type Token must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type Badge must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set('Token', id.toString(), this);
+      store.set('Badge', id.toString(), this);
     }
   }
 
-  static loadInBlock(id: string): Token | null {
-    return changetype<Token | null>(store.get_in_block('Token', id));
+  static loadInBlock(id: string): Badge | null {
+    return changetype<Badge | null>(store.get_in_block('Badge', id));
   }
 
-  static load(id: string): Token | null {
-    return changetype<Token | null>(store.get('Token', id));
+  static load(id: string): Badge | null {
+    return changetype<Badge | null>(store.get('Badge', id));
   }
 
   get id(): string {
@@ -312,8 +312,8 @@ export class Membership extends Entity {
     this.set('nickname', Value.fromString(value));
   }
 
-  get joined_At(): BigInt {
-    let value = this.get('joined_At');
+  get joinedAt(): BigInt {
+    let value = this.get('joinedAt');
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error('Cannot return null for a required field.');
     } else {
@@ -321,21 +321,8 @@ export class Membership extends Entity {
     }
   }
 
-  set joined_At(value: BigInt) {
-    this.set('joined_At', Value.fromBigInt(value));
-  }
-
-  get minted_At(): BigInt {
-    let value = this.get('minted_At');
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error('Cannot return null for a required field.');
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set minted_At(value: BigInt) {
-    this.set('minted_At', Value.fromBigInt(value));
+  set joinedAt(value: BigInt) {
+    this.set('joinedAt', Value.fromBigInt(value));
   }
 
   get experiencePoints(): BigInt {

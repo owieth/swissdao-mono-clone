@@ -1,4 +1,4 @@
-type Token @entity {
+type Badge @entity {
   id: ID!
   tokenID: BigInt!
   imageUri: String!
@@ -22,8 +22,7 @@ type Membership @entity {
   holder: Bytes!
   profileImageUri: String!
   nickname: String!
-  joined_At: BigInt!
-  minted_At: BigInt!
+  joinedAt: BigInt!
   experiencePoints: BigInt!
   activityPoints: BigInt!
   attendedEvents: BigInt!

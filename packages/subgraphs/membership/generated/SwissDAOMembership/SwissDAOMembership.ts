@@ -10,6 +10,42 @@ import {
   BigInt
 } from '@graphprotocol/graph-ts';
 
+export class AddBadge extends ethereum.Event {
+  get params(): AddBadge__Params {
+    return new AddBadge__Params(this);
+  }
+}
+
+export class AddBadge__Params {
+  _event: AddBadge;
+
+  constructor(event: AddBadge) {
+    this._event = event;
+  }
+
+  get _badgeId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+}
+
+export class AddGuild extends ethereum.Event {
+  get params(): AddGuild__Params {
+    return new AddGuild__Params(this);
+  }
+}
+
+export class AddGuild__Params {
+  _event: AddGuild;
+
+  constructor(event: AddGuild) {
+    this._event = event;
+  }
+
+  get _guildId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+}
+
 export class ApprovalForAll extends ethereum.Event {
   get params(): ApprovalForAll__Params {
     return new ApprovalForAll__Params(this);
@@ -33,6 +69,60 @@ export class ApprovalForAll__Params {
 
   get approved(): boolean {
     return this._event.parameters[2].value.toBoolean();
+  }
+}
+
+export class EditBadge extends ethereum.Event {
+  get params(): EditBadge__Params {
+    return new EditBadge__Params(this);
+  }
+}
+
+export class EditBadge__Params {
+  _event: EditBadge;
+
+  constructor(event: EditBadge) {
+    this._event = event;
+  }
+
+  get _badgeId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+}
+
+export class EditGuild extends ethereum.Event {
+  get params(): EditGuild__Params {
+    return new EditGuild__Params(this);
+  }
+}
+
+export class EditGuild__Params {
+  _event: EditGuild;
+
+  constructor(event: EditGuild) {
+    this._event = event;
+  }
+
+  get _guildId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+}
+
+export class EditMembership extends ethereum.Event {
+  get params(): EditMembership__Params {
+    return new EditMembership__Params(this);
+  }
+}
+
+export class EditMembership__Params {
+  _event: EditMembership;
+
+  constructor(event: EditMembership) {
+    this._event = event;
+  }
+
+  get _membershipId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
   }
 }
 
@@ -240,6 +330,28 @@ export class Upgraded__Params {
   }
 }
 
+export class SwissDAOMembership__getBadgeStructByTokenIdResultValue0Struct extends ethereum.Tuple {
+  get tokenId(): BigInt {
+    return this[0].toBigInt();
+  }
+
+  get name(): string {
+    return this[1].toString();
+  }
+
+  get description(): string {
+    return this[2].toString();
+  }
+
+  get imageUri(): string {
+    return this[3].toString();
+  }
+
+  get attributes(): string {
+    return this[4].toString();
+  }
+}
+
 export class SwissDAOMembership__getMemberStructByAddressResultValue0Struct extends ethereum.Tuple {
   get tokenId(): BigInt {
     return this[0].toBigInt();
@@ -255,14 +367,6 @@ export class SwissDAOMembership__getMemberStructByAddressResultValue0Struct exte
 
   get profileImageUri(): string {
     return this[3].toString();
-  }
-
-  get joinedAt(): BigInt {
-    return this[4].toBigInt();
-  }
-
-  get mintedAt(): BigInt {
-    return this[5].toBigInt();
   }
 }
 
@@ -281,36 +385,6 @@ export class SwissDAOMembership__getMemberStructByTokenIdResultValue0Struct exte
 
   get profileImageUri(): string {
     return this[3].toString();
-  }
-
-  get joinedAt(): BigInt {
-    return this[4].toBigInt();
-  }
-
-  get mintedAt(): BigInt {
-    return this[5].toBigInt();
-  }
-}
-
-export class SwissDAOMembership__getTokenStructByTokenIdResultValue0Struct extends ethereum.Tuple {
-  get imageUri(): string {
-    return this[0].toString();
-  }
-
-  get tokenId(): BigInt {
-    return this[1].toBigInt();
-  }
-
-  get name(): string {
-    return this[2].toString();
-  }
-
-  get description(): string {
-    return this[3].toString();
-  }
-
-  get attributes(): string {
-    return this[4].toString();
   }
 }
 
@@ -610,12 +684,45 @@ export class SwissDAOMembership extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigIntArray());
   }
 
+  getBadgeStructByTokenId(
+    _tokenId: BigInt
+  ): SwissDAOMembership__getBadgeStructByTokenIdResultValue0Struct {
+    let result = super.call(
+      'getBadgeStructByTokenId',
+      'getBadgeStructByTokenId(uint256):((uint256,string,string,string,string))',
+      [ethereum.Value.fromUnsignedBigInt(_tokenId)]
+    );
+
+    return changetype<SwissDAOMembership__getBadgeStructByTokenIdResultValue0Struct>(
+      result[0].toTuple()
+    );
+  }
+
+  try_getBadgeStructByTokenId(
+    _tokenId: BigInt
+  ): ethereum.CallResult<SwissDAOMembership__getBadgeStructByTokenIdResultValue0Struct> {
+    let result = super.tryCall(
+      'getBadgeStructByTokenId',
+      'getBadgeStructByTokenId(uint256):((uint256,string,string,string,string))',
+      [ethereum.Value.fromUnsignedBigInt(_tokenId)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      changetype<SwissDAOMembership__getBadgeStructByTokenIdResultValue0Struct>(
+        value[0].toTuple()
+      )
+    );
+  }
+
   getMemberStructByAddress(
     _member: Address
   ): SwissDAOMembership__getMemberStructByAddressResultValue0Struct {
     let result = super.call(
       'getMemberStructByAddress',
-      'getMemberStructByAddress(address):((uint256,string,address,string,uint256,uint256))',
+      'getMemberStructByAddress(address):((uint256,string,address,string))',
       [ethereum.Value.fromAddress(_member)]
     );
 
@@ -629,7 +736,7 @@ export class SwissDAOMembership extends ethereum.SmartContract {
   ): ethereum.CallResult<SwissDAOMembership__getMemberStructByAddressResultValue0Struct> {
     let result = super.tryCall(
       'getMemberStructByAddress',
-      'getMemberStructByAddress(address):((uint256,string,address,string,uint256,uint256))',
+      'getMemberStructByAddress(address):((uint256,string,address,string))',
       [ethereum.Value.fromAddress(_member)]
     );
     if (result.reverted) {
@@ -648,7 +755,7 @@ export class SwissDAOMembership extends ethereum.SmartContract {
   ): SwissDAOMembership__getMemberStructByTokenIdResultValue0Struct {
     let result = super.call(
       'getMemberStructByTokenId',
-      'getMemberStructByTokenId(uint256):((uint256,string,address,string,uint256,uint256))',
+      'getMemberStructByTokenId(uint256):((uint256,string,address,string))',
       [ethereum.Value.fromUnsignedBigInt(_tokenId)]
     );
 
@@ -662,7 +769,7 @@ export class SwissDAOMembership extends ethereum.SmartContract {
   ): ethereum.CallResult<SwissDAOMembership__getMemberStructByTokenIdResultValue0Struct> {
     let result = super.tryCall(
       'getMemberStructByTokenId',
-      'getMemberStructByTokenId(uint256):((uint256,string,address,string,uint256,uint256))',
+      'getMemberStructByTokenId(uint256):((uint256,string,address,string))',
       [ethereum.Value.fromUnsignedBigInt(_tokenId)]
     );
     if (result.reverted) {
@@ -695,39 +802,6 @@ export class SwissDAOMembership extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  getTokenStructByTokenId(
-    _tokenId: BigInt
-  ): SwissDAOMembership__getTokenStructByTokenIdResultValue0Struct {
-    let result = super.call(
-      'getTokenStructByTokenId',
-      'getTokenStructByTokenId(uint256):((string,uint256,string,string,string))',
-      [ethereum.Value.fromUnsignedBigInt(_tokenId)]
-    );
-
-    return changetype<SwissDAOMembership__getTokenStructByTokenIdResultValue0Struct>(
-      result[0].toTuple()
-    );
-  }
-
-  try_getTokenStructByTokenId(
-    _tokenId: BigInt
-  ): ethereum.CallResult<SwissDAOMembership__getTokenStructByTokenIdResultValue0Struct> {
-    let result = super.tryCall(
-      'getTokenStructByTokenId',
-      'getTokenStructByTokenId(uint256):((string,uint256,string,string,string))',
-      [ethereum.Value.fromUnsignedBigInt(_tokenId)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(
-      changetype<SwissDAOMembership__getTokenStructByTokenIdResultValue0Struct>(
-        value[0].toTuple()
-      )
-    );
   }
 
   hasRole(role: Bytes, account: Address): boolean {
@@ -888,20 +962,24 @@ export class AddBadgeCall__Inputs {
     this._call = call;
   }
 
-  get _imageUri(): string {
-    return this._call.inputValues[0].value.toString();
+  get _customTokenId(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
   }
 
   get _name(): string {
     return this._call.inputValues[1].value.toString();
   }
 
-  get _description(): string {
+  get _imageUri(): string {
     return this._call.inputValues[2].value.toString();
   }
 
-  get _attributes(): string {
+  get _description(): string {
     return this._call.inputValues[3].value.toString();
+  }
+
+  get _attributes(): string {
+    return this._call.inputValues[4].value.toString();
   }
 }
 
@@ -930,11 +1008,11 @@ export class AddGuildCall__Inputs {
     this._call = call;
   }
 
-  get _imageUri(): string {
+  get _name(): string {
     return this._call.inputValues[0].value.toString();
   }
 
-  get _name(): string {
+  get _imageUri(): string {
     return this._call.inputValues[1].value.toString();
   }
 
@@ -972,7 +1050,7 @@ export class AttendedCall__Inputs {
     this._call = call;
   }
 
-  get member(): Address {
+  get _member(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 }
@@ -1032,11 +1110,11 @@ export class EditBadgeCall__Inputs {
     return this._call.inputValues[0].value.toBigInt();
   }
 
-  get _imageUri(): string {
+  get _name(): string {
     return this._call.inputValues[1].value.toString();
   }
 
-  get _name(): string {
+  get _imageUri(): string {
     return this._call.inputValues[2].value.toString();
   }
 
@@ -1078,11 +1156,11 @@ export class EditGuildCall__Inputs {
     return this._call.inputValues[0].value.toBigInt();
   }
 
-  get _imageUri(): string {
+  get _name(): string {
     return this._call.inputValues[1].value.toString();
   }
 
-  get _name(): string {
+  get _imageUri(): string {
     return this._call.inputValues[2].value.toString();
   }
 
@@ -1154,11 +1232,11 @@ export class IncreasePointsCall__Inputs {
     this._call = call;
   }
 
-  get member(): Address {
+  get _member(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get amount(): BigInt {
+  get _amount(): BigInt {
     return this._call.inputValues[1].value.toBigInt();
   }
 }
@@ -1226,8 +1304,8 @@ export class JoinGuildCall__Inputs {
     this._call = call;
   }
 
-  get _tokenId(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
+  get _member(): Address {
+    return this._call.inputValues[0].value.toAddress();
   }
 
   get _guildId(): BigInt {
@@ -1260,8 +1338,8 @@ export class LeaveGuildCall__Inputs {
     this._call = call;
   }
 
-  get _tokenId(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
+  get _member(): Address {
+    return this._call.inputValues[0].value.toAddress();
   }
 
   get _guildId(): BigInt {
@@ -1328,15 +1406,15 @@ export class MintMembershipCall__Inputs {
     this._call = call;
   }
 
-  get member(): Address {
+  get _member(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get nickname(): string {
+  get _nickname(): string {
     return this._call.inputValues[1].value.toString();
   }
 
-  get profileImageUri(): string {
+  get _profileImageUri(): string {
     return this._call.inputValues[2].value.toString();
   }
 }
@@ -1345,6 +1423,36 @@ export class MintMembershipCall__Outputs {
   _call: MintMembershipCall;
 
   constructor(call: MintMembershipCall) {
+    this._call = call;
+  }
+}
+
+export class RageQuitCall extends ethereum.Call {
+  get inputs(): RageQuitCall__Inputs {
+    return new RageQuitCall__Inputs(this);
+  }
+
+  get outputs(): RageQuitCall__Outputs {
+    return new RageQuitCall__Outputs(this);
+  }
+}
+
+export class RageQuitCall__Inputs {
+  _call: RageQuitCall;
+
+  constructor(call: RageQuitCall) {
+    this._call = call;
+  }
+
+  get _member(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class RageQuitCall__Outputs {
+  _call: RageQuitCall;
+
+  constructor(call: RageQuitCall) {
     this._call = call;
   }
 }
