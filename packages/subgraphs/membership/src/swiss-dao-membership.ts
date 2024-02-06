@@ -1,14 +1,17 @@
-import { Bytes } from '@graphprotocol/graph-ts';
 import {
-  SwissDAOMembership,
-  TransferSingle as TransferSingleEvent,
   AddBadge as AddBadgeEvent,
-  EditBadge as EditBadgeEvent,
   AddGuild as AddGuildEvent,
+  EditBadge as EditBadgeEvent,
   EditGuild as EditGuildEvent,
-  EditMembership as EditMembershipEvent
+  EditMembership as EditMembershipEvent,
+  SwissDAOMembership,
+  TransferSingle as TransferSingleEvent
 } from '../generated/SwissDAOMembership/SwissDAOMembership';
-import { fetchGuild, fetchHolder, fetchMembership, fetchBadge } from './utils';
+import {
+  handleMembershipEdit,
+  handleMembershipTransfer
+} from './membership/membership';
+import { fetchBadge, fetchGuild, fetchHolder } from './utils';
 
 export function handleBadge(event: TransferSingleEvent): void {
   const contract = SwissDAOMembership.bind(event.address);
@@ -61,30 +64,6 @@ export function handleGuild(event: TransferSingleEvent): void {
   guild.save();
 }
 
-export function handleMembership(event: TransferSingleEvent): void {
-  const contract = SwissDAOMembership.bind(event.address);
-
-  const tokenId = event.params.id;
-
-  let membership = fetchMembership(tokenId.toString());
-
-  const membershipStruct = contract.getMemberStructByTokenId(tokenId);
-
-  membership.profileImageUri = membershipStruct.profileImageUri;
-  membership.nickname = membershipStruct.nickname;
-  membership.holder = membershipStruct.holder;
-  membership.joinedAt = event.block.timestamp;
-
-  membership.isAdmin = contract.hasRole(
-    Bytes.fromHexString(
-      '0x0000000000000000000000000000000000000000000000000000000000000000'
-    ),
-    membershipStruct.holder
-  );
-
-  membership.save();
-}
-
 export function handleTransferSingle(event: TransferSingleEvent): void {
   switch (event.params.id.toString().length) {
     case 1:
@@ -97,7 +76,7 @@ export function handleTransferSingle(event: TransferSingleEvent): void {
       break;
 
     case 5:
-      handleMembership(event);
+      handleMembershipTransfer(event);
       break;
 
     default:
@@ -123,6 +102,8 @@ export function handleAddGuild(event: AddGuildEvent): void {
   guild.save();
 }
 
-export function handleEditGuild(event: EditGuildEvent): void {}
+export function handleEditGuild(event: EditGuildEvent): void { }
 
-export function handleEditMembership(event: EditMembershipEvent): void {}
+export function handleEditMembership(event: EditMembershipEvent): void {
+  handleMembershipEdit(event);
+}
