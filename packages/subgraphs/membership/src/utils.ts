@@ -3,21 +3,6 @@ import { SwissDAOMembership } from '../generated/SwissDAOMembership/SwissDAOMemb
 import { Guild, Membership, Badge } from '../generated/schema';
 import { fetchMembership } from './membership/membership';
 
-export function fetchGuild(id: string): Guild {
-  let guild = Guild.load(id);
-
-  if (!guild) {
-    guild = new Guild(id);
-    guild.tokenID = BigInt.fromString(id);
-    guild.imageUri = '';
-    guild.name = '';
-    guild.description = '';
-    guild.holders = [];
-  }
-
-  return guild;
-}
-
 export function fetchBadge(id: string): Badge {
   let badge = Badge.load(id);
 

@@ -8,10 +8,15 @@ import {
   TransferSingle as TransferSingleEvent
 } from '../generated/SwissDAOMembership/SwissDAOMembership';
 import {
+  handleGuildAdd,
+  handleGuildEdit,
+  handleGuildTransfer
+} from './guild/guild';
+import {
   handleMembershipEdit,
   handleMembershipTransfer
 } from './membership/membership';
-import { fetchBadge, fetchGuild, fetchHolder } from './utils';
+import { fetchBadge, fetchHolder } from './utils';
 
 export function handleBadge(event: TransferSingleEvent): void {
   const contract = SwissDAOMembership.bind(event.address);
@@ -40,30 +45,6 @@ export function handleBadge(event: TransferSingleEvent): void {
   badge.save();
 }
 
-export function handleGuild(event: TransferSingleEvent): void {
-  const contract = SwissDAOMembership.bind(event.address);
-
-  const tokenId = event.params.id;
-
-  let guild = fetchGuild(tokenId.toString());
-
-  const holders = guild.holders;
-
-  const holder = fetchHolder(event.address, event.params.to);
-
-  const badgeStruct = contract.getBadgeStructByTokenId(tokenId);
-
-  guild.imageUri = badgeStruct.imageUri;
-  guild.name = badgeStruct.name;
-  guild.description = badgeStruct.description;
-
-  holders.push(holder.id);
-
-  guild.holders = holders;
-
-  guild.save();
-}
-
 export function handleTransferSingle(event: TransferSingleEvent): void {
   switch (event.params.id.toString().length) {
     case 1:
@@ -72,7 +53,7 @@ export function handleTransferSingle(event: TransferSingleEvent): void {
       break;
 
     case 2:
-      handleGuild(event);
+      handleGuildTransfer(event);
       break;
 
     case 5:
@@ -98,11 +79,12 @@ export function handleEditBadge(event: EditBadgeEvent): void {
 }
 
 export function handleAddGuild(event: AddGuildEvent): void {
-  const guild = fetchGuild(event.params._guildId.toString());
-  guild.save();
+  handleGuildAdd(event);
 }
 
-export function handleEditGuild(event: EditGuildEvent): void { }
+export function handleEditGuild(event: EditGuildEvent): void {
+  handleGuildEdit(event);
+}
 
 export function handleEditMembership(event: EditMembershipEvent): void {
   handleMembershipEdit(event);
