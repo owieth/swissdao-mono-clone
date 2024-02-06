@@ -1,35 +1,40 @@
 import { Bytes } from '@graphprotocol/graph-ts';
 import {
   SwissDAOMembership,
-  TransferSingle as TransferSingleEvent
+  TransferSingle as TransferSingleEvent,
+  AddBadge as AddBadgeEvent,
+  EditBadge as EditBadgeEvent,
+  AddGuild as AddGuildEvent,
+  EditGuild as EditGuildEvent,
+  EditMembership as EditMembershipEvent
 } from '../generated/SwissDAOMembership/SwissDAOMembership';
-import { fetchGuild, fetchHolder, fetchMembership, fetchToken } from './utils';
+import { fetchGuild, fetchHolder, fetchMembership, fetchBadge } from './utils';
 
-export function handleToken(event: TransferSingleEvent): void {
+export function handleBadge(event: TransferSingleEvent): void {
   const contract = SwissDAOMembership.bind(event.address);
 
   const tokenId = event.params.id;
 
-  let token = fetchToken(tokenId.toString());
+  let badge = fetchBadge(tokenId.toString());
 
-  const tokenStruct = contract.getTokenStructByTokenId(tokenId);
+  const badgeStruct = contract.getBadgeStructByTokenId(tokenId);
   const member = fetchHolder(event.address, event.params.to);
 
-  token.imageUri = tokenStruct.imageUri;
-  token.name = tokenStruct.name;
-  token.description = tokenStruct.description;
-  token.attributes = tokenStruct.attributes;
+  badge.imageUri = badgeStruct.imageUri;
+  badge.name = badgeStruct.name;
+  badge.description = badgeStruct.description;
+  badge.attributes = badgeStruct.attributes;
 
-  if (token.id == '1') {
+  if (badge.id == '1') {
     member.experiencePoints = member.experiencePoints.plus(event.params.value);
-  } else if (token.id == '2') {
+  } else if (badge.id == '2') {
     member.activityPoints = member.activityPoints.plus(event.params.value);
-  } else if (token.id == '3') {
+  } else if (badge.id == '3') {
     member.attendedEvents = member.attendedEvents.plus(event.params.value);
   }
 
   member.save();
-  token.save();
+  badge.save();
 }
 
 export function handleGuild(event: TransferSingleEvent): void {
@@ -43,11 +48,11 @@ export function handleGuild(event: TransferSingleEvent): void {
 
   const holder = fetchHolder(event.address, event.params.to);
 
-  const tokenStruct = contract.getTokenStructByTokenId(tokenId);
+  const badgeStruct = contract.getBadgeStructByTokenId(tokenId);
 
-  guild.imageUri = tokenStruct.imageUri;
-  guild.name = tokenStruct.name;
-  guild.description = tokenStruct.description;
+  guild.imageUri = badgeStruct.imageUri;
+  guild.name = badgeStruct.name;
+  guild.description = badgeStruct.description;
 
   holders.push(holder.id);
 
@@ -68,8 +73,7 @@ export function handleMembership(event: TransferSingleEvent): void {
   membership.profileImageUri = membershipStruct.profileImageUri;
   membership.nickname = membershipStruct.nickname;
   membership.holder = membershipStruct.holder;
-  membership.joined_At = membershipStruct.joinedAt;
-  membership.minted_At = membershipStruct.mintedAt;
+  membership.joinedAt = event.block.timestamp;
 
   membership.isAdmin = contract.hasRole(
     Bytes.fromHexString(
@@ -85,7 +89,7 @@ export function handleTransferSingle(event: TransferSingleEvent): void {
   switch (event.params.id.toString().length) {
     case 1:
     case 3:
-      handleToken(event);
+      handleBadge(event);
       break;
 
     case 2:
@@ -100,3 +104,13 @@ export function handleTransferSingle(event: TransferSingleEvent): void {
       break;
   }
 }
+
+export function handleAddBadge(event: AddBadgeEvent): void { }
+
+export function handleEditBadge(event: EditBadgeEvent): void { }
+
+export function handleAddGuild(event: AddGuildEvent): void { }
+
+export function handleEditGuild(event: EditGuildEvent): void { }
+
+export function handleEditMembership(event: EditMembershipEvent): void { }

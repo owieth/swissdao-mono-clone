@@ -1,6 +1,6 @@
 import { Address, BigInt, Bytes } from '@graphprotocol/graph-ts';
 import { SwissDAOMembership } from '../generated/SwissDAOMembership/SwissDAOMembership';
-import { Guild, Membership, Token } from '../generated/schema';
+import { Guild, Membership, Badge } from '../generated/schema';
 
 export function fetchMembership(id: string): Membership {
   let membership = Membership.load(id);
@@ -13,8 +13,7 @@ export function fetchMembership(id: string): Membership {
     membership.holder = Bytes.fromHexString(
       '0x0000000000000000000000000000000000000000'
     );
-    membership.joined_At = BigInt.fromI32(0);
-    membership.minted_At = BigInt.fromI32(0);
+    membership.joinedAt = BigInt.fromI32(0);
     membership.experiencePoints = BigInt.fromI32(0);
     membership.activityPoints = BigInt.fromI32(0);
     membership.attendedEvents = BigInt.fromI32(0);
@@ -38,19 +37,19 @@ export function fetchGuild(id: string): Guild {
   return guild;
 }
 
-export function fetchToken(id: string): Token {
-  let token = Token.load(id);
+export function fetchBadge(id: string): Badge {
+  let badge = Badge.load(id);
 
-  if (!token) {
-    token = new Token(id);
-    token.tokenID = BigInt.fromString(id);
-    token.imageUri = '';
-    token.name = '';
-    token.description = '';
-    token.attributes = '';
+  if (!badge) {
+    badge = new Badge(id);
+    badge.tokenID = BigInt.fromString(id);
+    badge.imageUri = '';
+    badge.name = '';
+    badge.description = '';
+    badge.attributes = '';
   }
 
-  return token;
+  return badge;
 }
 
 export function fetchBalance(
