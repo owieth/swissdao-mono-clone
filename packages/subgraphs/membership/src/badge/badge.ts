@@ -18,6 +18,7 @@ export function fetchBadge(id: string): Badge {
     badge.name = '';
     badge.description = '';
     badge.attributes = '';
+    badge.holders = [];
   }
 
   return badge;
@@ -32,6 +33,7 @@ export function handleBadgeTransfer(event: TransferSingleEvent): void {
 
   const badgeStruct = contract.getBadgeStructByTokenId(tokenId);
   const member = fetchHolder(event.address, event.params.to);
+  const holders = badge.holders;
 
   badge.imageUri = badgeStruct.imageUri;
   badge.name = badgeStruct.name;
@@ -48,6 +50,11 @@ export function handleBadgeTransfer(event: TransferSingleEvent): void {
     } else if (badge.id == '3') {
       member.attendedEvents = member.attendedEvents.plus(event.params.value);
     }
+
+    holders.push(member.id);
+
+    badge.holders = holders;
+
     member.save();
   } else if (event.params.to == Address.zero()) {
     if (badge.id == '1') {
@@ -59,6 +66,11 @@ export function handleBadgeTransfer(event: TransferSingleEvent): void {
     } else if (badge.id == '3') {
       member.attendedEvents = member.attendedEvents.minus(event.params.value);
     }
+
+    const indexOfHolder = holders.indexOf(member.id);
+
+    badge.holders = holders.splice(indexOfHolder, 1);
+
     member.save();
   }
 

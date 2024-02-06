@@ -5,6 +5,7 @@ type Badge @entity {
   name: String!
   description: String!
   attributes: String!
+  holders: [Membership!]!
 }
 
 type Guild @entity {
@@ -28,4 +29,5 @@ type Membership @entity {
   attendedEvents: BigInt!
   isAdmin: Boolean
   guilds: [Guild!]! @derivedFrom(field: "holders")
+  badges: [Badge!]! @derivedFrom(field: "holders")
 }

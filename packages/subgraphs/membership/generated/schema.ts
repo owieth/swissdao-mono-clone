@@ -114,6 +114,19 @@ export class Badge extends Entity {
   set attributes(value: string) {
     this.set('attributes', Value.fromString(value));
   }
+
+  get holders(): Array<string> {
+    let value = this.get('holders');
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error('Cannot return null for a required field.');
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set holders(value: Array<string>) {
+    this.set('holders', Value.fromStringArray(value));
+  }
 }
 
 export class Guild extends Entity {
@@ -380,6 +393,10 @@ export class Membership extends Entity {
   get guilds(): GuildLoader {
     return new GuildLoader('Membership', this.get('id')!.toString(), 'guilds');
   }
+
+  get badges(): BadgeLoader {
+    return new BadgeLoader('Membership', this.get('id')!.toString(), 'badges');
+  }
 }
 
 export class GuildLoader extends Entity {
@@ -397,5 +414,23 @@ export class GuildLoader extends Entity {
   load(): Guild[] {
     let value = store.loadRelated(this._entity, this._id, this._field);
     return changetype<Guild[]>(value);
+  }
+}
+
+export class BadgeLoader extends Entity {
+  _entity: string;
+  _field: string;
+  _id: string;
+
+  constructor(entity: string, id: string, field: string) {
+    super();
+    this._entity = entity;
+    this._id = id;
+    this._field = field;
+  }
+
+  load(): Badge[] {
+    let value = store.loadRelated(this._entity, this._id, this._field);
+    return changetype<Badge[]>(value);
   }
 }
