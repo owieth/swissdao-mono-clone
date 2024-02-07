@@ -17,8 +17,10 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - Token
-        - Membership
+        - TokenTransaction
+        - Badge
         - Guild
+        - Membership
       abis:
         - name: SwissDAOMembership
           file: ./abis/SwissDAOMembership.json

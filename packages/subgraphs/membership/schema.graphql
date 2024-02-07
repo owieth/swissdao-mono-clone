@@ -1,19 +1,40 @@
-type Badge @entity {
+type Token @entity {
   id: ID!
   tokenID: BigInt!
-  imageUri: String!
   name: String!
   description: String!
   attributes: String!
+  imageUri: String!
+  totalAmount: BigInt!
+  transactions: [TokenTransaction!]!
+}
+
+type TokenTransaction @entity {
+  id: ID!
+  tokenID: BigInt!
+  from: Bytes!
+  to: Bytes!
+  amount: BigInt!
+  txHash: Bytes!
+  timestamp: BigInt!
+}
+
+type Badge @entity {
+  id: ID!
+  tokenID: BigInt!
+  name: String!
+  description: String!
+  attributes: String!
+  imageUri: String!
   holders: [Membership!]!
 }
 
 type Guild @entity {
   id: ID!
   tokenID: BigInt!
-  imageUri: String!
   name: String!
   description: String!
+  imageUri: String!
   holders: [Membership!]!
 }
 
@@ -21,8 +42,8 @@ type Membership @entity {
   id: ID!
   tokenID: BigInt!
   holder: Bytes!
-  profileImageUri: String!
   nickname: String!
+  profileImageUri: String!
   joinedAt: BigInt!
   experiencePoints: BigInt!
   activityPoints: BigInt!
