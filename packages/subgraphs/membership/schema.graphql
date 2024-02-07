@@ -8,6 +8,7 @@ type Token @entity {
   totalAmount: BigInt!
   transactions: [TokenTransaction!]!
   balances: [TokenBalance!]!
+  holders: [Membership!]!
 }
 
 type TokenTransaction @entity {
@@ -57,4 +58,5 @@ type Membership @entity {
   isAdmin: Boolean
   guilds: [Guild!]! @derivedFrom(field: "holders")
   badges: [Badge!]! @derivedFrom(field: "holders")
+  tokens: [Token!]! @derivedFrom(field: "holders")
 }

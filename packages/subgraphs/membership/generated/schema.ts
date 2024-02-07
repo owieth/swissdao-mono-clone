@@ -153,6 +153,19 @@ export class Token extends Entity {
   set balances(value: Array<string>) {
     this.set('balances', Value.fromStringArray(value));
   }
+
+  get holders(): Array<string> {
+    let value = this.get('holders');
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error('Cannot return null for a required field.');
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set holders(value: Array<string>) {
+    this.set('holders', Value.fromStringArray(value));
+  }
 }
 
 export class TokenTransaction extends Entity {
@@ -718,6 +731,10 @@ export class Membership extends Entity {
   get badges(): BadgeLoader {
     return new BadgeLoader('Membership', this.get('id')!.toString(), 'badges');
   }
+
+  get tokens(): TokenLoader {
+    return new TokenLoader('Membership', this.get('id')!.toString(), 'tokens');
+  }
 }
 
 export class GuildLoader extends Entity {
@@ -753,5 +770,23 @@ export class BadgeLoader extends Entity {
   load(): Badge[] {
     let value = store.loadRelated(this._entity, this._id, this._field);
     return changetype<Badge[]>(value);
+  }
+}
+
+export class TokenLoader extends Entity {
+  _entity: string;
+  _field: string;
+  _id: string;
+
+  constructor(entity: string, id: string, field: string) {
+    super();
+    this._entity = entity;
+    this._id = id;
+    this._field = field;
+  }
+
+  load(): Token[] {
+    let value = store.loadRelated(this._entity, this._id, this._field);
+    return changetype<Token[]>(value);
   }
 }

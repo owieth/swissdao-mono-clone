@@ -19,6 +19,7 @@ export function fetchToken(id: string): Token {
     token.totalAmount = BigInt.fromI32(0);
     token.transactions = [];
     token.balances = [];
+    token.holders = [];
   }
 
   return token;
@@ -71,6 +72,7 @@ export function handleTokenTransfer(event: TransferSingleEvent): void {
 
   const transactions = token.transactions;
   const balances = token.balances;
+  const holders = token.holders;
 
   let tokenTransaction = fetchTokenTransaction(
     `${tokenId}-${event.params.value}-${from.toHexString()}-${to.toHexString()}`
@@ -95,8 +97,10 @@ export function handleTokenTransfer(event: TransferSingleEvent): void {
     tokenBalance.balance = tokenBalance.balance.plus(value);
 
     balances.push(tokenBalance.id);
+    holders.push(member.id);
 
     token.balances = balances;
+    token.holders = holders;
     tokenBalance.save();
 
     if (token.id == '1') {
@@ -114,8 +118,10 @@ export function handleTokenTransfer(event: TransferSingleEvent): void {
     tokenBalance.balance = tokenBalance.balance.minus(value);
 
     const indexOfBalance = balances.indexOf(tokenBalance.id);
+    const indexOfHolder = holders.indexOf(member.id);
 
     token.balances = balances.splice(indexOfBalance, 1);
+    token.holders = balances.splice(indexOfHolder, 1);
     tokenBalance.save();
 
     let burnToken = new Token('0');
