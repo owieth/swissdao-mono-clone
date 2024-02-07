@@ -7,6 +7,7 @@ type Token @entity {
   imageUri: String!
   totalAmount: BigInt!
   transactions: [TokenTransaction!]!
+  balances: [TokenBalance!]!
 }
 
 type TokenTransaction @entity {
@@ -17,6 +18,11 @@ type TokenTransaction @entity {
   amount: BigInt!
   txHash: Bytes!
   timestamp: BigInt!
+}
+
+type TokenBalance @entity {
+  id: ID!
+  balance: BigInt!
 }
 
 type Badge @entity {

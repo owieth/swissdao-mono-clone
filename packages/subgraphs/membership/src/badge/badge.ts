@@ -41,32 +41,12 @@ export function handleBadgeTransfer(event: TransferSingleEvent): void {
   badge.attributes = badgeStruct.attributes;
 
   if (event.params.from == Address.zero()) {
-    if (badge.id == '1') {
-      member.experiencePoints = member.experiencePoints.plus(
-        event.params.value
-      );
-    } else if (badge.id == '2') {
-      member.activityPoints = member.activityPoints.plus(event.params.value);
-    } else if (badge.id == '3') {
-      member.attendedEvents = member.attendedEvents.plus(event.params.value);
-    }
-
     holders.push(member.id);
 
     badge.holders = holders;
 
     member.save();
   } else if (event.params.to == Address.zero()) {
-    if (badge.id == '1') {
-      member.experiencePoints = member.experiencePoints.minus(
-        event.params.value
-      );
-    } else if (badge.id == '2') {
-      member.activityPoints = member.activityPoints.minus(event.params.value);
-    } else if (badge.id == '3') {
-      member.attendedEvents = member.attendedEvents.minus(event.params.value);
-    }
-
     const indexOfHolder = holders.indexOf(member.id);
 
     badge.holders = holders.splice(indexOfHolder, 1);

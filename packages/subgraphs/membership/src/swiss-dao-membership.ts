@@ -20,16 +20,20 @@ import {
   handleMembershipEdit,
   handleMembershipTransfer
 } from './membership/membership';
+import { handleTokenTransfer } from './tokens/tokens';
 
 export function handleTransferSingle(event: TransferSingleEvent): void {
   switch (event.params.id.toString().length) {
     case 1:
-    case 3:
-      handleBadgeTransfer(event);
+      handleTokenTransfer(event);
       break;
 
     case 2:
       handleGuildTransfer(event);
+      break;
+
+    case 3:
+      handleBadgeTransfer(event);
       break;
 
     case 5:

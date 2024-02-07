@@ -1,8 +1,8 @@
-import { Bytes, BigInt, Address } from '@graphprotocol/graph-ts';
+import { Address, BigInt, Bytes } from '@graphprotocol/graph-ts';
 import {
+  EditMembership as EditMembershipEvent,
   SwissDAOMembership,
-  TransferSingle as TransferSingleEvent,
-  EditMembership as EditMembershipEvent
+  TransferSingle as TransferSingleEvent
 } from '../../generated/SwissDAOMembership/SwissDAOMembership';
 import { Membership } from '../../generated/schema';
 
@@ -18,9 +18,9 @@ export function fetchMembership(id: string): Membership {
       '0x0000000000000000000000000000000000000000'
     );
     membership.joinedAt = BigInt.fromI32(0);
-    membership.experiencePoints = BigInt.fromI32(0);
-    membership.activityPoints = BigInt.fromI32(0);
-    membership.attendedEvents = BigInt.fromI32(0);
+    membership.experiencePoints = '0';
+    membership.activityPoints = '0';
+    membership.attendedEvents = '0';
   }
 
   return membership;
@@ -52,9 +52,9 @@ export function handleMembershipTransfer(event: TransferSingleEvent): void {
     membership.profileImageUri = '';
     membership.holder = event.params.to;
     membership.joinedAt = BigInt.fromI32(0);
-    membership.experiencePoints = BigInt.fromI32(0);
-    membership.activityPoints = BigInt.fromI32(0);
-    membership.attendedEvents = BigInt.fromI32(0);
+    membership.experiencePoints = '0';
+    membership.activityPoints = '0';
+    membership.attendedEvents = '0';
     membership.isAdmin = false;
     membership.save();
   }
