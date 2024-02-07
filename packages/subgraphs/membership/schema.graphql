@@ -45,9 +45,9 @@ type Membership @entity {
   nickname: String!
   profileImageUri: String!
   joinedAt: BigInt!
-  experiencePoints: BigInt!
-  activityPoints: BigInt!
-  attendedEvents: BigInt!
+  experiencePoints: Token!
+  activityPoints: Token!
+  attendedEvents: Token!
   isAdmin: Boolean
   guilds: [Guild!]! @derivedFrom(field: "holders")
   badges: [Badge!]! @derivedFrom(field: "holders")

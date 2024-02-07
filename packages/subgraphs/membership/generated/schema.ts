@@ -591,43 +591,43 @@ export class Membership extends Entity {
     this.set('joinedAt', Value.fromBigInt(value));
   }
 
-  get experiencePoints(): BigInt {
+  get experiencePoints(): string {
     let value = this.get('experiencePoints');
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error('Cannot return null for a required field.');
     } else {
-      return value.toBigInt();
+      return value.toString();
     }
   }
 
-  set experiencePoints(value: BigInt) {
-    this.set('experiencePoints', Value.fromBigInt(value));
+  set experiencePoints(value: string) {
+    this.set('experiencePoints', Value.fromString(value));
   }
 
-  get activityPoints(): BigInt {
+  get activityPoints(): string {
     let value = this.get('activityPoints');
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error('Cannot return null for a required field.');
     } else {
-      return value.toBigInt();
+      return value.toString();
     }
   }
 
-  set activityPoints(value: BigInt) {
-    this.set('activityPoints', Value.fromBigInt(value));
+  set activityPoints(value: string) {
+    this.set('activityPoints', Value.fromString(value));
   }
 
-  get attendedEvents(): BigInt {
+  get attendedEvents(): string {
     let value = this.get('attendedEvents');
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error('Cannot return null for a required field.');
     } else {
-      return value.toBigInt();
+      return value.toString();
     }
   }
 
-  set attendedEvents(value: BigInt) {
-    this.set('attendedEvents', Value.fromBigInt(value));
+  set attendedEvents(value: string) {
+    this.set('attendedEvents', Value.fromString(value));
   }
 
   get isAdmin(): boolean {
