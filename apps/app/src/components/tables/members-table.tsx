@@ -97,19 +97,37 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
             <AvatarGroup limit={3} className="justify-start">
               <AvatarGroupList>
                 {original.guilds.map((guild, i) => (
-                  <Avatar key={i}>
-                    <AvatarImage
-                      src={convertIpfsToHttps(guild.imageUri || '')}
-                      alt={guild.name}
-                    />
-                    <AvatarFallback>{guild.name}</AvatarFallback>
-                  </Avatar>
+                  <DropdownMenu key={i}>
+                    <DropdownMenuTrigger asChild className="cursor-pointer">
+                      <Avatar>
+                        <AvatarImage
+                          src={convertIpfsToHttps(guild.imageUri || '')}
+                          alt={guild.name}
+                        />
+                        <AvatarFallback>{guild.name}</AvatarFallback>
+                      </Avatar>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                      className="w-56"
+                      align="end"
+                      forceMount
+                    >
+                      <DropdownMenuItem>
+                        <Link
+                          href={`/guilds/${guild.id}`}
+                          className="flex w-full items-center"
+                        >
+                          Guild
+                        </Link>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 ))}
               </AvatarGroupList>
               <AvatarOverflowIndicator />
             </AvatarGroup>
           ) : (
-            <p>No Badges yet.</p>
+            <p>No Guilds yet.</p>
           )}
         </div>
       )
@@ -118,7 +136,7 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
       accessorKey: 'activityPoints',
       header: 'Activity Points',
       cell: ({ row: { original } }) => {
-        const value = original.activityPoints;
+        const value = original.activityPoints.totalAmount;
 
         return (
           <div className="flex items-center gap-4">
@@ -138,7 +156,7 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
       accessorKey: 'experiencePoints',
       header: 'Experience Points',
       cell: ({ row: { original } }) => {
-        const value = original.experiencePoints;
+        const value = original.experiencePoints.totalAmount;
 
         return (
           <div className="flex items-center gap-4">
@@ -158,7 +176,7 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
       accessorKey: 'attendedEvents',
       header: 'Attended Events',
       cell: ({ row: { original } }) => {
-        const value = original.attendedEvents;
+        const value = original.attendedEvents.totalAmount;
 
         return (
           <div className="flex items-center gap-4">
