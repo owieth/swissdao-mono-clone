@@ -33,11 +33,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { MembershipContext } from '@/contexts/membership';
-import {
-  ACTIVITY_POINTS_IPFS_URL,
-  ATTENDED_EVENTS_IPFS_URL,
-  EXPERIENCE_POINTS_IPFS_URL
-} from '@/helpers/const';
 import { convertIpfsToHttps } from '@/helpers/ipfs';
 import { MembershipType } from '@/types/types';
 import Link from 'next/link';
@@ -136,16 +131,13 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
       accessorKey: 'activityPoints',
       header: 'Activity Points',
       cell: ({ row: { original } }) => {
-        const value = original.activityPoints.totalAmount;
+        const { imageUri, totalAmount } = original.activityPoints;
 
         return (
           <div className="flex items-center gap-4">
-            {Number(value)}
+            {totalAmount}
             <Avatar className="h-8 w-8">
-              <AvatarImage
-                src={convertIpfsToHttps(ACTIVITY_POINTS_IPFS_URL)}
-                alt="AP"
-              />
+              <AvatarImage src={convertIpfsToHttps(imageUri)} alt="AP" />
               <AvatarFallback>AP</AvatarFallback>
             </Avatar>
           </div>
@@ -156,16 +148,13 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
       accessorKey: 'experiencePoints',
       header: 'Experience Points',
       cell: ({ row: { original } }) => {
-        const value = original.experiencePoints.totalAmount;
+        const { imageUri, totalAmount } = original.experiencePoints;
 
         return (
           <div className="flex items-center gap-4">
-            {Number(value)}
+            {totalAmount}
             <Avatar className="h-8 w-8">
-              <AvatarImage
-                src={convertIpfsToHttps(EXPERIENCE_POINTS_IPFS_URL)}
-                alt="XP"
-              />
+              <AvatarImage src={convertIpfsToHttps(imageUri)} alt="XP" />
               <AvatarFallback>XP</AvatarFallback>
             </Avatar>
           </div>
@@ -176,16 +165,13 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
       accessorKey: 'attendedEvents',
       header: 'Attended Events',
       cell: ({ row: { original } }) => {
-        const value = original.attendedEvents.totalAmount;
+        const { imageUri, totalAmount } = original.attendedEvents;
 
         return (
           <div className="flex items-center gap-4">
-            {Number(value)}
+            {totalAmount}
             <Avatar className="h-8 w-8">
-              <AvatarImage
-                src={convertIpfsToHttps(ATTENDED_EVENTS_IPFS_URL)}
-                alt="Events"
-              />
+              <AvatarImage src={convertIpfsToHttps(imageUri)} alt="Events" />
               <AvatarFallback>Events</AvatarFallback>
             </Avatar>
           </div>

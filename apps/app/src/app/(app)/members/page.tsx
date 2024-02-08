@@ -17,12 +17,15 @@ async function getData() {
         holder
         joinedAt
         experiencePoints {
+          imageUri
           totalAmount
         }
         activityPoints {
+          imageUri
           totalAmount
         }
         attendedEvents {
+          imageUri
           totalAmount
         }
         guilds {
