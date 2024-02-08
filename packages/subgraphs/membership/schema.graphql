@@ -6,12 +6,12 @@ type Token @entity {
   attributes: String!
   imageUri: String!
   totalAmount: BigInt!
-  transactions: [TokenTransaction!]!
+  transactions: [Transaction!]!
   balances: [TokenBalance!]!
   holders: [Membership!]!
 }
 
-type TokenTransaction @entity {
+type Transaction @entity {
   id: ID!
   tokenID: BigInt!
   from: Membership

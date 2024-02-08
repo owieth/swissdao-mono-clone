@@ -1,10 +1,10 @@
-import { Address, BigInt, Bytes } from '@graphprotocol/graph-ts';
+import { Address, BigInt } from '@graphprotocol/graph-ts';
 import {
   SwissDAOMembership,
   TransferSingle as TransferSingleEvent
 } from '../../generated/SwissDAOMembership/SwissDAOMembership';
-import { Token, TokenBalance, TokenTransaction } from '../../generated/schema';
-import { fetchHolder, fetchTokenTransaction } from '../utils';
+import { Token, TokenBalance } from '../../generated/schema';
+import { fetchHolder, fetchTransaction } from '../utils';
 
 export function fetchToken(id: string): Token {
   let token = Token.load(id);
@@ -58,22 +58,20 @@ export function handleTokenTransfer(event: TransferSingleEvent): void {
   const balances = token.balances;
   const holders = token.holders;
 
-  let tokenTransaction = fetchTokenTransaction(
-    event.transaction.hash.toHexString()
-  );
+  let transaction = fetchTransaction(event.transaction.hash.toHexString());
 
-  tokenTransaction.tokenID = tokenId;
-  tokenTransaction.amount = value;
-  tokenTransaction.txHash = event.transaction.hash;
-  tokenTransaction.timestamp = event.block.timestamp;
+  transaction.tokenID = tokenId;
+  transaction.amount = value;
+  transaction.txHash = event.transaction.hash;
+  transaction.timestamp = event.block.timestamp;
 
-  transactions.push(tokenTransaction.id);
+  transactions.push(transaction.id);
 
   token.transactions = transactions;
 
   if (event.params.from == Address.zero()) {
-    tokenTransaction.type = 'TOKEN_MINT';
-    tokenTransaction.to = fetchHolder(event.address, to).id;
+    transaction.type = 'TOKEN_MINT';
+    transaction.to = fetchHolder(event.address, to).id;
 
     token.totalAmount = token.totalAmount.plus(value);
 
@@ -96,8 +94,8 @@ export function handleTokenTransfer(event: TransferSingleEvent): void {
     }
     member.save();
   } else if (event.params.to == Address.zero()) {
-    tokenTransaction.type = 'TOKEN_BURN';
-    tokenTransaction.from = fetchHolder(event.address, from).id;
+    transaction.type = 'TOKEN_BURN';
+    transaction.from = fetchHolder(event.address, from).id;
 
     token.totalAmount = token.totalAmount.minus(value);
 
@@ -135,6 +133,6 @@ export function handleTokenTransfer(event: TransferSingleEvent): void {
     member.save();
   }
 
-  tokenTransaction.save();
+  transaction.save();
   token.save();
 }

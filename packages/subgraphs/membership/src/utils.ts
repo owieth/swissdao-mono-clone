@@ -1,6 +1,6 @@
 import { Address, BigInt, Bytes } from '@graphprotocol/graph-ts';
 import { SwissDAOMembership } from '../generated/SwissDAOMembership/SwissDAOMembership';
-import { Membership, TokenTransaction } from '../generated/schema';
+import { Membership, Transaction } from '../generated/schema';
 import { fetchMembership } from './membership/membership';
 
 export function fetchBalance(
@@ -24,19 +24,19 @@ export function fetchHolder(
   return fetchMembership(member.tokenId.toString());
 }
 
-export function fetchTokenTransaction(id: string): TokenTransaction {
-  let tokenTransaction = TokenTransaction.load(id);
+export function fetchTransaction(id: string): Transaction {
+  let transaction = Transaction.load(id);
 
-  if (!tokenTransaction) {
-    tokenTransaction = new TokenTransaction(id);
-    tokenTransaction.tokenID = BigInt.fromI32(0);
-    tokenTransaction.from = '';
-    tokenTransaction.to = '';
-    tokenTransaction.amount = BigInt.fromI32(0);
-    tokenTransaction.txHash = Bytes.fromI32(0);
-    tokenTransaction.type = 'NONE';
-    tokenTransaction.timestamp = BigInt.fromI32(0);
+  if (!transaction) {
+    transaction = new Transaction(id);
+    transaction.tokenID = BigInt.fromI32(0);
+    transaction.from = '';
+    transaction.to = '';
+    transaction.amount = BigInt.fromI32(0);
+    transaction.txHash = Bytes.fromI32(0);
+    transaction.type = 'NONE';
+    transaction.timestamp = BigInt.fromI32(0);
   }
 
-  return tokenTransaction;
+  return transaction;
 }

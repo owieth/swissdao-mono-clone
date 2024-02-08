@@ -168,7 +168,7 @@ export class Token extends Entity {
   }
 }
 
-export class TokenTransaction extends Entity {
+export class Transaction extends Entity {
   constructor(id: string) {
     super();
     this.set('id', Value.fromString(id));
@@ -176,26 +176,24 @@ export class TokenTransaction extends Entity {
 
   save(): void {
     let id = this.get('id');
-    assert(id != null, 'Cannot save TokenTransaction entity without an ID');
+    assert(id != null, 'Cannot save Transaction entity without an ID');
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type TokenTransaction must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type Transaction must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set('TokenTransaction', id.toString(), this);
+      store.set('Transaction', id.toString(), this);
     }
   }
 
-  static loadInBlock(id: string): TokenTransaction | null {
-    return changetype<TokenTransaction | null>(
-      store.get_in_block('TokenTransaction', id)
+  static loadInBlock(id: string): Transaction | null {
+    return changetype<Transaction | null>(
+      store.get_in_block('Transaction', id)
     );
   }
 
-  static load(id: string): TokenTransaction | null {
-    return changetype<TokenTransaction | null>(
-      store.get('TokenTransaction', id)
-    );
+  static load(id: string): Transaction | null {
+    return changetype<Transaction | null>(store.get('Transaction', id));
   }
 
   get id(): string {

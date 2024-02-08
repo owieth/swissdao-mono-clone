@@ -5,7 +5,7 @@ import {
   TransferSingle as TransferSingleEvent
 } from '../../generated/SwissDAOMembership/SwissDAOMembership';
 import { Membership } from '../../generated/schema';
-import { fetchHolder, fetchTokenTransaction } from '../utils';
+import { fetchHolder, fetchTransaction } from '../utils';
 
 export function fetchMembership(id: string): Membership {
   let membership = Membership.load(id);
@@ -34,18 +34,16 @@ export function handleMembershipTransfer(event: TransferSingleEvent): void {
   let membership = fetchMembership(tokenId.toString());
   const membershipStruct = contract.getMemberStructByTokenId(tokenId);
 
-  let tokenTransaction = fetchTokenTransaction(
-    event.transaction.hash.toHexString()
-  );
+  let transaction = fetchTransaction(event.transaction.hash.toHexString());
 
-  tokenTransaction.tokenID = tokenId;
-  tokenTransaction.amount = event.params.value;
-  tokenTransaction.txHash = event.transaction.hash;
-  tokenTransaction.timestamp = event.block.timestamp;
+  transaction.tokenID = tokenId;
+  transaction.amount = event.params.value;
+  transaction.txHash = event.transaction.hash;
+  transaction.timestamp = event.block.timestamp;
 
   if (event.params.from == Address.zero()) {
-    tokenTransaction.type = 'MEMBERSHIP_MINT';
-    tokenTransaction.to = fetchHolder(event.address, event.params.to).id;
+    transaction.type = 'MEMBERSHIP_MINT';
+    transaction.to = fetchHolder(event.address, event.params.to).id;
 
     membership.profileImageUri = membershipStruct.profileImageUri;
     membership.nickname = membershipStruct.nickname;
@@ -60,8 +58,8 @@ export function handleMembershipTransfer(event: TransferSingleEvent): void {
     );
     membership.save();
   } else if (event.params.to == Address.zero()) {
-    tokenTransaction.type = 'MEMBERSHIP_BURN';
-    tokenTransaction.from = fetchHolder(event.address, event.params.from).id;
+    transaction.type = 'MEMBERSHIP_BURN';
+    transaction.from = fetchHolder(event.address, event.params.from).id;
 
     membership.tokenID = BigInt.fromI32(0);
     membership.nickname = '';
@@ -75,7 +73,7 @@ export function handleMembershipTransfer(event: TransferSingleEvent): void {
     membership.save();
   }
 
-  tokenTransaction.save();
+  transaction.save();
 }
 
 export function handleMembershipEdit(event: EditMembershipEvent): void {
@@ -92,14 +90,12 @@ export function handleMembershipEdit(event: EditMembershipEvent): void {
     membership.profileImageUri = membershipStruct.profileImageUri;
     membership.save();
 
-    let tokenTransaction = fetchTokenTransaction(
-      event.transaction.hash.toHexString()
-    );
+    let transaction = fetchTransaction(event.transaction.hash.toHexString());
 
-    tokenTransaction.tokenID = tokenId;
-    tokenTransaction.type = 'MEMBERSHIP_EDIT';
-    tokenTransaction.txHash = event.transaction.hash;
-    tokenTransaction.timestamp = event.block.timestamp;
-    tokenTransaction.save();
+    transaction.tokenID = tokenId;
+    transaction.type = 'MEMBERSHIP_EDIT';
+    transaction.txHash = event.transaction.hash;
+    transaction.timestamp = event.block.timestamp;
+    transaction.save();
   }
 }
