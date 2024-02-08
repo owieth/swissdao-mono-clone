@@ -28,7 +28,7 @@ export function handleGuildTransfer(event: TransferSingleEvent): void {
 
   let guild = fetchGuild(tokenId.toString());
 
-  const holders = guild.holders;
+  let holders = guild.holders;
 
   let transaction = fetchTransaction(event.transaction.hash.toHexString());
 
@@ -54,8 +54,9 @@ export function handleGuildTransfer(event: TransferSingleEvent): void {
     const holder = fetchHolder(event.address, event.params.from);
 
     const indexOfHolder = holders.indexOf(holder.id);
+    holders.splice(indexOfHolder, 1);
 
-    guild.holders = holders.splice(indexOfHolder, 1);
+    guild.holders = holders;
 
     guild.save();
   }

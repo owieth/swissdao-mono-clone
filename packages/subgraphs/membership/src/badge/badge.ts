@@ -33,7 +33,7 @@ export function handleBadgeTransfer(event: TransferSingleEvent): void {
 
   const badgeStruct = contract.getBadgeStructByTokenId(tokenId);
   const member = fetchHolder(event.address, event.params.to);
-  const holders = badge.holders;
+  let holders = badge.holders;
 
   badge.imageUri = badgeStruct.imageUri;
   badge.name = badgeStruct.name;
@@ -61,8 +61,9 @@ export function handleBadgeTransfer(event: TransferSingleEvent): void {
     transaction.to = fetchHolder(event.address, event.params.to).id;
 
     const indexOfHolder = holders.indexOf(member.id);
+    holders.splice(indexOfHolder, 1);
 
-    badge.holders = holders.splice(indexOfHolder, 1);
+    badge.holders = holders;
 
     member.save();
   }

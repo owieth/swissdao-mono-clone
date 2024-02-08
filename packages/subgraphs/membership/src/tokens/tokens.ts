@@ -55,8 +55,8 @@ export function handleTokenTransfer(event: TransferSingleEvent): void {
   token.attributes = tokenStruct.attributes;
 
   const transactions = token.transactions;
-  const balances = token.balances;
-  const holders = token.holders;
+  let balances = token.balances;
+  let holders = token.holders;
 
   let transaction = fetchTransaction(event.transaction.hash.toHexString());
 
@@ -105,8 +105,11 @@ export function handleTokenTransfer(event: TransferSingleEvent): void {
     const indexOfBalance = balances.indexOf(tokenBalance.id);
     const indexOfHolder = holders.indexOf(member.id);
 
-    token.balances = balances.splice(indexOfBalance, 1);
-    token.holders = balances.splice(indexOfHolder, 1);
+    balances.splice(indexOfBalance, 1);
+    holders.splice(indexOfHolder, 1);
+
+    token.balances = balances;
+    token.holders = holders;
     tokenBalance.save();
 
     let burnToken = new Token('0');
