@@ -6,7 +6,7 @@ import {
   TransferSingle as TransferSingleEvent
 } from '../../generated/SwissDAOMembership/SwissDAOMembership';
 import { Guild } from '../../generated/schema';
-import { fetchHolder } from '../utils';
+import { fetchHolder, fetchTokenTransaction } from '../utils';
 
 export function fetchGuild(id: string): Guild {
   let guild = Guild.load(id);
@@ -30,7 +30,18 @@ export function handleGuildTransfer(event: TransferSingleEvent): void {
 
   const holders = guild.holders;
 
+  let tokenTransaction = fetchTokenTransaction(
+    event.transaction.hash.toHexString()
+  );
+
+  tokenTransaction.tokenID = tokenId;
+  tokenTransaction.txHash = event.transaction.hash;
+  tokenTransaction.timestamp = event.block.timestamp;
+
   if (event.params.from == Address.zero()) {
+    tokenTransaction.type = 'GUILD_JOIN';
+    tokenTransaction.to = fetchHolder(event.address, event.params.to).id;
+
     const holder = fetchHolder(event.address, event.params.to);
 
     holders.push(holder.id);
@@ -39,6 +50,9 @@ export function handleGuildTransfer(event: TransferSingleEvent): void {
 
     guild.save();
   } else if (event.params.to == Address.zero()) {
+    tokenTransaction.type = 'GUILD_LEAVE';
+    tokenTransaction.from = fetchHolder(event.address, event.params.from).id;
+
     const holder = fetchHolder(event.address, event.params.from);
 
     const indexOfHolder = holders.indexOf(holder.id);
@@ -47,6 +61,8 @@ export function handleGuildTransfer(event: TransferSingleEvent): void {
 
     guild.save();
   }
+
+  tokenTransaction.save();
 }
 
 export function handleGuildAdd(event: AddGuildEvent): void {
@@ -62,6 +78,16 @@ export function handleGuildAdd(event: AddGuildEvent): void {
   guild.description = badgeStruct.description;
   guild.imageUri = badgeStruct.imageUri;
   guild.save();
+
+  let tokenTransaction = fetchTokenTransaction(
+    event.transaction.hash.toHexString()
+  );
+
+  tokenTransaction.tokenID = tokenId;
+  tokenTransaction.type = 'GUILD_ADD';
+  tokenTransaction.txHash = event.transaction.hash;
+  tokenTransaction.timestamp = event.block.timestamp;
+  tokenTransaction.save();
 }
 
 export function handleGuildEdit(event: EditGuildEvent): void {
@@ -77,4 +103,14 @@ export function handleGuildEdit(event: EditGuildEvent): void {
   guild.description = badgeStruct.description;
   guild.imageUri = badgeStruct.imageUri;
   guild.save();
+
+  let tokenTransaction = fetchTokenTransaction(
+    event.transaction.hash.toHexString()
+  );
+
+  tokenTransaction.tokenID = tokenId;
+  tokenTransaction.type = 'GUILD_EDIT';
+  tokenTransaction.txHash = event.transaction.hash;
+  tokenTransaction.timestamp = event.block.timestamp;
+  tokenTransaction.save();
 }

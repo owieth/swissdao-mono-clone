@@ -4,7 +4,7 @@ import {
   TransferSingle as TransferSingleEvent
 } from '../../generated/SwissDAOMembership/SwissDAOMembership';
 import { Token, TokenBalance, TokenTransaction } from '../../generated/schema';
-import { fetchHolder } from '../utils';
+import { fetchHolder, fetchTokenTransaction } from '../utils';
 
 export function fetchToken(id: string): Token {
   let token = Token.load(id);
@@ -23,23 +23,6 @@ export function fetchToken(id: string): Token {
   }
 
   return token;
-}
-
-export function fetchTokenTransaction(id: string): TokenTransaction {
-  let tokenTransaction = TokenTransaction.load(id);
-
-  if (!tokenTransaction) {
-    tokenTransaction = new TokenTransaction(id);
-    tokenTransaction.tokenID = BigInt.fromI32(0);
-    tokenTransaction.from = '';
-    tokenTransaction.to = '';
-    tokenTransaction.amount = BigInt.fromI32(0);
-    tokenTransaction.txHash = Bytes.fromI32(0);
-    tokenTransaction.type = 'NONE';
-    tokenTransaction.timestamp = BigInt.fromI32(0);
-  }
-
-  return tokenTransaction;
 }
 
 export function fetchTokenBalance(id: string): TokenBalance {
@@ -76,7 +59,7 @@ export function handleTokenTransfer(event: TransferSingleEvent): void {
   const holders = token.holders;
 
   let tokenTransaction = fetchTokenTransaction(
-    `${tokenId}-${event.params.value}-${from.toHexString()}-${to.toHexString()}`
+    event.transaction.hash.toHexString()
   );
 
   tokenTransaction.tokenID = tokenId;

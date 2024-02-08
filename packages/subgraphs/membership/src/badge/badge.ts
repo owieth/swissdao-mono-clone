@@ -6,7 +6,7 @@ import {
   TransferSingle as TransferSingleEvent
 } from '../../generated/SwissDAOMembership/SwissDAOMembership';
 import { Badge } from '../../generated/schema';
-import { fetchHolder } from '../utils';
+import { fetchHolder, fetchTokenTransaction } from '../utils';
 
 export function fetchBadge(id: string): Badge {
   let badge = Badge.load(id);
@@ -40,13 +40,28 @@ export function handleBadgeTransfer(event: TransferSingleEvent): void {
   badge.description = badgeStruct.description;
   badge.attributes = badgeStruct.attributes;
 
+  let tokenTransaction = fetchTokenTransaction(
+    event.transaction.hash.toHexString()
+  );
+
+  tokenTransaction.tokenID = tokenId;
+  tokenTransaction.amount = event.params.value;
+  tokenTransaction.txHash = event.transaction.hash;
+  tokenTransaction.timestamp = event.block.timestamp;
+
   if (event.params.from == Address.zero()) {
+    tokenTransaction.type = 'BADGE_MINT';
+    tokenTransaction.to = fetchHolder(event.address, event.params.to).id;
+
     holders.push(member.id);
 
     badge.holders = holders;
 
     member.save();
   } else if (event.params.to == Address.zero()) {
+    tokenTransaction.type = 'BADGE_BURN';
+    tokenTransaction.to = fetchHolder(event.address, event.params.to).id;
+
     const indexOfHolder = holders.indexOf(member.id);
 
     badge.holders = holders.splice(indexOfHolder, 1);
@@ -54,6 +69,7 @@ export function handleBadgeTransfer(event: TransferSingleEvent): void {
     member.save();
   }
 
+  tokenTransaction.save();
   badge.save();
 }
 
@@ -70,6 +86,16 @@ export function handleBadgeAdd(event: AddBadgeEvent): void {
   badge.description = badgeStruct.description;
   badge.imageUri = badgeStruct.imageUri;
   badge.save();
+
+  let tokenTransaction = fetchTokenTransaction(
+    event.transaction.hash.toHexString()
+  );
+
+  tokenTransaction.tokenID = tokenId;
+  tokenTransaction.type = 'BADGE_ADD';
+  tokenTransaction.txHash = event.transaction.hash;
+  tokenTransaction.timestamp = event.block.timestamp;
+  tokenTransaction.save();
 }
 
 export function handleBadgeEdit(event: EditBadgeEvent): void {
@@ -85,4 +111,14 @@ export function handleBadgeEdit(event: EditBadgeEvent): void {
   badge.description = badgeStruct.description;
   badge.imageUri = badgeStruct.imageUri;
   badge.save();
+
+  let tokenTransaction = fetchTokenTransaction(
+    event.transaction.hash.toHexString()
+  );
+
+  tokenTransaction.tokenID = tokenId;
+  tokenTransaction.type = 'BADGE_EDIT';
+  tokenTransaction.txHash = event.transaction.hash;
+  tokenTransaction.timestamp = event.block.timestamp;
+  tokenTransaction.save();
 }
