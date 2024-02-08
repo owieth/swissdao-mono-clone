@@ -6,6 +6,7 @@ import {
 } from '../../generated/SwissDAOMembership/SwissDAOMembership';
 import { Membership } from '../../generated/schema';
 import { fetchHolder, fetchTransaction } from '../utils';
+import { fetchToken } from '../tokens/tokens';
 
 export function fetchMembership(id: string): Membership {
   let membership = Membership.load(id);
@@ -45,10 +46,16 @@ export function handleMembershipTransfer(event: TransferSingleEvent): void {
     transaction.type = 'MEMBERSHIP_MINT';
     transaction.to = fetchHolder(event.address, event.params.to).id;
 
+    const initialToken = fetchToken('0');
+    initialToken.save();
+
     membership.profileImageUri = membershipStruct.profileImageUri;
     membership.nickname = membershipStruct.nickname;
     membership.holder = membershipStruct.holder;
     membership.joinedAt = event.block.timestamp;
+    membership.experiencePoints = initialToken.id;
+    membership.activityPoints = initialToken.id;
+    membership.attendedEvents = initialToken.id;
 
     membership.isAdmin = contract.hasRole(
       Bytes.fromHexString(
@@ -61,14 +68,17 @@ export function handleMembershipTransfer(event: TransferSingleEvent): void {
     transaction.type = 'MEMBERSHIP_BURN';
     transaction.from = fetchHolder(event.address, event.params.from).id;
 
+    const burnToken = fetchToken('0');
+    burnToken.save();
+
     membership.tokenID = BigInt.fromI32(0);
     membership.nickname = '';
     membership.profileImageUri = '';
     membership.holder = event.params.to;
     membership.joinedAt = BigInt.fromI32(0);
-    membership.experiencePoints = '0';
-    membership.activityPoints = '0';
-    membership.attendedEvents = '0';
+    membership.experiencePoints = burnToken.id;
+    membership.activityPoints = burnToken.id;
+    membership.attendedEvents = burnToken.id;
     membership.isAdmin = false;
     membership.save();
   }
