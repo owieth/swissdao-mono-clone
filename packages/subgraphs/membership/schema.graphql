@@ -14,8 +14,8 @@ type Token @entity {
 type TokenTransaction @entity {
   id: ID!
   tokenID: BigInt!
-  from: Bytes!
-  to: Bytes!
+  from: Membership
+  to: Membership
   amount: BigInt!
   txHash: Bytes!
   type: TransactionType!

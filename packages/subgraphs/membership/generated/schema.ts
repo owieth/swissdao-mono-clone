@@ -224,30 +224,38 @@ export class TokenTransaction extends Entity {
     this.set('tokenID', Value.fromBigInt(value));
   }
 
-  get from(): Bytes {
+  get from(): string | null {
     let value = this.get('from');
     if (!value || value.kind == ValueKind.NULL) {
-      throw new Error('Cannot return null for a required field.');
+      return null;
     } else {
-      return value.toBytes();
+      return value.toString();
     }
   }
 
-  set from(value: Bytes) {
-    this.set('from', Value.fromBytes(value));
+  set from(value: string | null) {
+    if (!value) {
+      this.unset('from');
+    } else {
+      this.set('from', Value.fromString(<string>value));
+    }
   }
 
-  get to(): Bytes {
+  get to(): string | null {
     let value = this.get('to');
     if (!value || value.kind == ValueKind.NULL) {
-      throw new Error('Cannot return null for a required field.');
+      return null;
     } else {
-      return value.toBytes();
+      return value.toString();
     }
   }
 
-  set to(value: Bytes) {
-    this.set('to', Value.fromBytes(value));
+  set to(value: string | null) {
+    if (!value) {
+      this.unset('to');
+    } else {
+      this.set('to', Value.fromString(<string>value));
+    }
   }
 
   get amount(): BigInt {

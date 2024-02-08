@@ -31,8 +31,8 @@ export function fetchTokenTransaction(id: string): TokenTransaction {
   if (!tokenTransaction) {
     tokenTransaction = new TokenTransaction(id);
     tokenTransaction.tokenID = BigInt.fromI32(0);
-    tokenTransaction.from = Bytes.fromI32(0);
-    tokenTransaction.to = Bytes.fromI32(0);
+    tokenTransaction.from = '';
+    tokenTransaction.to = '';
     tokenTransaction.amount = BigInt.fromI32(0);
     tokenTransaction.txHash = Bytes.fromI32(0);
     tokenTransaction.type = 'NONE';
@@ -80,8 +80,6 @@ export function handleTokenTransfer(event: TransferSingleEvent): void {
   );
 
   tokenTransaction.tokenID = tokenId;
-  tokenTransaction.from = from;
-  tokenTransaction.to = to;
   tokenTransaction.amount = value;
   tokenTransaction.txHash = event.transaction.hash;
   tokenTransaction.timestamp = event.block.timestamp;
@@ -92,6 +90,7 @@ export function handleTokenTransfer(event: TransferSingleEvent): void {
 
   if (event.params.from == Address.zero()) {
     tokenTransaction.type = 'TOKEN_MINT';
+    tokenTransaction.to = fetchHolder(event.address, to).id;
 
     token.totalAmount = token.totalAmount.plus(value);
 
@@ -115,6 +114,7 @@ export function handleTokenTransfer(event: TransferSingleEvent): void {
     member.save();
   } else if (event.params.to == Address.zero()) {
     tokenTransaction.type = 'TOKEN_BURN';
+    tokenTransaction.from = fetchHolder(event.address, from).id;
 
     token.totalAmount = token.totalAmount.minus(value);
 
