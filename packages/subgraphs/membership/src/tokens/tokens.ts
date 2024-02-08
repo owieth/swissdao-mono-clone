@@ -1,4 +1,4 @@
-import { Address, BigInt } from '@graphprotocol/graph-ts';
+import { Address, BigInt, Bytes } from '@graphprotocol/graph-ts';
 import {
   SwissDAOMembership,
   TransferSingle as TransferSingleEvent
@@ -30,6 +30,7 @@ export function fetchTokenBalance(id: string): TokenBalance {
 
   if (!tokenBalance) {
     tokenBalance = new TokenBalance(id);
+    tokenBalance.holder = Bytes.fromI32(0);
     tokenBalance.balance = BigInt.fromI32(0);
   }
 
@@ -75,7 +76,10 @@ export function handleTokenTransfer(event: TransferSingleEvent): void {
 
     token.totalAmount = token.totalAmount.plus(value);
 
-    let tokenBalance = fetchTokenBalance(to.toHexString());
+    let tokenBalance = fetchTokenBalance(
+      `${to.toHexString()}-${tokenId.toString()}`
+    );
+    tokenBalance.holder = to;
     tokenBalance.balance = tokenBalance.balance.plus(value);
 
     balances.push(tokenBalance.id);
@@ -99,7 +103,9 @@ export function handleTokenTransfer(event: TransferSingleEvent): void {
 
     token.totalAmount = token.totalAmount.minus(value);
 
-    let tokenBalance = fetchTokenBalance(from.toHexString());
+    let tokenBalance = fetchTokenBalance(
+      `${from.toHexString()}-${tokenId.toString()}`
+    );
     tokenBalance.balance = tokenBalance.balance.minus(value);
 
     const indexOfBalance = balances.indexOf(tokenBalance.id);

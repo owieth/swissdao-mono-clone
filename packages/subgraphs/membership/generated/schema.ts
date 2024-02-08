@@ -350,6 +350,19 @@ export class TokenBalance extends Entity {
     this.set('id', Value.fromString(value));
   }
 
+  get holder(): Bytes {
+    let value = this.get('holder');
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error('Cannot return null for a required field.');
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set holder(value: Bytes) {
+    this.set('holder', Value.fromBytes(value));
+  }
+
   get balance(): BigInt {
     let value = this.get('balance');
     if (!value || value.kind == ValueKind.NULL) {

@@ -24,6 +24,7 @@ type Transaction @entity {
 
 type TokenBalance @entity {
   id: ID!
+  holder: Bytes!
   balance: BigInt!
 }
 
