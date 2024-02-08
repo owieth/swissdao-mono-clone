@@ -44,9 +44,7 @@ export default function DashboardPage() {
             <Card className="col-span-3">
               <CardHeader>
                 <CardTitle>Latest Activity</CardTitle>
-                <CardDescription>
-                  You made 265 sales this month.
-                </CardDescription>
+                <CardDescription>Latest Activity of the DAO</CardDescription>
               </CardHeader>
               <CardContent>
                 <ActivityLog />

@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { TransactionType } from '@/types/types';
 import { useState, useEffect, useRef } from 'react';
 import { Icons } from '../ui/icons';
+import Link from 'next/link';
 
 export default function ActivityLog() {
   const [transactions, setTransactions] = useState<TransactionType[]>([]);
@@ -76,7 +77,14 @@ export default function ActivityLog() {
               {transaction.from?.holder || transaction.to?.holder}
             </p>
           </div>
-          <div className="ml-auto font-medium">{transaction.type}</div>
+          <div className="ml-auto font-medium">
+            <Link
+              href={`https://sepolia-optimism.etherscan.io/tx/${transaction.txHash}`}
+              target="_blank"
+            >
+              {transaction.type}
+            </Link>
+          </div>
         </div>
       ))}
     </div>
