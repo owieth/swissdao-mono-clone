@@ -5,8 +5,9 @@ import {
   SwissDAOMembership,
   TransferSingle as TransferSingleEvent
 } from '../../generated/SwissDAOMembership/SwissDAOMembership';
-import { Badge } from '../../generated/schema';
+import { Badge, Token } from '../../generated/schema';
 import { fetchHolder, fetchTransaction } from '../utils';
+import { fetchToken } from '../tokens/tokens';
 
 export function fetchBadge(id: string): Badge {
   let badge = Badge.load(id);
@@ -74,17 +75,29 @@ export function handleBadgeTransfer(event: TransferSingleEvent): void {
 
 export function handleBadgeAdd(event: AddBadgeEvent): void {
   const tokenId = event.params._badgeId;
-
-  let badge = fetchBadge(tokenId.toString());
+  const tokenIdString = tokenId.toString();
 
   const contract = SwissDAOMembership.bind(event.address);
-
   const badgeStruct = contract.getBadgeStructByTokenId(tokenId);
 
-  badge.name = badgeStruct.name;
-  badge.description = badgeStruct.description;
-  badge.imageUri = badgeStruct.imageUri;
-  badge.save();
+  let badge: Badge;
+  let token: Token;
+
+  if (tokenIdString == '1' || tokenIdString == '2' || tokenIdString == '3') {
+    token = fetchToken(tokenIdString);
+    token.name = badgeStruct.name;
+    token.description = badgeStruct.description;
+    token.imageUri = badgeStruct.imageUri;
+    token.attributes = badgeStruct.attributes;
+    token.save();
+  } else {
+    badge = fetchBadge(tokenIdString);
+    badge.name = badgeStruct.name;
+    badge.description = badgeStruct.description;
+    badge.imageUri = badgeStruct.imageUri;
+    badge.attributes = badgeStruct.attributes;
+    badge.save();
+  }
 
   let transaction = fetchTransaction(event.transaction.hash.toHexString());
 
@@ -97,17 +110,29 @@ export function handleBadgeAdd(event: AddBadgeEvent): void {
 
 export function handleBadgeEdit(event: EditBadgeEvent): void {
   const tokenId = event.params._badgeId;
-
-  let badge = fetchBadge(tokenId.toString());
+  const tokenIdString = tokenId.toString();
 
   const contract = SwissDAOMembership.bind(event.address);
-
   const badgeStruct = contract.getBadgeStructByTokenId(tokenId);
 
-  badge.name = badgeStruct.name;
-  badge.description = badgeStruct.description;
-  badge.imageUri = badgeStruct.imageUri;
-  badge.save();
+  let badge: Badge;
+  let token: Token;
+
+  if (tokenIdString == '1' || tokenIdString == '2' || tokenIdString == '3') {
+    token = fetchToken(tokenIdString);
+    token.name = badgeStruct.name;
+    token.description = badgeStruct.description;
+    token.imageUri = badgeStruct.imageUri;
+    token.attributes = badgeStruct.attributes;
+    token.save();
+  } else {
+    badge = fetchBadge(tokenIdString);
+    badge.name = badgeStruct.name;
+    badge.description = badgeStruct.description;
+    badge.imageUri = badgeStruct.imageUri;
+    badge.attributes = badgeStruct.attributes;
+    badge.save();
+  }
 
   let transaction = fetchTransaction(event.transaction.hash.toHexString());
 
