@@ -18,6 +18,7 @@ type TokenTransaction @entity {
   to: Bytes!
   amount: BigInt!
   txHash: Bytes!
+  type: TransactionType!
   timestamp: BigInt!
 }
 
@@ -60,3 +61,20 @@ type Membership @entity {
   badges: [Badge!]! @derivedFrom(field: "holders")
   tokens: [Token!]! @derivedFrom(field: "holders")
 }
+
+enum TransactionType {
+  NONE
+  TOKEN_MINT
+  TOKEN_BURN
+  MEMBERSHIP_MINT
+  MEMBERSHIP_EDIT
+  MEMBERSHIP_BURN
+  BADGE_ADD
+  BADGE_MINT
+  BADGE_EDIT
+  BADGE_BURN
+  GUILD_ADD
+  GUILD_JOIN
+  GUILD_LEAVE
+  GUILD_EDIT
+} 

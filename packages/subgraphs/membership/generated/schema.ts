@@ -276,6 +276,19 @@ export class TokenTransaction extends Entity {
     this.set('txHash', Value.fromBytes(value));
   }
 
+  get type(): string {
+    let value = this.get('type');
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error('Cannot return null for a required field.');
+    } else {
+      return value.toString();
+    }
+  }
+
+  set type(value: string) {
+    this.set('type', Value.fromString(value));
+  }
+
   get timestamp(): BigInt {
     let value = this.get('timestamp');
     if (!value || value.kind == ValueKind.NULL) {
