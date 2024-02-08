@@ -140,15 +140,15 @@ export default function MemberPage({
               </h1>
 
               <h1 className="truncate text-2xl font-semibold text-black">
-                Activty Points: {membership.activityPoints.toString()}
+                Activty Points: {membership.activityPoints.totalAmount}
               </h1>
 
               <h1 className="truncate text-2xl font-semibold text-black">
-                Experience Points: {membership.experiencePoints.toString()}
+                Experience Points: {membership.experiencePoints.totalAmount}
               </h1>
 
               <h1 className="truncate text-2xl font-semibold text-black">
-                Attended Events: {membership.attendedEvents.toString()}
+                Attended Events: {membership.attendedEvents.totalAmount}
               </h1>
             </div>
           </div>
@@ -171,12 +171,12 @@ export default function MemberPage({
           <Card className="w-full p-5">
             <div className="flex justify-between">
               <span>Activity Points</span>
-              <span>{membership.activityPoints} %</span>
+              <span>{membership.activityPoints.totalAmount} %</span>
             </div>
             <CategoryBar
               values={[40, 30, 20, 10]}
               colors={['rose', 'orange', 'yellow', 'emerald']}
-              markerValue={membership.activityPoints}
+              markerValue={membership.activityPoints.totalAmount}
               className="mt-3"
             />
           </Card>

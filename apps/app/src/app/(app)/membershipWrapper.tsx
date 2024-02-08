@@ -25,11 +25,16 @@ export default function MembershipWrapper({
             profileImageUri
             nickname
             holder
-            joined_At
-            minted_At
-            experiencePoints
-            activityPoints
-            attendedEvents
+            joinedAt
+            experiencePoints {
+              totalAmount
+            }
+            activityPoints {
+              totalAmount
+            }
+            attendedEvents {
+              totalAmount
+            }
             isAdmin
           }
         }
