@@ -6,6 +6,10 @@ import {
 import { Token, TokenBalance } from '../../generated/schema';
 import { fetchHolder, fetchTransaction } from '../utils';
 
+export const EXPERIENCE_POINT_TOKEN_ID = '1';
+export const ACTIVITY_POINT_TOKEN_ID = '2';
+export const ATTENDED_EVENTS_TOKEN_ID = '3';
+
 export function fetchToken(id: string): Token {
   let token = Token.load(id);
 
