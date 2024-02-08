@@ -136,6 +136,8 @@ export function handleTokenTransfer(event: TransferSingleEvent): void {
     burnToken.attributes = '';
     burnToken.totalAmount = BigInt.fromI32(0);
     burnToken.transactions = [];
+    burnToken.balances = [];
+    burnToken.holders = [];
 
     burnToken.save();
 
