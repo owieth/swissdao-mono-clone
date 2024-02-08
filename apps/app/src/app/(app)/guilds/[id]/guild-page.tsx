@@ -29,7 +29,7 @@ export default function GuildPage({ guild }: { guild: GuildType }) {
     const config = await prepareWriteContract({
       ...CONTRACT,
       functionName: 'joinGuild',
-      args: [membership?.tokenID, guild.id]
+      args: [membership?.holder, guild.id]
     });
 
     const { hash } = await writeContract(config);
@@ -47,7 +47,7 @@ export default function GuildPage({ guild }: { guild: GuildType }) {
     const config = await prepareWriteContract({
       ...CONTRACT,
       functionName: 'leaveGuild',
-      args: [membership?.tokenID, guild.id]
+      args: [membership?.holder, guild.id]
     });
 
     const { hash } = await writeContract(config);
