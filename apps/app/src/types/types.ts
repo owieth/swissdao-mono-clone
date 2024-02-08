@@ -21,6 +21,7 @@ export type TransactionType = {
 };
 
 export type TokenBalanceType = {
+  holder: string;
   balance: number;
 };
 

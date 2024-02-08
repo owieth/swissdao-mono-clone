@@ -19,14 +19,26 @@ async function getData() {
         experiencePoints {
           imageUri
           totalAmount
+          balances {
+            holder
+            balance
+          }
         }
         activityPoints {
           imageUri
           totalAmount
+          balances {
+            holder
+            balance
+          }
         }
         attendedEvents {
           imageUri
           totalAmount
+          balances {
+            holder
+            balance
+          }
         }
         guilds {
           id

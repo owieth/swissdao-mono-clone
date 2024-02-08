@@ -128,31 +128,17 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
       )
     },
     {
-      accessorKey: 'activityPoints',
-      header: 'Activity Points',
-      cell: ({ row: { original } }) => {
-        const { imageUri, totalAmount } = original.activityPoints;
-
-        return (
-          <div className="flex items-center gap-4">
-            {totalAmount}
-            <Avatar className="h-8 w-8">
-              <AvatarImage src={convertIpfsToHttps(imageUri)} alt="AP" />
-              <AvatarFallback>AP</AvatarFallback>
-            </Avatar>
-          </div>
-        );
-      }
-    },
-    {
       accessorKey: 'experiencePoints',
       header: 'Experience Points',
       cell: ({ row: { original } }) => {
-        const { imageUri, totalAmount } = original.experiencePoints;
+        const { imageUri, balances } = original.experiencePoints;
+        const balanceOfMember =
+          balances.find(({ holder }) => holder === original.holder)?.balance ||
+          0;
 
         return (
           <div className="flex items-center gap-4">
-            {totalAmount}
+            {balanceOfMember}
             <Avatar className="h-8 w-8">
               <AvatarImage src={convertIpfsToHttps(imageUri)} alt="XP" />
               <AvatarFallback>XP</AvatarFallback>
@@ -162,14 +148,37 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
       }
     },
     {
-      accessorKey: 'attendedEvents',
-      header: 'Attended Events',
+      accessorKey: 'activityPoints',
+      header: 'Activity Points',
       cell: ({ row: { original } }) => {
-        const { imageUri, totalAmount } = original.attendedEvents;
+        const { imageUri, balances } = original.activityPoints;
+        const balanceOfMember =
+          balances.find(({ holder }) => holder === original.holder)?.balance ||
+          0;
 
         return (
           <div className="flex items-center gap-4">
-            {totalAmount}
+            {balanceOfMember}
+            <Avatar className="h-8 w-8">
+              <AvatarImage src={convertIpfsToHttps(imageUri)} alt="AP" />
+              <AvatarFallback>AP</AvatarFallback>
+            </Avatar>
+          </div>
+        );
+      }
+    },
+    {
+      accessorKey: 'attendedEvents',
+      header: 'Attended Events',
+      cell: ({ row: { original } }) => {
+        const { imageUri, balances } = original.attendedEvents;
+        const balanceOfMember =
+          balances.find(({ holder }) => holder === original.holder)?.balance ||
+          0;
+
+        return (
+          <div className="flex items-center gap-4">
+            {balanceOfMember}
             <Avatar className="h-8 w-8">
               <AvatarImage src={convertIpfsToHttps(imageUri)} alt="Events" />
               <AvatarFallback>Events</AvatarFallback>
