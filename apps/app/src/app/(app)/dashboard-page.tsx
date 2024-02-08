@@ -1,7 +1,7 @@
 'use client';
 
+import ActivityLog from '@/components/dashboard/activity-log';
 import { Overview } from '@/components/dashboard/overview';
-import { RecentSales } from '@/components/dashboard/recent-sales';
 import { MemberStats } from '@/components/member-stats/member-stats';
 import {
   Card,
@@ -10,10 +10,8 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
-import { CONTRACT } from '@/contracts/contracts';
 import { MembershipType } from '@/types/types';
-import { useEffect, useState } from 'react';
-import { useContractRead } from 'wagmi';
+import { useState } from 'react';
 
 export default function DashboardPage() {
   const [member, setMember] = useState({
@@ -23,24 +21,6 @@ export default function DashboardPage() {
     attendedEvents: BigInt(10),
     badges: []
   });
-
-  const {
-    data: members,
-    isError,
-    isLoading
-  } = useContractRead({
-    ...CONTRACT,
-    functionName: 'getAllMembers'
-  });
-
-  // console.log(members);
-  // console.log(members && (members as MemberType[]).reduce(
-  //   (accumulator, currentValue) => accumulator.concat(currentValue.activityPoints), []
-  // ));
-
-  useEffect(() => {
-    // setMember(members)
-  }, [members]);
 
   return (
     <>
@@ -63,13 +43,13 @@ export default function DashboardPage() {
             </Card>
             <Card className="col-span-3">
               <CardHeader>
-                <CardTitle>Recent Sales</CardTitle>
+                <CardTitle>Latest Activity</CardTitle>
                 <CardDescription>
                   You made 265 sales this month.
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <RecentSales />
+                <ActivityLog />
               </CardContent>
             </Card>
           </div>
