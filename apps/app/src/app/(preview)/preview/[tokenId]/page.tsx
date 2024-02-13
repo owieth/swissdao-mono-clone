@@ -1,5 +1,5 @@
+import { fetchSubgraph } from '@/api/subgraph';
 import MembercardPreview from '@/components/membercard/preview';
-import { ETHERS_CONTRACT } from '@/helpers/contracts';
 import { MembershipType } from '@/types/types';
 
 export default async function PreviewPage({
@@ -7,9 +7,41 @@ export default async function PreviewPage({
 }: {
   params: { tokenId: number };
 }) {
-  const tokenStruct = (await ETHERS_CONTRACT.getMemberStructByTokenId(
-    tokenId
-  )) as MembershipType;
+  const { membership } = (await fetchSubgraph(`
+  query {
+    membership(id:${tokenId}) {
+      id
+      tokenID
+      profileImageUri
+      nickname
+      holder
+      joinedAt
+      experiencePoints {
+        balances {
+          holder
+          balance
+        }
+      }
+      activityPoints {
+        balances {
+          holder
+          balance
+        }
+      }
+      attendedEvents {
+        balances {
+          holder
+          balance
+        }
+      }
+      guilds {
+        id
+        name
+        imageUri
+      }
+    }
+  }
+`)) as { membership: MembershipType };
 
-  return <MembercardPreview tokenStruct={tokenStruct} />;
+  return <MembercardPreview membership={membership} />;
 }
