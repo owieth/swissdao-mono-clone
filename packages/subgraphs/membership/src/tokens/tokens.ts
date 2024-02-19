@@ -1,4 +1,4 @@
-import { Address, BigInt, Bytes } from '@graphprotocol/graph-ts';
+import { Address, BigInt, Bytes, store } from '@graphprotocol/graph-ts';
 import {
   SwissDAOMembership,
   TransferSingle as TransferSingleEvent
@@ -122,26 +122,7 @@ export function handleTokenTransfer(event: TransferSingleEvent): void {
     token.holders = holders;
     tokenBalance.save();
 
-    let burnToken = new Token('0');
-    burnToken.tokenID = BigInt.fromI32(0);
-    burnToken.imageUri = '';
-    burnToken.name = '';
-    burnToken.description = '';
-    burnToken.attributes = '';
-    burnToken.totalAmount = BigInt.fromI32(0);
-    burnToken.transactions = [];
-    burnToken.balances = [];
-    burnToken.holders = [];
-
-    burnToken.save();
-
-    if (token.id == '1') {
-      member.experiencePoints = burnToken.id;
-    } else if (token.id == '2') {
-      member.activityPoints = burnToken.id;
-    } else if (token.id == '3') {
-      member.attendedEvents = burnToken.id;
-    }
+    store.remove('Token', tokenId.toString());
 
     member.save();
   }

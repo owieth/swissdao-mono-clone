@@ -1,4 +1,4 @@
-import { Address, BigInt, Bytes } from '@graphprotocol/graph-ts';
+import { Address, BigInt, Bytes, store } from '@graphprotocol/graph-ts';
 import {
   EditMembership as EditMembershipEvent,
   SwissDAOMembership,
@@ -67,19 +67,7 @@ export function handleMembershipTransfer(event: TransferSingleEvent): void {
     transaction.type = 'MEMBERSHIP_BURN';
     transaction.from = fetchHolder(event.address, event.params.from).id;
 
-    const burnToken = fetchToken('0');
-    burnToken.save();
-
-    membership.tokenID = BigInt.fromI32(0);
-    membership.nickname = '';
-    membership.profileImageUri = '';
-    membership.holder = event.params.to;
-    membership.joinedAt = BigInt.fromI32(0);
-    membership.experiencePoints = burnToken.id;
-    membership.activityPoints = burnToken.id;
-    membership.attendedEvents = burnToken.id;
-    membership.isAdmin = false;
-    membership.save();
+    store.remove('Membership', tokenId.toString());
   }
 
   transaction.save();
