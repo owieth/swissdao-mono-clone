@@ -4,7 +4,9 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
+      "dotEnv": [".env.local"],
+      "env": ["NEXT_PUBLIC_SPREADSHEET_ID","NEXT_PUBLIC_SHEET_ID","NEXT_PUBLIC_GOOGLE_CLIENT_EMAIL","GOOGLE_SERVICE_PRIVATE_KEY"]
     },
     "lint": {},
     "check-types": {},
