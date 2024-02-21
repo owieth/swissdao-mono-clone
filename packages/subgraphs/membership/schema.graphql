@@ -1,18 +1,49 @@
 type Token @entity {
   id: ID!
   tokenID: BigInt!
-  imageUri: String!
   name: String!
   description: String!
   attributes: String!
+  imageUri: String!
+  totalAmount: BigInt!
+  transactions: [Transaction!]!
+  balances: [TokenBalance!]!
+  holders: [Membership!]!
+}
+
+type Transaction @entity {
+  id: ID!
+  tokenID: BigInt!
+  from: Membership
+  to: Membership
+  amount: BigInt!
+  txHash: Bytes!
+  type: TransactionType!
+  timestamp: BigInt!
+}
+
+type TokenBalance @entity {
+  id: ID!
+  holder: Bytes!
+  balance: BigInt!
+}
+
+type Badge @entity {
+  id: ID!
+  tokenID: BigInt!
+  name: String!
+  description: String!
+  attributes: String!
+  imageUri: String!
+  holders: [Membership!]!
 }
 
 type Guild @entity {
   id: ID!
   tokenID: BigInt!
-  imageUri: String!
   name: String!
   description: String!
+  imageUri: String!
   holders: [Membership!]!
 }
 
@@ -20,12 +51,31 @@ type Membership @entity {
   id: ID!
   tokenID: BigInt!
   holder: Bytes!
-  profileImageUri: String!
   nickname: String!
-  joined_At: BigInt!
-  minted_At: BigInt!
-  experiencePoints: BigInt!
-  activityPoints: BigInt!
-  attendedEvents: BigInt!
+  profileImageUri: String!
+  joinedAt: BigInt!
+  experiencePoints: Token!
+  activityPoints: Token!
+  attendedEvents: Token!
+  isAdmin: Boolean
   guilds: [Guild!]! @derivedFrom(field: "holders")
+  badges: [Badge!]! @derivedFrom(field: "holders")
+  tokens: [Token!]! @derivedFrom(field: "holders")
 }
+
+enum TransactionType {
+  NONE
+  TOKEN_MINT
+  TOKEN_BURN
+  MEMBERSHIP_MINT
+  MEMBERSHIP_EDIT
+  MEMBERSHIP_BURN
+  BADGE_ADD
+  BADGE_MINT
+  BADGE_EDIT
+  BADGE_BURN
+  GUILD_ADD
+  GUILD_JOIN
+  GUILD_LEAVE
+  GUILD_EDIT
+} 

@@ -1,12 +1,12 @@
 'use client';
 
+import { fetchSubgraph } from '@/api/subgraph';
 import { MembershipContext } from '@/contexts/membership';
-import { CONTRACT } from '@/contracts/contracts';
 import { MembershipType } from '@/types/types';
-import { useEffect, useState } from 'react';
-import { useAccount, useContractRead } from 'wagmi';
+import { useCallback, useEffect, useState } from 'react';
+import { getAddress } from 'viem';
+import { useAccount } from 'wagmi';
 
-// TODO server side
 export default function MembershipWrapper({
   children
 }: {
@@ -16,27 +16,40 @@ export default function MembershipWrapper({
 
   const { address } = useAccount();
 
-  const { data: member } = useContractRead({
-    ...CONTRACT,
-    functionName: 'getMemberStructByAddress',
-    args: [address]
-  });
+  const fetchMembership = useCallback(async () => {
+    const { memberships } = (await fetchSubgraph(`
+        query {
+          memberships {
+            id
+            tokenID
+            profileImageUri
+            nickname
+            holder
+            joinedAt
+            experiencePoints {
+              totalAmount
+            }
+            activityPoints {
+              totalAmount
+            }
+            attendedEvents {
+              totalAmount
+            }
+            isAdmin
+          }
+        }
+      `)) as { memberships: MembershipType[] };
 
-  const { data: isAdmin } = useContractRead({
-    ...CONTRACT,
-    functionName: 'hasRole',
-    args: [
-      '0x0000000000000000000000000000000000000000000000000000000000000000',
-      address
-    ]
-  });
+    return memberships.find(({ holder }) => getAddress(holder) === address);
+  }, [address]);
 
   useEffect(() => {
-    setMembership({
-      ...(member as MembershipType),
-      isAdmin: isAdmin as boolean
-    });
-  }, [isAdmin, member]);
+    const fetch = async () => {
+      setMembership(await fetchMembership());
+    };
+
+    fetch();
+  }, [fetchMembership]);
 
   return (
     <MembershipContext.Provider value={{ membership, setMembership }}>

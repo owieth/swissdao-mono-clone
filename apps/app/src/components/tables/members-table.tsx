@@ -33,11 +33,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { MembershipContext } from '@/contexts/membership';
-import {
-  ACTIVITY_POINTS_IPFS_URL,
-  ATTENDED_EVENTS_IPFS_URL,
-  EXPERIENCE_POINTS_IPFS_URL
-} from '@/helpers/const';
 import { convertIpfsToHttps } from '@/helpers/ipfs';
 import { MembershipType } from '@/types/types';
 import Link from 'next/link';
@@ -97,58 +92,76 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
             <AvatarGroup limit={3} className="justify-start">
               <AvatarGroupList>
                 {original.guilds.map((guild, i) => (
-                  <Avatar key={i}>
-                    <AvatarImage
-                      src={convertIpfsToHttps(guild.imageUri || '')}
-                      alt={guild.name}
-                    />
-                    <AvatarFallback>{guild.name}</AvatarFallback>
-                  </Avatar>
+                  <DropdownMenu key={i}>
+                    <DropdownMenuTrigger asChild className="cursor-pointer">
+                      <Avatar>
+                        <AvatarImage
+                          src={convertIpfsToHttps(guild.imageUri || '')}
+                          alt={guild.name}
+                        />
+                        <AvatarFallback>{guild.name}</AvatarFallback>
+                      </Avatar>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                      className="w-56"
+                      align="end"
+                      forceMount
+                    >
+                      <DropdownMenuItem>
+                        <Link
+                          href={`/guilds/${guild.id}`}
+                          className="flex w-full items-center"
+                        >
+                          Guild
+                        </Link>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 ))}
               </AvatarGroupList>
               <AvatarOverflowIndicator />
             </AvatarGroup>
           ) : (
-            <p>No Badges yet.</p>
+            <p>No Guilds yet.</p>
           )}
         </div>
       )
     },
     {
-      accessorKey: 'activityPoints',
-      header: 'Activity Points',
+      accessorKey: 'experiencePoints',
+      header: 'Experience Points',
       cell: ({ row: { original } }) => {
-        const value = original.activityPoints;
+        const { imageUri, balances } = original.experiencePoints;
+        const balanceOfMember =
+          balances.find(({ holder }) => holder === original.holder)?.balance ||
+          0;
 
         return (
           <div className="flex items-center gap-4">
-            {Number(value)}
+            {balanceOfMember}
             <Avatar className="h-8 w-8">
-              <AvatarImage
-                src={convertIpfsToHttps(ACTIVITY_POINTS_IPFS_URL)}
-                alt="AP"
-              />
-              <AvatarFallback>AP</AvatarFallback>
+              <AvatarImage src={convertIpfsToHttps(imageUri)} alt="XP" />
+              <AvatarFallback>XP</AvatarFallback>
             </Avatar>
           </div>
         );
       }
     },
     {
-      accessorKey: 'experiencePoints',
-      header: 'Experience Points',
+      accessorKey: 'activityPoints',
+      header: 'Activity Points',
       cell: ({ row: { original } }) => {
-        const value = original.experiencePoints;
+        const { imageUri, balances } = original.activityPoints;
+        const balanceOfMember =
+          balances.find(({ holder }) => holder === original.holder)?.balance ||
+          0;
 
         return (
           <div className="flex items-center gap-4">
-            {Number(value)}
+            {balanceOfMember}
             <Avatar className="h-8 w-8">
-              <AvatarImage
-                src={convertIpfsToHttps(EXPERIENCE_POINTS_IPFS_URL)}
-                alt="XP"
-              />
-              <AvatarFallback>XP</AvatarFallback>
+              <AvatarImage src={convertIpfsToHttps(imageUri)} alt="AP" />
+              <AvatarFallback>AP</AvatarFallback>
             </Avatar>
           </div>
         );
@@ -158,16 +171,16 @@ export function MembersTable({ members, onAttend, onIncrease }: Props) {
       accessorKey: 'attendedEvents',
       header: 'Attended Events',
       cell: ({ row: { original } }) => {
-        const value = original.attendedEvents;
+        const { imageUri, balances } = original.attendedEvents;
+        const balanceOfMember =
+          balances.find(({ holder }) => holder === original.holder)?.balance ||
+          0;
 
         return (
           <div className="flex items-center gap-4">
-            {Number(value)}
+            {balanceOfMember}
             <Avatar className="h-8 w-8">
-              <AvatarImage
-                src={convertIpfsToHttps(ATTENDED_EVENTS_IPFS_URL)}
-                alt="Events"
-              />
+              <AvatarImage src={convertIpfsToHttps(imageUri)} alt="Events" />
               <AvatarFallback>Events</AvatarFallback>
             </Avatar>
           </div>

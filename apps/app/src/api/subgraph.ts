@@ -3,7 +3,8 @@ export const fetchSubgraph = async (query: string) => {
     'https://subgraph.satsuma-prod.com/75e84f5f611a/devs-team--4192614/swissdao-membership-optimism/api',
     {
       method: 'POST',
-      body: JSON.stringify({ query })
+      body: JSON.stringify({ query }),
+      next: { revalidate: 0 }
     }
   );
 

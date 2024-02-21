@@ -8,21 +8,33 @@ dataSources:
     name: SwissDAOMembership
     network: optimism-sepolia
     source:
-      address: "0x878b42Fe88A7a135f8Ee1E978Effa824e8f32998"
+      address: "0xEC997f40a560518DEb69B8287355fdA9f2DFa623"
       abi: SwissDAOMembership
-      startBlock: 7456356
+      startBlock: 7710229
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Token
-        - Membership
+        - TokenTransaction
+        - Badge
         - Guild
+        - Membership
       abis:
         - name: SwissDAOMembership
           file: ./abis/SwissDAOMembership.json
       eventHandlers:
         - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
           handler: handleTransferSingle
+        - event: AddBadge(indexed uint256)
+          handler: handleAddBadge
+        - event: EditBadge(indexed uint256)
+          handler: handleEditBadge
+        - event: AddGuild(indexed uint256)
+          handler: handleAddGuild
+        - event: EditGuild(indexed uint256)
+          handler: handleEditGuild
+        - event: EditMembership(indexed uint256)
+          handler: handleEditMembership
       file: ./src/swiss-dao-membership.ts

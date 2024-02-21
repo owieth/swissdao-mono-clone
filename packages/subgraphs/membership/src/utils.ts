@@ -1,57 +1,7 @@
 import { Address, BigInt, Bytes } from '@graphprotocol/graph-ts';
 import { SwissDAOMembership } from '../generated/SwissDAOMembership/SwissDAOMembership';
-import { Guild, Membership, Token } from '../generated/schema';
-
-export function fetchMembership(id: string): Membership {
-  let membership = Membership.load(id);
-
-  if (!membership) {
-    membership = new Membership(id);
-    membership.tokenID = BigInt.fromString(id);
-    membership.profileImageUri = '';
-    membership.nickname = '';
-    membership.holder = Bytes.fromHexString(
-      '0x0000000000000000000000000000000000000000'
-    );
-    membership.joined_At = BigInt.fromI32(0);
-    membership.minted_At = BigInt.fromI32(0);
-    membership.experiencePoints = BigInt.fromI32(0);
-    membership.activityPoints = BigInt.fromI32(0);
-    membership.attendedEvents = BigInt.fromI32(0);
-  }
-
-  return membership;
-}
-
-export function fetchGuild(id: string): Guild {
-  let guild = Guild.load(id);
-
-  if (!guild) {
-    guild = new Guild(id);
-    guild.tokenID = BigInt.fromString(id);
-    guild.imageUri = '';
-    guild.name = '';
-    guild.description = '';
-    guild.holders = [];
-  }
-
-  return guild;
-}
-
-export function fetchToken(id: string): Token {
-  let token = Token.load(id);
-
-  if (!token) {
-    token = new Token(id);
-    token.tokenID = BigInt.fromString(id);
-    token.imageUri = '';
-    token.name = '';
-    token.description = '';
-    token.attributes = '';
-  }
-
-  return token;
-}
+import { Membership, Transaction } from '../generated/schema';
+import { fetchMembership } from './membership/membership';
 
 export function fetchBalance(
   tokenAddress: Address,
@@ -72,4 +22,21 @@ export function fetchHolder(
   const member = contract.getMemberStructByAddress(memberAddress);
 
   return fetchMembership(member.tokenId.toString());
+}
+
+export function fetchTransaction(id: string): Transaction {
+  let transaction = Transaction.load(id);
+
+  if (!transaction) {
+    transaction = new Transaction(id);
+    transaction.tokenID = BigInt.fromI32(0);
+    transaction.from = '';
+    transaction.to = '';
+    transaction.amount = BigInt.fromI32(0);
+    transaction.txHash = Bytes.fromI32(0);
+    transaction.type = 'NONE';
+    transaction.timestamp = BigInt.fromI32(0);
+  }
+
+  return transaction;
 }

@@ -89,7 +89,7 @@ export function UserNav() {
                     <DropdownMenuGroup>
                       <DropdownMenuItem>
                         <Link
-                          href={`/members/${(membership as any)?.tokenId}`}
+                          href={`/members/${membership?.tokenID}`}
                           className="flex w-full items-center"
                         >
                           Profile

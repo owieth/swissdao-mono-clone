@@ -2,10 +2,11 @@
 
 import { MembersTable } from '@/components/tables/members-table';
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import { MembershipContext } from '@/contexts/membership';
 import { CONTRACT } from '@/contracts/contracts';
 import { MembershipType } from '@/types/types';
-import { Card, Text, Title } from '@tremor/react';
+import { Title, Text } from '@tremor/react';
 import { prepareWriteContract, writeContract } from '@wagmi/core';
 import Link from 'next/link';
 import { useContext } from 'react';
@@ -44,13 +45,13 @@ export default function MembersPage({
           <Title>Members</Title>
           <Text>A list of all swissDAO Members</Text>
         </div>
-        {BigInt(membership?.tokenID || 0) === BigInt(0) && (
+        {(membership?.tokenID || 0) === 0 && (
           <Button>
             <Link href="/join">Get Membership</Link>
           </Button>
         )}
       </div>
-      <Card className="mt-6">
+      <Card className="mt-6 p-6">
         <MembersTable
           members={members}
           onAttend={onAttend}

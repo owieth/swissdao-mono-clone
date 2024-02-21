@@ -1,7 +1,7 @@
 import { MembershipType } from '@/types/types';
 
-const MembercardBack = ({ tokenStruct }: { tokenStruct: MembershipType }) => {
-  const {} = tokenStruct;
+const MembercardBack = ({ membership }: { membership: MembershipType }) => {
+  const { tokenID } = membership;
 
   return (
     <svg

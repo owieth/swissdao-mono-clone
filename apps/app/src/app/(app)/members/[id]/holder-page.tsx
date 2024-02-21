@@ -1,9 +1,11 @@
 'use client';
 
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Card } from '@/components/ui/card';
 import { getGradient } from '@/helpers/gradient';
 import { MembershipType } from '@/types/types';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
+import { AreaChart, CategoryBar } from '@tremor/react';
 import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { Address, getAddress } from 'viem';
@@ -27,6 +29,43 @@ export default function MemberPage({
     address && holder
       ? getAddress(address as Address) == getAddress(holder as Address)
       : false;
+
+  const chartdata = [
+    {
+      date: 'Jan 22',
+      SemiAnalysis: 2890,
+      'The Pragmatic Engineer': 2338
+    },
+    {
+      date: 'Feb 22',
+      SemiAnalysis: 2756,
+      'The Pragmatic Engineer': 2103
+    },
+    {
+      date: 'Mar 22',
+      SemiAnalysis: 3322,
+      'The Pragmatic Engineer': 2194
+    },
+    {
+      date: 'Apr 22',
+      SemiAnalysis: 3470,
+      'The Pragmatic Engineer': 2108
+    },
+    {
+      date: 'May 22',
+      SemiAnalysis: 3475,
+      'The Pragmatic Engineer': 1812
+    },
+    {
+      date: 'Jun 22',
+      SemiAnalysis: 3129,
+      'The Pragmatic Engineer': 1726
+    }
+  ];
+
+  const valueFormatter = function (number: number) {
+    return '$ ' + new Intl.NumberFormat('us').format(number).toString();
+  };
 
   useEffect(() => {
     if (!address) {
@@ -101,18 +140,46 @@ export default function MemberPage({
               </h1>
 
               <h1 className="truncate text-2xl font-semibold text-black">
-                Activty Points: {membership.activityPoints.toString()}
+                Activty Points: {membership.activityPoints.totalAmount}
               </h1>
 
               <h1 className="truncate text-2xl font-semibold text-black">
-                Experience Points: {membership.experiencePoints.toString()}
+                Experience Points: {membership.experiencePoints.totalAmount}
               </h1>
 
               <h1 className="truncate text-2xl font-semibold text-black">
-                Attended Events: {membership.attendedEvents.toString()}
+                Attended Events: {membership.attendedEvents.totalAmount}
               </h1>
             </div>
           </div>
+        </div>
+
+        <div className="relative flex w-full flex-col gap-10 px-10 md:px-20">
+          <Card className="w-full p-5">
+            Newsletter revenue over time (USD)
+            <AreaChart
+              className="mt-4 h-72"
+              data={chartdata}
+              index="date"
+              yAxisWidth={65}
+              categories={['SemiAnalysis', 'The Pragmatic Engineer']}
+              colors={['indigo', 'cyan']}
+              valueFormatter={valueFormatter}
+            />
+          </Card>
+
+          <Card className="w-full p-5">
+            <div className="flex justify-between">
+              <span>Activity Points</span>
+              <span>{membership.activityPoints.totalAmount} %</span>
+            </div>
+            <CategoryBar
+              values={[40, 30, 20, 10]}
+              colors={['rose', 'orange', 'yellow', 'emerald']}
+              markerValue={membership.activityPoints.totalAmount}
+              className="mt-3"
+            />
+          </Card>
         </div>
 
         {/* <div className="grid w-full grid-cols-1 gap-8 px-10 sm:grid-cols-2 md:px-20 xl:grid-cols-3">
