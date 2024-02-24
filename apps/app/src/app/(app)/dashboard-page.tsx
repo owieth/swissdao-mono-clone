@@ -1,8 +1,7 @@
-'use client';
-
+import { fetchSubgraph } from '@/api/subgraph';
 import ActivityLog from '@/components/dashboard/activity-log';
 import { Overview } from '@/components/dashboard/overview';
-import { MemberStats } from '@/components/member-stats/member-stats';
+import { MembersStats } from '@/components/member-stats/member-stats';
 import {
   Card,
   CardContent,
@@ -10,17 +9,25 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
-import { MembershipType } from '@/types/types';
-import { useState } from 'react';
+import { BadgeType, TokenType } from '@/types/types';
 
-export default function DashboardPage() {
-  const [member, setMember] = useState({
-    membership: {} as MembershipType,
-    activityPoints: BigInt(10),
-    experiencePoints: BigInt(10),
-    attendedEvents: BigInt(10),
-    badges: []
-  });
+async function getData() {
+  const { tokens, badges } = await fetchSubgraph(`
+    query {
+      tokens {
+        totalAmount
+      }
+      badges {
+        id
+      }
+    }
+  `);
+
+  return { tokens, badges } as { tokens: TokenType[]; badges: BadgeType[] };
+}
+
+export default async function DashboardPage() {
+  const { tokens, badges } = await getData();
 
   return (
     <>
@@ -31,7 +38,7 @@ export default function DashboardPage() {
               swissDAO - Membership Overview
             </h2>
           </div>
-          {member && <MemberStats member={member} />}
+          <MembersStats tokens={tokens} badges={badges} />
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
             <Card className="col-span-4">
               <CardHeader>

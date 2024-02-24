@@ -5,44 +5,14 @@ import {
   UpdateIcon
 } from '@radix-ui/react-icons';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-
-const chartdata = [
-  {
-    year: 1970,
-    'Export Growth Rate': 2.04,
-    'Import Growth Rate': 1.53
-  },
-  {
-    year: 1971,
-    'Export Growth Rate': 1.96,
-    'Import Growth Rate': 1.58
-  },
-  {
-    year: 1972,
-    'Export Growth Rate': 1.96,
-    'Import Growth Rate': 1.61
-  },
-  {
-    year: 1973,
-    'Export Growth Rate': 1.93,
-    'Import Growth Rate': 1.61
-  },
-  {
-    year: 1974,
-    'Export Growth Rate': 1.88,
-    'Import Growth Rate': 1.67
-  }
-  //...
-];
-
-const dataFormatter = (number: number) =>
-  `${Intl.NumberFormat('us').format(number).toString()}%`;
+import { BadgeType, TokenType } from '@/types/types';
 
 type Props = {
-  member: any;
+  tokens: TokenType[];
+  badges: BadgeType[];
 };
 
-export function MemberStats({ member }: Props) {
+export function MembersStats({ tokens, badges }: Props) {
   return (
     <>
       <div className="mb-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -52,7 +22,7 @@ export function MemberStats({ member }: Props) {
             <IdCardIcon />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{member.badges.length}</div>
+            <div className="text-2xl font-bold">{badges.length}</div>
           </CardContent>
         </Card>
 
@@ -64,9 +34,7 @@ export function MemberStats({ member }: Props) {
             <LapTimerIcon />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {member.activityPoints.toString()}
-            </div>
+            <div className="text-2xl font-bold">{tokens[0].totalAmount}</div>
           </CardContent>
         </Card>
 
@@ -78,9 +46,7 @@ export function MemberStats({ member }: Props) {
             <PersonIcon />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {member.experiencePoints.toString()}
-            </div>
+            <div className="text-2xl font-bold">{tokens[1].totalAmount}</div>
           </CardContent>
         </Card>
         <Card>
@@ -91,9 +57,7 @@ export function MemberStats({ member }: Props) {
             <UpdateIcon />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {member.attendedEvents.toString()}
-            </div>
+            <div className="text-2xl font-bold">{tokens[2].totalAmount}</div>
           </CardContent>
         </Card>
       </div>
