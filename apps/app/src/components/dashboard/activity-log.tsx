@@ -28,6 +28,7 @@ import {
 import {
   ColumnDef,
   ColumnFiltersState,
+  Row,
   SortingState,
   flexRender,
   getCoreRowModel,
@@ -36,12 +37,31 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table';
-import { ArrowUpRight, MoreHorizontal } from 'lucide-react';
+import {
+  ArrowUpRight,
+  ChevronDown,
+  ChevronUp,
+  MoreHorizontal
+} from 'lucide-react';
 import Link from 'next/link';
 import * as React from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { Icons } from '../ui/icons';
 import { shortenBytes32 } from '@/helpers/format';
+import { Card } from '../ui/card';
+
+const TransactionLink = ({ txHash }: { txHash: string }) => (
+  <div className="group">
+    <Link
+      href={`https://sepolia-optimism.etherscan.io/tx/${txHash}`}
+      target="_blank"
+      className="flex items-center group-hover:underline"
+    >
+      {shortenBytes32(txHash)}
+      <ArrowUpRight className="size-4 ml-2 shrink-0 opacity-50 group-hover:opacity-100" />
+    </Link>
+  </div>
+);
 
 export default function ActivityLog() {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -145,46 +165,48 @@ export default function ActivityLog() {
       cell: ({ row }) => {
         const { txHash } = row.original;
 
-        return (
-          <div className="group">
-            <Link
-              href={`https://sepolia-optimism.etherscan.io/tx/${txHash}`}
-              target="_blank"
-              className="flex items-center group-hover:underline"
-            >
-              {shortenBytes32(txHash)}
-              <ArrowUpRight className="size-4 ml-2 shrink-0 opacity-50 group-hover:opacity-100" />
-            </Link>
-          </div>
-        );
+        return <TransactionLink txHash={txHash} />;
       }
     },
     {
-      id: 'actions',
-      enableHiding: false,
-      cell: ({ row }) => {
-        const { tokenID } = row.original;
-
-        return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <Link href={`/members/${tokenID}`}>View profile</Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        );
-      }
+      id: 'expander',
+      cell: ({ row }) => (
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => row.toggleExpanded()}
+        >
+          {row.getIsExpanded() ? (
+            <ChevronUp className="h-2 w-2" />
+          ) : (
+            <ChevronDown className="h-2 w-2" />
+          )}
+        </Button>
+      )
     }
   ];
+
+  const renderRowSubComponent = useCallback(
+    ({ row }: { row: Row<TransactionType> }) => (
+      <Card className="p-4">
+        <h1>Transaction Information</h1>
+        <h2>Get more information about this transaction.</h2>
+
+        <div className="flex justify-between">
+          <span>Hash</span>
+          <TransactionLink txHash={row.original.txHash} />
+        </div>
+
+        <div className="flex justify-between">
+          <span>Sent At</span>
+          <span>
+            {new Date(row.original.timestamp * 1000).toLocaleString()}
+          </span>
+        </div>
+      </Card>
+    ),
+    []
+  );
 
   const table = useReactTable({
     data: transactions || [],
@@ -232,16 +254,33 @@ export default function ActivityLog() {
 
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map(row => (
-                <TableRow key={row.id}>
-                  {row.getVisibleCells().map(cell => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
+                <>
+                  <TableRow
+                    key={row.id}
+                    className={row.getIsExpanded() ? 'border-none' : ''}
+                  >
+                    {row.getVisibleCells().map(cell => (
+                      <>
+                        <TableCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      </>
+                    ))}
+                  </TableRow>
+
+                  <>
+                    {row.getIsExpanded() ? (
+                      <TableRow>
+                        <TableCell colSpan={5}>
+                          {renderRowSubComponent({ row })}
+                        </TableCell>
+                      </TableRow>
+                    ) : null}
+                  </>
+                </>
               ))
             ) : (
               <TableRow>
