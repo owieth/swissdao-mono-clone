@@ -11,6 +11,8 @@
   "dependencies": {
     "@hookform/resolvers": "^3.3.1",
     "@notionhq/client": "^2.2.12",
+    "@quillforms/react-renderer-utils": "^5.9.2",
+    "@quillforms/renderer-core": "^5.7.1",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-avatar": "^1.0.3",
     "@radix-ui/react-checkbox": "^1.0.4",
@@ -32,6 +34,8 @@
     "cmdk": "^0.2.0",
     "date-fns": "^2.30.0",
     "ethers": "^6.7.1",
+    "google-auth-library": "^9.6.2",
+    "google-spreadsheet": "^4.1.1",
     "lucide-react": "^0.276.0",
     "next": "13.5.6",
     "react-hook-form": "^7.47.0",
