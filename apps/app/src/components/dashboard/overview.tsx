@@ -108,9 +108,9 @@ export function Overview({ tokens }: Props) {
   ];
 
   const statusColor = {
-    ActivityPoints: { color: 'blue', bg: 'bg-blue-500' },
-    ExperiencePoints: { color: 'violet', bg: 'bg-violet-500' },
-    AttendedEvents: { color: 'violet', bg: 'bg-violet-500' }
+    ActivityPoints: { color: 'red', bg: 'bg-red-500' },
+    ExperiencePoints: { color: 'yellow', bg: 'bg-yellow-500' },
+    AttendedEvents: { color: 'green', bg: 'bg-green-500' }
   } as {
     [key: string]: {
       color: string;
