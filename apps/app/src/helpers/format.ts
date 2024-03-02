@@ -9,3 +9,6 @@ export const shortenBytes32 = (bytes32: string) => {
     bytes32?.substring(bytes32.length - 8, bytes32.length)
   );
 };
+
+export const valueFormatter = (number: number) =>
+  `${Intl.NumberFormat('us').format(number).toString()}`;

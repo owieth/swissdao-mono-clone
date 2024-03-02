@@ -1,7 +1,6 @@
 import { fetchSubgraph } from '@/api/subgraph';
 import ActivityLog from '@/components/dashboard/activity-log';
 import { Overview } from '@/components/dashboard/overview';
-import { MembersStats } from '@/components/member-stats/member-stats';
 import {
   Card,
   CardContent,
@@ -42,17 +41,16 @@ export default async function DashboardPage() {
               swissDAO - Membership Overview
             </h2>
           </div>
-          <MembersStats tokens={tokens} badges={badges} />
           <div className="flex flex-col gap-4">
-            <Card className="col-span-4">
+            <Card>
               <CardHeader>
                 <CardTitle>Overview</CardTitle>
               </CardHeader>
-              <CardContent className="pl-2">
-                <Overview />
+              <CardContent>
+                <Overview tokens={tokens} />
               </CardContent>
             </Card>
-            <Card className="col-span-3">
+            <Card>
               <CardHeader>
                 <CardTitle>Latest Activity</CardTitle>
                 <CardDescription>Latest Activity of the DAO</CardDescription>

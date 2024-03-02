@@ -1,78 +1,153 @@
 'use client';
 
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import { TokenType } from '@/types/types';
+import { valueFormatter } from '@/helpers/format';
+import { AreaChart, Card, List, ListItem } from '@tremor/react';
 
-const data = [
-  {
-    name: 'Jan',
-    total: Math.floor(Math.random() * 5000) + 1000
-  },
-  {
-    name: 'Feb',
-    total: Math.floor(Math.random() * 5000) + 1000
-  },
-  {
-    name: 'Mar',
-    total: Math.floor(Math.random() * 5000) + 1000
-  },
-  {
-    name: 'Apr',
-    total: Math.floor(Math.random() * 5000) + 1000
-  },
-  {
-    name: 'May',
-    total: Math.floor(Math.random() * 5000) + 1000
-  },
-  {
-    name: 'Jun',
-    total: Math.floor(Math.random() * 5000) + 1000
-  },
-  {
-    name: 'Jul',
-    total: Math.floor(Math.random() * 5000) + 1000
-  },
-  {
-    name: 'Aug',
-    total: Math.floor(Math.random() * 5000) + 1000
-  },
-  {
-    name: 'Sep',
-    total: Math.floor(Math.random() * 5000) + 1000
-  },
-  {
-    name: 'Oct',
-    total: Math.floor(Math.random() * 5000) + 1000
-  },
-  {
-    name: 'Nov',
-    total: Math.floor(Math.random() * 5000) + 1000
-  },
-  {
-    name: 'Dec',
-    total: Math.floor(Math.random() * 5000) + 1000
-  }
-];
+type Props = {
+  tokens: TokenType[];
+};
 
-export function Overview() {
+export function Overview({ tokens }: Props) {
+  //const data = tokens.map((token, _, array) => {
+  //   return {
+  //     ActivityPoints: 0,
+  //     ExperiencePoints: 0,
+  //     AttendedEvents: 0,
+  //   }
+  // });
+
+  const data = [
+    {
+      date: 'Jan 23',
+      ActivityPoints: 0,
+      ExperiencePoints: 0,
+      AttendedEvents: 0
+    },
+    {
+      date: 'Feb 23',
+      ActivityPoints: 0,
+      ExperiencePoints: 0,
+      AttendedEvents: 0
+    },
+    {
+      date: 'Mar 23',
+      ActivityPoints: 0,
+      ExperiencePoints: 0,
+      AttendedEvents: 0
+    },
+    {
+      date: 'Apr 23',
+      ActivityPoints: 0,
+      ExperiencePoints: 0,
+      AttendedEvents: 0
+    },
+    {
+      date: 'May 23',
+      ActivityPoints: 0,
+      ExperiencePoints: 0,
+      AttendedEvents: 0
+    },
+    {
+      date: 'Jun 23',
+      ActivityPoints: 0,
+      ExperiencePoints: 0,
+      AttendedEvents: 0
+    },
+    {
+      date: 'Jul 23',
+      ActivityPoints: 0,
+      ExperiencePoints: 0,
+      AttendedEvents: 0
+    },
+    {
+      date: 'Aug 23',
+      ActivityPoints: 0,
+      ExperiencePoints: 0,
+      AttendedEvents: 0
+    },
+    {
+      date: 'Sep 23',
+      ActivityPoints: 0,
+      ExperiencePoints: 0,
+      AttendedEvents: 0
+    },
+    {
+      date: 'Oct 23',
+      ActivityPoints: 0,
+      ExperiencePoints: 0,
+      AttendedEvents: 0
+    },
+    {
+      date: 'Nov 23',
+      ActivityPoints: 0,
+      ExperiencePoints: 0,
+      AttendedEvents: 0
+    },
+    {
+      date: 'Dec 23',
+      ActivityPoints: 0,
+      ExperiencePoints: 0,
+      AttendedEvents: 0
+    }
+  ];
+
+  const summary = [
+    {
+      name: 'Activity Points',
+      value: tokens[0].totalAmount
+    },
+    {
+      name: 'Experience Points',
+      value: tokens[1].totalAmount
+    },
+    {
+      name: 'Attended Events',
+      value: tokens[2].totalAmount
+    }
+  ];
+
+  const statusColor = {
+    ActivityPoints: { color: 'blue', bg: 'bg-blue-500' },
+    ExperiencePoints: { color: 'violet', bg: 'bg-violet-500' },
+    AttendedEvents: { color: 'violet', bg: 'bg-violet-500' }
+  } as {
+    [key: string]: {
+      color: string;
+      bg: string;
+    };
+  };
+
   return (
-    <ResponsiveContainer width="100%" height={350}>
-      <BarChart data={data}>
-        <XAxis
-          dataKey="name"
-          stroke="#888888"
-          fontSize={12}
-          tickLine={false}
-          axisLine={false}
-        />
-        <YAxis
-          stroke="#888888"
-          fontSize={12}
-          tickLine={false}
-          axisLine={false}
-          tickFormatter={value => `$${value}`}
-        />
-        <Bar dataKey="total" fill="#adfa1d" radius={[4, 4, 0, 0]} />
-      </BarChart>
-    </ResponsiveContainer>
+    <>
+      <AreaChart
+        data={data}
+        index="date"
+        categories={Object.keys(statusColor)}
+        colors={Object.values(statusColor).map(status => status.color) as any}
+        valueFormatter={valueFormatter}
+        showLegend={false}
+        showYAxis={false}
+        showGradient={false}
+        className="mt-6 h-32"
+      />
+
+      <List className="mt-2">
+        {summary.map((item, i) => (
+          <ListItem key={item.name}>
+            <div className="flex items-center space-x-2">
+              <span
+                className={`h-0.5 w-3 ${Object.values(statusColor)[i].bg}`}
+                aria-hidden={true}
+              />
+              <span>{item.name}</span>
+            </div>
+            <span className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-medium">
+              {valueFormatter(item.value)}
+            </span>
+          </ListItem>
+        ))}
+      </List>
+    </>
   );
 }
