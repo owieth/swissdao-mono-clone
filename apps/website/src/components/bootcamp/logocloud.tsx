@@ -4,15 +4,21 @@ type Props = {
   text: string;
   logos: string[];
   className?: string;
+  textClassName?: string;
 };
 
-export default function Logocloud({ text, logos, className }: Props) {
+export default function Logocloud({
+  text,
+  logos,
+  className,
+  textClassName
+}: Props) {
   return (
-    <div className="bg-white pb-12">
+    <div className={className || 'bg-white pb-12'}>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <h2
           className={
-            className ||
+            textClassName ||
             'text-center text-lg font-semibold leading-8 text-gray-900'
           }
         >
