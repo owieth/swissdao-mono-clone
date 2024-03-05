@@ -22,14 +22,12 @@ import imageLaptop from '@/images/laptop.jpg'
 import { type CaseStudy, type MDXEntry, loadCaseStudies } from '@/lib/mdx'
 
 const clients = [
-  ['Phobia', logoPhobiaLight],
-  ['Family Fund', logoFamilyFund],
-  ['Unseal', logoUnseal],
-  ['Mail Smirk', logoMailSmirk],
-  ['Home Work', logoHomeWork],
-  ['Green Life', logoGreenLife],
-  ['Bright Path', logoBrightPath],
-  ['North Adventures', logoNorthAdventures],
+  ['Solana Foundation', logoPhobiaLight],
+  ['Kamino Finance', logoFamilyFund],
+  ['The Graph', logoUnseal],
+  ['Gelato Network', logoMailSmirk],
+  ['Superteam', logoMailSmirk],
+  ['Trust Square', logoMailSmirk],
 ]
 
 function Clients() {
@@ -38,7 +36,7 @@ function Clients() {
       <Container>
         <FadeIn className="flex items-center gap-x-8">
           <h2 className="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
-            We’ve worked with hundreds of amazing people
+            We’ve worked with Web3 protocols, blockchains, tech-providers and web2 businesses.
           </h2>
           <div className="h-px flex-auto bg-neutral-800" />
         </FadeIn>
@@ -48,7 +46,7 @@ function Clients() {
             className="mt-10 grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-4"
           >
             {clients.map(([client, logo]) => (
-              <li key={client}>
+              <li >
                 <FadeIn>
                   <Image src={logo} alt={client} unoptimized />
                 </FadeIn>
@@ -69,13 +67,11 @@ function CaseStudies({
   return (
     <>
       <SectionIntro
-        title="Harnessing technology for a brighter future"
+        title="Past events"
         className="mt-24 sm:mt-32 lg:mt-40"
       >
         <p>
-          We believe technology is the answer to the world’s greatest
-          challenges. It’s also the cause, so we find ourselves in bit of a
-          catch 22 situation.
+          Whether a competitive hackathon, a collaborative workshop or a mind sparking ideathon, we did it.
         </p>
       </SectionIntro>
       <Container className="mt-16">
@@ -185,12 +181,10 @@ export default async function Home() {
       <Container className="mt-24 sm:mt-32 md:mt-56">
         <FadeIn className="max-w-3xl">
           <h1 className="font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-7xl">
-            Award-winning development studio based in Denmark.
+            DAO governed education, web3 training, venture building and community.
           </h1>
           <p className="mt-6 text-xl text-neutral-600">
-            We are a development studio working at the intersection of design
-            and technology. It’s a really busy intersection though — a lot of
-            our staff have been involved in hit and runs.
+            We are a community that is working to improve the onboarding for Web3 native careers. We teach you how to contribute to DAOs, deploy smart contracts, develop Web3 business ideas and make this process less lonely and more enjoyable with our community.
           </p>
         </FadeIn>
       </Container>
