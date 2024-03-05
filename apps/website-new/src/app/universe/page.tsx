@@ -19,7 +19,6 @@ import buildspace from '@/images/buildspace.jpg'
 import daotraining from '@/images/dao-training.jpg'
 import community from '@/images/community.jpg'
 
-
 function Section({
   title,
   image,
@@ -63,17 +62,23 @@ function Education() {
     <Section title="Education" image={{ src: education }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-          We educate dropouts, graduates and professionals on Web3 and Blockchain topics.
-          The blockchain and web3 space is irrespective of the infancy wide and deeply complex. If a simple youtube video, a coding tutorial 
-          or your master thesis made you curious to learn more, <strong className="font-semibold text-neutral-950">you are at the right spot.</strong> 
+          We educate dropouts, graduates and professionals on Web3 and
+          Blockchain topics. The blockchain and web3 space is irrespective of
+          the infancy wide and deeply complex. If a simple youtube video, a
+          coding tutorial or your master thesis made you curious to learn more,{' '}
+          <strong className="font-semibold text-neutral-950">
+            you are at the right spot.
+          </strong>
         </p>
         <p>
-          Our 20+ contributors have wide backgrounds and are keen to pass their knowledge to curious open minds that join the community. {' '}
-          
-          But even still, our contributors enjoy spending time together, to always stay ahead of the latest trends.
+          Our 20+ contributors have wide backgrounds and are keen to pass their
+          knowledge to curious open minds that join the community. But even
+          still, our contributors enjoy spending time together, to always stay
+          ahead of the latest trends.
         </p>
         <p>
-          Are you curious to learn more about Web3, join one of our courses, our bootcamp or come by at our next meetup.
+          Are you curious to learn more about Web3, join one of our courses, our
+          bootcamp or come by at our next meetup.
         </p>
       </div>
 
@@ -95,15 +100,18 @@ function Buildspace() {
     <Section title="Buildpace" image={{ src: buildspace, shape: 1 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-          We want to give our community members, contributors and web3 enthusiasts the opportunity to leverage
-          our network in the blockchain industry and the DAO collective intelligence to launch ventures.
+          We want to give our community members, contributors and web3
+          enthusiasts the opportunity to leverage our network in the blockchain
+          industry and the DAO collective intelligence to launch ventures.
         </p>
         <p>
-          Raiding together hackathons, collaborating in explorative tinkering sessions supported by the DAO and venture building assistance
-          are planned for this.
+          Raiding together hackathons, collaborating in explorative tinkering
+          sessions supported by the DAO and venture building assistance are
+          planned for this.
         </p>
         <p>
-          This pillar is currently being developped. Contact us if you are interested to collaborate on this mission.
+          This pillar is currently being developped. Contact us if you are
+          interested to collaborate on this mission.
         </p>
       </div>
 
@@ -127,24 +135,30 @@ function DAOTraining() {
     <Section title="DAO Training" image={{ src: daotraining, shape: 2 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-          We believe that DAOs as internet native organisations, with multifacet variety of governance types are
-          going to disrupt organisation politics, structure, tech and philosophy.
+          We believe that DAOs as internet native organisations, with multifacet
+          variety of governance types are going to disrupt organisation
+          politics, structure, tech and philosophy.
         </p>
         <p>
-          Sourcing liquidity has never been easier, faster and more global than with DAOs. Smart Contract and blockchain technology
-          allow to have trustless accountability across borders.
+          Sourcing liquidity has never been easier, faster and more global than
+          with DAOs. Smart Contract and blockchain technology allow to have
+          trustless accountability across borders.
         </p>
         <p>
-         We are truly passionate about DAOs and believe they could allow us to build truly meritocratic organisastions.
-         We strive to be a meritocratic organisation and thus we decided to form a DAO. 
+          We are truly passionate about DAOs and believe they could allow us to
+          build truly meritocratic organisastions. We strive to be a
+          meritocratic organisation and thus we decided to form a DAO.
         </p>
         <p>
-         To adopt DAOs and make them work, we need more experiments and people being practically educated to contribute and work inside of a DAO.
-         This is why we decided to launch a DAO training program.
+          To adopt DAOs and make them work, we need more experiments and people
+          being practically educated to contribute and work inside of a DAO.
+          This is why we decided to launch a DAO training program.
         </p>
         <p>
-          Our vision is to be the main practical educator in Switzerland, that teaches trainees in participating in governance structures,
-          assessing blockchain aspects of the DAO and to further innovate DAOs in the next decade.
+          Our vision is to be the main practical educator in Switzerland, that
+          teaches trainees in participating in governance structures, assessing
+          blockchain aspects of the DAO and to further innovate DAOs in the next
+          decade.
         </p>
       </div>
 
@@ -167,10 +181,12 @@ function Community() {
     <Section title="Community" image={{ src: community, shape: 2 }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
-          DAOs stand for community owned assets, community powered venture building and community governed decisions.
+          DAOs stand for community owned assets, community powered venture
+          building and community governed decisions.
         </p>
         <p>
-          We put in a lot of effort to meet in person on a regular basis, to strengthen the community bond.
+          We put in a lot of effort to meet in person on a regular basis, to
+          strengthen the community bond.
         </p>
       </div>
 
@@ -201,30 +217,38 @@ function Values() {
         eyebrow="Our values"
         title="growing a thriving ecosystem of builders in Switzerland"
       >
-        <p>
-          Talk to us if you share our vision.
-        </p>
+        <p>Talk to us if you share our vision.</p>
       </SectionIntro>
 
       <Container className="mt-24">
         <GridList>
           <GridListItem title="Innovation">
-            We are committed to driving innovation and pushing the boundaries of what is possible with decentralized technologies.
+            We are committed to driving innovation and pushing the boundaries of
+            what is possible with decentralized technologies.
           </GridListItem>
           <GridListItem title="Community">
-          We believe that a strong sense of community is essential to building a thriving web3 ecosystem, and work to foster connections and relationships among our members.
+            We believe that a strong sense of community is essential to building
+            a thriving web3 ecosystem, and work to foster connections and
+            relationships among our members.
           </GridListItem>
           <GridListItem title="Collaboration">
-          We foster a collaborative environment where diverse perspectives and ideas can come together to create something truly remarkable.
+            We foster a collaborative environment where diverse perspectives and
+            ideas can come together to create something truly remarkable.
           </GridListItem>
           <GridListItem title="Continuous Learning">
-          We are committed to continuous learning and self-improvement, and believe that curiosity and a willingness to learn are essential to success in the fast-changing world of web3.
+            We are committed to continuous learning and self-improvement, and
+            believe that curiosity and a willingness to learn are essential to
+            success in the fast-changing world of web3.
           </GridListItem>
           <GridListItem title="Empowerment">
-          We empower builders, entrepreneurs, and creatives to harness the full potential of decentralized technologies and build a more equitable and sustainable future for all.
+            We empower builders, entrepreneurs, and creatives to harness the
+            full potential of decentralized technologies and build a more
+            equitable and sustainable future for all.
           </GridListItem>
           <GridListItem title="Transparency">
-          We believe in transparency and openness, and are committed to creating a trustworthy and reliable platform for our community to engage with.
+            We believe in transparency and openness, and are committed to
+            creating a trustworthy and reliable platform for our community to
+            engage with.
           </GridListItem>
         </GridList>
       </Container>
@@ -243,8 +267,9 @@ export default function Universe() {
     <>
       <PageIntro eyebrow="Our Universe" title="What we do">
         <p>
-          We aim to be the entry portal for new web3 techies and the go-to community for Web3 venture builders in Switzerland.
-          The goal is to onboard, educate and connect new enthusiast to help them thrive.
+          We aim to be the entry portal for new web3 techies and the go-to
+          community for Web3 venture builders in Switzerland. The goal is to
+          onboard, educate and connect new enthusiast to help them thrive.
         </p>
       </PageIntro>
 

@@ -36,7 +36,8 @@ function Clients() {
       <Container>
         <FadeIn className="flex items-center gap-x-8">
           <h2 className="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
-            We’ve worked with Web3 protocols, blockchains, tech-providers and web2 businesses.
+            We’ve worked with Web3 protocols, blockchains, tech-providers and
+            web2 businesses.
           </h2>
           <div className="h-px flex-auto bg-neutral-800" />
         </FadeIn>
@@ -46,7 +47,7 @@ function Clients() {
             className="mt-10 grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-4"
           >
             {clients.map(([client, logo]) => (
-              <li >
+              <li>
                 <FadeIn>
                   <Image src={logo} alt={client} unoptimized />
                 </FadeIn>
@@ -66,12 +67,10 @@ function CaseStudies({
 }) {
   return (
     <>
-      <SectionIntro
-        title="Past events"
-        className="mt-24 sm:mt-32 lg:mt-40"
-      >
+      <SectionIntro title="Past events" className="mt-24 sm:mt-32 lg:mt-40">
         <p>
-          Whether a competitive hackathon, a collaborative workshop or a mind sparking ideathon, we did it.
+          Whether a competitive hackathon, a collaborative workshop or a mind
+          sparking ideathon, we did it.
         </p>
       </SectionIntro>
       <Container className="mt-16">
@@ -181,10 +180,14 @@ export default async function Home() {
       <Container className="mt-24 sm:mt-32 md:mt-56">
         <FadeIn className="max-w-3xl">
           <h1 className="font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-7xl">
-            DAO governed education, web3 training, venture building and community.
+            DAO governed education, web3 training, venture building and
+            community.
           </h1>
           <p className="mt-6 text-xl text-neutral-600">
-            We are a community that is working to improve the onboarding for Web3 native careers. We teach you how to contribute to DAOs, deploy smart contracts, develop Web3 business ideas and make this process less lonely and more enjoyable with our community.
+            We are a community that is working to improve the onboarding for
+            Web3 native careers. We teach you how to contribute to DAOs, deploy
+            smart contracts, develop Web3 business ideas and make this process
+            less lonely and more enjoyable with our community.
           </p>
         </FadeIn>
       </Container>

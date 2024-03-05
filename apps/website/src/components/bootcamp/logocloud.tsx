@@ -1,14 +1,19 @@
-import Image from "next/image"
+import Image from 'next/image';
 
-export default function Logocloud() {
-    return (
-      <div className="bg-white pb-12">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-center text-lg font-semibold leading-8 text-gray-900">
-            swissDAO is a well connected builder community giving you the best exposure to the industry.
-          </h2>
-          <div className="mx-auto mt-10 h-28 lg:h-8 grid max-w-lg grid-cols-2 lg:grid-cols-4 items-center gap-x-8 gap-y-10 sm:gap-x-10 lg:mx-0 lg:max-w-none">
-            {/* <img
+type Props = {
+  text: string;
+  logos: string[];
+};
+
+export default function Logocloud({ text, logos }: Props) {
+  return (
+    <div className="bg-white pb-12">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <h2 className="text-center text-lg font-semibold leading-8 text-gray-900">
+          {text}
+        </h2>
+        <div className="mx-auto mt-10 grid h-28 max-w-lg grid-cols-2 items-center gap-x-8 gap-y-10 sm:gap-x-10 lg:mx-0 lg:h-8 lg:max-w-none lg:grid-cols-4">
+          {/* <img
               className="col-span-2 w-full founded-full object-contain lg:col-span-1"
               src="/images/bootcamp/solanafoundation.png"
               alt="Transistor"
@@ -25,20 +30,13 @@ export default function Logocloud() {
               src="/images/bootcamp/superteam.png"
               alt="Tuple"
             /> */}
-            <div className="relative w-full h-full object-contain">
-              <Image src="/images/bootcamp/solana.svg" alt="" fill />
+          {logos.map((logo, i) => (
+            <div className="relative h-full w-full object-contain" key={i}>
+              <Image src={logo} alt="" fill />
             </div>
-            <div className="relative w-full h-full object-contain">
-              <Image src="/images/bootcamp/thegraph.svg" alt="" fill />
-            </div>
-            <div className="relative w-full h-full object-contain">
-              <Image src="/images/bootcamp/superteam.svg" alt="" fill />
-            </div>
-            <div className="relative w-full h-full object-contain">
-              <Image src="/images/bootcamp/gelato.svg" alt="" fill />
-            </div>
-          </div>
+          ))}
         </div>
       </div>
-    )
-  }
+    </div>
+  );
+}
