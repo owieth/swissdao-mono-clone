@@ -416,6 +416,29 @@ export class SwissDAOMembership extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
+  ACTIVITY_POINTS_MAXIMUM(): BigInt {
+    let result = super.call(
+      'ACTIVITY_POINTS_MAXIMUM',
+      'ACTIVITY_POINTS_MAXIMUM():(uint256)',
+      []
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_ACTIVITY_POINTS_MAXIMUM(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      'ACTIVITY_POINTS_MAXIMUM',
+      'ACTIVITY_POINTS_MAXIMUM():(uint256)',
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
   ATTENDED_EVENTS(): BigInt {
     let result = super.call(
       'ATTENDED_EVENTS',
@@ -437,6 +460,29 @@ export class SwissDAOMembership extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  AUTOMATION_ROLE(): Bytes {
+    let result = super.call(
+      'AUTOMATION_ROLE',
+      'AUTOMATION_ROLE():(bytes32)',
+      []
+    );
+
+    return result[0].toBytes();
+  }
+
+  try_AUTOMATION_ROLE(): ethereum.CallResult<Bytes> {
+    let result = super.tryCall(
+      'AUTOMATION_ROLE',
+      'AUTOMATION_ROLE():(bytes32)',
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
   BADGE_INITIAL_COUNTER(): BigInt {
@@ -531,6 +577,29 @@ export class SwissDAOMembership extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
+  GOVERNANCE_ROLE(): Bytes {
+    let result = super.call(
+      'GOVERNANCE_ROLE',
+      'GOVERNANCE_ROLE():(bytes32)',
+      []
+    );
+
+    return result[0].toBytes();
+  }
+
+  try_GOVERNANCE_ROLE(): ethereum.CallResult<Bytes> {
+    let result = super.tryCall(
+      'GOVERNANCE_ROLE',
+      'GOVERNANCE_ROLE():(bytes32)',
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBytes());
+  }
+
   GUILD_INITIAL_COUNTER(): BigInt {
     let result = super.call(
       'GUILD_INITIAL_COUNTER',
@@ -577,29 +646,6 @@ export class SwissDAOMembership extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  MEMBER_ADMIN_ROLE(): Bytes {
-    let result = super.call(
-      'MEMBER_ADMIN_ROLE',
-      'MEMBER_ADMIN_ROLE():(bytes32)',
-      []
-    );
-
-    return result[0].toBytes();
-  }
-
-  try_MEMBER_ADMIN_ROLE(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall(
-      'MEMBER_ADMIN_ROLE',
-      'MEMBER_ADMIN_ROLE():(bytes32)',
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
   UPGRADE_INTERFACE_VERSION(): string {
     let result = super.call(
       'UPGRADE_INTERFACE_VERSION',
@@ -616,6 +662,21 @@ export class SwissDAOMembership extends ethereum.SmartContract {
       'UPGRADE_INTERFACE_VERSION():(string)',
       []
     );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toString());
+  }
+
+  VERSION(): string {
+    let result = super.call('VERSION', 'VERSION():(string)', []);
+
+    return result[0].toString();
+  }
+
+  try_VERSION(): ethereum.CallResult<string> {
+    let result = super.tryCall('VERSION', 'VERSION():(string)', []);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
@@ -1215,20 +1276,20 @@ export class GrantRoleCall__Outputs {
   }
 }
 
-export class IncreasePointsCall extends ethereum.Call {
-  get inputs(): IncreasePointsCall__Inputs {
-    return new IncreasePointsCall__Inputs(this);
+export class IncreaseActivityPointsCall extends ethereum.Call {
+  get inputs(): IncreaseActivityPointsCall__Inputs {
+    return new IncreaseActivityPointsCall__Inputs(this);
   }
 
-  get outputs(): IncreasePointsCall__Outputs {
-    return new IncreasePointsCall__Outputs(this);
+  get outputs(): IncreaseActivityPointsCall__Outputs {
+    return new IncreaseActivityPointsCall__Outputs(this);
   }
 }
 
-export class IncreasePointsCall__Inputs {
-  _call: IncreasePointsCall;
+export class IncreaseActivityPointsCall__Inputs {
+  _call: IncreaseActivityPointsCall;
 
-  constructor(call: IncreasePointsCall) {
+  constructor(call: IncreaseActivityPointsCall) {
     this._call = call;
   }
 
@@ -1241,10 +1302,44 @@ export class IncreasePointsCall__Inputs {
   }
 }
 
-export class IncreasePointsCall__Outputs {
-  _call: IncreasePointsCall;
+export class IncreaseActivityPointsCall__Outputs {
+  _call: IncreaseActivityPointsCall;
 
-  constructor(call: IncreasePointsCall) {
+  constructor(call: IncreaseActivityPointsCall) {
+    this._call = call;
+  }
+}
+
+export class IncreaseExperiencePointsCall extends ethereum.Call {
+  get inputs(): IncreaseExperiencePointsCall__Inputs {
+    return new IncreaseExperiencePointsCall__Inputs(this);
+  }
+
+  get outputs(): IncreaseExperiencePointsCall__Outputs {
+    return new IncreaseExperiencePointsCall__Outputs(this);
+  }
+}
+
+export class IncreaseExperiencePointsCall__Inputs {
+  _call: IncreaseExperiencePointsCall;
+
+  constructor(call: IncreaseExperiencePointsCall) {
+    this._call = call;
+  }
+
+  get _member(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get _amount(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
+}
+
+export class IncreaseExperiencePointsCall__Outputs {
+  _call: IncreaseExperiencePointsCall;
+
+  constructor(call: IncreaseExperiencePointsCall) {
     this._call = call;
   }
 }
@@ -1270,12 +1365,16 @@ export class InitializeCall__Inputs {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get _defaultMemberAdmin(): Address {
+  get _defaultGovernance(): Address {
     return this._call.inputValues[1].value.toAddress();
   }
 
-  get _defaultUpgraderAdmin(): Address {
+  get _defaultAutomation(): Address {
     return this._call.inputValues[2].value.toAddress();
+  }
+
+  get _defaultUpgrader(): Address {
+    return this._call.inputValues[3].value.toAddress();
   }
 }
 

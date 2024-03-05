@@ -8,17 +8,19 @@ dataSources:
     name: SwissDAOMembership
     network: optimism-sepolia
     source:
-      address: "0xEC997f40a560518DEb69B8287355fdA9f2DFa623"
+      address: "0xD2B43918d9522B6ba8E3cbcfd49E62123661Fd8A"
       abi: SwissDAOMembership
-      startBlock: 7710229
+      startBlock: 8450814
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Token
-        - Membership
+        - TokenTransaction
+        - Badge
         - Guild
+        - Membership
       abis:
         - name: SwissDAOMembership
           file: ./abis/SwissDAOMembership.json

@@ -15,11 +15,31 @@ async function getData() {
         profileImageUri
         nickname
         holder
-        joined_At
-        minted_At
-        experiencePoints
-        activityPoints
-        attendedEvents
+        joinedAt
+        experiencePoints {
+          imageUri
+          totalAmount
+          balances {
+            holder
+            balance
+          }
+        }
+        activityPoints {
+          imageUri
+          totalAmount
+          balances {
+            holder
+            balance
+          }
+        }
+        attendedEvents {
+          imageUri
+          totalAmount
+          balances {
+            holder
+            balance
+          }
+        }
         guilds {
           id
           name

@@ -2,11 +2,7 @@ import MembercardBack from '@/components/membercard/back';
 import MembercardFront from '@/components/membercard/front';
 import { MembershipType } from '@/types/types';
 
-const MembercardPreview = ({
-  tokenStruct
-}: {
-  tokenStruct: MembershipType;
-}) => {
+const MembercardPreview = ({ membership }: { membership: MembershipType }) => {
   const styles = {
     card: [
       'absolute',
@@ -45,10 +41,10 @@ const MembercardPreview = ({
     <div className={styles.card}>
       <div className={styles.cardInner}>
         <div className={styles.front}>
-          <MembercardFront tokenStruct={tokenStruct} />
+          <MembercardFront membership={membership} />
         </div>
         <div className={`${styles.front} ${styles.back}`}>
-          <MembercardBack tokenStruct={tokenStruct} />
+          <MembercardBack membership={membership} />
         </div>
       </div>
     </div>

@@ -171,6 +171,11 @@
   },
   {
     "inputs": [],
+    "name": "SwissDAOMembership__ActivityPointsCountdown",
+    "type": "error"
+  },
+  {
+    "inputs": [],
     "name": "SwissDAOMembership__AlreadyBadgeOwner",
     "type": "error"
   },
@@ -181,7 +186,7 @@
   },
   {
     "inputs": [],
-    "name": "SwissDAOMembership__FreezedBeforeAttending3Events",
+    "name": "SwissDAOMembership__FreezedBeforeAttendingThreeEvents",
     "type": "error"
   },
   {
@@ -519,12 +524,38 @@
   },
   {
     "inputs": [],
+    "name": "ACTIVITY_POINTS_MAXIMUM",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "ATTENDED_EVENTS",
     "outputs": [
       {
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "AUTOMATION_ROLE",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
       }
     ],
     "stateMutability": "view",
@@ -584,6 +615,19 @@
   },
   {
     "inputs": [],
+    "name": "GOVERNANCE_ROLE",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "GUILD_INITIAL_COUNTER",
     "outputs": [
       {
@@ -610,12 +654,12 @@
   },
   {
     "inputs": [],
-    "name": "MEMBER_ADMIN_ROLE",
+    "name": "UPGRADE_INTERFACE_VERSION",
     "outputs": [
       {
-        "internalType": "bytes32",
+        "internalType": "string",
         "name": "",
-        "type": "bytes32"
+        "type": "string"
       }
     ],
     "stateMutability": "view",
@@ -623,7 +667,7 @@
   },
   {
     "inputs": [],
-    "name": "UPGRADE_INTERFACE_VERSION",
+    "name": "VERSION",
     "outputs": [
       {
         "internalType": "string",
@@ -1031,7 +1075,25 @@
         "type": "uint256"
       }
     ],
-    "name": "increasePoints",
+    "name": "increaseActivityPoints",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_member",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "increaseExperiencePoints",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1045,12 +1107,17 @@
       },
       {
         "internalType": "address",
-        "name": "_defaultMemberAdmin",
+        "name": "_defaultGovernance",
         "type": "address"
       },
       {
         "internalType": "address",
-        "name": "_defaultUpgraderAdmin",
+        "name": "_defaultAutomation",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_defaultUpgrader",
         "type": "address"
       }
     ],

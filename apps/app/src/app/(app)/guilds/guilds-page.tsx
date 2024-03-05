@@ -55,7 +55,7 @@ export default function GuildsPage({ guilds }: { guilds: GuildType[] }) {
                 </span>
               </div>
 
-              <div className="absolute right-5 top-[23rem] rounded-full border border-gray-100 bg-white py-2 pl-4 pr-5 text-center shadow-md">
+              <div className="absolute bottom-[7.5em] right-5 rounded-full border border-gray-100 bg-white py-2 pl-4 pr-5 text-center shadow-md">
                 # {guild.id}
               </div>
 

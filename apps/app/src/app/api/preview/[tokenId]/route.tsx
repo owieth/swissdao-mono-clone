@@ -1,4 +1,4 @@
-import { ETHERS_CONTRACT } from '@/helpers/contracts';
+import { fetchSubgraph } from '@/api/subgraph';
 import { shortenString } from '@/helpers/format';
 import { MembershipType } from '@/types/types';
 import { ImageResponse } from 'next/server';
@@ -7,8 +7,16 @@ export async function GET(
   request: Request,
   { params: { tokenId } }: { params: { tokenId: string } }
 ) {
-  const { holder, profileImageUri } =
-    (await ETHERS_CONTRACT.getMemberStructByTokenId(tokenId)) as MembershipType;
+  const { membership } = (await fetchSubgraph(`
+    query {
+      membership(id:${tokenId}) {
+        id
+        tokenID
+        profileImageUri
+        holder
+      }
+    }
+  `)) as { membership: MembershipType };
 
   return new ImageResponse(
     (
@@ -36,7 +44,7 @@ export async function GET(
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={profileImageUri || 'https://picsum.photos/500'}
+            src={membership.profileImageUri || 'https://picsum.photos/500'}
             alt=""
             height={100}
             width={100}
@@ -79,7 +87,7 @@ export async function GET(
               fontSize: 16
             }}
           >
-            {shortenString(holder, 8)}
+            {shortenString(membership.holder, 8)}
           </p>
           <p
             style={{

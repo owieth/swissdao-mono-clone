@@ -1,6 +1,6 @@
 'use client';
 
-import { ContributorQuest } from '@/components/typeforms/contributor-quest';
+import ContributorQuest from '@/components/contributor-form/contributor-quest';
 
 export default function Quest() {
   return (
