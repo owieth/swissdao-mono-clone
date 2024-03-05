@@ -1,0 +1,43 @@
+import BootcampStats from "./bootcampstats";
+
+export default function HowitWorks() {
+    return (
+        <div className="bg-indigo-400 py-8">
+            <h2 className="text-center mb-8 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            How it works
+            </h2>
+            <div className="grid grid-cols-1 gap-8 overflow-hidden rounded-2xl text-center sm-px-0 px-8 sm:grid-cols-2 mx-auto max-w-5xl space-between">
+                <div className="bg-gray-50 p-4 overflow-hidden rounded-lg shadow">
+                    <div className="px-4 py-5 sm:px-6">
+                        <h3 className="font-semibold pb-2 leading-6 text-2xl text-gray-900">Learn the fundamentals of smart contract writing</h3>
+                    {/* Content goes here */}
+                    {/* We use less vertical padding on card headers on desktop than on body sections */}
+                    </div>
+                    <div className="px-4 mb-4">
+                        <p className="py-2">12 live sessions in person or remote</p>
+                        <p className="py-2">You'll have bonus access to all examples, templates and cheatsheets for you to download and use (that will save you hours of headache)</p>    
+                    </div>
+                </div>
+                <div className="bg-gray-50 p-4 overflow-hidden rounded-lg shadow">
+                    <div className="px-4 py-5 sm:px-6">
+                        <h3 className="font-semibold pb-2 leading-6 text-2xl text-gray-900">Put learnings into practice by following the 12 weeks program</h3>
+                    
+                    {/* Content goes here */}
+                    {/* We use less vertical padding on card headers on desktop than on body sections */}
+                    </div>
+                    <div className="px-4 mb-4">
+                        <p className="py-2">You’ll do 2 assignments per week that will be checked by your TA.</p>
+                        <p className="py-2">You’ll have 1 session with your TA to check your progress and reflect open questions</p>
+                    </div>
+                </div>
+            </div>
+            {/* <div className="mt-8">
+                <h2 className="mt-2 text-center text-2xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+                + get a course certification that testifies your solidity skills
+                </h2>
+            </div> */}
+            <BootcampStats/>
+        </div>
+    )
+  }
+  

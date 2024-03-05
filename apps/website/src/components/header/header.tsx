@@ -10,6 +10,7 @@ import Logo from '../logo/logo';
 
 const navigation = [
   { name: 'Home', href: '/' },
+  { name: 'Bootcamp', href: '/bootcamp' },
   { name: 'About', href: '/about' },
   {
     name: 'Events',
