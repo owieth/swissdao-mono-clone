@@ -5,6 +5,7 @@ import Features from '@/components/Landing/Feature';
 import Hero from '@/components/Landing/Hero';
 import Mission from '@/components/Landing/Mission';
 import Subscribe from '@/components/Landing/Subscribe';
+import Logocloud from '@/components/bootcamp/logocloud';
 import { type NextPage } from 'next';
 import { useRef } from 'react';
 
@@ -27,6 +28,11 @@ const Home: NextPage = () => {
       <Committment></Committment>
       {/* <Testimonials></Testimonials> */}
       {/* <Partners></Partners> */}
+      <Logocloud
+        text="Partners"
+        logos={[]}
+        className="text-background mt-2 text-3xl font-bold tracking-tight sm:text-4xl"
+      ></Logocloud>
       <Subscribe></Subscribe>
       {/* <LearnSection></LearnSection>
           <ConnectSection></ConnectSection>

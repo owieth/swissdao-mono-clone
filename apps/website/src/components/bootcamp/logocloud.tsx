@@ -3,13 +3,19 @@ import Image from 'next/image';
 type Props = {
   text: string;
   logos: string[];
+  className?: string;
 };
 
-export default function Logocloud({ text, logos }: Props) {
+export default function Logocloud({ text, logos, className }: Props) {
   return (
     <div className="bg-white pb-12">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <h2 className="text-center text-lg font-semibold leading-8 text-gray-900">
+        <h2
+          className={
+            className ||
+            'text-center text-lg font-semibold leading-8 text-gray-900'
+          }
+        >
           {text}
         </h2>
         <div className="mx-auto mt-10 grid h-28 max-w-lg grid-cols-2 items-center gap-x-8 gap-y-10 sm:gap-x-10 lg:mx-0 lg:h-8 lg:max-w-none lg:grid-cols-4">
