@@ -18,7 +18,7 @@ export default function HowitWorks() {
           <div className="mb-4 px-4">
             <p className="py-2">12 live sessions in person or remote</p>
             <p className="py-2">
-              You'll have bonus access to all examples, templates and
+              You&apos;ll have bonus access to all examples, templates and
               cheatsheets for you to download and use (that will save you hours
               of headache)
             </p>
