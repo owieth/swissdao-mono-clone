@@ -1,5 +1,6 @@
 'use client';
 
+import Announcement from '@/components/Landing/Announcement';
 import Committment from '@/components/Landing/Commitment';
 import Features from '@/components/Landing/Feature';
 import Hero from '@/components/Landing/Hero';
@@ -14,11 +15,18 @@ import { useRef } from 'react';
 const Home: NextPage = () => {
   const targetRef = useRef<HTMLDivElement>(null); // Specify the correct type for the ref
 
+  // const logos = [
+  //   '/images/partners_eth_zuri.png',
+  //   '/images/partners_trust_square.png',
+  //   '/images/partners_eth_zuri.png',
+  //   '/images/partners_trust_square.png'
+  // ];
+
   const logos = [
-    '/images/partners_eth_zuri.png',
-    '/images/partners_trust_square.png',
-    '/images/partners_eth_zuri.png',
-    '/images/partners_trust_square.png'
+    '/images/bootcamp/solana.svg',
+    '/images/bootcamp/thegraph.svg',
+    '/images/bootcamp/superteam.svg',
+    '/images/bootcamp/gelato.svg'
   ];
 
   const scrollToComponent = () => {
@@ -31,7 +39,14 @@ const Home: NextPage = () => {
   return (
     <div className="flex min-h-screen w-full flex-col items-center justify-center">
       <Hero scrollToComponent={scrollToComponent}></Hero>
+      <Announcement></Announcement>
       <Mission ref={targetRef}></Mission>
+      
+      <Logocloud
+          className='mb-36'
+          text="swissDAO is a well connected builder community giving you the best exposure to the industry."
+          logos={logos}
+        />
       <Features></Features>
       {/* <Event></Event> */}
       <Committment></Committment>
