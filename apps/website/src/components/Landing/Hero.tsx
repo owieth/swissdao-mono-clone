@@ -17,7 +17,7 @@ export default function Hero(props: IHero) {
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
               Announcing our next major event.{' '}
               <a
-                href="https://www.meetup.com/swissdao/events/"
+                href="https://lu.ma/r9kxh1s0"
                 target="_blank"
                 className="text-accent font-semibold"
               >
