@@ -58,21 +58,6 @@ const Home: NextPage = () => {
         className='w-full h-28'
         textClassName="text-background mt-2 text-3xl font-bold tracking-tight sm:text-4xl"
       ></Logocloud> */}
-      <div className="pb-16 sm:pb-24 xl:pb-32">
-        <div className="relative flex h-28 w-28 flex-col items-center gap-10 ">
-          <p className="text-background mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-            Partners
-          </p>
-          <Link href="https://ethereumzuri.ch/" target="_blank">
-            <Image
-              src="/images/partners_eth_zuri.png"
-              alt=""
-              height={500}
-              width={500}
-            />
-          </Link>
-        </div>
-      </div>
       <Subscribe></Subscribe>
       {/* <LearnSection></LearnSection>
           <ConnectSection></ConnectSection>
