@@ -24,7 +24,7 @@ export default function JoinPage() {
 
       <div className="col-span-2 lg:p-8">
         <div className="mx-auto flex h-[500px] w-full flex-col justify-center space-y-6 sm:w-[350px]">
-          <Swiper interactive>
+          <Swiper>
             <Card className="p-4">
               <div className="flex flex-col space-y-2 text-center">
                 <h1 className="text-2xl font-semibold tracking-tight">
@@ -40,8 +40,8 @@ export default function JoinPage() {
 
             <Card className="p-4">
               <div className="flex flex-col space-y-2 text-center">
-                <h1 className="text-2xl font-semibold tracking-tight">
-                  Mint your Membership now!
+                <h1 className="p-4 text-2xl font-semibold tracking-tight">
+                  Mint your Membership!
                 </h1>
               </div>
 

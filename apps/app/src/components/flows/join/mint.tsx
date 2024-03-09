@@ -7,16 +7,21 @@ import {
   FormMessage
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { ToastAction } from '@/components/ui/toast';
-import { toast } from '@/components/ui/use-toast';
+import { toast } from 'sonner';
 import { SwiperContext } from '@/contexts/swiper';
 import { CONTRACT } from '@/contracts/contracts';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
+import {
+  prepareWriteContract,
+  waitForTransaction,
+  writeContract
+} from '@wagmi/core';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
-import { useAccount, useContractWrite, usePrepareContractWrite } from 'wagmi';
+import { useAccount } from 'wagmi';
 import * as z from 'zod';
+import { Loader2 } from 'lucide-react';
+import { type WriteContractErrorType } from 'viem';
 
 const FormSchema = z.object({
   nickname: z.string().min(2, {
@@ -29,64 +34,62 @@ export function Mint() {
   const { address } = useAccount();
   const { swiper } = React.useContext(SwiperContext);
 
+  const [loading, setLoading] = React.useState(false);
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema)
   });
 
-  const { watch } = form;
+  const {
+    watch,
+    formState: { isValid }
+  } = form;
 
   const formData = watch();
 
-  // const { config, error } = usePrepareContractWrite({
-  //   ...CONTRACT,
-  //   functionName: 'mintMembership',
-  //   args: [address, formData.nickname, formData.profileImageUri],
-  //   onSuccess() {
-  //     toast({
-  //       description: 'Membership has been minted!',
-  //     });
-  //     swiper?.slideNext();
-  //   },
-  // });
+  const onSubmit = async () => {
+    setLoading(true);
 
-  //const { write, error: writeError } = useContractWrite(config);
-  const { write, error: writeError } = useContractWrite({
-    ...CONTRACT,
-    functionName: 'mintMembership',
-    args: [address, formData.nickname, formData.profileImageUri]
-    // onSuccess() {
-    //   toast({
-    //     description: 'Membership has been minted!',
-    //   });
-    //   swiper?.slideNext();
-    // },
-  });
+    try {
+      const config = await prepareWriteContract({
+        ...CONTRACT,
+        functionName: 'mintMembership',
+        args: [address, formData.nickname, formData.profileImageUri]
+      });
 
-  // if (error || writeError) {
-  //   toast({
-  //     variant: 'destructive',
-  //     title: 'Uh oh! Something went wrong.',
-  //     description: error?.message || writeError?.message,
-  //   });
-  // }
+      const { hash } = await writeContract(config);
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    const hash = write?.();
-    toast({
-      title: 'Your Membership is minting...'
-      // action: (
-      //   <ToastAction altText="explorer">
-      //     <Link href={hash || ''} target="_blank">
-      //       Have a look
-      //     </Link>
-      //   </ToastAction>
-      // ),
-    });
-  }
+      toast.promise(
+        waitForTransaction({
+          hash
+        }),
+        {
+          loading: 'Your Membership is minting...',
+          success: () => {
+            setLoading(false);
+
+            return `Membership minted!`;
+          },
+          error: 'Error'
+        }
+      );
+    } catch (e) {
+      const error = e as WriteContractErrorType;
+
+      const message = String(error.cause).includes(
+        'SwissDAOMembership__YouAlreadyAreMember'
+      )
+        ? "You're already have a membership!"
+        : 'Execution Error';
+
+      toast.error(message);
+      setLoading(false);
+    }
+  };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField
           control={form.control}
           name="nickname"
@@ -113,7 +116,8 @@ export function Mint() {
           )}
         />
 
-        <Button type="submit" disabled={!write}>
+        <Button type="submit" disabled={loading || !isValid}>
+          {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           Mint
         </Button>
       </form>
