@@ -53,7 +53,8 @@ import { Card } from '../ui/card';
 const TransactionLink = ({ txHash }: { txHash: string }) => (
   <div className="group">
     <Link
-      href={`https://sepolia-optimism.etherscan.io/tx/${txHash}`}
+      // href={`https://sepolia-optimism.etherscan.io/tx/${txHash}`}
+      href={`https://optimistic.etherscan.io/tx/${txHash}`}
       target="_blank"
       className="flex items-center group-hover:underline"
     >
