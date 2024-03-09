@@ -368,6 +368,10 @@ export class SwissDAOMembership__getMemberStructByAddressResultValue0Struct exte
   get profileImageUri(): string {
     return this[3].toString();
   }
+
+  get lastActivity(): BigInt {
+    return this[4].toBigInt();
+  }
 }
 
 export class SwissDAOMembership__getMemberStructByTokenIdResultValue0Struct extends ethereum.Tuple {
@@ -385,6 +389,10 @@ export class SwissDAOMembership__getMemberStructByTokenIdResultValue0Struct exte
 
   get profileImageUri(): string {
     return this[3].toString();
+  }
+
+  get lastActivity(): BigInt {
+    return this[4].toBigInt();
   }
 }
 
@@ -783,7 +791,7 @@ export class SwissDAOMembership extends ethereum.SmartContract {
   ): SwissDAOMembership__getMemberStructByAddressResultValue0Struct {
     let result = super.call(
       'getMemberStructByAddress',
-      'getMemberStructByAddress(address):((uint256,string,address,string))',
+      'getMemberStructByAddress(address):((uint256,string,address,string,uint256))',
       [ethereum.Value.fromAddress(_member)]
     );
 
@@ -797,7 +805,7 @@ export class SwissDAOMembership extends ethereum.SmartContract {
   ): ethereum.CallResult<SwissDAOMembership__getMemberStructByAddressResultValue0Struct> {
     let result = super.tryCall(
       'getMemberStructByAddress',
-      'getMemberStructByAddress(address):((uint256,string,address,string))',
+      'getMemberStructByAddress(address):((uint256,string,address,string,uint256))',
       [ethereum.Value.fromAddress(_member)]
     );
     if (result.reverted) {
@@ -816,7 +824,7 @@ export class SwissDAOMembership extends ethereum.SmartContract {
   ): SwissDAOMembership__getMemberStructByTokenIdResultValue0Struct {
     let result = super.call(
       'getMemberStructByTokenId',
-      'getMemberStructByTokenId(uint256):((uint256,string,address,string))',
+      'getMemberStructByTokenId(uint256):((uint256,string,address,string,uint256))',
       [ethereum.Value.fromUnsignedBigInt(_tokenId)]
     );
 
@@ -830,7 +838,7 @@ export class SwissDAOMembership extends ethereum.SmartContract {
   ): ethereum.CallResult<SwissDAOMembership__getMemberStructByTokenIdResultValue0Struct> {
     let result = super.tryCall(
       'getMemberStructByTokenId',
-      'getMemberStructByTokenId(uint256):((uint256,string,address,string))',
+      'getMemberStructByTokenId(uint256):((uint256,string,address,string,uint256))',
       [ethereum.Value.fromUnsignedBigInt(_tokenId)]
     );
     if (result.reverted) {
@@ -1712,6 +1720,66 @@ export class SafeTransferFromCall__Outputs {
   _call: SafeTransferFromCall;
 
   constructor(call: SafeTransferFromCall) {
+    this._call = call;
+  }
+}
+
+export class SetApDecreaseAmountCall extends ethereum.Call {
+  get inputs(): SetApDecreaseAmountCall__Inputs {
+    return new SetApDecreaseAmountCall__Inputs(this);
+  }
+
+  get outputs(): SetApDecreaseAmountCall__Outputs {
+    return new SetApDecreaseAmountCall__Outputs(this);
+  }
+}
+
+export class SetApDecreaseAmountCall__Inputs {
+  _call: SetApDecreaseAmountCall;
+
+  constructor(call: SetApDecreaseAmountCall) {
+    this._call = call;
+  }
+
+  get _amount(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+}
+
+export class SetApDecreaseAmountCall__Outputs {
+  _call: SetApDecreaseAmountCall;
+
+  constructor(call: SetApDecreaseAmountCall) {
+    this._call = call;
+  }
+}
+
+export class SetApDecreaseDurationCall extends ethereum.Call {
+  get inputs(): SetApDecreaseDurationCall__Inputs {
+    return new SetApDecreaseDurationCall__Inputs(this);
+  }
+
+  get outputs(): SetApDecreaseDurationCall__Outputs {
+    return new SetApDecreaseDurationCall__Outputs(this);
+  }
+}
+
+export class SetApDecreaseDurationCall__Inputs {
+  _call: SetApDecreaseDurationCall;
+
+  constructor(call: SetApDecreaseDurationCall) {
+    this._call = call;
+  }
+
+  get _duration(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+}
+
+export class SetApDecreaseDurationCall__Outputs {
+  _call: SetApDecreaseDurationCall;
+
+  constructor(call: SetApDecreaseDurationCall) {
     this._call = call;
   }
 }
