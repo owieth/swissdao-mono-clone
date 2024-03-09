@@ -41,12 +41,12 @@ const Home: NextPage = () => {
       <Hero scrollToComponent={scrollToComponent}></Hero>
       <Announcement></Announcement>
       <Mission ref={targetRef}></Mission>
-      
+
       <Logocloud
-          className='mb-36'
-          text="swissDAO is a well connected builder community giving you the best exposure to the industry."
-          logos={logos}
-        />
+        className="mb-36"
+        text="swissDAO is a well connected builder community giving you the best exposure to the industry."
+        logos={logos}
+      />
       <Features></Features>
       {/* <Event></Event> */}
       <Committment></Committment>

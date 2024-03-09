@@ -58,7 +58,7 @@ const TransactionLink = ({ txHash }: { txHash: string }) => (
       className="flex items-center group-hover:underline"
     >
       {shortenBytes32(txHash)}
-      <ArrowUpRight className="size-4 ml-2 shrink-0 opacity-50 group-hover:opacity-100" />
+      <ArrowUpRight className="ml-2 size-4 shrink-0 opacity-50 group-hover:opacity-100" />
     </Link>
   </div>
 );

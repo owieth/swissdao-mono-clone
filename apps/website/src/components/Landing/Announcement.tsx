@@ -1,5 +1,5 @@
-import Link from "next/link";
-import Image from "next/image";
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Announcement() {
   return (
@@ -25,10 +25,26 @@ export default function Announcement() {
               </h2>
               <blockquote className="leading-8 text-gray-700 sm:text-2xl sm:leading-9">
                 <p className="mt-6 text-xl text-gray-700">
-                  We are proud to announce that we agreed to a partnership with <Link href="https://ethereumzuri.ch/" target="_blank" className="text-blue-400 ">Ethereum Zurich Conference</Link> taking place 5th to 7th of April 2024.
+                  We are proud to announce that we agreed to a partnership with{' '}
+                  <Link
+                    href="https://ethereumzuri.ch/"
+                    target="_blank"
+                    className="text-blue-400 "
+                  >
+                    Ethereum Zurich Conference
+                  </Link>{' '}
+                  taking place 5th to 7th of April 2024.
                 </p>
                 <p className="mt-6 text-xl text-gray-700">
-                  During the weeks prior to the conference we are hosting <Link href="https://lu.ma/swissdao" target="_blank" className="text-blue-400 ">Road to Ethereum Zurich</Link> a workshop series to make you ready for the conference.
+                  During the weeks prior to the conference we are hosting{' '}
+                  <Link
+                    href="https://lu.ma/swissdao"
+                    target="_blank"
+                    className="text-blue-400 "
+                  >
+                    Road to Ethereum Zurich
+                  </Link>{' '}
+                  a workshop series to make you ready for the conference.
                 </p>
               </blockquote>
             </figure>
