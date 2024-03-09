@@ -67,6 +67,7 @@ export function Mint() {
           loading: 'Your Membership is minting...',
           success: () => {
             setLoading(false);
+            swiper?.slideNext();
 
             return `Membership minted!`;
           },
@@ -83,6 +84,7 @@ export function Mint() {
         : 'Execution Error';
 
       toast.error(message);
+      console.error(error);
       setLoading(false);
     }
   };
