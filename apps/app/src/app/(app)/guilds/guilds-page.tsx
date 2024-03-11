@@ -1,3 +1,4 @@
+import { convertIpfsToHttps } from '@/helpers/ipfs';
 import { GuildType } from '@/types/types';
 import Link from 'next/link';
 
@@ -42,9 +43,9 @@ export default function GuildsPage({ guilds }: { guilds: GuildType[] }) {
                     )}
                   ></span>
                   <img
-                    alt="Developer DAO"
+                    alt={guild.name}
                     sizes="100vw"
-                    src="https://daocentral.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdaojones%2Fimage%2Fupload%2FCleanShot_2021-11-24_at_04.08.33_pxl0kp.png&w=1920&q=75"
+                    src={convertIpfsToHttps(guild.imageUri || '')}
                     decoding="async"
                     data-nimg="responsive"
                     className="scale-100 blur-0 grayscale-0 duration-700 ease-in-out"

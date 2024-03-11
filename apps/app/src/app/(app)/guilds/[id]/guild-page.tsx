@@ -6,6 +6,7 @@ import { Icons } from '@/components/ui/icons';
 import { MembershipContext } from '@/contexts/membership';
 import { CONTRACT } from '@/contracts/contracts';
 import { getGradient } from '@/helpers/gradient';
+import { convertIpfsToHttps } from '@/helpers/ipfs';
 import { GuildType } from '@/types/types';
 import {
   prepareWriteContract,
@@ -66,7 +67,7 @@ export default function GuildPage({ guild }: { guild: GuildType }) {
       <div className="mx-auto w-full max-w-screen-2xl">
         <div className="relative flex h-80 justify-center md:block">
           <Image
-            src="https://daocentral.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdaojones%2Fimage%2Fupload%2FCleanShot_2021-11-24_at_04.08.33_pxl0kp.png&w=1920&q=75"
+            src={convertIpfsToHttps(guild.imageUri)}
             alt=""
             className="object-cover"
             fill
@@ -74,7 +75,10 @@ export default function GuildPage({ guild }: { guild: GuildType }) {
 
           <div className="absolute -bottom-20 mx-10 h-32 w-32 overflow-hidden rounded-full border-8 border-white sm:h-48 sm:w-48">
             <Avatar className="h-full w-full">
-              <AvatarImage src={guild.imageUri} alt={guild.name} />
+              <AvatarImage
+                src={convertIpfsToHttps(guild.imageUri)}
+                alt={guild.name}
+              />
               <AvatarFallback>{guild.name}</AvatarFallback>
             </Avatar>
           </div>
