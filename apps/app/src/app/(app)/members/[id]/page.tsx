@@ -7,6 +7,16 @@ export const metadata: Metadata = {
 };
 
 async function getData(id: string) {
+  const {
+    membership: { holder }
+  } = await fetchSubgraph(`
+    query {
+      membership(id:${id}) {
+        holder
+      }
+    }
+  `);
+
   const member = await fetchSubgraph(`
     query {
       membership(id:${id}) {
@@ -17,13 +27,20 @@ async function getData(id: string) {
         holder
         joinedAt
         experiencePoints {
-          totalAmount
+          balances(where: { holder:"${holder}"}) {
+            balance
+          }
         }
         activityPoints {
           totalAmount
+          balances(where: { holder:"${holder}"}) {
+            balance
+          }
         }
         attendedEvents {
-          totalAmount
+          balances(where: { holder:"${holder}"}) {
+            balance
+          }
         }
         guilds {
           id
