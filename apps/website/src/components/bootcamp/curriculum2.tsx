@@ -73,7 +73,7 @@ export default function Curriculum2() {
             Curriculum
           </h2>
           <p className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            What you'll learn in this Solidity development bootcamp
+            What you&apos;ll learn in this Solidity development bootcamp
           </p>
           <p className="pt-4 text-gray-100">
             Master the technical skills needed to successfully contribute to the
@@ -130,8 +130,8 @@ export default function Curriculum2() {
             </p>
             {
               <ul>
-                {chapters[index].builds.map(build => (
-                  <div className="my-1 flex flex-row gap-x-2">
+                {chapters[index].builds.map((build, i) => (
+                  <div key={i} className="my-1 flex flex-row gap-x-2">
                     <CheckIcon
                       className="h-6 w-5 flex-none text-gray-100"
                       aria-hidden="true"

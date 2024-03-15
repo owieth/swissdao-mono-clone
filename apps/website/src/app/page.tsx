@@ -32,7 +32,7 @@ const Home: NextPage = () => {
   return (
     <div className="flex min-h-screen w-full flex-col items-center justify-center">
       <Hero scrollToComponent={scrollToComponent}></Hero>
-      <Announcement></Announcement>
+      <Announcement />
       <Mission ref={targetRef}></Mission>
 
       <Logocloud
@@ -40,9 +40,9 @@ const Home: NextPage = () => {
         text="swissDAO is a well connected builder community giving you the best exposure to the industry."
         logos={logos}
       />
-      <Features></Features>
-      <Committment></Committment>
-      <Subscribe></Subscribe>
+      <Features />
+      <Committment />
+      <Subscribe />
     </div>
   );
 };
