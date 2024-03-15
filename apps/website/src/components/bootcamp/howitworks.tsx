@@ -1,10 +1,16 @@
 import BootcampStats from './bootcampstats';
+import { CheckIcon } from '@heroicons/react/20/solid';
+
+
 
 export default function HowitWorks() {
   return (
-    <div className="bg-indigo-400 py-8">
-      <h2 className="mb-8 text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+    <div className="bg-gray-800 py-20">
+      <h2 className="text-base text-center font-semibold leading-7 text-gray-300 pb-4">
         How it works
+      </h2>
+      <h2 className="mb-8 text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        The Bootcamp that works part-time
       </h2>
       <div className="sm-px-0 space-between mx-auto grid max-w-5xl grid-cols-1 gap-8 overflow-hidden rounded-2xl px-8 text-center sm:grid-cols-2">
         <div className="overflow-hidden rounded-lg bg-gray-50 p-4 shadow">

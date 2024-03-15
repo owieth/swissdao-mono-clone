@@ -6,7 +6,7 @@ interface IMission {
 
 const Mission = forwardRef<HTMLDivElement, IMission>((props, ref) => {
   return (
-    <div ref={ref} className="w-full overflow-hidden bg-white py-32">
+    <div ref={ref} className="w-full overflow-hidden bg-white py-16">
       <div className="px-6 lg:flex lg:px-8">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8">
           <div className="lg:col-end-1 lg:w-full lg:max-w-lg lg:pb-8 lg:pl-24 lg:pt-16">

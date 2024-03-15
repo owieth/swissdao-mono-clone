@@ -6,6 +6,7 @@ import { BootcampHero2 } from '@/components/bootcamp/bootcamphero_2';
 import BootcampStats from '@/components/bootcamp/bootcampstats';
 import Cohorts from '@/components/bootcamp/cohorts';
 import Curriculum from '@/components/bootcamp/curriculum';
+import Curriculum2 from '@/components/bootcamp/curriculum2';
 import FAQ from '@/components/bootcamp/faq';
 import HowitWorks from '@/components/bootcamp/howitworks';
 import Logocloud from '@/components/bootcamp/logocloud';
@@ -36,6 +37,7 @@ export default function Bootcamp() {
         <HowitWorks />
 
         <Target />
+        <Curriculum2 />
         <Problems />
         <Curriculum />
         <Advantage />
