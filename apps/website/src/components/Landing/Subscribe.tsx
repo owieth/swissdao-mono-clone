@@ -1,4 +1,4 @@
-import { Widget } from '@typeform/embed-react'
+import { Widget } from '@typeform/embed-react';
 
 export default function Subscribe() {
   return (
@@ -7,7 +7,11 @@ export default function Subscribe() {
         <div className="max-w-2xl overflow-hidden text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           <h2 className="inline sm:block">Want community news and updates?</h2>{' '}
           <div className="md:overflow-hidden">
-            <Widget id="ojIVEkpV" style={{ width: '100%' }} className="my-form h-96" />
+            <Widget
+              id="ojIVEkpV"
+              style={{ width: '100%' }}
+              className="my-form h-96"
+            />
           </div>
         </div>
       </div>

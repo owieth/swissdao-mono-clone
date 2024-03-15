@@ -6,15 +6,14 @@ interface IHero {
   scrollToComponent: () => void;
 }
 
-
-const Hero  = forwardRef<HTMLDivElement, IHero>((props) => {
+const Hero = forwardRef<HTMLDivElement, IHero>(props => {
   const { scrollToComponent } = props;
 
   return (
     <>
       <BackgroundGrid />
       <div className="relative isolate px-6 pt-2 lg:px-8">
-        <div className="bg-gradient-radial from-foreground mx-auto max-w-2xl mt-16">
+        <div className="bg-gradient-radial from-foreground mx-auto mt-16 max-w-2xl">
           {/* <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
               Announcing our next major event.{' '}

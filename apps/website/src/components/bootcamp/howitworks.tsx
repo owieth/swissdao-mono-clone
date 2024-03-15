@@ -1,12 +1,10 @@
 import BootcampStats from './bootcampstats';
 import { CheckIcon } from '@heroicons/react/20/solid';
 
-
-
 export default function HowitWorks() {
   return (
     <div className="bg-gray-800 py-20">
-      <h2 className="text-base text-center font-semibold leading-7 text-gray-300 pb-4">
+      <h2 className="pb-4 text-center text-base font-semibold leading-7 text-gray-300">
         How it works
       </h2>
       <h2 className="mb-8 text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
