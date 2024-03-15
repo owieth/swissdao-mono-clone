@@ -1,19 +1,20 @@
 import Link from 'next/link';
 import BackgroundGrid from '../background-grid/background-grid';
+import { type RefObject, forwardRef } from 'react';
 
 interface IHero {
   scrollToComponent: () => void;
 }
 
-export default function Hero(props: IHero) {
+const Hero = forwardRef<HTMLDivElement, IHero>(props => {
   const { scrollToComponent } = props;
 
   return (
     <>
       <BackgroundGrid />
-      <div className="relative isolate px-6 pt-14 lg:px-8">
-        <div className="bg-gradient-radial from-foreground mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-          <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+      <div className="relative isolate px-6 pt-2 lg:px-8">
+        <div className="bg-gradient-radial from-foreground mx-auto mt-16 max-w-2xl">
+          {/* <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
               Announcing our next major event.{' '}
               <a
@@ -25,7 +26,7 @@ export default function Hero(props: IHero) {
                 Read more <span aria-hidden="true">&rarr;</span>
               </a>
             </div>
-          </div>
+          </div> */}
           <div className="text-center">
             <h1 className="text-background text-4xl font-bold tracking-tight sm:text-6xl">
               Accelerate your web3 journey with swissDAO
@@ -52,4 +53,6 @@ export default function Hero(props: IHero) {
       </div>
     </>
   );
-}
+});
+
+export default Hero;

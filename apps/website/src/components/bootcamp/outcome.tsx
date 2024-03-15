@@ -1,16 +1,3 @@
-const items = [
-  {
-    id: 1,
-    outcome: 'Develop smart contracts with a proper framework and strategy'
-  },
-  {
-    id: 2,
-    outcome:
-      'Optimise your smart contracts for gas usage and check for vulnerabilities'
-  },
-  { id: 3, outcome: 'Build your own Web3 Project with our industry partners' }
-  // More items...
-];
 import { CheckIcon } from '@heroicons/react/20/solid';
 
 const includedFeatures = [
