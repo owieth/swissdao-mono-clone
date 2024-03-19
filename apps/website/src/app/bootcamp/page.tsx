@@ -40,13 +40,13 @@ export default function Bootcamp() {
         <Curriculum2 />
         <Problems />
         <Curriculum />
-        <Advantage />
-        <Cohorts />
+        {/* <Advantage /> */}
+        {/* <Cohorts /> */}
         {/* more visible when the bootcamp takes place */}
         {/* more visible about the course certification */}
-        <AdmissionProcess />
+        {/* <AdmissionProcess /> */}
         {/* add a face to who to talk to */}
-        <FAQ />
+        {/* <FAQ /> */}
       </main>
     </div>
   );
