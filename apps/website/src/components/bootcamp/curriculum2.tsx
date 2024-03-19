@@ -8,7 +8,7 @@ const chapters = [
     title: 'Foundations',
     subtitle: 'Code your first Smart Contracts',
     abstract:
-      'Structure your software following object-oriented principles. Learn one of the most used design patterns, the Model-View-Controller (MVC) and master it by coding several MVC apps from scratch.',
+      'We start with a solid Foundation into the Bootcamp - Programming and Solidity Basics ',
     builds: [
       'Learn Types',
       'Understand Keywords',
@@ -20,45 +20,64 @@ const chapters = [
     title: 'First Project, Tokens, Staking',
     subtitle: 'Deploy Tokens and make them interact with other Smart Contracts',
     abstract:
-      'Structure your software following object-oriented principles. Learn one of the most used design patterns, the Model-View-Controller (MVC) and master it by coding several MVC apps from scratch.',
-    builds: []
+      'We dive deeper into the Solidity Ecosystem by creating own Tokens and utilizing them on Protocols',
+    builds: ['Token Standards', 'How Staking works', 'Open Source Libraries']
   },
   {
     title: 'Randomness, Oracles',
     subtitle:
       'Increase Complexity of your Smart Contracts and Reference the Real World',
     abstract:
-      'Structure your software following object-oriented principles. Learn one of the most used design patterns, the Model-View-Controller (MVC) and master it by coding several MVC apps from scratch.',
-    builds: []
+      'How do we get real Data into our Smart Contract? In this section, we make our contracts smarter with real-world data.',
+    builds: [
+      'Oracle Networks',
+      'Oracle Integration',
+      'Scale your Contract thanks to Oracles'
+    ]
   },
   {
     title: 'DeFi Primitives',
     subtitle: 'Develop your own Decentralised Exchange',
     abstract:
-      'Structure your software following object-oriented principles. Learn one of the most used design patterns, the Model-View-Controller (MVC) and master it by coding several MVC apps from scratch.',
-    builds: []
+      'Decentralised Exchanges are the backbone of the crypto landscape, in this section you will create and deploy your own!',
+    builds: [
+      'Deepdive into DEXs',
+      'Understand the Risks',
+      'Code a DEX like Uniswap'
+    ]
   },
   {
     title: 'Wallets',
     subtitle:
       'Level up your understanding of the EVM by developing your own Multisig',
     abstract:
-      'Structure your software following object-oriented principles. Learn one of the most used design patterns, the Model-View-Controller (MVC) and master it by coding several MVC apps from scratch.',
-    builds: []
+      'Multisig wallets are the safest wallet and it is crucial to understand how they work. Best is to develop it by yourself.',
+    builds: [
+      'Generate your own Wallet',
+      'Hands on the Gnosis Wallet',
+      'Multisig Wallet Standard'
+    ]
   },
   {
     title: 'Testing & Hacking',
     subtitle: 'Exploit Smart Contracts like Hackers',
     abstract:
-      'Structure your software following object-oriented principles. Learn one of the most used design patterns, the Model-View-Controller (MVC) and master it by coding several MVC apps from scratch.',
-    builds: []
+      'We explore the worst hacks in Smart Contract history and try to hack our own contracts.',
+    builds: [
+      'Get to know all resources',
+      'How to write secure Contracts',
+      'Learn what to do in an Emergency'
+    ]
   },
   {
     title: 'Project Weeks',
     subtitle: 'Build your own Project solidifying your gained knowledge',
     abstract:
-      'Structure your software following object-oriented principles. Learn one of the most used design patterns, the Model-View-Controller (MVC) and master it by coding several MVC apps from scratch.',
-    builds: []
+      'This is the pinnacle of the bootcamp, a full week long project you start on your own and demonstrate it at the end, showcasing all of your learnings!',
+    builds: [
+      'Test all your knowledge to build an anwesome Project',
+      'Demonstrate it at the end to the participants'
+    ]
   }
 ];
 
@@ -97,7 +116,7 @@ export default function Curriculum2() {
                       onClick={() => {
                         setIndex(i);
                       }}
-                      className="text-md font-semibold leading-6 text-gray-100"
+                      className="text-md h-full w-full cursor-pointer font-semibold leading-6 text-gray-100"
                     >
                       {i}. {chapter.title} <span aria-hidden="true">→</span>
                     </p>
@@ -110,7 +129,7 @@ export default function Curriculum2() {
                     onClick={() => {
                       setIndex(i);
                     }}
-                    className="text-md font-semibold leading-6 text-gray-100"
+                    className="text-md h-full w-full cursor-pointer font-semibold leading-6 text-gray-100"
                   >
                     {i}. {chapter.title} <span aria-hidden="true">→</span>
                   </p>
