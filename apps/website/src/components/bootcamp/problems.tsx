@@ -33,13 +33,12 @@ const features = [
   {
     name: 'Analysis Paralysis',
     description:
-      'You are not becoming a Solidity Developer by looking at Youtube Videos. You need to apply what you see. Modify and break it.',
+      'Do not have fear of making mistakes, it is part of the game!. It is far easier to fail and grow together than alone.',
     icon: FingerPrintIcon
   },
   {
     name: 'Random Tactics',
-    description:
-      'You are not becoming a Solidity Developer by looking at Youtube Videos. You need to apply what you see. Modify and break it.',
+    description: `It is quite hard at the beginning to conquer this gigantic world alone, let's join forces together.`,
     icon: FingerPrintIcon
   }
 ];
