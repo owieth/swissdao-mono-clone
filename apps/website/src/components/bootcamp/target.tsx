@@ -5,8 +5,7 @@ const posts = [
     href: '#',
     description:
       'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80'
+    imageUrl: '/images/bootcamp/software.jpg'
   },
   {
     id: 1,
@@ -14,8 +13,7 @@ const posts = [
     href: '#',
     description:
       'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80'
+    imageUrl: '/images/bootcamp/students.jpg'
   },
   {
     id: 1,
@@ -23,8 +21,7 @@ const posts = [
     href: '#',
     description:
       'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80'
+    imageUrl: '/images/bootcamp/enthusiasts.jpg'
   }
   // More posts...
 ];
@@ -59,14 +56,14 @@ export default function Target() {
                 <div className="mt-8 flex items-center gap-x-4 text-xs"></div>
                 <div className="group relative">
                   <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                    <a href={post.href}>
-                      <span className="absolute inset-0" />
-                      {post.title}
-                    </a>
+                    {/* <a href={post.href}> */}
+                    <span className="absolute inset-0" />
+                    {post.title}
+                    {/* </a> */}
                   </h3>
-                  <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
+                  {/* <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
                     {post.description}
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </article>
